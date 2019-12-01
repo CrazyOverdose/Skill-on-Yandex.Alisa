@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cb38bc6d-9667-4c33-a38c-0406a6ca14d4" name="Default Changelist" comment="" />
+    <list default="true" id="cb38bc6d-9667-4c33-a38c-0406a6ca14d4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/alice_scripts" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1T21fnw6odwVVjFJR89s9ahPQZ2" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -19,8 +23,14 @@
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Docker.Dockerfile">
     <configuration name="api" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="alice" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -33,7 +43,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/api.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -42,8 +52,17 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="sourceFilePath" value="Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.Dockerfile" />
         <item itemvalue="Python.api" />
       </list>
     </recent_temporary>
@@ -62,10 +81,22 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+    <state x="297" y="0" width="839" height="869" key="#Dockerfile" timestamp="1575238486279">
+      <screen x="0" y="0" width="1440" height="872" />
+    </state>
+    <state x="297" y="0" width="839" height="869" key="#Dockerfile/0.0.1440.872@0.0.1440.872" timestamp="1575238486279" />
+    <state x="297" y="0" width="839" height="869" key="#api" timestamp="1575048493205">
+      <screen x="0" y="0" width="1440" height="872" />
+    </state>
+    <state x="297" y="0" width="839" height="869" key="#api/0.0.1440.872@0.0.1440.872" timestamp="1575048493205" />
     <state x="178" y="93" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1572786530065">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
     <state x="178" y="93" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.872@0.0.1440.872" timestamp="1572786530065" />
+    <state x="435" y="193" key="FileChooserDialogImpl" timestamp="1575237080621">
+      <screen x="0" y="0" width="1440" height="872" />
+    </state>
+    <state x="435" y="193" key="FileChooserDialogImpl/0.0.1440.872@0.0.1440.872" timestamp="1575237080621" />
     <state width="1407" height="261" key="GridCell.Tab.0.bottom" timestamp="1574016713283">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
@@ -98,10 +129,14 @@
       <screen x="0" y="0" width="1440" height="872" />
     </state>
     <state width="1407" height="261" key="GridCell.Tab.1.right/0.0.1440.872@0.0.1440.872" timestamp="1574016713287" />
-    <state x="306" y="262" key="com.intellij.ide.util.TipDialog" timestamp="1574165150839">
+    <state x="164" y="71" width="1106" height="728" key="SettingsEditor" timestamp="1575238495689">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
-    <state x="306" y="262" key="com.intellij.ide.util.TipDialog/0.0.1440.872@0.0.1440.872" timestamp="1574165150839" />
+    <state x="164" y="71" width="1106" height="728" key="SettingsEditor/0.0.1440.872@0.0.1440.872" timestamp="1575238495689" />
+    <state x="306" y="262" key="com.intellij.ide.util.TipDialog" timestamp="1575053755137">
+      <screen x="0" y="0" width="1440" height="872" />
+    </state>
+    <state x="306" y="262" key="com.intellij.ide.util.TipDialog/0.0.1440.872@0.0.1440.872" timestamp="1575053755137" />
     <state x="570" y="49" width="505" height="744" key="refactoring.ChangeSignatureDialog" timestamp="1573223658022">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
