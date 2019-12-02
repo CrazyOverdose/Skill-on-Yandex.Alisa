@@ -1,8 +1,15 @@
-FROM ubuntu:18.04
-RUN apt-get update
-RUN apt-get install -y python-pip python-dev build-essential
-COPY . /app
+FROM python:3.6
+
+ENV PYTHONUNBUFFERED 1
+
+RUN mkdir -p /app
 WORKDIR /app
-RUN pip install -r requirements.txt
-ENTRYPOINT ["python"]
-CMD ["app.py"]
+
+COPY requirements.txt /app/
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . /app
+
+CMD gunicorn guess_number:skill --config gunicorn.conf.py
+
+EXPOSE 80
