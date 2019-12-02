@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cb38bc6d-9667-4c33-a38c-0406a6ca14d4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,7 +21,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Alice_SeaBattle_YandexHackathone" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
@@ -92,10 +92,10 @@
       <screen x="0" y="0" width="1440" height="872" />
     </state>
     <state x="178" y="93" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.872@0.0.1440.872" timestamp="1572786530065" />
-    <state x="435" y="193" key="FileChooserDialogImpl" timestamp="1575237080621">
+    <state x="435" y="193" key="FileChooserDialogImpl" timestamp="1575269173185">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
-    <state x="435" y="193" key="FileChooserDialogImpl/0.0.1440.872@0.0.1440.872" timestamp="1575237080621" />
+    <state x="435" y="193" key="FileChooserDialogImpl/0.0.1440.872@0.0.1440.872" timestamp="1575269173185" />
     <state width="1407" height="261" key="GridCell.Tab.0.bottom" timestamp="1574016713283">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
@@ -132,10 +132,10 @@
       <screen x="0" y="0" width="1440" height="872" />
     </state>
     <state x="164" y="71" width="1106" height="728" key="SettingsEditor/0.0.1440.872@0.0.1440.872" timestamp="1575238495689" />
-    <state x="306" y="262" key="com.intellij.ide.util.TipDialog" timestamp="1575239292094">
+    <state x="306" y="262" key="com.intellij.ide.util.TipDialog" timestamp="1575268925369">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
-    <state x="306" y="262" key="com.intellij.ide.util.TipDialog/0.0.1440.872@0.0.1440.872" timestamp="1575239292094" />
+    <state x="306" y="262" key="com.intellij.ide.util.TipDialog/0.0.1440.872@0.0.1440.872" timestamp="1575268925369" />
     <state x="215" y="124" width="1004" height="622" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1575239331118">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
