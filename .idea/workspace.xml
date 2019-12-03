@@ -180,10 +180,10 @@
       <screen x="0" y="0" width="1440" height="872" />
     </state>
     <state x="164" y="71" width="1106" height="728" key="SettingsEditor/0.0.1440.872@0.0.1440.872" timestamp="1575238495689" />
-    <state x="306" y="262" key="com.intellij.ide.util.TipDialog" timestamp="1575287390801">
+    <state x="306" y="262" key="com.intellij.ide.util.TipDialog" timestamp="1575406343249">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
-    <state x="306" y="262" key="com.intellij.ide.util.TipDialog/0.0.1440.872@0.0.1440.872" timestamp="1575287390801" />
+    <state x="306" y="262" key="com.intellij.ide.util.TipDialog/0.0.1440.872@0.0.1440.872" timestamp="1575406343249" />
     <state x="215" y="124" width="1004" height="622" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1575239331118">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
@@ -192,9 +192,9 @@
       <screen x="0" y="0" width="1440" height="872" />
     </state>
     <state x="570" y="49" width="505" height="744" key="refactoring.ChangeSignatureDialog/0.0.1440.872@0.0.1440.872" timestamp="1573223658022" />
-    <state x="342" y="184" width="753" height="685" key="search.everywhere.popup" timestamp="1573538856659">
+    <state x="342" y="184" width="753" height="685" key="search.everywhere.popup" timestamp="1575294284541">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
-    <state x="342" y="184" width="753" height="685" key="search.everywhere.popup/0.0.1440.872@0.0.1440.872" timestamp="1573538856659" />
+    <state x="342" y="184" width="753" height="685" key="search.everywhere.popup/0.0.1440.872@0.0.1440.872" timestamp="1575294284541" />
   </component>
 </project>
