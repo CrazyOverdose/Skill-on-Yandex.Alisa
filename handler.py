@@ -56,11 +56,11 @@ class las_vegas:
     price_chance = [0, -20, 15, 0, 25, 50, -20, 0, -15, 70, 0, 0, 30]
 
 
-MONEY = ['деньги', 'мои деньги', 'сколько у меня денег', 'сколько денег', 'финансы', 'сбережения']
+MONEY = ['деньги', 'моиденьги', 'сколькоуменяденег', 'сколькоденег', 'финансы', 'сбережения']
 
-WORDS = ['бросить кубик', 'я хожу', 'го', 'давай играть', 'играть', 'начать']
+WORDS = ['броситькубик', 'я хожу', 'го', 'давайиграть', 'играть', 'начать']
 
-ENDING_WORDS = ['новая игра', 'выход', 'начать новую игру']
+ENDING_WORDS = ['новаяигра', 'выход', 'начатьновуюигру']
 
 ALL_WORDS = WORDS + ENDING_WORDS + MONEY
 
@@ -134,7 +134,7 @@ def handle_dialog(request, response, user_storage):
             if user_message == "купить":
                 user_storage["moneyU"] = user_storage["moneyU"] + game.fields[user_storage["field_cellU"]]
                 user_storage["propertyU"][user_storage["property"]] = 1
-                response.set_text('Пздравляем с приобретерием!')
+                response.set_text('Поздравляем с приобретерием!')
             else:
                 response.set_text('Может, это действиельно не лучшее вложение денег')
             user_storage["property"] = 0
