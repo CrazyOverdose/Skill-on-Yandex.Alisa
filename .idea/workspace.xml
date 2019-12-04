@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated />
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="cb38bc6d-9667-4c33-a38c-0406a6ca14d4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alice_sdk.py" beforeDir="false" afterPath="$PROJECT_DIR$/alice_sdk.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler.py" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -22,6 +32,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
@@ -29,6 +40,18 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager" selected="Python.main">
     <configuration name="alice_sdk" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -102,11 +125,16 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.alice_sdk" />
+      <item itemvalue="Python.api" />
+      <item itemvalue="Python.main" />
+      <item itemvalue="Docker.Dockerfile" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
         <item itemvalue="Python.alice_sdk" />
-        <item itemvalue="Docker.Dockerfile" />
         <item itemvalue="Python.api" />
       </list>
     </recent_temporary>
@@ -121,8 +149,23 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1572786424239</updated>
+      <workItem from="1575421225998" duration="128000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="WindowStateProjectService">
     <state x="297" y="0" width="839" height="869" key="#Dockerfile" timestamp="1575238486279">
@@ -141,10 +184,10 @@
       <screen x="0" y="0" width="1440" height="872" />
     </state>
     <state x="453" y="179" width="528" height="513" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1440.872@0.0.1440.872" timestamp="1575291421412" />
-    <state x="435" y="193" key="FileChooserDialogImpl" timestamp="1575269173185">
+    <state x="435" y="193" key="FileChooserDialogImpl" timestamp="1575421171184">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
-    <state x="435" y="193" key="FileChooserDialogImpl/0.0.1440.872@0.0.1440.872" timestamp="1575269173185" />
+    <state x="435" y="193" key="FileChooserDialogImpl/0.0.1440.872@0.0.1440.872" timestamp="1575421171184" />
     <state width="1014" height="190" key="GridCell.Tab.0.bottom" timestamp="1575291410332">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
