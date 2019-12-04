@@ -87,7 +87,7 @@ def handle_dialog(request, response, user_storage):
             "exchange": 0,  # биржа (ячейка поля 13)
             "user_id": request.user_id,
             "users_turn": True,
-            "bank": False,
+            "bank": True,
             "property": 0,
             "go": False,
             "school": 0
