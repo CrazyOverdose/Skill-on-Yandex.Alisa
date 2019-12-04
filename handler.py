@@ -54,11 +54,11 @@ class las_vegas:
 
     price_chance = [0, -20, 15, 0, 25, 50, -20, 0, -15, 70, 0, 0, 30]
 
-MONEY = ['деньги', 'моиденьги', 'сколькоуменяденег', 'сколькоденег', 'финансы', 'сбережения']
+MONEY = ['деньги', 'мои деньги', 'сколько у меня денег', 'сколько денег', 'финансы', 'сбережения']
 
-WORDS = ['бросайкубик', 'яхожу', 'го', 'давайиграть', 'играть', 'начать']
+WORDS = ['бросай кубик', 'я хожу', 'го', 'давай играть', 'играть', 'начать']
 
-ENDING_WORDS = ['новаяигра', 'выход', 'начатьновуюигру']
+ENDING_WORDS = ['новая игра', 'выход', 'начать новую игру']
 
 ALL_WORDS = WORDS + ENDING_WORDS + MONEY
 
@@ -351,8 +351,8 @@ def handle_dialog(request, response, user_storage):
                         user_storage["field_cellA"] = field
                 user_storage["users_turns"] = True
 
-            else:
-                response.set_text("Простите, но я вас не поняла.")
+        else:
+            response.set_text("Простите, но я вас не поняла.")
 
     except WinnerError:
         response.set_text("Я выиграла, спасибо за игру!")
