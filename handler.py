@@ -187,8 +187,8 @@ def handle_dialog(request, response, user_storage):
             if user_message in MONEY:
                 text1 = str(user_storage["moneyU"])
                 text2 = str(user_storage["moneyU"])
-                text3 = 'Ваши деньги ' + text1 + 'Деньги Алисы ' + text2
-                response.set_text(text3)
+                text3 = 'Ваши деньги ' + text1 + '  Деньги Алисы ' + text2
+                response.set_text('Ваши деньги ' + user_storage["moneyU"] + '  Деньги Алисы ' + user_storage["moneyA"])
 
             # Если Пользователь
             if user_message in WORDS:
