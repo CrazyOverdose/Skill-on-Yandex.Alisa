@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 import logging
 from random import randint
+import random
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -69,6 +70,7 @@ ALL_WORDS = WORDS + ENDING_WORDS + MONEY
 def handle_dialog(request, response, user_storage):
     # response.user_id
     game = las_vegas()
+    random.seed()
     if request.is_new_session:
         # Это новый пользователь.
         # Инициализируем сессию и поприветствуем его.
@@ -172,15 +174,15 @@ def handle_dialog(request, response, user_storage):
 
             if user_storage["moneyU"] <= 0:
                 text = 'Мне очень жаль, но вы проиграли'
-                user_storage = end(request, response)
+                user_storage = end(request, response, text)
 
             if user_storage["moneyA"] <= 0:
                 text = 'Мне очень жаль, но вы проиграли'
-                user_storage = end(request, response)
+                user_storage = end(request, response, text)
 
             # Проверка наличия слова в словах о начале игры
             if user_message in ENDING_WORDS:
-                user_storage = end(request, response)
+                user_storage = end(request, response, text)
 
             if user_message in MONEY:
                 text1 = str(user_storage["moneyU"])
@@ -383,7 +385,7 @@ def handle_dialog(request, response, user_storage):
 
         else:
             response.set_text("Простите, но я вас не поняла.")
-            return response, user_storage
+        return response, user_storage
 
 
 # Шансы
@@ -432,7 +434,7 @@ def chances(user_storage, game):
 
 
 # Начало новой игры
-def end(request, response):
+def end(request, response, text):
     game = las_vegas()
 
     user_storage = {
@@ -457,7 +459,7 @@ def end(request, response):
 
     backup_turn = user_storage
 
-    response.set_text('Давай напомню правила: Каждый участник бросает кубик и в зависимости от выпавшего количества '
+    response.set_text(text +'Давай напомню правила: Каждый участник бросает кубик и в зависимости от выпавшего количества '
                       'очков перемещает фишку по полю. За каждый пройденный круг банк выплачивает 200$. Ваша цель – '
                       'не обанкротиться. \n Если вы остановились на поле недвижимости и оно не '
                       'занято другими участниками, у вас есть право на его покупку или отказ от покупки. \n Владение зданием дает право взыскивать арендную плату с человека, '
