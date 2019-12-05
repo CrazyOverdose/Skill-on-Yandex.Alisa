@@ -86,7 +86,7 @@ def handle_dialog(request, response, user_storage):
             "bankA": 0,  # вклады алисы (ячейка поля 37)
             "exchange": 0,  # биржа (ячейка поля 13)
             "user_id": request.user_id,
-            "users_turn": False,
+            "users_turn": True,
             "bank": False,
             "property": 0,
             "go": False,
@@ -191,9 +191,10 @@ def handle_dialog(request, response, user_storage):
                     if cube + user_storage["field_cellU"] > 40:
                         user_storage["moneyU"] = user_storage["moneyU"] + 200
                         user_storage["bankU"] = user_storage["bankU"] * 1.5
+                        user_storage["field_cellU"] = user_storage["field_cellU"] + cube - 40
 
                     if cube + user_storage["field_cellA"] < 40:
-                        user_storage["field_cellA"] = user_storage["bankA"] + cube
+                        user_storage["field_cellU"] = user_storage["field_cellU"] + cube
 
                     if user_storage["field_cellU"] == 2 | user_storage["field_cellU"] == 4 | user_storage[
                         "field_cellU"] == 5 | user_storage["field_cellU"] == 7 | user_storage["field_cellU"] == 9 | \
@@ -268,6 +269,7 @@ def handle_dialog(request, response, user_storage):
                         user_storage["go"] = True
 
                     user_storage["users_turns"] = False
+                    return response, user_storage
 
                 # Если ходит Алиса
 
@@ -276,10 +278,10 @@ def handle_dialog(request, response, user_storage):
                 if cube + user_storage["field_cellA"] > 40:
                     user_storage["moneyA"] = user_storage["moneyA"] + 200
                     user_storage["bankA"] = user_storage["bankA"] * 1.5
-                    user_storage["field_cellA"] = user_storage["bankA"] + cube - 40
+                    user_storage["field_cellA"] = user_storage["field_cellA"] + cube - 40
 
                 if cube + user_storage["field_cellA"] < 40:
-                    user_storage["field_cellA"] = user_storage["bankA"] + cube
+                    user_storage["field_cellA"] = user_storage["field_cellA"] + cube
 
                 if user_storage["field_cellA"] == 2 | user_storage["field_cellA"] == 4 | user_storage[
                     "field_cellA"] == 5 | user_storage["field_cellA"] == 7 | user_storage["field_cellA"] == 9 | \
@@ -373,12 +375,11 @@ def handle_dialog(request, response, user_storage):
                     response.set_text(game.fields[user_storage["field_cellA"]] + " Выбор Алисы: " + game.fields[field])
                     user_storage["field_cellA"] = field
                 user_storage["users_turns"] = True
+                return response, user_storage
 
         else:
             response.set_text("Простите, но я вас не поняла.")
-
-    # В любом случае
-    return response, user_storage
+            return response, user_storage
 
 
 # Шансы
