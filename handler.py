@@ -7,10 +7,6 @@ import random
 logging.basicConfig(level=logging.DEBUG)
 
 
-class WinnerError(Exception):
-    pass
-
-
 class las_vegas:
     questions = [0, 'Чему равно 2+4-3*2', 'Какое из чисел натуральное? 0, 4, 0.2, 1/2', 'Cтолица Канады',
                  'Столица Южной Кореи',
@@ -76,23 +72,23 @@ def handle_dialog(request, response, user_storage):
         # Инициализируем сессию и поприветствуем его.
 
         user_storage = {
-            "propertyA": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                          0, 0, 0, 0, 0, 0, 0, 0, 0],  # имущество Алисы
-            "propertyU": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                          0, 0, 0, 0, 0, 0, 0, 0, 0],  # имущество пользователя
-            "moneyU": 200,  # Деньги Пользователя
-            "moneyA": 200,  # Деньги Алисы
-            "field_cellA": 0,  # Клетка, на которой находится Алиса
-            "field_cellU": 0,  # Клетка, на которой находится пользователь
-            "bankU": 0,  # вклады пользователя (ячейка поля 37)
-            "bankA": 0,  # вклады алисы (ячейка поля 37)
-            "exchange": 0,  # биржа (ячейка поля 13)
+            "propertyA": [int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0),
+                          int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0)],  # имущество Алисы
+            "propertyU": [int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0),
+                          int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0)],  # имущество пользователя
+            "moneyU": int(200),  # Деньги Пользователя
+            "moneyA": int(200),  # Деньги Алисы
+            "field_cellA": int(0),  # Клетка, на которой находится Алиса
+            "field_cellU": int(0),  # Клетка, на которой находится пользователь
+            "bankU": int(0),  # вклады пользователя (ячейка поля 37)
+            "bankA": int(0),  # вклады алисы (ячейка поля 37)
+            "exchange": int(0),  # биржа (ячейка поля 13)
             "user_id": request.user_id,
-            "users_turn": True,
+            "users_turn": bool(True),
             "bank": False,
-            "property": 0,
-            "go": False,
-            "school": 0
+            "property": int(0),
+            "go": bool(False),
+            "school": int(0)
         }
 
         global backup_turn
@@ -133,7 +129,7 @@ def handle_dialog(request, response, user_storage):
             return response, user_storage
 
         if int(user_storage["property"]) != 0:
-            if str(user_message) == "купить":
+            if str(user_message) == str("купить"):
                 user_storage["moneyU"] = int(user_storage["moneyU"]) + int(game.fields[int(user_storage["field_cellU"])])
                 user_storage["propertyU"][int(user_storage["property"])] = 1
                 response.set_text('Поздравляем с приобретерием!')
@@ -143,7 +139,7 @@ def handle_dialog(request, response, user_storage):
             return response, user_storage
 
         if bool(user_storage["bank"]):
-            if str(user_message) == "забрать":
+            if str(user_message) == str("забрать"):
                 response.set_text('Вы забрали деньги')
                 user_storage["moneyU"] = int(user_storage["moneyU"]) + int(user_storage["bankU"])
                 user_storage["bankU"] = 0
@@ -170,7 +166,7 @@ def handle_dialog(request, response, user_storage):
 
         # Проверка слова в допустимых словах
         if user_message in ALL_WORDS:
-            cube = randint(2, 12)
+            cube = int(randint(2, 12))
 
             if int(user_storage["moneyU"]) <= 0:
                 text = 'Мне очень жаль, но вы проиграли'
@@ -199,9 +195,9 @@ def handle_dialog(request, response, user_storage):
                         user_storage["field_cellU"] = int(user_storage["field_cellU"]) + int(cube)
 
                     if int(user_storage["field_cellU"]) == 2 | int(user_storage["field_cellU"]) == 4 | int(user_storage["field_cellU"]) == 5 | int(user_storage["field_cellU"]) == 7 | int(user_storage["field_cellU"]) == 9 | int(user_storage["field_cellU"]) == 10 | int(user_storage["field_cellU"]) == 12 | int(user_storage["field_cellU"]) == 14 | int(user_storage["field_cellU"]) == 15 | int(user_storage["field_cellU"]) == 17 | int(user_storage["field_cellU"]) == 19 | int(user_storage["field_cellU"]) == 20 | int(user_storage["field_cellU"]) == 22 | int(user_storage["field_cellU"]) == 24 | int(user_storage["field_cellU"]) == 25 | int(user_storage["field_cellU"]) == 27 | int(user_storage["field_cellU"]) == 28 | int(user_storage["field_cellU"]) == 30 | int(user_storage["field_cellU"]) == 32 | int(user_storage["field_cellU"]) == 33 | int(user_storage["field_cellU"]) == 35 | int(user_storage["field_cellU"]) == 38 | int(user_storage["field_cellU"]) == 40:
-                        a = int(conversion(user_storage["field_cellA"]))
+                        a = int(conversion(int(user_storage["field_cellA"])))
                         response.set_text(
-                            str(game.fields[user_storage["field_cellA"]]) + 'Если хотите приобрести, введите (купить)')
+                            str(game.fields[int(user_storage["field_cellA"])]) + 'Если хотите приобрести, введите (купить)')
 
                         user_storage["property"] = int(a)
 
@@ -263,7 +259,7 @@ def handle_dialog(request, response, user_storage):
 
             elif not user_storage["users_turn"]:
                 backup_turn = user_storage
-                if cube + int(user_storage["field_cellA"]) > 40:
+                if int(cube) + int(user_storage["field_cellA"]) > 40:
                     user_storage["moneyA"] = int(user_storage["moneyA"]) + 200
                     user_storage["bankA"] = int(user_storage["bankA"]) + 150
                     user_storage["field_cellA"] = int(user_storage["field_cellA"]) + int(cube) - 40
@@ -315,14 +311,14 @@ def handle_dialog(request, response, user_storage):
                     user_storage["moneyU"] = int(user_storage["moneyU"]) + 50
 
                 if int(user_storage["field_cellA"]) == 37:
-                    response.set_text(str(game.fields[user_storage["field_cellA"]]))
+                    response.set_text(str(game.fields[int(user_storage["field_cellA"])]))
                     user_storage["bank"] = True
 
                 if int(user_storage["field_cellA"]) == 1:
-                    response.set_text('\n Алиса попала в ' + str(game.fields[user_storage["field_cellA"]]))
+                    response.set_text('\n Алиса попала в ' + str(game.fields[int(user_storage["field_cellA"])]))
 
                 if int(user_storage["field_cellA"]) == 11:
-                    response.set_text('\n Алиса попала в ' + str(game.fields[user_storage["field_cellA"]]))
+                    response.set_text('\n Алиса попала в ' + str(game.fields[int(user_storage["field_cellA"])]))
                     user_storage["moneyA"] = int(user_storage["moneyA"]) - 100
 
                 if int(user_storage["field_cellA"]) == 18:
@@ -401,25 +397,26 @@ def chances(user_storage, game):
 # Начало новой игры
 def end(request, response, text):
     game = las_vegas()
+    random.seed()
 
     user_storage = {
-        "propertyA": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                      0, 0, 0, 0, 0, 0, 0, 0, 0],  # имущество Алисы
-        "propertyU": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                      0, 0, 0, 0, 0, 0, 0, 0, 0],  # имущество пользователя
-        "moneyU": 200,  # Деньги Пользователя
-        "moneyA": 200,  # Деньги Алисы
-        "field_cellA": 0,  # Клетка, на которой находится Алиса
-        "field_cellU": 0,  # Клетка, на которой находится пользователь
-        "bankU": 0,  # вклады пользователя (ячейка поля 37)
-        "bankA": 0,  # вклады алисы (ячейка поля 37)
-        "exchange": 0,  # биржа (ячейка поля 13)
+        "propertyA": [int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0),
+                      int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0)],  # имущество Алисы
+        "propertyU": [int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0),
+                      int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0)],  # имущество пользователя
+        "moneyU": int(200),  # Деньги Пользователя
+        "moneyA": int(200),  # Деньги Алисы
+        "field_cellA": int(0),  # Клетка, на которой находится Алиса
+        "field_cellU": int(0),  # Клетка, на которой находится пользователь
+        "bankU": int(0),  # вклады пользователя (ячейка поля 37)
+        "bankA": int(0),  # вклады алисы (ячейка поля 37)
+        "exchange": int(0),  # биржа (ячейка поля 13)
         "user_id": request.user_id,
-        "users_turn": True,
+        "users_turn": bool(True),
         "bank": False,
-        "go": False,
-        "property": 0,
-        "school": 0
+        "property": int(0),
+        "go": bool(False),
+        "school": int(0)
     }
 
     backup_turn = user_storage
@@ -447,7 +444,7 @@ def school(user_storage, game):
             return str(game.fields[18]) + '\n' + str(game.questions[int(rand)]) + '\n Ответ Алисы: я не знаю. НЕ засчитано'
 
     if bool(user_storage["users_turns"]):
-        user_storage["flag"] = rand
+        user_storage["flag"] = int(rand)
         return str(game.fields[18]) + '\n' + str(game.questions[int(rand)])
 
 
