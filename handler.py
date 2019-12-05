@@ -172,18 +172,21 @@ def handle_dialog(request, response, user_storage):
 
             if user_storage["moneyU"] <= 0:
                 text = 'Мне очень жаль, но вы проиграли'
-                user_storage = end(request, response, text)
+                user_storage = end(request, response)
 
             if user_storage["moneyA"] <= 0:
                 text = 'Мне очень жаль, но вы проиграли'
-                user_storage = end(request, response, text)
+                user_storage = end(request, response)
 
             # Проверка наличия слова в словах о начале игры
             if user_message in ENDING_WORDS:
-                user_storage = end(request, response, text)
+                user_storage = end(request, response)
 
             if user_message in MONEY:
-                response.set_text('Ваши деньги ' + str(user_storage["moneyU"]) + 'Деньги Алисы ' + str(user_storage["moneyA"]))
+                text1 = str(user_storage["moneyU"])
+                text2 = str(user_storage["moneyU"])
+                text3 = 'Ваши деньги ' + text1 + 'Деньги Алисы ' + text2
+                response.set_text(text3)
 
             # Если Пользователь
             if user_message in WORDS:
@@ -252,7 +255,8 @@ def handle_dialog(request, response, user_storage):
                     if user_storage["field_cellU"] == 13:
                         if user_storage["exchange"] == 0:
                             response.set_text(
-                                game.fields[user_storage["field_cellU"]] + ' Биржа пуста, значит вы должны оставить 200$')
+                                game.fields[
+                                    user_storage["field_cellU"]] + ' Биржа пуста, значит вы должны оставить 200$')
                             user_storage["moneyU"] = user_storage["moneyU"] - 200
                             user_storage["exchange"] = 200
                         else:
@@ -428,7 +432,7 @@ def chances(user_storage, game):
 
 
 # Начало новой игры
-def end(request, response, text):
+def end(request, response):
     game = las_vegas()
 
     user_storage = {
@@ -453,7 +457,14 @@ def end(request, response, text):
 
     backup_turn = user_storage
 
-    response.set_text(' Давай напомню правила: Каждый участник бросает кубик и в зависимости от выпавшего количества очков перемещает фишку по полю. За каждый пройденный круг банк выплачивает 200$. Ваша цель – не обанкротиться. \n Покупка недвижимости: Если вы остановились на поле недвижимости и оно не занято другими участниками, у вас есть право на его покупку или отказ от покупки. \n Владение недвижимостью: Владение зданием дает право взыскивать арендную плату с человека, остановившегося на этом поле.\n «Тюрьма»: Чтобы покинуть этот сектор, необходимо заплатить штраф в 100 $. \n Если вам не хватает средств на какие-то обязательные выплаты, вы становитесь банкротом. \n \n Чтобы начать новую игру наберите "новая игра", чтобы сделать свой ход наберите "бросить кубик"')
+    response.set_text('Давай напомню правила: Каждый участник бросает кубик и в зависимости от выпавшего количества '
+                      'очков перемещает фишку по полю. За каждый пройденный круг банк выплачивает 200$. Ваша цель – '
+                      'не обанкротиться. \n Если вы остановились на поле недвижимости и оно не '
+                      'занято другими участниками, у вас есть право на его покупку или отказ от покупки. \n Владение зданием дает право взыскивать арендную плату с человека, '
+                      'остановившегося на этом поле.\n «Тюрьма»: Чтобы покинуть этот сектор, необходимо заплатить '
+                      'штраф в 100 $. \n Если вам не хватает средств на какие-то обязательные выплаты, вы становитесь '
+                      'банкротом. \n \n Чтобы начать новую игру наберите "новая игра", чтобы сделать свой ход '
+                      'наберите "бросить кубик"')
 
     return user_storage
 
