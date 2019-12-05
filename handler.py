@@ -39,7 +39,7 @@ class las_vegas:
               'Отправляйтесь в тюрьму', 'Часовня цветов Цена: 35$', 'Музей мадам Тюссо Цена: 35$',
               'Выберете любую ячейку, на которую отправитесь. Действие этой ячейки на вас не распространиться',
               'Ред-Рок-Каньон Цена: 35$', 'Шанс ',
-              'Банк. Вы можете взять деньги под 1,5% (скажите, сколько денег хотите положить), забрать ранее вложенные деньги (с процентами) Для этого скажите "забрать"',
+              'Банк. Вы можете положить деньги (каждый круг +150$) (скажите, сколько денег хотите положить), забрать ранее вложенные деньги (с процентами) Для этого скажите "забрать"',
               'Национальный парк "Долина смерти" Цена: 40$', 'Вы такой невнимательный! КАк умудрились потерять 50$?',
               'Сансет Парк Цена: 40$']
 
@@ -123,46 +123,46 @@ def handle_dialog(request, response, user_storage):
 
     if alena == 17:
 
-        if user_storage["school"] != 0:
-            if user_message == game.answers[user_storage["school"]]:
+        if int(user_storage["school"]) != 0:
+            if str(user_message) == str(game.answers[int(user_storage["school"])]):
                 response.set_text('Правильный ответ')
-                user_storage["moneyU"] = user_storage["moneyU"] + 50
+                user_storage["moneyU"] = int(user_storage["moneyU"]) + 50
             else:
                 response.set_text('Неправильный ответ')
             user_storage["school"] = 0
             return response, user_storage
 
-        if user_storage["property"] != 0:
-            if user_message == "купить":
-                user_storage["moneyU"] = user_storage["moneyU"] + game.fields[user_storage["field_cellU"]]
-                user_storage["propertyU"][user_storage["property"]] = 1
+        if int(user_storage["property"]) != 0:
+            if str(user_message) == "купить":
+                user_storage["moneyU"] = int(user_storage["moneyU"]) + int(game.fields[int(user_storage["field_cellU"])])
+                user_storage["propertyU"][int(user_storage["property"])] = 1
                 response.set_text('Поздравляем с приобретерием!')
             else:
                 response.set_text('Может, это действиельно не лучшее вложение денег')
             user_storage["property"] = 0
             return response, user_storage
 
-        if user_storage["bank"]:
-            if user_message == "забрать":
+        if bool(user_storage["bank"]):
+            if str(user_message) == "забрать":
                 response.set_text('Вы забрали деньги')
-                user_storage["moneyU"] = user_storage["moneyU"] + user_storage["bankU"]
+                user_storage["moneyU"] = int(user_storage["moneyU"]) + int(user_storage["bankU"])
                 user_storage["bankU"] = 0
 
             if user_message.is_integer():
                 response.set_text('Вы положили деньги под проценты')
-                user_storage["moneyU"] = user_storage["moneyU"] - user_message.is_integer()
-                user_storage["bankU"] = user_storage["bankU"] + user_message.is_integer()
+                user_storage["moneyU"] = int(user_storage["moneyU"]) - int(user_message.is_integer())
+                user_storage["bankU"] = int(user_storage["bankU"]) + int(user_message.is_integer())
             else:
                 response.set_text('Ну, не всем становиться миллионерами')
             user_storage["bank"] = False
             return response, user_storage
 
-        if user_storage["go"]:
+        if bool(user_storage["go"]):
             if user_message.is_integer():
-                response.set_text('Вы переместились на ячейку: ' + game.fields[user_message.is_integer()])
+                response.set_text('Вы переместились на ячейку: ' + str(game.fields[int(user_message.is_integer())]))
                 user_storage["field_cellU"] = user_message.is_integer()
-                if user_storage["field_cellU"] > user_message.is_integer():
-                    user_storage["moneyU"] = user_storage["moneyU"] + 200
+                if int(user_storage["field_cellU"]) > user_message.is_integer():
+                    user_storage["moneyU"] = int(user_storage["moneyU"]) + 200
             else:
                 response.set_text('ВЫ решили остаться на этой ячейке')
             user_storage["go"] = False
@@ -172,12 +172,12 @@ def handle_dialog(request, response, user_storage):
         if user_message in ALL_WORDS:
             cube = randint(2, 12)
 
-            if user_storage["moneyU"] <= 0:
+            if int(user_storage["moneyU"]) <= 0:
                 text = 'Мне очень жаль, но вы проиграли'
                 user_storage = end(request, response, text)
 
-            if user_storage["moneyA"] <= 0:
-                text = 'Мне очень жаль, но вы проиграли'
+            if int(user_storage["moneyA"]) <= 0:
+                text = 'Поздравляю, вы победили!'
                 user_storage = end(request, response, text)
 
             # Проверка наличия слова в словах о начале игры
@@ -185,93 +185,75 @@ def handle_dialog(request, response, user_storage):
                 user_storage = end(request, response, text)
 
             if user_message in MONEY:
-                text1 = str(user_storage["moneyU"])
-                text2 = str(user_storage["moneyU"])
-                text3 = 'Ваши деньги ' + text1 + '  Деньги Алисы ' + text2
                 response.set_text('Ваши деньги ' + str(user_storage["moneyU"]) + '  Деньги Алисы ' + str(user_storage["moneyA"]))
 
             # Если Пользователь
             if user_message in WORDS:
-                if user_storage["users_turn"]:
-                    if cube + user_storage["field_cellU"] > 40:
-                        user_storage["moneyU"] = user_storage["moneyU"] + 200
-                        user_storage["bankU"] = user_storage["bankU"] * 1.5
-                        user_storage["field_cellU"] = user_storage["field_cellU"] + cube - 40
+                if bool(user_storage["users_turn"]):
+                    if int(cube) + int(user_storage["field_cellU"]) > 40:
+                        user_storage["moneyU"] = int(user_storage["moneyU"]) + 200
+                        user_storage["bankU"] = int(user_storage["bankU"]) * 2
+                        user_storage["field_cellU"] = int(user_storage["field_cellU"]) + int(cube) - 40
 
-                    if cube + user_storage["field_cellA"] < 40:
-                        user_storage["field_cellU"] = user_storage["field_cellU"] + cube
+                    if int(cube) + int(user_storage["field_cellA"]) < 40:
+                        user_storage["field_cellU"] = int(user_storage["field_cellU"]) + int(cube)
 
-                    if user_storage["field_cellU"] == 2 | user_storage["field_cellU"] == 4 | user_storage[
-                        "field_cellU"] == 5 | user_storage["field_cellU"] == 7 | user_storage["field_cellU"] == 9 | \
-                            user_storage["field_cellU"] == 10 | user_storage["field_cellU"] == 12 | user_storage[
-                        "field_cellU"] == 14 | user_storage["field_cellU"] == 15 | user_storage["field_cellU"] == 17 | \
-                            user_storage["field_cellU"] == 19 | user_storage["field_cellU"] == 20 | user_storage[
-                        "field_cellU"] == 22 | user_storage["field_cellU"] == 24 | user_storage["field_cellU"] == 25 | \
-                            user_storage["field_cellU"] == 27 | user_storage["field_cellU"] == 28 | user_storage[
-                        "field_cellU"] == 30 | user_storage["field_cellU"] == 32 | user_storage["field_cellU"] == 33 | \
-                            user_storage["field_cellU"] == 35 | user_storage["field_cellU"] == 38 | user_storage[
-                        "field_cellU"] == 40:
-                        a = conversion(user_storage["field_cellA"])
+                    if int(user_storage["field_cellU"]) == 2 | int(user_storage["field_cellU"]) == 4 | int(user_storage["field_cellU"]) == 5 | int(user_storage["field_cellU"]) == 7 | int(user_storage["field_cellU"]) == 9 | int(user_storage["field_cellU"]) == 10 | int(user_storage["field_cellU"]) == 12 | int(user_storage["field_cellU"]) == 14 | int(user_storage["field_cellU"]) == 15 | int(user_storage["field_cellU"]) == 17 | int(user_storage["field_cellU"]) == 19 | int(user_storage["field_cellU"]) == 20 | int(user_storage["field_cellU"]) == 22 | int(user_storage["field_cellU"]) == 24 | int(user_storage["field_cellU"]) == 25 | int(user_storage["field_cellU"]) == 27 | int(user_storage["field_cellU"]) == 28 | int(user_storage["field_cellU"]) == 30 | int(user_storage["field_cellU"]) == 32 | int(user_storage["field_cellU"]) == 33 | int(user_storage["field_cellU"]) == 35 | int(user_storage["field_cellU"]) == 38 | int(user_storage["field_cellU"]) == 40:
+                        a = int(conversion(user_storage["field_cellA"]))
                         response.set_text(
-                            game.fields[user_storage["field_cellA"]] + 'Если хотите приобрести, введите (купить)')
+                            str(game.fields[user_storage["field_cellA"]]) + 'Если хотите приобрести, введите (купить)')
 
-                        user_storage["property"] = a
+                        user_storage["property"] = int(a)
 
-                    if user_storage["field_cellU"] == 26 | user_storage["field_cellU"] == 21 | user_storage[
-                        "field_cellU"] == 29 | user_storage["field_cellU"] == 39 | user_storage["field_cellU"] == 3 | \
-                            user_storage[
-                                "field_cellU"] == 8:
-                        user_storage["moneyU"] = user_storage["moneyU"] + game.price_field[user_storage["field_cellU"]]
-                        response.set_text(game.fields[user_storage["field_cellU"]])
+                    if int(user_storage["field_cellU"]) == 26 | int(user_storage["field_cellU"]) == 21 | int(user_storage["field_cellU"]) == 29 | int(user_storage["field_cellU"]) == 39 | int(user_storage["field_cellU"]) == 3 | int(user_storage["field_cellU"]) == 8:
+                        user_storage["moneyU"] = int(user_storage["moneyU"]) + int(game.price_field[int(user_storage["field_cellU"])])
+                        response.set_text(str(game.fields[int(user_storage["field_cellU"])]))
 
-                    if user_storage["field_cellU"] == 23:
-                        response.set_text(game.fields[user_storage["field_cellU"]])
-                        user_storage["moneyU"] = user_storage["moneyU"] + 200
+                    if int(user_storage["field_cellU"]) == 23:
+                        response.set_text(str(game.fields[int(user_storage["field_cellU"])]))
+                        user_storage["moneyU"] = int(user_storage["moneyU"]) + 200
                         user_storage["field_cellU"] = 1
 
-                    if user_storage["field_cellU"] == 31:
-                        response.set_text(game.fields[user_storage["field_cellU"]])
-                        user_storage["moneyU"] = user_storage["moneyU"] + 100
+                    if int(user_storage["field_cellU"]) == 31:
+                        response.set_text(str(game.fields[int(user_storage["field_cellU"])]))
+                        user_storage["moneyU"] = int(user_storage["moneyU"]) + 100
                         user_storage["field_cellU"] = 11
 
-                    if user_storage["field_cellU"] == 6:
-                        response.set_text(game.fields[user_storage["field_cellU"]])
-                        user_storage["moneyU"] = user_storage["moneyU"] - 50
-                        user_storage["moneyA"] = user_storage["moneyA"] + 50
+                    if int(user_storage["field_cellU"]) == 6:
+                        response.set_text(str(game.fields[int(user_storage["field_cellU"])]))
+                        user_storage["moneyU"] = int(user_storage["moneyU"]) - 50
+                        user_storage["moneyA"] = int(user_storage["moneyA"]) + 50
 
-                    if user_storage["field_cellU"] == 37:
-                        response.set_text(game.fields[user_storage["field_cellU"]])
+                    if int(user_storage["field_cellU"]) == 37:
+                        response.set_text(str(game.fields[int(user_storage["field_cellU"])]))
                         user_storage["bank"] = True
 
-                    if user_storage["field_cellU"] == 1:
-                        response.set_text(game.fields[user_storage["field_cellU"]])
+                    if int(user_storage["field_cellU"]) == 1:
+                        response.set_text(str(game.fields[int(user_storage["field_cellU"])]))
 
-                    if user_storage["field_cellU"] == 11:
-                        response.set_text('\n Алиса попала в ' + game.fields[user_storage["field_cellU"]])
-                        user_storage["moneyU"] = user_storage["moneyU"] - 100
+                    if int(user_storage["field_cellU"]) == 11:
+                        response.set_text('\n Алиса попала в ' + str(game.fields[int(user_storage["field_cellU"])]))
+                        user_storage["moneyU"] = int(user_storage["moneyU"]) - 100
 
-                    if user_storage["field_cellU"] == 18:
-                        response.set_text(game.fields[user_storage["field_cellU"]])
-                        response.set_text(school(user_storage, game))
+                    if int(user_storage["field_cellU"]) == 18:
+                        response.set_text(str(school(user_storage, game)))
 
-                    if user_storage["field_cellU"] == 13:
-                        if user_storage["exchange"] == 0:
+                    if int(user_storage["field_cellU"]) == 13:
+                        if int(user_storage["exchange"]) == 0:
                             response.set_text(
-                                game.fields[
-                                    user_storage["field_cellU"]] + ' Биржа пуста, значит вы должны оставить 200$')
-                            user_storage["moneyU"] = user_storage["moneyU"] - 200
+                                str(game.fields[int(user_storage["field_cellU"])]) + ' Биржа пуста, значит вы должны оставить 200$')
+                            user_storage["moneyU"] = int(user_storage["moneyU"]) - 200
                             user_storage["exchange"] = 200
                         else:
-                            response.set_text(game.fields[user_storage["field_cellU"]] + '\n Поздравляю, 200 $ ваши')
-                            user_storage["moneyU"] = user_storage["moneyU"] + 2 * user_storage["exchange"]
+                            response.set_text(str(game.fields[int(user_storage["field_cellU"])]) + '\n Поздравляю, 200 $ ваши')
+                            user_storage["moneyU"] = int(user_storage["moneyU"]) + 2 * int(user_storage["exchange"])
                             user_storage["exchange"] = 0
 
-                    if user_storage["field_cellU"] == 5 | user_storage["field_cellU"] == 16 | user_storage[
-                        "field_cellU"] == 36:
-                        response.set_text(chances(user_storage, game))
+                    if int(user_storage["field_cellU"]) == 5 | int(user_storage["field_cellU"]) == 16 | int(user_storage["field_cellU"]) == 36:
+                        response.set_text(str(chances(user_storage, game)))
 
-                    if user_storage["field_cellU"] == 34:
-                        response.set_text(game.fields[user_storage["field_cellU"]])
+                    if int(user_storage["field_cellU"]) == 34:
+                        response.set_text(str(game.fields[int(user_storage["field_cellU"])]))
                         user_storage["go"] = True
 
                     user_storage["users_turns"] = False
@@ -281,105 +263,90 @@ def handle_dialog(request, response, user_storage):
 
             elif not user_storage["users_turn"]:
                 backup_turn = user_storage
-                if cube + user_storage["field_cellA"] > 40:
-                    user_storage["moneyA"] = user_storage["moneyA"] + 200
-                    user_storage["bankA"] = user_storage["bankA"] * 1.5
-                    user_storage["field_cellA"] = user_storage["field_cellA"] + cube - 40
+                if cube + int(user_storage["field_cellA"]) > 40:
+                    user_storage["moneyA"] = int(user_storage["moneyA"]) + 200
+                    user_storage["bankA"] = int(user_storage["bankA"]) + 150
+                    user_storage["field_cellA"] = int(user_storage["field_cellA"]) + int(cube) - 40
 
-                if cube + user_storage["field_cellA"] < 40:
-                    user_storage["field_cellA"] = user_storage["field_cellA"] + cube
+                if int(cube) + int(user_storage["field_cellA"]) < 40:
+                    user_storage["field_cellA"] = int(user_storage["field_cellA"]) + int(cube)
 
-                if user_storage["field_cellA"] == 2 | user_storage["field_cellA"] == 4 | user_storage[
-                    "field_cellA"] == 5 | user_storage["field_cellA"] == 7 | user_storage["field_cellA"] == 9 | \
-                        user_storage["field_cellA"] == 10 | user_storage["field_cellA"] == 12 | user_storage[
-                    "field_cellA"] == 14 | user_storage["field_cellA"] == 15 | user_storage["field_cellA"] == 17 | \
-                        user_storage["field_cellA"] == 19 | user_storage["field_cellA"] == 20 | user_storage[
-                    "field_cellA"] == 22 | user_storage["field_cellA"] == 24 | user_storage["field_cellA"] == 25 | \
-                        user_storage["field_cellA"] == 27 | user_storage["field_cellA"] == 28 | user_storage[
-                    "field_cellA"] == 30 | user_storage["field_cellA"] == 32 | user_storage["field_cellA"] == 33 | \
-                        user_storage["field_cellA"] == 35 | user_storage["field_cellA"] == 38 | user_storage[
-                    "field_cellA"] == 40:
+                if int(user_storage["field_cellA"]) == 2 | int(user_storage["field_cellA"]) == 4 | int(user_storage["field_cellA"]) == 5 | int(user_storage["field_cellA"]) == 7 | int(user_storage["field_cellA"]) == 9 | int(user_storage["field_cellA"]) == 10 | int(user_storage["field_cellA"]) == 12 | int(user_storage["field_cellA"]) == 14 | int(user_storage["field_cellA"]) == 15 | int(user_storage["field_cellA"]) == 17 | int(user_storage["field_cellA"]) == 19 | int(user_storage["field_cellA"]) == 20 | int(user_storage["field_cellA"]) == 22 | int(user_storage["field_cellA"]) == 24 | int(user_storage["field_cellA"]) == 25 | int(user_storage["field_cellA"]) == 27 | int(user_storage["field_cellA"]) == 28 | int(user_storage["field_cellA"]) == 30 | int(user_storage["field_cellA"]) == 32 | int(user_storage["field_cellA"]) == 33 | int(user_storage["field_cellA"]) == 35 | int(user_storage["field_cellA"]) == 38 | int(user_storage["field_cellA"]) == 40:
 
-                    a = conversion(user_storage["field_cellA"])
+                    a = int(conversion(int(user_storage["field_cellA"])))
 
-                    b = randint(1, 2)
+                    b = int(randint(1, 2))
 
-                    if user_storage["moneyA"] < 41:
+                    if int(user_storage["moneyA"]) < 41:
                         b = 2
 
-                    if user_storage["propertyU"][a] == 1:
-                        response.set_text("Алиса попала на ваш участок: " + game.fields[user_storage["field_cellA"]])
-                        user_storage["moneyA"] = user_storage["moneyA"] + game.price_field[user_storage["field_cellA"]]
-                        user_storage["moneyU"] = user_storage["moneyU"] - game.price_field[user_storage["field_cellA"]]
+                    if int(user_storage["propertyU"][a]) == 1:
+                        response.set_text("Алиса попала на ваш участок: " + str(game.fields[int(user_storage["field_cellA"])]))
+                        user_storage["moneyA"] = int(user_storage["moneyA"]) + int(game.price_field[int(user_storage["field_cellA"])])
+                        user_storage["moneyU"] = int(user_storage["moneyU"]) - int(game.price_field[int(user_storage["field_cellA"])])
 
                     else:
                         if b == 1:
                             response.set_text(
-                                "Алиса попала: " + game.fields[user_storage["field_cellA"]] + " и решила купить")
-                            user_storage["moneyA"] = user_storage["moneyA"] + game.price_field[
-                                user_storage["field_cellA"]]
+                                "Алиса попала: " + str(game.fields[int(user_storage["field_cellA"])]) + " и решила купить")
+                            user_storage["moneyA"] = int(user_storage["moneyA"]) + int(game.price_field[int(user_storage["field_cellA"])])
                             user_storage["propertyA"][a] = 1
                         else:
                             response.set_text(
-                                "Алиса попала: " + game.fields[user_storage["field_cellA"]] + " и решила не покупать")
+                                "Алиса попала: " + str(game.fields[int(user_storage["field_cellA"])]) + " и решила не покупать")
 
-                if user_storage["field_cellA"] == 26 | user_storage["field_cellA"] == 21 | user_storage[
-                    "field_cellA"] == 29 | user_storage["field_cellA"] == 39 | user_storage["field_cellA"] == 3 | \
-                        user_storage[
-                            "field_cellA"] == 8:
-                    user_storage["moneyA"] = user_storage["moneyA"] + game.price_field[user_storage["field_cellA"]]
-                    response.set_text(game.fields[user_storage["field_cellA"]])
+                if int(user_storage["field_cellA"]) == 26 | int(user_storage["field_cellA"]) == 21 | int(user_storage["field_cellA"]) == 29 | int(user_storage["field_cellA"]) == 39 | int(user_storage["field_cellA"]) == 3 | int(user_storage["field_cellA"]) == 8:
+                    user_storage["moneyA"] = int(user_storage["moneyA"]) + int(game.price_field[int(user_storage["field_cellA"])])
+                    response.set_text(str(game.fields[int(user_storage["field_cellA"])]))
 
-                if user_storage["field_cellA"] == 23:
-                    response.set_text('\n Алиса ' + game.fields[user_storage["field_cellA"]])
-                    user_storage["moneyA"] = user_storage["moneyA"] + 200
+                if int(user_storage["field_cellA"]) == 23:
+                    response.set_text('\n Алиса ' + str(game.fields[int(user_storage["field_cellA"])]))
+                    user_storage["moneyA"] = int(user_storage["moneyA"]) + 200
                     user_storage["field_cellA"] = 1
 
-                if user_storage["field_cellA"] == 31:
-                    response.set_text('\n Алиса ' + game.fields[user_storage["field_cellA"]])
-                    user_storage["moneyA"] = user_storage["moneyA"] + 100
+                if int(user_storage["field_cellA"]) == 31:
+                    response.set_text('\n Алиса ' + str(game.fields[int(user_storage["field_cellA"])]))
+                    user_storage["moneyA"] = int(user_storage["moneyA"]) + 100
                     user_storage["field_cellA"] = 11
 
-                if user_storage["field_cellA"] == 6:
-                    response.set_text(game.fields[user_storage["field_cellA"]])
-                    user_storage["moneyA"] = user_storage["moneyA"] - 50
-                    user_storage["moneyU"] = user_storage["moneyU"] + 50
+                if int(user_storage["field_cellA"]) == 6:
+                    response.set_text(str(game.fields[int(user_storage["field_cellA"])]))
+                    user_storage["moneyA"] = int(user_storage["moneyA"]) - 50
+                    user_storage["moneyU"] = int(user_storage["moneyU"]) + 50
 
-                if user_storage["field_cellA"] == 37:
-                    response.set_text(game.fields[user_storage["field_cellA"]])
+                if int(user_storage["field_cellA"]) == 37:
+                    response.set_text(str(game.fields[user_storage["field_cellA"]]))
                     user_storage["bank"] = True
 
-                if user_storage["field_cellA"] == 1:
-                    response.set_text('\n Алиса попала в ' + game.fields[user_storage["field_cellA"]])
+                if int(user_storage["field_cellA"]) == 1:
+                    response.set_text('\n Алиса попала в ' + str(game.fields[user_storage["field_cellA"]]))
 
-                if user_storage["field_cellA"] == 11:
-                    response.set_text('\n Алиса попала в ' + game.fields[user_storage["field_cellA"]])
-                    user_storage["moneyA"] = user_storage["moneyA"] - 100
+                if int(user_storage["field_cellA"]) == 11:
+                    response.set_text('\n Алиса попала в ' + str(game.fields[user_storage["field_cellA"]]))
+                    user_storage["moneyA"] = int(user_storage["moneyA"]) - 100
 
-                if user_storage["field_cellA"] == 18:
-                    response.set_text(game.fields[user_storage["field_cellA"]])
-                    response.set_text(school(user_storage, game))
+                if int(user_storage["field_cellA"]) == 18:
+                    response.set_text(str(school(user_storage, game)))
 
-                if user_storage["field_cellA"] == 13:
-                    if user_storage["exchange"] == 0:
-                        response.set_text(game.fields[user_storage["field_cellA"]] + '\nАлиса оставила деньги на бирже')
-                        user_storage["moneyA"] = user_storage["moneyA"] - 200
+                if int(user_storage["field_cellA"]) == 13:
+                    if int(user_storage["exchange"]) == 0:
+                        response.set_text(str(game.fields[int(user_storage["field_cellA"])]) + '\nАлиса оставила деньги на бирже')
+                        user_storage["moneyA"] = int(user_storage["moneyA"]) - 200
                         user_storage["exchange"] = 200
                     else:
-                        response.set_text(game.fields[user_storage["field_cellA"]] + '\nАлиса взяла деньги с биржи')
-                        user_storage["moneyA"] = user_storage["moneyA"] + 2 * user_storage["exchange"]
+                        response.set_text(str(game.fields[int(user_storage["field_cellA"])]) + '\nАлиса взяла деньги с биржи')
+                        user_storage["moneyA"] = int(user_storage["moneyA"]) + 2 * int(user_storage["exchange"])
                         user_storage["exchange"] = 0
 
-                if user_storage["field_cellA"] == 5 | user_storage["field_cellA"] == 16 | user_storage[
-                    "field_cellA"] == 36:
-                    response.set_text(chances(user_storage, game))
+                if int(user_storage["field_cellA"]) == 5 | int(user_storage["field_cellA"]) == 16 | int(user_storage["field_cellA"]) == 36:
+                    response.set_text(str(chances(user_storage, game)))
 
-                if user_storage["field_cellA"] == 34:
-                    field = randint(1, 40)
-                    if user_storage["field_cellA"] > field:
-                        user_storage["moneyA"] = user_storage["moneyA"] + 200
-                    response.set_text(game.fields[user_storage["field_cellA"]] + " Выбор Алисы: " + game.fields[field])
-                    user_storage["field_cellA"] = field
+                if int(user_storage["field_cellA"]) == 34:
+                    field = int(randint(1, 40))
+                    if int(user_storage["field_cellA"]) > int(field):
+                        user_storage["moneyA"] = int(user_storage["moneyA"]) + 200
+                    response.set_text(str(game.fields[int(user_storage["field_cellA"])]) + " Выбор Алисы: " + str(game.fields[field]))
+                    user_storage["field_cellA"] = int(field)
                 user_storage["users_turns"] = True
                 return response, user_storage
 
@@ -390,47 +357,45 @@ def handle_dialog(request, response, user_storage):
 
 # Шансы
 def chances(user_storage, game):
-    rand = randint(1, 12)
-    if (rand == 1 | rand == 2 | rand == 4 | rand == 5 | rand == 6 | rand == 8 | rand == 9 | rand == 12) & user_storage[
-        "users_turns"] == True:
-        user_storage["moneyU"] = user_storage["moneyU"] + game.price_chance[rand]
+    rand = int(randint(1, 12))
+    if (rand == 1 | rand == 2 | rand == 4 | rand == 5 | rand == 6 | rand == 8 | rand == 9 | rand == 12) & bool(user_storage["users_turns"]) == True:
+        user_storage["moneyU"] = int(user_storage["moneyU"]) + int(game.price_chance[int(rand)])
 
     if (
-            rand == 1 | rand == 2 | rand == 4 | rand == 5 | rand == 6 | rand == 8 | rand == 9 | rand == 12) & \
-            user_storage["users_turns"] == False:
-        user_storage["moneyA"] = user_storage["moneyA"] + game.price_chance[rand]
+            rand == 1 | rand == 2 | rand == 4 | rand == 5 | rand == 6 | rand == 8 | rand == 9 | rand == 12) & bool(user_storage["users_turns"]) == False:
+        user_storage["moneyA"] = int(user_storage["moneyA"]) + int(game.price_chance[int(rand)])
 
-    if rand == 3 & user_storage["users_turns"] == True:
-        user_storage["field_cellU"] = user_storage["field_cellU"] - 5
+    if rand == 3 & bool(user_storage["users_turns"]) == True:
+        user_storage["field_cellU"] = int(user_storage["field_cellU"]) - 5
 
-    if rand == 3 & user_storage["users_turns"] == False:
-        user_storage["field_cellA"] = user_storage["field_cellA"] - 5
+    if rand == 3 & bool(user_storage["users_turns"]) == False:
+        user_storage["field_cellA"] = int(user_storage["field_cellA"]) - 5
 
-    if rand == 10 & user_storage["users_turns"] == True:
-        user_storage["field_cellU"] = user_storage["field_cellU"] + 3
+    if rand == 10 & bool(user_storage["users_turns"]) == True:
+        user_storage["field_cellU"] = int(user_storage["field_cellU"]) + 3
 
-    if rand == 10 & user_storage["users_turns"] == False:
-        user_storage["field_cellA"] = user_storage["field_cellA"] + 3
+    if rand == 10 & bool(user_storage["users_turns"]) == False:
+        user_storage["field_cellA"] = int(user_storage["field_cellA"]) + 3
 
-    if rand == 11 & user_storage["users_turns"] == True:
+    if rand == 11 & bool(user_storage["users_turns"]) == True:
         user_storage["field_cellU"] = 11
-        user_storage["moneyU"] = user_storage["moneyU"] - 100
+        user_storage["moneyU"] = int(user_storage["moneyU"]) - 100
 
-    if rand == 11 & user_storage["users_turns"] == False:
+    if rand == 11 & bool(user_storage["users_turns"]) == False:
         user_storage["field_cellA"] = 11
-        user_storage["moneyA"] = user_storage["moneyA"] - 100
+        user_storage["moneyA"] = int(user_storage["moneyA"]) - 100
 
-    if rand == 7 & user_storage["users_turns"] == True:
+    if rand == 7 & bool(user_storage["users_turns"]) == True:
         user_storage["field_cellU"] = 21
 
-    if rand == 7 & user_storage["users_turns"] == False:
+    if rand == 7 & bool(user_storage["users_turns"]) == False:
         user_storage["field_cellA"] = 21
 
-    if not user_storage["users_turns"]:
-        return 'Алиса: ' + game.fields[user_storage["field_cellA"]] + game.chance[rand]
+    if not bool(user_storage["users_turns"]):
+        return 'Алиса: ' + str(game.fields[int(user_storage["field_cellA"])]) + str(game.chance[int(rand)])
 
-    if user_storage["users_turns"]:
-        return game.fields[user_storage["field_cellA"]] + game.chance[rand]
+    if bool(user_storage["users_turns"]):
+        return str(game.fields[int(user_storage["field_cellA"])]) + str(game.chance[int(rand)])
 
 
 # Начало новой игры
@@ -472,19 +437,18 @@ def end(request, response, text):
 
 
 def school(user_storage, game):
-    rand = randint(1, 11)
-    if not user_storage["users_turns"]:
-        choise = randint(1, 2)
+    rand = int(randint(1, 11))
+    if not bool(user_storage["users_turns"]):
+        choise = int(randint(1, 2))
         if choise == 1:
-            user_storage["moneyA"] = user_storage["moneyA"] + 50
-            return (game.fields[18] + '\n' + game.questions[rand] + '\n Ответ Алисы:' + game.answers[
-                rand] + '\nПравильный ответ')
+            user_storage["moneyA"] = int(user_storage["moneyA"]) + 50
+            return (str(game.fields[18]) + '\n' + str(game.questions[int(rand)]) + '\n Ответ Алисы:' + str(game.answers[int(rand)]) + '\nПравильный ответ')
         else:
-            return game.fields[18] + '\n' + game.questions[rand] + '\n Ответ Алисы: я не знаю. НЕ засчитано'
+            return str(game.fields[18]) + '\n' + str(game.questions[int(rand)]) + '\n Ответ Алисы: я не знаю. НЕ засчитано'
 
-    if user_storage["users_turns"]:
+    if bool(user_storage["users_turns"]):
         user_storage["flag"] = rand
-        return game.fields[18] + '\n' + game.questions[rand]
+        return str(game.fields[18]) + '\n' + str(game.questions[int(rand)])
 
 
 def conversion(a):
@@ -530,4 +494,4 @@ def conversion(a):
         a = 19
     if a == 40:
         a = 20
-    return a
+    return int(a)
