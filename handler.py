@@ -79,8 +79,8 @@ def handle_dialog(request, response, user_storage):
                           int(0),
                           int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0)],
             # имущество пользователя
-            "moneyU": int(200),  # Деньги Пользователя
-            "moneyA": int(-200),  # Деньги Алисы
+            "moneyU": int(-200),  # Деньги Пользователя
+            "moneyA": int(200),  # Деньги Алисы
             "field_cellA": int(23),  # Клетка, на которой находится Алиса
             "field_cellU": int(23),  # Клетка, на которой находится пользователь
             "bankU": int(0),  # вклады пользователя (ячейка поля 37)
