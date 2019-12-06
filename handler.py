@@ -116,14 +116,14 @@ def handle_dialog(request, response, user_storage):
     # Обрабатываем ответ пользователя.
     user_message = request.command.lower().strip().replace(' ', '')
 
-    text = False
+    text = 'true'
 
     if not text:
         response.set_text(text)
-        text = True
+        text = 'false'
     else:
         response.set_text(text)
-        text = False
+        text = 'true'
 
     return response, user_storage
 
