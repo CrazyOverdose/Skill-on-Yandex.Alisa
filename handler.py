@@ -116,67 +116,15 @@ def handle_dialog(request, response, user_storage):
     # Обрабатываем ответ пользователя.
     user_message = request.command.lower().strip().replace(' ', '')
 
-    text = ' '
+    text = False
 
-    # Проверка слова в допустимых словах
-    if user_message in ALL_WORDS:
-        cube = 0
-
-        if int(user_storage["moneyU"]) <= 0:
-            text = 'Мне очень жаль, но вы проиграли'
-            user_storage = end(request, response, text)
-
-        if int(user_storage["moneyA"]) <= 0:
-            text = 'Поздравляю, вы победили!'
-            user_storage = end(request, response, text)
-
-        # Проверка наличия слова в словах о начале игры
-        if user_message in ENDING_WORDS:
-            user_storage = end(request, response, text)
-
-        if user_message in MONEY:
-            response.set_text(
-                'Ваши деньги ' + str(user_storage["moneyU"]) + '  Деньги Алисы ' + str(user_storage["moneyA"]))
-
-        # Если Пользователь
-        if user_message in WORDS:
-            if bool(user_storage["users_turn"]):
-                if int(cube) + int(user_storage["field_cellU"]) > 40:
-                    user_storage["moneyU"] = int(user_storage["moneyU"]) + 200
-                    user_storage["bankU"] = int(user_storage["bankU"]) * 2
-                    user_storage["field_cellU"] = int(user_storage["field_cellU"]) + int(cube) - 40
-
-                if int(cube) + int(user_storage["field_cellA"]) < 40:
-                    user_storage["field_cellU"] = int(user_storage["field_cellU"]) + int(cube)
-
-                if int(user_storage["field_cellU"]) == 23:
-                    response.set_text(str(game.fields[int(user_storage["field_cellU"])]))
-                    user_storage["moneyU"] = int(user_storage["moneyU"]) + 200
-                    user_storage["field_cellU"] = 1
-                user_storage["users_turns"] = False
-                return response, user_storage
-
-                # Если ходит Алиса
-
-        if not bool(user_storage["users_turn"]):
-            backup_turn = user_storage
-            if int(cube) + int(user_storage["field_cellA"]) > 40:
-                user_storage["moneyA"] = int(user_storage["moneyA"]) + 200
-                user_storage["bankA"] = int(user_storage["bankA"]) + 150
-                user_storage["field_cellA"] = int(user_storage["field_cellA"]) + int(cube) - 40
-
-            if int(cube) + int(user_storage["field_cellA"]) < 40:
-                user_storage["field_cellA"] = int(user_storage["field_cellA"]) + int(cube)
-
-            if int(user_storage["field_cellA"]) == 23:
-                response.set_text('Алиса ' + str(game.fields[(int(user_storage["field_cellA"]))]))
-                user_storage["moneyA"] = int(user_storage["moneyA"]) + 200
-                user_storage["field_cellA"] = 1
-            user_storage["users_turns"] = True
-            return response, user_storage
-
+    if not text:
+        response.set_text(text)
+        text = True
     else:
-        response.set_text("Простите, но я вас не поняла.")
+        response.set_text(text)
+        text = False
+
     return response, user_storage
 
 
