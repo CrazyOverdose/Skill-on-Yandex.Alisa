@@ -90,7 +90,7 @@ def handle_dialog(request, response, user_storage):
                           int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0)],
             # имущество пользователя
             "moneyU": int(200),  # Деньги Пользователя
-            "moneyA": int(-200),  # Деньги Алисы
+            "moneyA": int(200),  # Деньги Алисы
             "field_cellA": int(23),  # Клетка, на которой находится Алиса
             "field_cellU": int(23),  # Клетка, на которой находится пользователь
             "bankU": int(0),  # вклады пользователя (ячейка поля 37)
@@ -144,6 +144,28 @@ def handle_dialog(request, response, user_storage):
             if user_message in MONEY:
                 response.set_text(
                     'Ваши деньги ' + str(user_storage["moneyU"]) + '  Деньги Алисы ' + str(user_storage["moneyA"]))
+
+            if user_message in WORDS:
+                if bool(user_storage["users_turn"]):
+                    if int(cube) + int(user_storage["field_cellU"]) > 40:
+                        user_storage["moneyU"] = int(user_storage["moneyU"]) + 200
+                        user_storage["bankU"] = int(user_storage["bankU"]) + 150
+                        user_storage["field_cellU"] = int(user_storage["field_cellU"]) + int(cube) - 40
+
+                    if int(cube) + int(user_storage["field_cellA"]) < 40:
+                        user_storage["field_cellU"] = int(user_storage["field_cellU"]) + int(cube)
+                    response.set_text(str(user_storage["field_cellU"]))
+
+                elif not user_storage["users_turn"]:
+                    backup_turn = user_storage
+                    if int(cube) + int(user_storage["field_cellA"]) > 40:
+                        user_storage["moneyA"] = int(user_storage["moneyA"]) + 200
+                        user_storage["bankA"] = int(user_storage["bankA"]) + 150
+                        user_storage["field_cellA"] = int(user_storage["field_cellA"]) + int(cube) - 40
+
+                    if int(cube) + int(user_storage["field_cellA"]) < 40:
+                        user_storage["field_cellA"] = int(user_storage["field_cellA"]) + int(cube)
+                    response.set_text(str(user_storage["field_cellA"]))
         else:
             response.set_text("Простите, но я вас не поняла.")
 
