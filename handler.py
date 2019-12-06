@@ -145,11 +145,11 @@ def handle_dialog(request, response, user_storage):
             response.set_text("Простите, но я вас не поняла.")
 
     except WinnerError1:
-        text = 'Мне очень жаль, но вы проиграли '
+        response.set_text('Мне очень жаль, но вы проиграли ')
         user_storage = end(request, response)
 
     except WinnerError2:
-        text = 'Поздравляю, вы победили! '
+        response.set_text('Поздравляю, вы победили! ')
         user_storage = end(request, response)
 
     # В любом случае
