@@ -169,10 +169,9 @@ def handle_dialog(request, response, user_storage):
                 user_storage["field_cellA"] = int(user_storage["field_cellA"]) + int(cube)
 
             if int(user_storage["field_cellA"]) == 23:
-                response.set_text('\n Алиса ' + str(game.fields[int(user_storage["field_cellA"])]))
+                response.set_text(str(game.fields[(int(user_storage["field_cellA"]))]))
                 user_storage["moneyA"] = int(user_storage["moneyA"]) + 200
                 user_storage["field_cellA"] = 1
-
             user_storage["users_turns"] = True
             return response, user_storage
 
