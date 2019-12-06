@@ -116,8 +116,6 @@ def handle_dialog(request, response, user_storage):
     # Обрабатываем ответ пользователя.
     user_message = request.command.lower().strip().replace(' ', '')
 
-    alena = 17
-
     text = ' '
 
     # Проверка слова в допустимых словах
@@ -155,6 +153,8 @@ def handle_dialog(request, response, user_storage):
                     response.set_text(str(game.fields[int(user_storage["field_cellU"])]))
                     user_storage["moneyU"] = int(user_storage["moneyU"]) + 200
                     user_storage["field_cellU"] = 1
+                user_storage["users_turns"] = False
+                return response, user_storage
 
                 # Если ходит Алиса
 
