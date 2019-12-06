@@ -79,7 +79,7 @@ def handle_dialog(request, response, user_storage):
                           int(0),
                           int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0)],
             # имущество пользователя
-            "moneyU": int(200),  # Деньги Пользователя
+            "moneyU": int(-200),  # Деньги Пользователя
             "moneyA": int(200),  # Деньги Алисы
             "field_cellA": int(23),  # Клетка, на которой находится Алиса
             "field_cellU": int(23),  # Клетка, на которой находится пользователь
@@ -118,15 +118,24 @@ def handle_dialog(request, response, user_storage):
 
     text = ''
 
-    if bool(user_storage["users_turn"]):
-        response.set_text('Пользователь')
-        user_storage["users_turn"] = False
-    else:
-        response.set_text('Алиса')
-        user_storage["users_turn"] = True
+    if user_message in ALL_WORDS:
+        cube = 0
+        if int(user_storage["moneyU"]) <= 0:
+            text = 'Мне очень жаль, но вы проиграли'
+            user_storage = end(request, response, text)
 
+        if int(user_storage["moneyA"]) <= 0:
+            text = 'Поздравляю, вы победили!'
+            user_storage = end(request, response, text)
+
+        # Проверка наличия слова в словах о начале игры
+        if user_message in ENDING_WORDS:
+            user_storage = end(request, response, text)
+
+        if user_message in MONEY:
+            response.set_text(
+                'Ваши деньги ' + str(user_storage["moneyU"]) + '  Деньги Алисы ' + str(user_storage["moneyA"]))
     return response, user_storage
-
 
 # Шансы
 def chances(user_storage, game):
@@ -183,7 +192,7 @@ def end(request, response, text):
                       int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0)],  # имущество Алисы
         "propertyU": [int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0),
                       int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0)],  # имущество пользователя
-        "moneyU": int(200),  # Деньги Пользователя
+        "moneyU": int(-200),  # Деньги Пользователя
         "moneyA": int(200),  # Деньги Алисы
         "field_cellA": int(23),  # Клетка, на которой находится Алиса
         "field_cellU": int(23),  # Клетка, на которой находится пользователь
