@@ -158,7 +158,7 @@ def handle_dialog(request, response, user_storage):
 
                 # Если ходит Алиса
 
-        elif not user_storage["users_turn"]:
+        elif not bool(user_storage["users_turn"]):
             backup_turn = user_storage
             if int(cube) + int(user_storage["field_cellA"]) > 40:
                 user_storage["moneyA"] = int(user_storage["moneyA"]) + 200
