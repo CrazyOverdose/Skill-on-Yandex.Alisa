@@ -7,6 +7,14 @@ import random
 logging.basicConfig(level=logging.DEBUG)
 
 
+class WinnerError1(Exception):
+    pass
+
+
+class WinnerError2(Exception):
+    pass
+
+
 class las_vegas:
     questions = [0, 'Чему равно 2+4-3*2', 'Какое из чисел натуральное? 0, 4, 0.2, 1/2', 'Cтолица Канады',
                  'Столица Южной Кореи',
@@ -116,29 +124,35 @@ def handle_dialog(request, response, user_storage):
     # Обрабатываем ответ пользователя.
     user_message = request.command.lower().strip().replace(' ', '')
 
-    text = ''
+    try:
+        if int(user_storage["moneyU"]) <= 0:
+            raise WinnerError1
 
-    if int(user_storage["moneyU"]) <= 0:
+        if int(user_storage["moneyA"]) <= 0:
+            raise WinnerError2
+
+        if user_message in ALL_WORDS:
+            cube = 0
+
+            # Проверка наличия слова в словах о начале игры
+            if user_message in ENDING_WORDS:
+                user_storage = end(request, response)
+
+            if user_message in MONEY:
+                response.set_text(
+                    'Ваши деньги ' + str(user_storage["moneyU"]) + '  Деньги Алисы ' + str(user_storage["moneyA"]))
+        else:
+            response.set_text("Простите, но я вас не поняла.")
+
+    except WinnerError1:
         text = 'Мне очень жаль, но вы проиграли '
-        user_storage = end(request, response, text)
+        user_storage = end(request, response)
 
-    if int(user_storage["moneyA"]) <= 0:
+    except WinnerError2:
         text = 'Поздравляю, вы победили! '
-        user_storage = end(request, response, text)
+        user_storage = end(request, response)
 
-    if user_message in ALL_WORDS:
-        cube = 0
-
-        # Проверка наличия слова в словах о начале игры
-        if user_message in ENDING_WORDS:
-            text = ''
-            user_storage = end(request, response, text)
-
-        if user_message in MONEY:
-            response.set_text(
-                'Ваши деньги ' + str(user_storage["moneyU"]) + '  Деньги Алисы ' + str(user_storage["moneyA"]))
-    else:
-        response.set_text("Простите, но я вас не поняла.")
+    # В любом случае
     return response, user_storage
 
 
@@ -188,19 +202,20 @@ def chances(user_storage, game):
 
 
 # Начало новой игры
-def end(request, response, text):
+def end(request, response):
     game = las_vegas()
     random.seed()
 
     response.set_text(
-        text + 'Давай напомню правила: Каждый участник бросает кубик и в зависимости от выпавшего количества '
-               'очков перемещает фишку по полю. За каждый пройденный круг банк выплачивает 200$. Ваша цель – '
-               'не обанкротиться. \n Если вы остановились на поле недвижимости и оно не '
-               'занято другими участниками, у вас есть право на его покупку или отказ от покупки. \n Владение зданием дает право взыскивать арендную плату с человека, '
-               'остановившегося на этом поле.\n «Тюрьма»: Чтобы покинуть этот сектор, необходимо заплатить '
-               'штраф в 100 $. \n Если вам не хватает средств на какие-то обязательные выплаты, вы становитесь '
-               'банкротом. \n \n Чтобы начать новую игру наберите "новая игра", чтобы сделать свой ход '
-               'наберите "бросить кубик"')
+         'Давай напомню правила: Каждый участник бросает кубик и в зависимости от выпавшего количества '
+         'очков перемещает фишку по полю. За каждый пройденный круг банк выплачивает 200$. Ваша цель – '
+         'не обанкротиться. \n Если вы остановились на поле недвижимости и оно не '
+         'занято другими участниками, у вас есть право на его покупку или отказ от покупки. \n Владение зданием '
+         'дает право взыскивать арендную плату с человека, '
+         'остановившегося на этом поле.\n «Тюрьма»: Чтобы покинуть этот сектор, необходимо заплатить '
+         'штраф в 100 $. \n Если вам не хватает средств на какие-то обязательные выплаты, вы становитесь '
+         'банкротом. \n \n Чтобы начать новую игру наберите "новая игра", чтобы сделать свой ход '
+         'наберите "бросить кубик"')
 
     user_storage = {
         "propertyA": [int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0),
