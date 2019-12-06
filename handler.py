@@ -154,9 +154,9 @@ def handle_dialog(request, response, user_storage):
 
                     if int(cube) + int(user_storage["field_cellA"]) < 40:
                         user_storage["field_cellU"] = int(user_storage["field_cellU"]) + int(cube)
-                    response.set_text(str(user_storage["field_cellU"]))
+                    response.set_text('Пользователь' + str(user_storage["field_cellU"]))
 
-                elif not user_storage["users_turn"]:
+                elif not bool(user_storage["users_turn"]):
                     backup_turn = user_storage
                     if int(cube) + int(user_storage["field_cellA"]) > 40:
                         user_storage["moneyA"] = int(user_storage["moneyA"]) + 200
@@ -165,7 +165,7 @@ def handle_dialog(request, response, user_storage):
 
                     if int(cube) + int(user_storage["field_cellA"]) < 40:
                         user_storage["field_cellA"] = int(user_storage["field_cellA"]) + int(cube)
-                    response.set_text(str(user_storage["field_cellA"]))
+                    response.set_text('АЛиса' + str(user_storage["field_cellA"]))
         else:
             response.set_text("Простите, но я вас не поняла.")
 
