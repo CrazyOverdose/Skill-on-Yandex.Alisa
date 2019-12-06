@@ -136,7 +136,8 @@ def handle_dialog(request, response, user_storage):
 
             # Проверка наличия слова в словах о начале игры
             if user_message in ENDING_WORDS:
-                user_storage = end(request, response)
+                text = ''
+                user_storage = end(request, response, text)
 
             if user_message in MONEY:
                 response.set_text(
@@ -145,12 +146,12 @@ def handle_dialog(request, response, user_storage):
             response.set_text("Простите, но я вас не поняла.")
 
     except WinnerError1:
-        response.set_text('Мне очень жаль, но вы проиграли ')
-        user_storage = end(request, response)
+        text = 'Мне очень жаль, но вы проиграли '
+        user_storage = end(request, response, text)
 
     except WinnerError2:
-        response.set_text('Поздравляю, вы победили! ')
-        user_storage = end(request, response)
+        text = 'Поздравляю, вы победили! '
+        user_storage = end(request, response, text)
 
     # В любом случае
     return response, user_storage
@@ -202,11 +203,11 @@ def chances(user_storage, game):
 
 
 # Начало новой игры
-def end(request, response):
+def end(request, response, text):
     game = las_vegas()
     random.seed()
 
-    response.set_text(
+    response.set_text( str(text) +
          'Давай напомню правила: Каждый участник бросает кубик и в зависимости от выпавшего количества '
          'очков перемещает фишку по полю. За каждый пройденный круг банк выплачивает 200$. Ваша цель – '
          'не обанкротиться. \n Если вы остановились на поле недвижимости и оно не '
