@@ -333,7 +333,7 @@ def handle_dialog(request, response, user_storage):
                                                   'Алиса попала: ' + str(
                                     game.fields[int(user_storage["field_cellA"])]) + ' и решила не покупать')
 
-                    if int(user_storage["field_cellA"]) == 13 or int(user_storage["field_cellA"]) == 36 :
+                    if int(user_storage["field_cellA"]) == 13 or int(user_storage["field_cellA"]) == 16 :
                         y = randint(1, 2)
                         if float(user_storage["exchange"]) == 0:
                             response.set_text('Ход Алисы \n' +
@@ -482,7 +482,7 @@ def handle_dialog(request, response, user_storage):
                                     user_storage["field_cellU"])]) + ' Если хотите приобрести, введите (купить)')
                             user_storage["property"] = int(a)
 
-                    if int(user_storage["field_cellU"]) == 13 or int(user_storage["field_cellU"]) == 36:
+                    if int(user_storage["field_cellU"]) == 13 or int(user_storage["field_cellU"]) == 16:
                         if float(user_storage["exchange"]) != 0:
                             response.set_text('Ваш ход \n' + str(game.fields[int(user_storage["field_cellU"])]))
                             user_storage["choice"] = True
@@ -598,8 +598,8 @@ def end(request, response, text):
         # имущество пользователя
         "moneyU": 200,  # Деньги Пользователя
         "moneyA": 200,  # Деньги Алисы
-        "field_cellA": 40,  # Клетка, на которой находится Алиса
-        "field_cellU": 40,  # Клетка, на которой находится пользователь
+        "field_cellA": 16,  # Клетка, на которой находится Алиса
+        "field_cellU": 5,  # Клетка, на которой находится пользователь
         "bankU": 0,  # вклады пользователя (ячейка поля 37)
         "bankA": 0,  # вклады алисы (ячейка поля 37)
         "exchange": 0,  # биржа (ячейка поля 13)
