@@ -82,10 +82,10 @@ def handle_dialog(request, response, user_storage):
         # Инициализируем сессию и поприветствуем его.
 
         user_storage = {
-            "propertyA": [int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0),
+            "propertyA": [0, int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0),
                           int(0),
                           int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0)],  # имущество Алисы
-            "propertyU": [int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0),
+            "propertyU": [0, int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0),
                           int(0),
                           int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0)],
             # имущество пользователя
@@ -190,7 +190,7 @@ def handle_dialog(request, response, user_storage):
                     if int(user_storage["field_cellU"]) == 2 or int(user_storage["field_cellU"]) == 4 or int(user_storage["field_cellU"]) == 5 or int(user_storage["field_cellU"]) == 7 or int(user_storage["field_cellU"]) == 9 or int(user_storage["field_cellU"]) == 10 or int(user_storage["field_cellU"]) == 12 or int(user_storage["field_cellU"]) == 14 or int(user_storage["field_cellU"]) == 15 or int(user_storage["field_cellU"]) == 17 or int(user_storage["field_cellU"]) == 19 or int(user_storage["field_cellU"]) == 20 or int(user_storage["field_cellU"]) == 22 or int(user_storage["field_cellU"]) == 24 or int(user_storage["field_cellU"]) == 25 or int(user_storage["field_cellU"]) == 27 or int(user_storage["field_cellU"]) == 28 or int(user_storage["field_cellU"]) == 30 or int(user_storage["field_cellU"]) == 32 or int(user_storage["field_cellU"]) == 33 or int(user_storage["field_cellU"]) == 35 or int(user_storage["field_cellU"]) == 38 or int(user_storage["field_cellU"]) == 40:
                         a = int(conversion(int(user_storage["field_cellU"])))
                         response.set_text(
-                            str('Ваш ход \n' + game.fields[int(user_storage["field_cellU"])]) + 'Если хотите приобрести, введите (купить)')
+                            str('Ваш ход \n' + game.fields[int(user_storage["field_cellU"])]) + ' Если хотите приобрести, введите (купить)')
                         user_storage["property"] = int(a)
 
                     user_storage["users_turn"] = False
@@ -305,9 +305,9 @@ def end(request, response, text):
                       'наберите "бросить кубик"')
 
     user_storage = {
-        "propertyA": [int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0),
+        "propertyA": [0, int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0),
                       int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0)],  # имущество Алисы
-        "propertyU": [int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0),
+        "propertyU": [0, int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0),
                       int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0)],  # имущество пользователя
         "moneyU": float(200),  # Деньги Пользователя
         "moneyA": float(200),  # Деньги Алисы
@@ -346,45 +346,45 @@ def school(user_storage, game):
 
 def conversion(a):
     if a == 2:
-        a = 0
-    if a == 4:
         a = 1
-    if a == 7:
+    if a == 4:
         a = 2
-    if a == 9:
+    if a == 7:
         a = 3
-    if a == 10:
+    if a == 9:
         a = 4
-    if a == 12:
+    if a == 10:
         a = 5
-    if a == 14:
+    if a == 12:
         a = 6
-    if a == 15:
+    if a == 14:
         a = 7
-    if a == 17:
+    if a == 15:
         a = 8
-    if a == 19:
+    if a == 17:
         a = 9
-    if a == 20:
+    if a == 19:
         a = 10
-    if a == 22:
+    if a == 20:
         a = 11
-    if a == 24:
+    if a == 22:
         a = 12
-    if a == 25:
+    if a == 24:
         a = 13
-    if a == 27:
+    if a == 25:
         a = 14
-    if a == 28:
+    if a == 27:
         a = 15
-    if a == 30:
+    if a == 28:
         a = 16
-    if a == 32:
+    if a == 30:
         a = 17
-    if a == 33:
+    if a == 32:
         a = 18
-    if a == 38:
+    if a == 33:
         a = 19
-    if a == 40:
+    if a == 38:
         a = 20
+    if a == 40:
+        a = 21
     return int(a)
