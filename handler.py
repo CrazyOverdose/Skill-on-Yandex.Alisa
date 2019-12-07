@@ -134,7 +134,7 @@ def handle_dialog(request, response, user_storage):
             raise WinnerError2
 
         if user_message in ALL_WORDS:
-            cube = randint(2, 12)
+            cube = 0
 
             # Проверка наличия слова в словах о начале игры
             if user_message in ENDING_WORDS:
