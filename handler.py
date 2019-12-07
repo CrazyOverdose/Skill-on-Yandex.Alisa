@@ -78,7 +78,13 @@ BURSEtake = ['взять', 'забрать', 'взятьденьги', 'забр
 
 BURSEgive = ['оставить', 'отдать', 'отдатьденьги', 'положить', 'оставитьденьги', 'положитьденьги', ]
 
-ALL_WORDS = WORDS + ENDING_WORDS + MONEY + FIELD
+PLACE = ['мояячейка', 'гдея', 'моеположение', 'накакойяячейке', 'клетка', 'мояклетка', 'накакойяклетке']
+
+RULES = ['правила', 'какиграть', 'описание', 'описаниеигры']
+
+MAP = ['ячейки', 'карта', 'поле', 'описаниеячеек']
+
+ALL_WORDS = WORDS + ENDING_WORDS + MONEY + FIELD + PLACE + RULES + MAP
 
 
 # Функция для непосредственной обработки диалога.
@@ -172,10 +178,50 @@ def handle_dialog(request, response, user_storage):
         if user_message in ALL_WORDS:
             cube = 0
 
-            # Проверка наличия слова в словах о начале игры
+            if user_message in PLACE:
+                response.set_text('Вы находитесь ' + str(user_storage["field_cellU"]) + '\n Алиса на ' + str(
+                    user_storage["field_cellA"]))
+
+                # Проверка наличия слова в словах о начале игры
             if user_message in ENDING_WORDS:
                 text = ''
                 user_storage = end(request, response, text)
+
+            if user_message in RULES:
+                response.set_text('Каждый участник бросает кубик и в зависимости от выпавшего количества '
+                                  'очков перемещает фишку по полю. За каждый пройденный круг банк выплачивает 200$. Ваша цель – '
+                                  'не обанкротиться. \n Если вы остановились на поле недвижимости и оно не '
+                                  'занято другими участниками, у вас есть право на его покупку или отказ от покупки. \n Владение зданием '
+                                  'дает право взыскивать арендную плату с человека, '
+                                  'остановившегося на этом поле.\n «Тюрьма»: Чтобы покинуть этот сектор, необходимо заплатить '
+                                  'штраф в 100 $. \n Если вам не хватает средств на какие-то обязательные выплаты, вы становитесь '
+                                  'банкротом. \n \n Чтобы начать новую игру наберите "новая игра", чтобы сделать свой ход '
+                                  'наберите "бросить кубик"')
+
+            if user_message in MAP:
+                response.set_text(
+                    '1 - Cтарт \n 2 - Колесо обозрения "High Roller" Цена: 5$ \n 3 - Инвестроры вложили в вас 100$ \n'
+                    '4 - Ранчо "Casa de Shenandoah" Цена: 5$ \n 5; 16; 36 - Шанс \n 6 - Брат за брата. Отдайте второму игроку 50$ \n'
+                    '7 - Плотина Гувера Цена: 10$ \n 8 - Какая жалость...у вас сломался холодильник -50$ \n'
+                    '9 - Улица Фримонт-стрит Цена: 10$ \n 10 - Аллея Лас-Вегас Цена: 10$ \n 11 - Тюрьма. Выход из тюрьмы  - 100$'
+                    '\n 12 - Парка развлечений "Adventuredome" Цена: 15$ \n'
+                    '13 - Биржа. Если она пуста, то должен оставить 100$, если нет,то вправе забрать в 1.5 раза больше, чем на ней'
+                    'есть или оставить еще 100 \n'
+                    '14 - Музей Shelby American Цена: 15$ \n 15 - Национальный музей атомных испытаний Цена: 15$ \n'
+                    '17 - Музей Моб Цена: 20$ \n '
+                    '18 - Назад в будущее. Игроку будет задан один школьный вопрос. За правильный ответ +50$ \n'
+                    '19 - Отель-Казино "Белладжио" Цена: 20$ \n 20 - Музей Неона Цена: 20$ \n  21 - Бесплатный ночлег \n'
+                    '22 - Развлекательный комплекс "Луксор Лас-Вегас" Цена: 25$ \n 23 - Отправляйтесь на начало \n '
+                    '24 - Отель-казино "Париж Лас-Вегас" Цена: 25$ \n 25 - Отель-казино "Венецианский Лас-Вегас Цена: 25$" \n'
+                    '26 - Вы остановились переночевать в мотеле. Заплатите 50$ \n 27 - Отель-казино "Wynn" Цена: 30$ \n'
+                    '28 - Развлекательный комплекс "Сизарс-Пэлас" Цена: 30$ \n'
+                    '29 - Лотерея. Да вы везунчик, заберите свои законные 95$ \n 30 - Отель-казино "Стратосфера Лас-Вегас" Цена: 30$ \n'
+                    '31 - Отправляйтесь в тюрьму \n 32 - Часовня цветов Цена: 35$ \n 33 - Музей мадам Тюссо Цена: 35$ \n'
+                    '34 - Выберете любую ячейку, на которую отправитесь. Действие этой ячейки на вас не распространиться \n'
+                    '35 - Ред-Рок-Каньон Цена: 35$ \n'
+                    '37 - Банк. Вы можете положить деньги (каждый круг +150$) (скажите, сколько денег хотите положить), забрать ранее вложенные деньги (с процентами) Для этого скажите "забрать" \n'
+                    '38 - Национальный парк "Долина смерти" Цена: 40$ \n 39 - Вы такой невнимательный! КАк умудрились потерять 50$? \n'
+                    '40 - Сансет Парк Цена: 40$')
 
             if user_message in MONEY:
                 response.set_text(
@@ -198,7 +244,8 @@ def handle_dialog(request, response, user_storage):
 
                     if int(user_storage["field_cellA"]) == 26 or int(user_storage["field_cellA"]) == 21 or int(
                             user_storage["field_cellA"]) == 29 or int(user_storage["field_cellA"]) == 39 or int(
-                        user_storage["field_cellA"]) == 3 or int(user_storage["field_cellA"]) == 8 or int(user_storage["field_cellA"]) == 11 :
+                        user_storage["field_cellA"]) == 3 or int(user_storage["field_cellA"]) == 8 or int(
+                        user_storage["field_cellA"]) == 11:
                         user_storage["moneyA"] = float(user_storage["moneyA"]) + float(
                             game.price_field[int(user_storage["field_cellA"])])
                         response.set_text('Ход Алисы \n' + str(game.fields[int(user_storage["field_cellA"])]))
@@ -287,7 +334,8 @@ def handle_dialog(request, response, user_storage):
                             if int(y) == 1:
                                 response.set_text('Ход Алисы \n' +
                                                   str(game.fields[int(
-                                                      user_storage["field_cellA"])]) + '\nАлиса оставила деньги на бирже')
+                                                      user_storage[
+                                                          "field_cellA"])]) + '\nАлиса оставила деньги на бирже')
                                 user_storage["moneyA"] = float(user_storage["moneyA"]) - 100
                                 user_storage["exchange"] = user_storage["exchange"] + 100
 
@@ -310,7 +358,8 @@ def handle_dialog(request, response, user_storage):
 
                     if int(user_storage["field_cellU"]) == 26 or int(user_storage["field_cellU"]) == 21 or int(
                             user_storage["field_cellU"]) == 29 or int(user_storage["field_cellU"]) == 39 or int(
-                        user_storage["field_cellU"]) == 3 or int(user_storage["field_cellU"]) == 8 or int(user_storage["field_cellU"]) == 11:
+                        user_storage["field_cellU"]) == 3 or int(user_storage["field_cellU"]) == 8 or int(
+                        user_storage["field_cellU"]) == 11:
                         user_storage["moneyU"] = float(user_storage["moneyU"]) + float(
                             game.price_field[int(user_storage["field_cellU"])])
                         response.set_text('Ваш ход \n' + str(game.fields[int(user_storage["field_cellU"])]))
