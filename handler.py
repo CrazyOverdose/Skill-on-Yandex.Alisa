@@ -134,7 +134,7 @@ def handle_dialog(request, response, user_storage):
             raise WinnerError2
 
         if int(user_storage["property"]) != 0:
-            if str(user_message) == str("купить"):
+            if str(user_message) == str('купить'):
                 user_storage["moneyU"] = float(user_storage["moneyU"]) + float(game.fields[int(user_storage["field_cellU"])])
                 user_storage["propertyU"][int(user_storage["property"])] = 1
                 response.set_text('Поздравляем с приобретерием!')
@@ -192,9 +192,9 @@ def handle_dialog(request, response, user_storage):
                         response.set_text(
                             str('Ваш ход \n' + game.fields[int(user_storage["field_cellU"])]) + ' Если хотите приобрести, введите (купить)')
                         user_storage["property"] = int(a)
-                        return response, user_storage
 
                     user_storage["users_turn"] = False
+                    return response, user_storage
 
                 elif not bool(user_storage["users_turn"]):
                     backup_turn = user_storage
