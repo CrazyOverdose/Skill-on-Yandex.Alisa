@@ -373,7 +373,7 @@ def handle_dialog(request, response, user_storage):
                                 str('Ход Алисы \n ' + game.fields[18]) + '\n' + str(
                                     game.questions[int(rand)]) + '\n Ответ Алисы: я не знаю. НЕ засчитано')
 
-                    if int(user_storage["field_cellU"]) == 34:
+                    if int(user_storage["field_cellA"]) == 34:
                         cell = int(randint (1,40))
 
                         if cell + int(user_storage["field_cellA"]) > 40:
