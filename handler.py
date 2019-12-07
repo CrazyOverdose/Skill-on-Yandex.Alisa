@@ -314,7 +314,7 @@ def handle_dialog(request, response, user_storage):
 
                     if int(user_storage["field_cellU"]) == 5 or int(user_storage["field_cellU"]) == 16 or int(
                             user_storage["field_cellU"]) == 36:
-                        response.set_text(str(chances(user_storage, game)))
+                        response.set_text('попал сюда')
 
                     user_storage["users_turn"] = False
                     return response, user_storage
