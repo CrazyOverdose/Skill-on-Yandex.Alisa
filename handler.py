@@ -224,7 +224,7 @@ def handle_dialog(request, response, user_storage):
 
                         if int(user_storage["propertyA"][a]) == 0 and int(user_storage["propertyU"][a]) == 0:
                             if b == 1:
-                                response.set_text( 'Ход Алисы \n' + str(game.fields[int(user_storage["field_cellA"])]) + " и решила купить")
+                                response.set_text( 'Ход Алисы \n' + str(game.fields[int(user_storage["field_cellA"])]) + ' и решила купить')
                                 user_storage["moneyA"] = float(user_storage["moneyA"]) + float(
                                     game.price_field[int(user_storage["field_cellA"])])
                                 user_storage["propertyA"][a] = 1
@@ -284,7 +284,7 @@ def handle_dialog(request, response, user_storage):
                         user_storage["field_cellU"]) == 40:
 
                         a = int(conversion(int(user_storage["field_cellU"])))
-                        if user_storage["propertyA"][int(a)] == 1:
+                        if int(user_storage["propertyA"][int(a)]) == 1:
                             response.set_text(
                                 str('Ваш ход \n' + game.fields[
                                     int(user_storage[
@@ -292,7 +292,7 @@ def handle_dialog(request, response, user_storage):
                             user_storage["moneyU"] = float(user_storage["moneyU"]) + game.price_field[int(user_storage["field_cellU"])]
                             user_storage["moneyA"] = float(user_storage["moneyA"]) - game.price_field[int(user_storage["field_cellU"])]
 
-                        if user_storage["propertyU"][int(a)] == 1:
+                        if int(user_storage["propertyU"][int(a)]) == 1:
                             response.set_text(
                                 str('Ваш ход \n' + game.fields[
                                     int(user_storage[
