@@ -244,7 +244,6 @@ def handle_dialog(request, response, user_storage):
                         answer = str(chances(user_storage, game))
                         response.set_text(answer)
 
-
                     user_storage["users_turn"] = True
                     return response, user_storage
 
@@ -344,7 +343,9 @@ def handle_dialog(request, response, user_storage):
 # Шансы
 def chances(user_storage, game):
     rand = int(randint(1, 12))
-    if int(rand) == 1 or int(rand) == 2 or int(rand) == 4 or int(rand) == 5 or int(rand) == 6 or int(rand) == 8 or int(rand) == 9 or int(rand) == 12:
+    answer=''
+    if int(rand) == 1 or int(rand) == 2 or int(rand) == 4 or int(rand) == 5 or int(rand) == 6 or int(rand) == 8 or int(
+            rand) == 9 or int(rand) == 12:
         if bool(user_storage["users_turns"]):
             user_storage["moneyU"] = float(user_storage["moneyU"]) + float(game.price_chance[int(rand)])
         if not bool(user_storage["users_turns"]):
@@ -386,7 +387,8 @@ def chances(user_storage, game):
     if bool(user_storage["users_turns"]):
         answer = str('Ваш ход \n ' + str(game.fields[int(user_storage["field_cellU"])]) + str(game.chance[int(rand)]))
 
-    return answer
+    answer = 'тута'
+    return str(answer)
 
 
 # Начало новой игры
