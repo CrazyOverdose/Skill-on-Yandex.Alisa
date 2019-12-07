@@ -89,12 +89,12 @@ def handle_dialog(request, response, user_storage):
                           int(0),
                           int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0)],
             # имущество пользователя
-            "moneyU": int(200),  # Деньги Пользователя
-            "moneyA": int(200),  # Деньги Алисы
+            "moneyU": float(200),  # Деньги Пользователя
+            "moneyA": float(200),  # Деньги Алисы
             "field_cellA": int(23),  # Клетка, на которой находится Алиса
             "field_cellU": int(23),  # Клетка, на которой находится пользователь
-            "bankU": int(0),  # вклады пользователя (ячейка поля 37)
-            "bankA": int(0),  # вклады алисы (ячейка поля 37)
+            "bankU": float(0),  # вклады пользователя (ячейка поля 37)
+            "bankA": float(0),  # вклады алисы (ячейка поля 37)
             "exchange": int(0),  # биржа (ячейка поля 13)
             "user_id": request.user_id,
             "users_turn": bool(True),
@@ -127,14 +127,14 @@ def handle_dialog(request, response, user_storage):
     user_message = request.command.lower().strip().replace(' ', '')
 
     try:
-        if int(user_storage["moneyU"]) <= 0:
+        if float(user_storage["moneyU"]) <= 0:
             raise WinnerError1
 
-        if int(user_storage["moneyA"]) <= 0:
+        if float(user_storage["moneyA"]) <= 0:
             raise WinnerError2
 
         if user_message in ALL_WORDS:
-            cube = randint (2, 12)
+            cube = randint(2, 12)
 
             # Проверка наличия слова в словах о начале игры
             if user_message in ENDING_WORDS:
@@ -148,26 +148,34 @@ def handle_dialog(request, response, user_storage):
             if user_message in WORDS:
                 if bool(user_storage["users_turn"]):
                     if int(cube) + int(user_storage["field_cellU"]) > 40:
-                        user_storage["moneyU"] = int(user_storage["moneyU"]) + 200
-                        user_storage["bankU"] = int(user_storage["bankU"]) + 150
+                        user_storage["moneyU"] = float(user_storage["moneyU"]) + 200
+                        user_storage["bankU"] = float(user_storage["bankU"]) * 1.2
                         user_storage["field_cellU"] = int(user_storage["field_cellU"]) + int(cube) - 40
 
-                    if int(cube) + int(user_storage["field_cellA"]) < 40:
+                    if int(cube) + int(user_storage["field_cellU"]) < 40:
                         user_storage["field_cellU"] = int(user_storage["field_cellU"]) + int(cube)
-                    response.set_text('Пользователь' + str(user_storage["field_cellU"]))
+
+                    if int(user_storage["field_cellU"]) == 23:
+                        response.set_text(str(game.fields[int(user_storage["field_cellU"])]))
+                        user_storage["moneyU"] = float(user_storage["moneyU"]) + 200
+                        user_storage["field_cellU"] = 1
                     user_storage["users_turn"] = False
 
                 elif not bool(user_storage["users_turn"]):
                     backup_turn = user_storage
                     if int(cube) + int(user_storage["field_cellA"]) > 40:
-                        user_storage["moneyA"] = int(user_storage["moneyA"]) + 200
-                        user_storage["bankA"] = int(user_storage["bankA"]) + 150
+                        user_storage["moneyA"] = float(user_storage["moneyA"]) + 200
+                        user_storage["bankA"] = float(user_storage["bankA"]) * 1.2
                         user_storage["field_cellA"] = int(user_storage["field_cellA"]) + int(cube) - 40
 
                     if int(cube) + int(user_storage["field_cellA"]) < 40:
                         user_storage["field_cellA"] = int(user_storage["field_cellA"]) + int(cube)
+
+                    if int(user_storage["field_cellA"]) == 23:
+                        response.set_text(str(game.fields[int(user_storage["field_cellA"])]))
+                        user_storage["moneyA"] = float(user_storage["moneyA"]) + 200
+                        user_storage["field_cellA"] = 1
                     user_storage["users_turn"] = True
-                    response.set_text('АЛиса' + str(user_storage["field_cellA"]))
         else:
             response.set_text("Простите, но я вас не поняла.")
 
@@ -249,12 +257,12 @@ def end(request, response, text):
                       int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0)],  # имущество Алисы
         "propertyU": [int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0),
                       int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0)],  # имущество пользователя
-        "moneyU": int(200),  # Деньги Пользователя
-        "moneyA": int(200),  # Деньги Алисы
+        "moneyU": float(200),  # Деньги Пользователя
+        "moneyA": float(200),  # Деньги Алисы
         "field_cellA": int(23),  # Клетка, на которой находится Алиса
         "field_cellU": int(23),  # Клетка, на которой находится пользователь
-        "bankU": int(0),  # вклады пользователя (ячейка поля 37)
-        "bankA": int(0),  # вклады алисы (ячейка поля 37)
+        "bankU": float(0),  # вклады пользователя (ячейка поля 37)
+        "bankA": float(0),  # вклады алисы (ячейка поля 37)
         "exchange": int(0),  # биржа (ячейка поля 13)
         "user_id": request.user_id,
         "users_turn": bool(True),
