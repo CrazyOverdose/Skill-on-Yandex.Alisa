@@ -348,7 +348,18 @@ def handle_dialog(request, response, user_storage):
                                 user_storage["exchange"] = user_storage["exchange"] + 100
 
                     if int(user_storage["field_cellA"]) == 18:
-                        response.set_text('' + str(school(user_storage, game)))
+                        rand = int(randint(1, 11))
+                        choise = int(randint(1, 2))
+                        if choise == 1:
+                            user_storage["moneyA"] = float(user_storage["moneyA"]) + 50
+                            response.set_text(
+                                'Ход Алисы \n ' + str(game.fields[18]) + '\n' + str(
+                                    game.questions[int(rand)]) + '\n Ответ Алисы:' + str(
+                                    game.answers[int(rand)]) + '\nПравильный ответ')
+                        else:
+                            response.set_text(
+                                str('Ход Алисы \n ' + game.fields[18]) + '\n' + str(
+                                    game.questions[int(rand)]) + '\n Ответ Алисы: я не знаю. НЕ засчитано')
 
                     user_storage["users_turn"] = True
                     return response, user_storage
@@ -437,7 +448,9 @@ def handle_dialog(request, response, user_storage):
                             user_storage["exchange"] = 100
 
                     if int(user_storage["field_cellU"]) == 18:
-                        user_storage = school(request, response,user_storage)
+                        rand = int(randint(1, 11))
+                        user_storage["school"] = int(rand)
+                        response.set_text(str(game.fields[18]) + '\n' + str(game.questions[int(rand)]))
 
                     user_storage["users_turn"] = False
                     return response, user_storage
@@ -548,7 +561,7 @@ def end(request, response, text):
     return user_storage
 
 
-def school(request, response, user_storage):
+def school(response, user_storage):
     game = las_vegas()
     rand = int(randint(1, 11))
     if not bool(user_storage["users_turns"]):
