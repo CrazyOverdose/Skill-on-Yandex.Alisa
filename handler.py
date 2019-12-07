@@ -174,11 +174,11 @@ def handle_dialog(request, response, user_storage):
             return response, user_storage
 
         if bool(user_storage["go"]):
-            #if is_int(user_message):
-            response.set_text('Ваш ход \n' + str(game.fields[int(user_storage["field_cellA"])]) + '\n Вы перешли на ячейку ') # + str(user_message))
-                #if user_storage["field_cellU"] + int(user_message) < 40:
-                 #   user_storage["moneyU"] = user_storage["moneyU"] + 200
-            if not is_int(user_message):
+            if user_message.isdigit():
+                response.set_text('Ваш ход \n' + str(game.fields[int(user_storage["field_cellA"])]) + '\n Вы перешли на ячейку ') # + str(user_message))
+                if user_storage["field_cellU"] + int(user_message) < 40:
+                    user_storage["moneyU"] = user_storage["moneyU"] + 200
+            if not user_message.isdigit():
                 response.set_text('Ваш ход \n' + str(
                     game.fields[int(user_storage["field_cellA"])]) + '\n Вы остались на месте ' )
             return response, user_storage
@@ -497,9 +497,6 @@ def handle_dialog(request, response, user_storage):
 
     # В любом случае
     return response, user_storage
-
-def is_int(n):
-    return int(n) == float (n)
 
 # Шансы
 def chances(user_storage, game):
