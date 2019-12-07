@@ -156,7 +156,7 @@ def handle_dialog(request, response, user_storage):
                     'Ваши деньги ' + str(user_storage["moneyU"]) + '  Деньги Алисы ' + str(user_storage["moneyA"]))
 
             if user_message in WORDS:
-                if not bool(user_storage["users_turn"]):
+                if bool(user_storage["users_turn"]) == False:
                     backup_turn = user_storage
                     if int(cube) + int(user_storage["field_cellA"]) > 40:
                         user_storage["moneyA"] = float(user_storage["moneyA"]) + 200
@@ -190,7 +190,7 @@ def handle_dialog(request, response, user_storage):
 
                     user_storage["users_turn"] = True
 
-                if bool(user_storage["users_turn"]):
+                if bool(user_storage["users_turn"]) == True:
                     if int(cube) + int(user_storage["field_cellU"]) > 40:
                         user_storage["moneyU"] = float(user_storage["moneyU"]) + 200
                         user_storage["bankU"] = float(user_storage["bankU"]) * 1.2
