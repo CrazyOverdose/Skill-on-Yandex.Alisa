@@ -113,10 +113,10 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Docker.Dockerfile" />
       <item itemvalue="Python.alice_sdk" />
       <item itemvalue="Python.api" />
       <item itemvalue="Python.main" />
+      <item itemvalue="Docker.Dockerfile" />
     </list>
     <recent_temporary>
       <list>
