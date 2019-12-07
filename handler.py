@@ -297,7 +297,8 @@ def handle_dialog(request, response, user_storage):
                                 str('Ваш ход \n' + game.fields[
                                     int(user_storage[
                                             "field_cellU"])]) + ' \nВы попали на свою территорию')
-                        else:
+
+                        if int(user_storage["propertyU"][int(a)]) == 0 and int(user_storage["propertyA"][int(a)]) == 0:
                             response.set_text(
                                 str('Ваш ход \n' + game.fields[int(
                                     user_storage["field_cellU"])]) + ' Если хотите приобрести, введите (купить)')
