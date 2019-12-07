@@ -133,7 +133,8 @@ def handle_dialog(request, response, user_storage):
 
         if int(user_storage["property"]) != 0:
             if str(user_message) == 'купить':
-                user_storage["moneyU"] = float(user_storage["moneyU"]) + float(game.price_field[int(user_storage["field_cellU"])])
+                user_storage["moneyU"] = float(user_storage["moneyU"]) + float(
+                    game.price_field[int(user_storage["field_cellU"])])
                 user_storage["propertyU"][int(user_storage["property"])] = 1
                 response.set_text('Поздравляю с приобретением! ' + str(user_storage["users_turn"]))
             else:
@@ -168,12 +169,15 @@ def handle_dialog(request, response, user_storage):
                         user_storage["moneyA"] = float(user_storage["moneyA"]) + 200
                         user_storage["field_cellA"] = 1
 
-                    if int(user_storage["field_cellA"]) == 26 or int(user_storage["field_cellA"]) == 21 or int(user_storage["field_cellA"]) == 29 or int(user_storage["field_cellA"]) == 39 or int(user_storage["field_cellA"]) == 3 or int(user_storage["field_cellA"]) == 8:
-                        user_storage["moneyA"] = float(user_storage["moneyA"]) + float(game.price_field[int(user_storage["field_cellA"])])
-                        response.set_text('Ход Алисы \n' +str(game.fields[int(user_storage["field_cellA"])]))
+                    if int(user_storage["field_cellA"]) == 26 or int(user_storage["field_cellA"]) == 21 or int(
+                            user_storage["field_cellA"]) == 29 or int(user_storage["field_cellA"]) == 39 or int(
+                            user_storage["field_cellA"]) == 3 or int(user_storage["field_cellA"]) == 8:
+                        user_storage["moneyA"] = float(user_storage["moneyA"]) + float(
+                            game.price_field[int(user_storage["field_cellA"])])
+                        response.set_text('Ход Алисы \n' + str(game.fields[int(user_storage["field_cellA"])]))
 
                     if int(user_storage["field_cellA"]) == 31:
-                        response.set_text('Ход Алисы \n' +str(game.fields[int(user_storage["field_cellA"])]))
+                        response.set_text('Ход Алисы \n' + str(game.fields[int(user_storage["field_cellA"])]))
                         user_storage["moneyA"] = float(user_storage["moneyA"]) + 100
                         user_storage["field_cellA"] = 11
 
@@ -204,7 +208,7 @@ def handle_dialog(request, response, user_storage):
 
                     if int(user_storage["field_cellU"]) == 26 or int(user_storage["field_cellU"]) == 21 or int(
                             user_storage["field_cellU"]) == 29 or int(user_storage["field_cellU"]) == 39 or int(
-                            user_storage["field_cellU"]) == 3 or int(user_storage["field_cellU"]) == 8:
+                        user_storage["field_cellU"]) == 3 or int(user_storage["field_cellU"]) == 8:
                         user_storage["moneyU"] = float(user_storage["moneyU"]) + float(
                             game.price_field[int(user_storage["field_cellU"])])
                         response.set_text('Ваш ход \n' + str(game.fields[int(user_storage["field_cellU"])]))
@@ -224,22 +228,37 @@ def handle_dialog(request, response, user_storage):
 
                     if int(user_storage["field_cellU"]) == 2 or int(user_storage["field_cellU"]) == 4 or int(
                             user_storage["field_cellU"]) == 5 or int(user_storage["field_cellU"]) == 7 or int(
-                            user_storage["field_cellU"]) == 9 or int(user_storage["field_cellU"]) == 10 or int(
-                            user_storage["field_cellU"]) == 12 or int(user_storage["field_cellU"]) == 14 or int(
-                            user_storage["field_cellU"]) == 15 or int(user_storage["field_cellU"]) == 17 or int(
-                            user_storage["field_cellU"]) == 19 or int(user_storage["field_cellU"]) == 20 or int(
-                            user_storage["field_cellU"]) == 22 or int(user_storage["field_cellU"]) == 24 or int(
-                            user_storage["field_cellU"]) == 25 or int(user_storage["field_cellU"]) == 27 or int(
-                            user_storage["field_cellU"]) == 28 or int(user_storage["field_cellU"]) == 30 or int(
-                            user_storage["field_cellU"]) == 32 or int(user_storage["field_cellU"]) == 33 or int(
-                            user_storage["field_cellU"]) == 35 or int(user_storage["field_cellU"]) == 38 or int(
-                            user_storage["field_cellU"]) == 40:
+                        user_storage["field_cellU"]) == 9 or int(user_storage["field_cellU"]) == 10 or int(
+                        user_storage["field_cellU"]) == 12 or int(user_storage["field_cellU"]) == 14 or int(
+                        user_storage["field_cellU"]) == 15 or int(user_storage["field_cellU"]) == 17 or int(
+                        user_storage["field_cellU"]) == 19 or int(user_storage["field_cellU"]) == 20 or int(
+                        user_storage["field_cellU"]) == 22 or int(user_storage["field_cellU"]) == 24 or int(
+                        user_storage["field_cellU"]) == 25 or int(user_storage["field_cellU"]) == 27 or int(
+                        user_storage["field_cellU"]) == 28 or int(user_storage["field_cellU"]) == 30 or int(
+                        user_storage["field_cellU"]) == 32 or int(user_storage["field_cellU"]) == 33 or int(
+                        user_storage["field_cellU"]) == 35 or int(user_storage["field_cellU"]) == 38 or int(
+                        user_storage["field_cellU"]) == 40:
+
                         a = int(conversion(int(user_storage["field_cellU"])))
-                        response.set_text(
-                            str('Ваш ход \n' + game.fields[
-                                int(user_storage["field_cellU"])]) + ' Если хотите приобрести, введите (купить)' + str(
-                                user_storage["users_turn"]))
-                        user_storage["property"] = int(a)
+                        if user_storage["propertyA"][int(a)] == 1:
+                            response.set_text(
+                                str('Ваш ход \n' + game.fields[
+                                    int(user_storage[
+                                            "field_cellU"])]) + ' \nВы попали на недвижимость Алисы')
+                            user_storage["moneyU"] = float(user_storage["moneyU"]) + game.price_field[
+                                int(user_storage["field_cellU"])]
+
+                        if user_storage["propertyU"][int(a)] == 1:
+                            response.set_text(
+                                str('Ваш ход \n' + game.fields[
+                                    int(user_storage[
+                                            "field_cellU"])]) + ' \nВы попали на свою территорию')
+                        else:
+                            response.set_text(
+                                str('Ваш ход \n' + game.fields[int(
+                                    user_storage["field_cellU"])]) + ' Если хотите приобрести, введите (купить)' + str(
+                                    user_storage["users_turn"]))
+                            user_storage["property"] = int(a)
 
                     user_storage["users_turn"] = False
                     return response, user_storage
@@ -257,6 +276,7 @@ def handle_dialog(request, response, user_storage):
 
     # В любом случае
     return response, user_storage
+
 
 # Шансы
 def chances(user_storage, game):
