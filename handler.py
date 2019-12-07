@@ -148,6 +148,15 @@ def handle_dialog(request, response, user_storage):
         if float(user_storage["moneyA"]) < 0:
             raise WinnerError2
 
+        if int(user_storage["school"]) != 0:
+            if str(user_message) == str(game.answers[int(user_storage["school"])]):
+                response.set_text('Правильный ответ')
+                user_storage["moneyU"] = float(user_storage["moneyU"]) + 50
+            else:
+                response.set_text('Неправильный ответ')
+            user_storage["school"] = 0
+            return response, user_storage
+
         if bool(user_storage["choice"]):
             if user_message in BURSEtake:
                 user_storage["moneyU"] = float(user_storage["moneyU"]) + float(user_storage["exchange"]) * 1.5
@@ -338,6 +347,9 @@ def handle_dialog(request, response, user_storage):
                                 user_storage["moneyA"] = float(user_storage["moneyA"]) - 100
                                 user_storage["exchange"] = user_storage["exchange"] + 100
 
+                    if int(user_storage["field_cellA"]) == 18:
+                        response.set_text(str(school(user_storage, game)))
+
                     user_storage["users_turn"] = True
                     return response, user_storage
 
@@ -424,6 +436,9 @@ def handle_dialog(request, response, user_storage):
                             user_storage["moneyU"] = float(user_storage["moneyU"]) - 100
                             user_storage["exchange"] = 100
 
+                    if int(user_storage["field_cellU"]) == 18:
+                        response.set_text(str(school(user_storage, game)))
+
                     user_storage["users_turn"] = False
                     return response, user_storage
 
@@ -431,11 +446,11 @@ def handle_dialog(request, response, user_storage):
             response.set_text("Простите, но я вас не поняла.")
 
     except WinnerError1:
-        text = 'Мне очень жаль, но вы проиграли '
+        text = 'Мне очень жаль, но вы проиграли \n'
         user_storage = end(request, response, text)
 
     except WinnerError2:
-        text = 'Поздравляю, вы победили! '
+        text = 'Поздравляю, вы победили! \n '
         user_storage = end(request, response, text)
 
     # В любом случае
@@ -538,11 +553,11 @@ def school(user_storage, game):
     if not bool(user_storage["users_turns"]):
         choise = int(randint(1, 2))
         if choise == 1:
-            user_storage["moneyA"] = int(user_storage["moneyA"]) + 50
-            return (str(game.fields[18]) + '\n' + str(game.questions[int(rand)]) + '\n Ответ Алисы:' + str(
+            user_storage["moneyA"] = float(user_storage["moneyA"]) + 50
+            return ('Ход Алисы \n ' + str(game.fields[18]) + '\n' + str(game.questions[int(rand)]) + '\n Ответ Алисы:' + str(
                 game.answers[int(rand)]) + '\nПравильный ответ')
         else:
-            return str(game.fields[18]) + '\n' + str(
+            return str('Ход Алисы \n ' + game.fields[18]) + '\n' + str(
                 game.questions[int(rand)]) + '\n Ответ Алисы: я не знаю. НЕ засчитано'
 
     if bool(user_storage["users_turns"]):
