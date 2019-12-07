@@ -92,7 +92,7 @@ def handle_dialog(request, response, user_storage):
             "moneyU": float(200),  # Деньги Пользователя
             "moneyA": float(200),  # Деньги Алисы
             "field_cellA": int(6),  # Клетка, на которой находится Алиса
-            "field_cellU": int(6),  # Клетка, на которой находится пользователь
+            "field_cellU": int(2),  # Клетка, на которой находится пользователь
             "bankU": float(0),  # вклады пользователя (ячейка поля 37)
             "bankA": float(0),  # вклады алисы (ячейка поля 37)
             "exchange": int(0),  # биржа (ячейка поля 13)
@@ -133,6 +133,16 @@ def handle_dialog(request, response, user_storage):
         if float(user_storage["moneyA"]) < 0:
             raise WinnerError2
 
+        if int(user_storage["property"]) != 0:
+            if str(user_message) == str("купить"):
+                user_storage["moneyU"] = float(user_storage["moneyU"]) + float(game.fields[int(user_storage["field_cellU"])])
+                user_storage["propertyU"][int(user_storage["property"])] = 1
+                response.set_text('Поздравляем с приобретерием!')
+            else:
+                response.set_text('Может, это действиельно не лучшее вложение денег')
+            user_storage["property"] = 0
+            return response, user_storage
+
         if user_message in ALL_WORDS:
             cube = 0
 
@@ -156,26 +166,32 @@ def handle_dialog(request, response, user_storage):
                         user_storage["field_cellU"] = int(user_storage["field_cellU"]) + int(cube)
 
                     if int(user_storage["field_cellU"]) == 23:
-                        response.set_text(str(game.fields[int(user_storage["field_cellU"])]))
+                        response.set_text('Ваш ход \n' +str(game.fields[int(user_storage["field_cellU"])]))
                         user_storage["moneyU"] = float(user_storage["moneyU"]) + 200
                         user_storage["field_cellU"] = 1
 
                     if int(user_storage["field_cellU"]) == 26 or int(user_storage["field_cellU"]) == 21 or int(user_storage["field_cellU"]) == 29 or int(user_storage["field_cellU"]) == 39 or int(user_storage["field_cellU"]) == 3 or int(user_storage["field_cellU"]) == 8:
                         user_storage["moneyU"] = float(user_storage["moneyU"]) + float(game.price_field[int(user_storage["field_cellU"])])
-                        response.set_text(str(game.fields[int(user_storage["field_cellU"])]))
+                        response.set_text('Ваш ход \n' +str(game.fields[int(user_storage["field_cellU"])]))
 
                     if int(user_storage["field_cellU"]) == 31:
-                        response.set_text(str(game.fields[int(user_storage["field_cellU"])]))
+                        response.set_text('Ваш ход \n' + str(game.fields[int(user_storage["field_cellU"])]))
                         user_storage["moneyU"] = float(user_storage["moneyU"]) + 100
                         user_storage["field_cellU"] = 11
 
                     if int(user_storage["field_cellU"]) == 6:
-                        response.set_text(str(game.fields[int(user_storage["field_cellU"])]))
+                        response.set_text('Ваш ход \n' +str(game.fields[int(user_storage["field_cellU"])]))
                         user_storage["moneyU"] = float(user_storage["moneyU"]) - 50
                         user_storage["moneyA"] = float(user_storage["moneyA"]) + 50
 
                     if int(user_storage["field_cellU"]) == 1:
-                        response.set_text(str(game.fields[int(user_storage["field_cellU"])]))
+                        response.set_text('Ваш ход \n' + str(game.fields[int(user_storage["field_cellU"])]))
+
+                    if int(user_storage["field_cellU"]) == 2 or int(user_storage["field_cellU"]) == 4 or int(user_storage["field_cellU"]) == 5 or int(user_storage["field_cellU"]) == 7 or int(user_storage["field_cellU"]) == 9 or int(user_storage["field_cellU"]) == 10 or int(user_storage["field_cellU"]) == 12 or int(user_storage["field_cellU"]) == 14 or int(user_storage["field_cellU"]) == 15 or int(user_storage["field_cellU"]) == 17 or int(user_storage["field_cellU"]) == 19 or int(user_storage["field_cellU"]) == 20 or int(user_storage["field_cellU"]) == 22 or int(user_storage["field_cellU"]) == 24 or int(user_storage["field_cellU"]) == 25 or int(user_storage["field_cellU"]) == 27 or int(user_storage["field_cellU"]) == 28 or int(user_storage["field_cellU"]) == 30 or int(user_storage["field_cellU"]) == 32 or int(user_storage["field_cellU"]) == 33 or int(user_storage["field_cellU"]) == 35 or int(user_storage["field_cellU"]) == 38 or int(user_storage["field_cellU"]) == 40:
+                        a = int(conversion(int(user_storage["field_cellU"])))
+                        response.set_text(
+                            str('Ваш ход \n' + game.fields[int(user_storage["field_cellU"])]) + 'Если хотите приобрести, введите (купить)')
+                        user_storage["property"] = int(a)
 
                     user_storage["users_turn"] = False
 
@@ -190,26 +206,26 @@ def handle_dialog(request, response, user_storage):
                         user_storage["field_cellA"] = int(user_storage["field_cellA"]) + int(cube)
 
                     if int(user_storage["field_cellA"]) == 23:
-                        response.set_text(str(game.fields[int(user_storage["field_cellA"])]))
+                        response.set_text('Ход Алисы \n' + str(game.fields[int(user_storage["field_cellA"])]))
                         user_storage["moneyA"] = float(user_storage["moneyA"]) + 200
                         user_storage["field_cellA"] = 1
 
                     if int(user_storage["field_cellA"]) == 26 or int(user_storage["field_cellA"]) == 21 or int(user_storage["field_cellA"]) == 29 or int(user_storage["field_cellA"]) == 39 or int(user_storage["field_cellA"]) == 3 or int(user_storage["field_cellA"]) == 8:
                         user_storage["moneyA"] = float(user_storage["moneyA"]) + float(game.price_field[int(user_storage["field_cellA"])])
-                        response.set_text(str(game.fields[int(user_storage["field_cellA"])]))
+                        response.set_text('Ход Алисы \n' +str(game.fields[int(user_storage["field_cellA"])]))
 
                     if int(user_storage["field_cellA"]) == 31:
-                        response.set_text(str(game.fields[int(user_storage["field_cellA"])]))
+                        response.set_text('Ход Алисы \n' +str(game.fields[int(user_storage["field_cellA"])]))
                         user_storage["moneyA"] = float(user_storage["moneyA"]) + 100
                         user_storage["field_cellA"] = 11
 
                     if int(user_storage["field_cellA"]) == 6:
-                        response.set_text(str(game.fields[int(user_storage["field_cellA"])]))
-                        user_storage["moneyA"] = float(user_storage["moneyU"]) - 50
-                        user_storage["moneyU"] = float(user_storage["moneyA"]) + 50
+                        response.set_text(str('Ход Алисы \n' + game.fields[int(user_storage["field_cellA"])]))
+                        user_storage["moneyA"] = float(user_storage["moneyA"]) - 50
+                        user_storage["moneyU"] = float(user_storage["moneyU"]) + 50
 
                     if int(user_storage["field_cellA"]) == 1:
-                        response.set_text(str(game.fields[int(user_storage["field_cellA"])]))
+                        response.set_text('Ход Алисы \n' + str(game.fields[int(user_storage["field_cellA"])]))
 
                     user_storage["users_turn"] = True
         else:
@@ -296,7 +312,7 @@ def end(request, response, text):
         "moneyU": float(200),  # Деньги Пользователя
         "moneyA": float(200),  # Деньги Алисы
         "field_cellA": int(1),  # Клетка, на которой находится Алиса
-        "field_cellU": int(1),  # Клетка, на которой находится пользователь
+        "field_cellU": int(39),  # Клетка, на которой находится пользователь
         "bankU": float(0),  # вклады пользователя (ячейка поля 37)
         "bankA": float(0),  # вклады алисы (ячейка поля 37)
         "exchange": int(0),  # биржа (ячейка поля 13)
