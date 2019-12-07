@@ -224,7 +224,7 @@ def handle_dialog(request, response, user_storage):
                     if int(user_storage["field_cellU"]) == 2 or int(user_storage["field_cellU"]) == 4 or int(user_storage["field_cellU"]) == 5 or int(user_storage["field_cellU"]) == 7 or int(user_storage["field_cellU"]) == 9 or int(user_storage["field_cellU"]) == 10 or int(user_storage["field_cellU"]) == 12 or int(user_storage["field_cellU"]) == 14 or int(user_storage["field_cellU"]) == 15 or int(user_storage["field_cellU"]) == 17 or int(user_storage["field_cellU"]) == 19 or int(user_storage["field_cellU"]) == 20 or int(user_storage["field_cellU"]) == 22 or int(user_storage["field_cellU"]) == 24 or int(user_storage["field_cellU"]) == 25 or int(user_storage["field_cellU"]) == 27 or int(user_storage["field_cellU"]) == 28 or int(user_storage["field_cellU"]) == 30 or int(user_storage["field_cellU"]) == 32 or int(user_storage["field_cellU"]) == 33 or int(user_storage["field_cellU"]) == 35 or int(user_storage["field_cellU"]) == 38 or int(user_storage["field_cellU"]) == 40:
                         a = int(conversion(int(user_storage["field_cellU"])))
                         response.set_text(
-                            str('Ваш ход \n' + game.fields[int(user_storage["field_cellU"])]) + ' Если хотите приобрести, введите (купить)')
+                            str('Ваш ход \n' + game.fields[int(user_storage["field_cellU"])]) + ' Если хотите приобрести, введите (купить)' + str(user_storage["users_turn"]))
                         user_storage["property"] = int(a)
 
                     user_storage["users_turn"] = False

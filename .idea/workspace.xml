@@ -9,7 +9,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb38bc6d-9667-4c33-a38c-0406a6ca14d4" name="Default Changelist" comment="test 40&#10;test 40">
+    <list default="true" id="cb38bc6d-9667-4c33-a38c-0406a6ca14d4" name="Default Changelist" comment="test 40&#10;test 42">
       <change beforePath="$PROJECT_DIR$/handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -404,7 +404,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575719470142</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="test 40&#10;test 42">
+      <created>1575720725198</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1575720725198</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -446,7 +453,8 @@
     <MESSAGE value="test 38" />
     <MESSAGE value="test 39" />
     <MESSAGE value="test 40&#10;test 40" />
-    <option name="LAST_COMMIT_MESSAGE" value="test 40&#10;test 40" />
+    <MESSAGE value="test 40&#10;test 42" />
+    <option name="LAST_COMMIT_MESSAGE" value="test 40&#10;test 42" />
   </component>
   <component name="WindowStateProjectService">
     <state x="297" y="0" width="839" height="869" key="#Dockerfile" timestamp="1575238486279">
