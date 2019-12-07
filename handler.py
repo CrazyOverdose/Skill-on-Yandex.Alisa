@@ -348,7 +348,7 @@ def handle_dialog(request, response, user_storage):
                                 user_storage["exchange"] = user_storage["exchange"] + 100
 
                     if int(user_storage["field_cellA"]) == 18:
-                        response.set_text(str(school(user_storage, game)))
+                        response.set_text('' + str(school(user_storage, game)))
 
                     user_storage["users_turn"] = True
                     return response, user_storage
@@ -437,7 +437,8 @@ def handle_dialog(request, response, user_storage):
                             user_storage["exchange"] = 100
 
                     if int(user_storage["field_cellU"]) == 18:
-                        response.set_text(str(school(user_storage, game)))
+                        answer = str(school(user_storage, game))
+                        response.set_text( str(a) + '')
 
                     user_storage["users_turn"] = False
                     return response, user_storage
