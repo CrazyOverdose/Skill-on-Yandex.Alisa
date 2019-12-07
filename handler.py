@@ -216,12 +216,13 @@ def handle_dialog(request, response, user_storage):
                                 game.price_field[int(user_storage["field_cellA"])])
                             user_storage["moneyU"] = float(user_storage["moneyU"]) - float(
                                 game.price_field[int(user_storage["field_cellA"])])
+
                         if int(user_storage["propertyA"][a]) == 1:
                             response.set_text('Ход Алисы \n' +
                                               'Алиса попала на свою территорию: ' + str(
                                 game.fields[int(user_storage["field_cellA"])]))
 
-                        else:
+                        if int(user_storage["propertyA"][a]) == 0 and int(user_storage["propertyU"][a]) == 0:
                             if b == 1:
                                 response.set_text( 'Ход Алисы \n' + str(game.fields[int(user_storage["field_cellA"])]) + " и решила купить")
                                 user_storage["moneyA"] = float(user_storage["moneyA"]) + float(
