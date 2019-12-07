@@ -30,8 +30,8 @@ class las_vegas:
               'Плотина Гувера Цена: 10$', 'Какая жалость...у вас сломался холодильник -50$',
               'Улица Фримонт-стрит Цена: 10$', 'Аллея Лас-Вегас Цена: 10$', 'Тюрьма. Выход из тюрьмы  - 100$',
               'Парка развлечений "Adventuredome" Цена: 15$',
-              'Биржа. Если она пуста, то должен оставить 200$, если нет,то вправе забрать в 2 раза больше, чем на ней '
-              'есть или оставить еще 200',
+              'Биржа. Если она пуста, то должен оставить 100$, если нет,то вправе забрать в 2 раза больше, чем на ней '
+              'есть или оставить еще 100',
               'Музей Shelby American Цена: 15$', 'Национальный музей атомных испытаний Цена: 15$', 'Шанс ',
               'Музей Моб Цена: 20$',
               'Назад в будущее. Игроку будет задан один школьный вопрос. За правильный ответ +50$',
@@ -148,8 +148,8 @@ def handle_dialog(request, response, user_storage):
                 user_storage["exchange"] = 0
 
             if user_message in BURSEgive:
-                user_storage["moneyU"] = float(user_storage["moneyU"]) - 200
-                user_storage["exchange"] = float(user_storage["exchange"]) + 200
+                user_storage["moneyU"] = float(user_storage["moneyU"]) - 100
+                user_storage["exchange"] = float(user_storage["exchange"]) + 100
 
             if user_message not in BURSEgive + BURSEtake:
                 response.set_text('Иногда ничего не делать - лучшее решение')
@@ -266,8 +266,8 @@ def handle_dialog(request, response, user_storage):
                             response.set_text('Ход Алисы \n' +
                                               str(game.fields[int(
                                                   user_storage["field_cellA"])]) + '\nАлиса оставила деньги на бирже')
-                            user_storage["moneyA"] = float(user_storage["moneyA"]) - 200
-                            user_storage["exchange"] = 200
+                            user_storage["moneyA"] = float(user_storage["moneyA"]) - 100
+                            user_storage["exchange"] = 100
 
                         if float(user_storage["exchange"]) != 0:
                             if int(y) == 2:
@@ -281,8 +281,8 @@ def handle_dialog(request, response, user_storage):
                                 response.set_text('Ход Алисы \n' +
                                                   str(game.fields[int(
                                                       user_storage["field_cellA"])]) + '\nАлиса оставила деньги на бирже')
-                                user_storage["moneyA"] = float(user_storage["moneyA"]) - 200
-                                user_storage["exchange"] = user_storage["exchange"] + 200
+                                user_storage["moneyA"] = float(user_storage["moneyA"]) - 100
+                                user_storage["exchange"] = user_storage["exchange"] + 100
 
                     user_storage["users_turn"] = True
                     return response, user_storage
@@ -366,8 +366,8 @@ def handle_dialog(request, response, user_storage):
                             response.set_text('Ваш ход \n' +
                                               str(game.fields[int(
                                                   user_storage["field_cellU"])]) + '\n Биржа пуста, вы оставили деньги')
-                            user_storage["moneyU"] = float(user_storage["moneyU"]) - 200
-                            user_storage["exchange"] = 200
+                            user_storage["moneyU"] = float(user_storage["moneyU"]) - 100
+                            user_storage["exchange"] = 100
 
                     user_storage["users_turn"] = False
                     return response, user_storage
