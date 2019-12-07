@@ -91,8 +91,8 @@ def handle_dialog(request, response, user_storage):
             # имущество пользователя
             "moneyU": float(200),  # Деньги Пользователя
             "moneyA": float(200),  # Деньги Алисы
-            "field_cellA": int(23),  # Клетка, на которой находится Алиса
-            "field_cellU": int(23),  # Клетка, на которой находится пользователь
+            "field_cellA": int(39),  # Клетка, на которой находится Алиса
+            "field_cellU": int(8),  # Клетка, на которой находится пользователь
             "bankU": float(0),  # вклады пользователя (ячейка поля 37)
             "bankA": float(0),  # вклады алисы (ячейка поля 37)
             "exchange": int(0),  # биржа (ячейка поля 13)
@@ -159,6 +159,10 @@ def handle_dialog(request, response, user_storage):
                         response.set_text(str(game.fields[int(user_storage["field_cellU"])]))
                         user_storage["moneyU"] = float(user_storage["moneyU"]) + 200
                         user_storage["field_cellU"] = 1
+
+                    if int(user_storage["field_cellU"]) == 26 | int(user_storage["field_cellU"]) == 21 | int(user_storage["field_cellU"]) == 29 | int(user_storage["field_cellU"]) == 39 | int(user_storage["field_cellU"]) == 3 | int(user_storage["field_cellU"]) == 8:
+                        user_storage["moneyU"] = float(user_storage["moneyU"]) + float(game.price_field[int(user_storage["field_cellU"])])
+                        response.set_text(str(game.fields[int(user_storage["field_cellU"])]))
                     user_storage["users_turn"] = False
 
                 elif not bool(user_storage["users_turn"]):
@@ -175,6 +179,11 @@ def handle_dialog(request, response, user_storage):
                         response.set_text(str(game.fields[int(user_storage["field_cellA"])]))
                         user_storage["moneyA"] = float(user_storage["moneyA"]) + 200
                         user_storage["field_cellA"] = 1
+
+                    if int(user_storage["field_cellA"]) == 26 | int(user_storage["field_cellA"]) == 21 | int(user_storage["field_cellA"]) == 29 | int(user_storage["field_cellA"]) == 39 | int(user_storage["field_cellA"]) == 3 | int(user_storage["field_cellA"]) == 8:
+                        user_storage["moneyA"] = float(user_storage["moneyA"]) + float(game.price_field[int(user_storage["field_cellA"])])
+                        response.set_text(str(game.fields[int(user_storage["field_cellA"])]))
+
                     user_storage["users_turn"] = True
         else:
             response.set_text("Простите, но я вас не поняла.")
@@ -259,8 +268,8 @@ def end(request, response, text):
                       int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0), int(0)],  # имущество пользователя
         "moneyU": float(200),  # Деньги Пользователя
         "moneyA": float(200),  # Деньги Алисы
-        "field_cellA": int(23),  # Клетка, на которой находится Алиса
-        "field_cellU": int(23),  # Клетка, на которой находится пользователь
+        "field_cellA": int(26),  # Клетка, на которой находится Алиса
+        "field_cellU": int(21),  # Клетка, на которой находится пользователь
         "bankU": float(0),  # вклады пользователя (ячейка поля 37)
         "bankA": float(0),  # вклады алисы (ячейка поля 37)
         "exchange": int(0),  # биржа (ячейка поля 13)
