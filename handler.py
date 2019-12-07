@@ -319,8 +319,8 @@ def handle_dialog(request, response, user_storage):
 
                     if int(user_storage["field_cellU"]) == 5 or int(user_storage["field_cellU"]) == 16 or int(
                             user_storage["field_cellU"]) == 36:
-                        answer = str(chances(user_storage, game))
-                        response.set_text(answer)
+                        answer = chances(user_storage, game)
+                        response.set_text(str(answer))
 
                     user_storage["users_turn"] = False
                     return response, user_storage
@@ -343,7 +343,7 @@ def handle_dialog(request, response, user_storage):
 # Шансы
 def chances(user_storage, game):
     rand = int(randint(1, 12))
-    answer=''
+    answer = ''
     if int(rand) == 1 or int(rand) == 2 or int(rand) == 4 or int(rand) == 5 or int(rand) == 6 or int(rand) == 8 or int(
             rand) == 9 or int(rand) == 12:
         if bool(user_storage["users_turns"]):
@@ -388,7 +388,7 @@ def chances(user_storage, game):
         answer = str('Ваш ход \n ' + str(game.fields[int(user_storage["field_cellU"])]) + str(game.chance[int(rand)]))
 
     answer = 'тута'
-    return str(answer)
+    return answer
 
 
 # Начало новой игры
