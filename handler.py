@@ -194,6 +194,7 @@ def handle_dialog(request, response, user_storage):
                         user_storage["property"] = int(a)
 
                     user_storage["users_turn"] = False
+                    return response, user_storage
 
                 elif not bool(user_storage["users_turn"]):
                     backup_turn = user_storage
