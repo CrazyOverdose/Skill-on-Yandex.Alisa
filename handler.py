@@ -137,7 +137,7 @@ def handle_dialog(request, response, user_storage):
             if str(user_message) == 'купить':
                 user_storage["moneyU"] = float(user_storage["moneyU"]) + float(game.price_field[int(user_storage["field_cellU"])])
                 user_storage["propertyU"][int(user_storage["property"])] = 1
-                response.set_text('Поздравляю с приобретением! ' + user_storage["users_turn"])
+                response.set_text('Поздравляю с приобретением! ' + str(user_storage["users_turn"]))
             else:
                 response.set_text('Может, это действиельно не лучшее вложение денег')
             user_storage["property"] = 0
