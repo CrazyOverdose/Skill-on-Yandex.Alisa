@@ -90,7 +90,7 @@ def handle_dialog(request, response, user_storage):
             "moneyU": 200,  # Деньги Пользователя
             "moneyA": 200,  # Деньги Алисы
             "field_cellA": 20,  # Клетка, на которой находится Алиса
-            "field_cellU": 32,  # Клетка, на которой находится пользователь
+            "field_cellU": 20,  # Клетка, на которой находится пользователь
             "bankU": 0,  # вклады пользователя (ячейка поля 37)
             "bankA": 0,  # вклады алисы (ячейка поля 37)
             "exchange": 0,  # биржа (ячейка поля 13)
@@ -216,6 +216,10 @@ def handle_dialog(request, response, user_storage):
                                 game.price_field[int(user_storage["field_cellA"])])
                             user_storage["moneyU"] = float(user_storage["moneyU"]) - float(
                                 game.price_field[int(user_storage["field_cellA"])])
+                        if int(user_storage["propertyA"][a]) == 1:
+                            response.set_text('Ход Алисы \n' +
+                                              'Алиса попала на свою территорию: ' + str(
+                                game.fields[int(user_storage["field_cellA"])]))
 
                         else:
                             if b == 1:
@@ -385,8 +389,8 @@ def end(request, response, text):
         # имущество пользователя
         "moneyU": 200,  # Деньги Пользователя
         "moneyA": 200,  # Деньги Алисы
-        "field_cellA": 20,  # Клетка, на которой находится Алиса
-        "field_cellU": 32,  # Клетка, на которой находится пользователь
+        "field_cellA": 40,  # Клетка, на которой находится Алиса
+        "field_cellU": 25,  # Клетка, на которой находится пользователь
         "bankU": 0,  # вклады пользователя (ячейка поля 37)
         "bankA": 0,  # вклады алисы (ячейка поля 37)
         "exchange": 0,  # биржа (ячейка поля 13)
