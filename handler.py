@@ -95,7 +95,7 @@ def handle_dialog(request, response, user_storage):
             "bankA": 0,  # вклады алисы (ячейка поля 37)
             "exchange": 0,  # биржа (ячейка поля 13)
             "user_id": request.user_id,
-            "users_turn": False,
+            "users_turn": True,
             "bank": False,
             "property": 0,
             "go": False,
@@ -396,7 +396,7 @@ def end(request, response, text):
         "bankA": 0,  # вклады алисы (ячейка поля 37)
         "exchange": 0,  # биржа (ячейка поля 13)
         "user_id": request.user_id,
-        "users_turn": True,
+        "users_turn": False,
         "bank": False,
         "property": 0,
         "go": False,
