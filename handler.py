@@ -102,7 +102,7 @@ def handle_dialog(request, response, user_storage):
             "field_cellU": 13,  # Клетка, на которой находится пользователь
             "bankU": 0,  # вклады пользователя (ячейка поля 37)
             "bankA": 0,  # вклады алисы (ячейка поля 37)
-            "exchange": 0,  # биржа (ячейка поля 13)
+            "exchange": float(0),  # биржа (ячейка поля 13)
             "user_id": request.user_id,
             "users_turn": True,  # чей ход
             "bank": False,  # пользователь попал в банк
@@ -262,25 +262,27 @@ def handle_dialog(request, response, user_storage):
 
                     if int(user_storage["field_cellA"]) == 13:
                         y = randint(1, 2)
-                        if int(user_storage["exchange"]) == 0:
+                        if float(user_storage["exchange"]) == 0:
                             response.set_text('Ход Алисы \n' +
                                               str(game.fields[int(
                                                   user_storage["field_cellA"])]) + '\nАлиса оставила деньги на бирже')
                             user_storage["moneyA"] = float(user_storage["moneyA"]) - 200
                             user_storage["exchange"] = 200
-                        if int(y) == 2:
-                            response.set_text('Ход Алисы \n' +
-                                              str(game.fields[int(
-                                                  user_storage["field_cellA"])]) + '\nАлиса взяла деньги с биржи')
-                            user_storage["moneyA"] = float(user_storage["moneyA"]) + 1.5 * float(
-                                user_storage["exchange"])
-                            user_storage["exchange"] = 0
-                        if int(y) == 1:
-                            response.set_text('Ход Алисы \n' +
-                                              str(game.fields[int(
-                                                  user_storage["field_cellA"])]) + '\nАлиса оставила деньги на бирже')
-                            user_storage["moneyA"] = float(user_storage["moneyA"]) - 200
-                            user_storage["exchange"] = user_storage["exchange"] + 200
+
+                        if float(user_storage["exchange"]) != 0:
+                            if int(y) == 2:
+                                response.set_text('Ход Алисы \n' +
+                                                  str(game.fields[int(
+                                                      user_storage["field_cellA"])]) + '\nАлиса взяла деньги с биржи')
+                                user_storage["moneyA"] = float(user_storage["moneyA"]) + 1.5 * float(
+                                    user_storage["exchange"])
+                                user_storage["exchange"] = 0
+                            if int(y) == 1:
+                                response.set_text('Ход Алисы \n' +
+                                                  str(game.fields[int(
+                                                      user_storage["field_cellA"])]) + '\nАлиса оставила деньги на бирже')
+                                user_storage["moneyA"] = float(user_storage["moneyA"]) - 200
+                                user_storage["exchange"] = user_storage["exchange"] + 200
 
                     user_storage["users_turn"] = True
                     return response, user_storage
@@ -356,15 +358,16 @@ def handle_dialog(request, response, user_storage):
                             user_storage["property"] = int(a)
 
                     if int(user_storage["field_cellU"]) == 13:
-                        if int(user_storage["exchange"]) == 0:
+                        if float(user_storage["exchange"]) != 0:
+                            response.set_text('Ваш ход \n' + str(game.fields[int(user_storage["field_cellU"])]))
+                            user_storage["choice"] = True
+
+                        if float(user_storage["exchange"]) == 0:
                             response.set_text('Ваш ход \n' +
                                               str(game.fields[int(
                                                   user_storage["field_cellU"])]) + '\n Биржа пуста, вы оставили деньги')
                             user_storage["moneyU"] = float(user_storage["moneyU"]) - 200
                             user_storage["exchange"] = 200
-                        if int(user_storage["exchange"]) != 0:
-                            response.set_text('Ваш ход \n' + str(game.fields[int(user_storage["field_cellU"])]))
-                            user_storage["choice"] = True
 
                     user_storage["users_turn"] = False
                     return response, user_storage
