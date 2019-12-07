@@ -134,13 +134,13 @@ def handle_dialog(request, response, user_storage):
             raise WinnerError2
 
         if int(user_storage["property"]) != 0:
-           # if str(user_message) == str('купить'):
-           #     user_storage["moneyU"] = float(user_storage["moneyU"]) + float(game.fields[int(user_storage["field_cellU"])])
-           #    user_storage["propertyU"][int(user_storage["property"])] = 1
-            response.set_text(str(user_storage["property"]))
-            #  else:
-            #    response.set_text('Может, это действиельно не лучшее вложение денег')
-            #user_storage["property"] = 0
+            if str(user_message) == 'купить':
+                user_storage["moneyU"] = float(user_storage["moneyU"]) + float(game.price_field[int(user_storage["field_cellU"])])
+                user_storage["propertyU"][int(user_storage["property"])] = 1
+                response.set_text('Поздравляю с приобретением! ')
+            else:
+                response.set_text('Может, это действиельно не лучшее вложение денег')
+            user_storage["property"] = 0
             return response, user_storage
 
         if user_message in ALL_WORDS:
