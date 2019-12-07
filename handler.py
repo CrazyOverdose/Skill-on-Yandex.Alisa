@@ -145,11 +145,13 @@ def handle_dialog(request, response, user_storage):
         if bool(user_storage["choice"]):
             if user_message in BURSEtake:
                 user_storage["moneyU"] = float(user_storage["moneyU"]) + float(user_storage["exchange"]) * 1.5
+                response.set_text('Вы взяли ' + str(user_storage["exchange"]) + ' $ с биржи')
                 user_storage["exchange"] = 0
 
             if user_message in BURSEgive:
                 user_storage["moneyU"] = float(user_storage["moneyU"]) - 100
                 user_storage["exchange"] = float(user_storage["exchange"]) + 100
+                response.set_text('Вы оставили 100$ на бирже')
 
             if user_message not in BURSEgive + BURSEtake:
                 response.set_text('Иногда ничего не делать - лучшее решение')
@@ -270,6 +272,10 @@ def handle_dialog(request, response, user_storage):
                             user_storage["exchange"] = 100
 
                         if float(user_storage["exchange"]) != 0:
+
+                            if float(user_storage["moneyA"]) < 150:
+                                y = 2
+
                             if int(y) == 2:
                                 response.set_text('Ход Алисы \n' +
                                                   str(game.fields[int(
@@ -277,6 +283,7 @@ def handle_dialog(request, response, user_storage):
                                 user_storage["moneyA"] = float(user_storage["moneyA"]) + 1.5 * float(
                                     user_storage["exchange"])
                                 user_storage["exchange"] = 0
+
                             if int(y) == 1:
                                 response.set_text('Ход Алисы \n' +
                                                   str(game.fields[int(
