@@ -20,10 +20,10 @@ class las_vegas:
                  'Столица Южной Кореи',
                  'На какую букву ударание в слове "щавель"',
                  'Какая буква пропущена? Параш..т', 'Кто написал "Горе от ума"?', 'Является ли банан фруктом?',
-                 'Чему равна площадь треугольника со сторонами 4 на 3 на 5', 'СКолько в 1км сантиметров?',
+                 'Чему равна площадь треугольника со сторонами 4 на 3 на 5', 'Сколько в 1км сантиметров?',
                  'Сколько лет длилась Первая Мировая война?']
 
-    answers = [0, 0, 4, 'Оттава', 'Сеул', 'е', 'ю', 'Грибоедов', 'нет', '4.5', '100000', '4']
+    answers = [0, 0, 4, 'оттава', 'сеул', 'е', 'ю', 'грибоедов', 'нет', '6', '100000', '4']
 
     fields = [0, 'Cтарт', 'Колесо обозрения "High Roller" Цена: 5$', 'Инвестроры вложили в вас 100$',
               'Ранчо "Casa de Shenandoah" Цена: 5$', 'Шанс ', 'Брат за брата. Отдайте второму игроку 50$',
@@ -172,6 +172,15 @@ def handle_dialog(request, response, user_storage):
                 response.set_text('Иногда ничего не делать - лучшее решение')
             user_storage["choice"] = False
             return response, user_storage
+
+        if bool(user_storage["go"]):
+            if is_int(user_message):
+                response.set_text('Ваш ход \n' + str(game.fields[int(user_storage["field_cellA"])]) + '\n Вы перешли на ячейку ' + str(user_message))
+                if user_storage["field_cellU"] + int(user_message) < 40:
+                    user_storage["moneyU"] = user_storage["moneyU"] + 200
+            if not is_int(user_message):
+                response.set_text('Ваш ход \n' + str(
+                    game.fields[int(user_storage["field_cellA"])]) + '\n Вы остались на месте ' )
 
         if int(user_storage["property"]) != 0:
             if str(user_message) == 'купить':
@@ -361,6 +370,18 @@ def handle_dialog(request, response, user_storage):
                                 str('Ход Алисы \n ' + game.fields[18]) + '\n' + str(
                                     game.questions[int(rand)]) + '\n Ответ Алисы: я не знаю. НЕ засчитано')
 
+                    if int(user_storage["field_cellU"]) == 34:
+                        cell = int(randint (1,40))
+
+                        if cell + int(user_storage["field_cellA"]) > 40:
+                            user_storage["moneyA"] = user_storage["moneyA"] + 200
+                            cell = cell + int(user_storage["field_cellA"]) - 40
+                        if cell + int(user_storage["field_cellA"]) < 40:
+                            cell = cell + int(user_storage["field_cellA"])
+
+                        response.set_text('Ход Алисы \n' + str(game.fields[int(user_storage["field_cellA"])]) + '\n Алиса перешла на ячейку ' + str(cell))
+                        user_storage["field_cellA"] = cell
+
                     user_storage["users_turn"] = True
                     return response, user_storage
 
@@ -452,6 +473,13 @@ def handle_dialog(request, response, user_storage):
                         user_storage["school"] = int(rand)
                         response.set_text(str(game.fields[18]) + '\n' + str(game.questions[int(rand)]))
 
+
+                    if int(user_storage["field_cellU"]) == 34:
+                        user_storage["go"] = True
+                        response.set_text('Ваш ход \n' +
+                                          str(game.fields[int(
+                                              user_storage["field_cellU"])]))
+
                     user_storage["users_turn"] = False
                     return response, user_storage
 
@@ -469,6 +497,8 @@ def handle_dialog(request, response, user_storage):
     # В любом случае
     return response, user_storage
 
+def is_int(n):
+    return int(n) == float (n)
 
 # Шансы
 def chances(user_storage, game):
@@ -560,28 +590,6 @@ def end(request, response, text):
 
     return user_storage
 
-
-def school(response, user_storage):
-    game = las_vegas()
-    rand = int(randint(1, 11))
-    if not bool(user_storage["users_turns"]):
-        choise = int(randint(1, 2))
-        if choise == 1:
-            user_storage["moneyA"] = float(user_storage["moneyA"]) + 50
-            response.set_text(
-                'Ход Алисы \n ' + str(game.fields[18]) + '\n' + str(
-                    game.questions[int(rand)]) + '\n Ответ Алисы:' + str(
-                    game.answers[int(rand)]) + '\nПравильный ответ')
-        else:
-            response.set_text(
-                str('Ход Алисы \n ' + game.fields[18]) + '\n' + str(
-                    game.questions[int(rand)]) + '\n Ответ Алисы: я не знаю. НЕ засчитано')
-
-    if bool(user_storage["users_turns"]):
-        user_storage["flag"] = int(rand)
-        response.set_text( str(game.fields[18]) + '\n' + str(game.questions[int(rand)]))
-
-    return user_storage
 
 
 def conversion(a):
