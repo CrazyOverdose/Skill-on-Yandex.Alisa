@@ -48,7 +48,7 @@ class las_vegas:
               'Национальный парк "Долина смерти" Цена: 40$', 'Вы такой невнимательный! КАк умудрились потерять 50$?',
               'Сансет Парк Цена: 40$']
 
-    price_field = [0, 200, -5, 100, -5, 0, -50, -10, -50, -10, -10, 0, -15, 0, -15, -15, 0, -20, 0, -20, -20, 0, -25,
+    price_field = [0, 200, -5, 100, -5, 0, -50, -10, -50, -10, -10, -200, -15, 0, -15, -15, 0, -20, 0, -20, -20, 0, -25,
                    200,
                    -25, -25, -50, -30, -30, 95, -30, 0, -35, -35, 0, -35, 0, 0, -40, -50, -40]
 
@@ -196,7 +196,7 @@ def handle_dialog(request, response, user_storage):
 
                     if int(user_storage["field_cellA"]) == 26 or int(user_storage["field_cellA"]) == 21 or int(
                             user_storage["field_cellA"]) == 29 or int(user_storage["field_cellA"]) == 39 or int(
-                        user_storage["field_cellA"]) == 3 or int(user_storage["field_cellA"]) == 8:
+                        user_storage["field_cellA"]) == 3 or int(user_storage["field_cellA"]) == 8 or int(user_storage["field_cellA"]) == 11 :
                         user_storage["moneyA"] = float(user_storage["moneyA"]) + float(
                             game.price_field[int(user_storage["field_cellA"])])
                         response.set_text('Ход Алисы \n' + str(game.fields[int(user_storage["field_cellA"])]))
@@ -301,7 +301,7 @@ def handle_dialog(request, response, user_storage):
 
                     if int(user_storage["field_cellU"]) == 26 or int(user_storage["field_cellU"]) == 21 or int(
                             user_storage["field_cellU"]) == 29 or int(user_storage["field_cellU"]) == 39 or int(
-                        user_storage["field_cellU"]) == 3 or int(user_storage["field_cellU"]) == 8:
+                        user_storage["field_cellU"]) == 3 or int(user_storage["field_cellU"]) == 8 or int(user_storage["field_cellU"]) == 11:
                         user_storage["moneyU"] = float(user_storage["moneyU"]) + float(
                             game.price_field[int(user_storage["field_cellU"])])
                         response.set_text('Ваш ход \n' + str(game.fields[int(user_storage["field_cellU"])]))
