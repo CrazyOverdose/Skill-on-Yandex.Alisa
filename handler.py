@@ -186,6 +186,8 @@ def handle_dialog(request, response, user_storage):
                         response.set_text('Ход Алисы \n' + str(game.fields[int(user_storage["field_cellA"])]))
 
                     user_storage["users_turn"] = True
+                    return response, user_storage
+
                 if bool(user_storage["users_turn"]):
                     if int(cube) + int(user_storage["field_cellU"]) > 40:
                         user_storage["moneyU"] = float(user_storage["moneyU"]) + 200
@@ -240,6 +242,7 @@ def handle_dialog(request, response, user_storage):
                         user_storage["property"] = int(a)
 
                     user_storage["users_turn"] = False
+                    return response, user_storage
 
         else:
             response.set_text("Простите, но я вас не поняла.")
