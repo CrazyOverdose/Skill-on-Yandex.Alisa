@@ -192,9 +192,9 @@ def handle_dialog(request, response, user_storage):
                         response.set_text(
                             str('Ваш ход \n' + game.fields[int(user_storage["field_cellU"])]) + ' Если хотите приобрести, введите (купить)')
                         user_storage["property"] = int(a)
+                        return response, user_storage
 
                     user_storage["users_turn"] = False
-                    return response, user_storage
 
                 elif not bool(user_storage["users_turn"]):
                     backup_turn = user_storage
