@@ -160,7 +160,7 @@ def handle_dialog(request, response, user_storage):
                         user_storage["moneyU"] = float(user_storage["moneyU"]) + 200
                         user_storage["field_cellU"] = 1
 
-                    if int(user_storage["field_cellU"]) == 26 | int(user_storage["field_cellU"]) == 21 | int(user_storage["field_cellU"]) == 29 | int(user_storage["field_cellU"]) == 39 | int(user_storage["field_cellU"]) == 3 | int(user_storage["field_cellU"]) == 8:
+                    if int(user_storage["field_cellU"]) == 26 or int(user_storage["field_cellU"]) == 21 or int(user_storage["field_cellU"]) == 29 or int(user_storage["field_cellU"]) == 39 or int(user_storage["field_cellU"]) == 3 or int(user_storage["field_cellU"]) == 8:
                         user_storage["moneyU"] = float(user_storage["moneyU"]) + float(game.price_field[int(user_storage["field_cellU"])])
                         response.set_text(str(game.fields[int(user_storage["field_cellU"])]))
                     user_storage["users_turn"] = False
@@ -180,7 +180,7 @@ def handle_dialog(request, response, user_storage):
                         user_storage["moneyA"] = float(user_storage["moneyA"]) + 200
                         user_storage["field_cellA"] = 1
 
-                    if int(user_storage["field_cellA"]) == 26 | int(user_storage["field_cellA"]) == 21 | int(user_storage["field_cellA"]) == 29 | int(user_storage["field_cellA"]) == 39 | int(user_storage["field_cellA"]) == 3 | int(user_storage["field_cellA"]) == 8:
+                    if int(user_storage["field_cellA"]) == 26 or int(user_storage["field_cellA"]) == 21 or int(user_storage["field_cellA"]) == 29 or int(user_storage["field_cellA"]) == 39 or int(user_storage["field_cellA"]) == 3 or int(user_storage["field_cellA"]) == 8:
                         user_storage["moneyA"] = float(user_storage["moneyA"]) + float(game.price_field[int(user_storage["field_cellA"])])
                         response.set_text(str(game.fields[int(user_storage["field_cellA"])]))
 
