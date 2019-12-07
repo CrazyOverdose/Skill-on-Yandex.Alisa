@@ -175,12 +175,13 @@ def handle_dialog(request, response, user_storage):
 
         if bool(user_storage["go"]):
             if user_message.isdigit():
-                response.set_text('Ваш ход \n' + str(game.fields[int(user_storage["field_cellA"])]) + '\n Вы перешли на ячейку ') # + str(user_message))
+                response.set_text('Ваш ход \n' + str(game.fields[int(user_storage["field_cellA"])]) + '\n Вы перешли на ячейку ' + str(user_message))
                 if user_storage["field_cellU"] + int(user_message) < 40:
                     user_storage["moneyU"] = user_storage["moneyU"] + 200
             if not user_message.isdigit():
                 response.set_text('Ваш ход \n' + str(
                     game.fields[int(user_storage["field_cellA"])]) + '\n Вы остались на месте ' )
+            user_storage["go"] = False
             return response, user_storage
 
         if int(user_storage["property"]) != 0:
