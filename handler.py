@@ -14,8 +14,6 @@ class WinnerError1(Exception):
 class WinnerError2(Exception):
     pass
 
-class property(Exception):
-    pass
 
 class las_vegas:
     questions = [0, 'Чему равно 2+4-3*2', 'Какое из чисел натуральное? 0, 4, 0.2, 1/2', 'Cтолица Канады',
@@ -92,7 +90,7 @@ def handle_dialog(request, response, user_storage):
             "moneyU": 200,  # Деньги Пользователя
             "moneyA": 200,  # Деньги Алисы
             "field_cellA": 6,  # Клетка, на которой находится Алиса
-            "field_cellU": 2,  # Клетка, на которой находится пользователь
+            "field_cellU": 3,  # Клетка, на которой находится пользователь
             "bankU": 0,  # вклады пользователя (ячейка поля 37)
             "bankA": 0,  # вклады алисы (ячейка поля 37)
             "exchange": 0,  # биржа (ячейка поля 13)
@@ -203,8 +201,12 @@ def handle_dialog(request, response, user_storage):
                             user_storage["field_cellU"]) == 35 or int(user_storage["field_cellU"]) == 38 or int(
                             user_storage["field_cellU"]) == 40:
                         a = int(conversion(int(user_storage["field_cellU"])))
+                        response.set_text(
+                            str('Ваш ход \n' + game.fields[
+                                int(user_storage["field_cellU"])]) + ' Если хотите приобрести, введите (купить)' + str(
+                                user_storage["users_turn"]))
                         user_storage["property"] = int(a)
-                        raise property
+
                     user_storage["users_turn"] = False
 
                 if not bool(user_storage["users_turn"]):
@@ -250,13 +252,6 @@ def handle_dialog(request, response, user_storage):
     except WinnerError2:
         text = 'Поздравляю, вы победили! '
         user_storage = end(request, response, text)
-
-    except property:
-        response.set_text(
-            str('Ваш ход \n' + game.fields[
-                int(user_storage["field_cellU"])]) + ' Если хотите приобрести, введите (купить)' + str(
-                user_storage["users_turn"]))
-        return response, user_storage
 
     # В любом случае
     return response, user_storage
