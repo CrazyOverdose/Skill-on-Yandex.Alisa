@@ -93,8 +93,8 @@ def handle_dialog(request, response, user_storage):
             # имущество пользователя
             "moneyU": 200,  # Деньги Пользователя
             "moneyA": 200,  # Деньги Алисы
-            "field_cellA": 5,  # Клетка, на которой находится Алиса
-            "field_cellU": 5,  # Клетка, на которой находится пользователь
+            "field_cellA": 16,  # Клетка, на которой находится Алиса
+            "field_cellU": 16,  # Клетка, на которой находится пользователь
             "bankU": 0,  # вклады пользователя (ячейка поля 37)
             "bankA": 0,  # вклады алисы (ячейка поля 37)
             "exchange": 0,  # биржа (ячейка поля 13)
@@ -241,7 +241,9 @@ def handle_dialog(request, response, user_storage):
 
                     if int(user_storage["field_cellA"]) == 5 | int(user_storage["field_cellA"]) == 16 | int(
                             user_storage["field_cellA"]) == 36:
-                        response.set_text(str(chances(user_storage, game)))
+                        answer = str(chances(user_storage, game))
+                        response.set_text(answer)
+
 
                     user_storage["users_turn"] = True
                     return response, user_storage
@@ -318,7 +320,8 @@ def handle_dialog(request, response, user_storage):
 
                     if int(user_storage["field_cellU"]) == 5 or int(user_storage["field_cellU"]) == 16 or int(
                             user_storage["field_cellU"]) == 36:
-                        response.set_text(str(chances(user_storage, game)))
+                        answer = str(chances(user_storage, game))
+                        response.set_text(answer)
 
                     user_storage["users_turn"] = False
                     return response, user_storage
@@ -341,39 +344,41 @@ def handle_dialog(request, response, user_storage):
 # Шансы
 def chances(user_storage, game):
     rand = int(randint(1, 12))
-    if rand == 1 or rand == 2 or rand == 4 or rand == 5 or rand == 6 or rand == 8 or rand == 9 or rand == 12:
+    if int(rand) == 1 or int(rand) == 2 or int(rand) == 4 or int(rand) == 5 or int(rand) == 6 or int(rand) == 8 or int(rand) == 9 or int(rand) == 12:
         if bool(user_storage["users_turns"]):
             user_storage["moneyU"] = float(user_storage["moneyU"]) + float(game.price_chance[int(rand)])
-
-    if rand == 1 or rand == 2 or rand == 4 or rand == 5 or rand == 6 or rand == 8 or rand == 9 or rand == 12:
-        if bool(user_storage["users_turns"]) == False:
+        if not bool(user_storage["users_turns"]):
             user_storage["moneyA"] = float(user_storage["moneyA"]) + float(game.price_chance[int(rand)])
 
-    if rand == 3 and bool(user_storage["users_turns"]) == True:
-        user_storage["field_cellU"] = int(user_storage["field_cellU"]) - 5
+    if int(rand) == 3:
+        if bool(user_storage["users_turns"]):
+            user_storage["field_cellU"] = int(user_storage["field_cellU"]) - 5
 
-    if rand == 3 and bool(user_storage["users_turns"]) == False:
-        user_storage["field_cellA"] = int(user_storage["field_cellA"]) - 5
+        if not bool(user_storage["users_turns"]):
+            user_storage["field_cellA"] = int(user_storage["field_cellA"]) - 5
 
-    if rand == 10 and bool(user_storage["users_turns"]) == True:
-        user_storage["field_cellU"] = int(user_storage["field_cellU"]) + 3
+    if int(rand) == 10:
+        if bool(user_storage["users_turns"]):
+            user_storage["field_cellU"] = int(user_storage["field_cellU"]) + 3
 
-    if rand == 10 and bool(user_storage["users_turns"]) == False:
-        user_storage["field_cellA"] = int(user_storage["field_cellA"]) + 3
+        if not bool(user_storage["users_turns"]):
+            user_storage["field_cellA"] = int(user_storage["field_cellA"]) + 3
 
-    if rand == 11 and bool(user_storage["users_turns"]) == True:
-        user_storage["field_cellU"] = 11
-        user_storage["moneyU"] = float(user_storage["moneyU"]) - 100
+    if int(rand) == 11:
+        if bool(user_storage["users_turns"]):
+            user_storage["field_cellU"] = 11
+            user_storage["moneyU"] = float(user_storage["moneyU"]) - 100
 
-    if rand == 11 and bool(user_storage["users_turns"]) == False:
-        user_storage["field_cellA"] = 11
-        user_storage["moneyA"] = float(user_storage["moneyA"]) - 100
+        if not bool(user_storage["users_turns"]):
+            user_storage["field_cellA"] = 11
+            user_storage["moneyA"] = float(user_storage["moneyA"]) - 100
 
-    if rand == 7 and bool(user_storage["users_turns"]) == True:
-        user_storage["field_cellU"] = 21
+    if int(rand) == 7:
+        if bool(user_storage["users_turns"]):
+            user_storage["field_cellU"] = 21
 
-    if rand == 7 and bool(user_storage["users_turns"]) == False:
-        user_storage["field_cellA"] = 21
+        if not bool(user_storage["users_turns"]):
+            user_storage["field_cellA"] = 21
 
     if not bool(user_storage["users_turns"]):
         answer = str('Ход Алисы \n ' + str(game.fields[int(user_storage["field_cellA"])]) + str(game.chance[int(rand)]))
