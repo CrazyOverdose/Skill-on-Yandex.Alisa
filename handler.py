@@ -437,8 +437,7 @@ def handle_dialog(request, response, user_storage):
                             user_storage["exchange"] = 100
 
                     if int(user_storage["field_cellU"]) == 18:
-                        answer = str(school(user_storage, game))
-                        response.set_text( str(a) + '')
+                        user_storage = school(request, response,user_storage)
 
                     user_storage["users_turn"] = False
                     return response, user_storage
@@ -549,21 +548,27 @@ def end(request, response, text):
     return user_storage
 
 
-def school(user_storage, game):
+def school(request, response, user_storage):
+    game = las_vegas()
     rand = int(randint(1, 11))
     if not bool(user_storage["users_turns"]):
         choise = int(randint(1, 2))
         if choise == 1:
             user_storage["moneyA"] = float(user_storage["moneyA"]) + 50
-            return ('Ход Алисы \n ' + str(game.fields[18]) + '\n' + str(game.questions[int(rand)]) + '\n Ответ Алисы:' + str(
-                game.answers[int(rand)]) + '\nПравильный ответ')
+            response.set_text(
+                'Ход Алисы \n ' + str(game.fields[18]) + '\n' + str(
+                    game.questions[int(rand)]) + '\n Ответ Алисы:' + str(
+                    game.answers[int(rand)]) + '\nПравильный ответ')
         else:
-            return str('Ход Алисы \n ' + game.fields[18]) + '\n' + str(
-                game.questions[int(rand)]) + '\n Ответ Алисы: я не знаю. НЕ засчитано'
+            response.set_text(
+                str('Ход Алисы \n ' + game.fields[18]) + '\n' + str(
+                    game.questions[int(rand)]) + '\n Ответ Алисы: я не знаю. НЕ засчитано')
 
     if bool(user_storage["users_turns"]):
         user_storage["flag"] = int(rand)
-        return str(game.fields[18]) + '\n' + str(game.questions[int(rand)])
+        response.set_text( str(game.fields[18]) + '\n' + str(game.questions[int(rand)]))
+
+    return user_storage
 
 
 def conversion(a):
