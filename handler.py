@@ -212,21 +212,6 @@ def handle_dialog(request, response, user_storage):
                 text = ''
                 user_storage = end(request, response, text)
 
-            if user_message in OWN:
-                text = 'Собственность Алисы: '
-                i = 0
-                while i < 22:
-                    if user_storage["propertyA"][int(i)] == 1:
-                        text = text + str(game.fields[i])
-                    i = i + 1
-                j = 0
-                text = text + 'Ваша собственность: '
-                while j < 22:
-                    if user_storage["propertyU"][int(i)] == 1:
-                        text = text + str(game.fields[i])
-                    j = j + 1
-                response.set_text(str(text))
-
             if user_message in RULES:
                 response.set_text('Каждый участник бросает кубик и в зависимости от выпавшего количества '
                                   'очков перемещает фишку по полю. За каждый пройденный круг банк выплачивает 200$. Ваша цель – '
