@@ -104,7 +104,7 @@ def handle_dialog(request, response, user_storage):
             "moneyU": 200,  # Деньги Пользователя
             "moneyA": 200,  # Деньги Алисы
             "field_cellA": 11,  # Клетка, на которой находится Алиса
-            "field_cellU": 30,  # Клетка, на которой находится пользователь
+            "field_cellU": 11,  # Клетка, на которой находится пользователь
             "bankU": 0,  # вклады пользователя (ячейка поля 37)
             "bankA": 0,  # вклады алисы (ячейка поля 37)
             "exchange": 0,  # биржа (ячейка поля 13)
@@ -163,12 +163,14 @@ def handle_dialog(request, response, user_storage):
             j = 0
             while i < 22:
                 if int(user_storage["propertyA"][int(i)]) == 1:
-                    text = text + str(game.fields[int(i)])
+                    desipher = int(deconversion(int(i)))
+                    text = text + str(game.fields[int(desipher)])
                 i = i + 1
             text = text + '\nВаша собственность: '
             while j < 22:
                 if int(user_storage["propertyU"][int(j)]) == 1:
-                    text = text + str(game.fields[int(j)])
+                    desipher = int(deconversion(int(j)))
+                    text = text + str(game.fields[int(desipher)])
                 j = j + 1
             response.set_text(str(text))
             return response, user_storage
@@ -355,7 +357,7 @@ def handle_dialog(request, response, user_storage):
 
                         if int(user_storage["propertyU"][a]) == 1:
                             response.set_text('Ход Алисы \n' + 'Алиса попала на ваш участок: ' + str(
-                                game.fields[int(user_storage["field_cellA"])]) + 'и заплатила' + str(
+                                game.fields[int(user_storage["field_cellA"])]) + 'и заплатила ' + str(
                                 abs(int(game.price_foreign_field[int(user_storage["field_cellA"])]))) + '$\n')
                             user_storage["moneyA"] = float(user_storage["moneyA"]) + float(
                                 game.price_foreign_field[int(user_storage["field_cellA"])])
@@ -516,7 +518,7 @@ def handle_dialog(request, response, user_storage):
                         a = int(conversion(int(user_storage["field_cellU"])))
                         if int(user_storage["propertyA"][int(a)]) == 1:
                             response.set_text(str('Ваш ход \n' + str(game.fields[int(
-                                user_storage["field_cellU"])]) + ' \nВы попали на недвижимость Алисы и заплатили' + str(
+                                user_storage["field_cellU"])]) + ' \nВы попали на недвижимость Алисы и заплатили ' + str(
                                 abs(int(game.price_foreign_field[int(user_storage["field_cellU"])]))) + '$\n'))
                             user_storage["moneyU"] = float(user_storage["moneyU"]) + float(
                                 game.price_foreign_field[int(user_storage["field_cellU"])])
@@ -662,4 +664,49 @@ def conversion(a):
         a = 20
     if a == 40:
         a = 21
+    return int(a)
+
+def deconversion(a):
+    if a == 1:
+        a = 2
+    if a == 2:
+        a = 4
+    if a == 3:
+        a = 7
+    if a == 4:
+        a = 9
+    if a == 5:
+        a = 10
+    if a == 6:
+        a = 12
+    if a == 7:
+        a = 14
+    if a == 8:
+        a = 15
+    if a == 9:
+        a = 17
+    if a == 10:
+        a = 19
+    if a == 11:
+        a = 20
+    if a == 12:
+        a = 22
+    if a == 13:
+        a = 24
+    if a == 14:
+        a = 25
+    if a == 15:
+        a = 27
+    if a == 16:
+        a = 28
+    if a == 17:
+        a = 30
+    if a == 18:
+        a = 32
+    if a == 19:
+        a = 33
+    if a == 20:
+        a = 38
+    if a == 21:
+        a = 40
     return int(a)
