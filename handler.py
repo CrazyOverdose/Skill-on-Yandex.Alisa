@@ -195,6 +195,40 @@ def handle_dialog(request, response, user_storage):
                 user_storage["propertyA"][int(realty(user_storage))] = 0
                 return response, user_storage
 
+        if float(user_storage["moneyU"]) <= 0:
+            if int(realty(user_storage)) != 0:
+                if not bool(user_storage["crash"]):
+                    response.set_text(
+                        'Вы находитесь на грани банкротства, скажите, какую недвижимость хотите пролдать? ')
+                    user_storage["crash"] = True
+                    return response, user_storage
+                if bool(user_storage["crash"]):
+                    if user_message.isdigit():
+                        if int(user_message) == 2 or int(user_message) == 4 or int(user_message) == 5 or int(
+                                user_message) == 7 or int(user_message) == 9 or int(user_message) == 10 or int(
+                            user_message) == 12 or int(user_message) == 14 or int(user_message) == 15 or int(
+                            user_message) == 17 or int(user_message) == 19 or int(user_message) == 20 or int(
+                            user_message) == 22 or int(user_message) == 24 or int(user_message) == 25 or int(
+                            user_message) == 27 or int(user_message) == 28 or int(user_message) == 30 or int(
+                            user_message) == 32 or int(user_message) == 33 or int(user_message) == 35 or int(
+                            user_message) == 38 or int(user_message) == 40:
+                            if int(user_storage["propertyU"][int(conversion(int(user_message)))]) == 1:
+                                response.set_text('Вы продали свою недвижимость ' + str(game.fields[int(user_message)]))
+                                user_storage["moneyU"] = float(user_storage["moneyU"]) - float(
+                                    game.price_field[int(user_message)] // 2)
+                                user_storage["propertyU"][int(conversion(int(user_message)))] = 0
+                                user_storage["crash"] = False
+                                return response, user_storage
+                            else:
+                                response.set_text('Вы не владеете данным имуществом')
+                                return response, user_storage
+                        else:
+                            response.set_text('Зачем вы ввели номер несуществующей ячейки недвижимости?')
+                            return response, user_storage
+                    else:
+                        response.set_text('Вы не ввели номер ячейки недвижимости')
+                        return response, user_storage
+
 
         if float(user_storage["moneyU"]) < 0:
             raise WinnerError1
@@ -803,11 +837,13 @@ def realty(user_storage):
         while i < 22:
             if int(user_storage["propertyU"][int(i)]) == 1:
                flag = i
+               return flag
     if not user_storage["users_turn"]:
         j = 0
         while j < 22:
             if int(user_storage["propertyA"][int(j)]) == 1:
                 flag = j
+                return flag
             j = j + 1
 
     return flag
