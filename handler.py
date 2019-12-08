@@ -189,6 +189,7 @@ def handle_dialog(request, response, user_storage):
                 '37 - Банк\n'
                 '38 - Национальный парк "Долина смерти"\n 39 - Потеря\n'
                 '40 - Сансет Парк')
+            return response, user_storage
 
         if not bool(user_message["users_turn"]):
             if float(user_storage["moneyA"]) <= 0:
@@ -205,7 +206,7 @@ def handle_dialog(request, response, user_storage):
                 if int(realty(user_storage)) != 0:
                     if not bool(user_storage["crash"]):
                         response.set_text(
-                            'Вы находитесь на грани банкротства, скажите, какую недвижимость хотите пролдать? ')
+                            'Вы находитесь на грани банкротства, скажите, какую недвижимость хотите продать? ')
                         user_storage["crash"] = True
                         return response, user_storage
                     if bool(user_storage["crash"]):
