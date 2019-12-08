@@ -244,7 +244,7 @@ def handle_dialog(request, response, user_storage):
                     user_storage["bankU"] = user_storage["bankU"] + float(user_message)
                     user_storage["moneyU"] = float(user_storage["moneyU"]) - float(user_message)
                     response.set_text('Вы оставили ' + str(user_message) + ' $ в банке')
-            else:
+            if user_message.isdigit() == False and user_message not in BURSEtake:
                 response.set_text('Денюжки греют душу,когда они под рукой, не так ли?')
             user_storage["bank"] = False
             return response, user_storage
@@ -469,7 +469,7 @@ def handle_dialog(request, response, user_storage):
                             user_storage["bankA"] = user_storage["bankA"] + money
                             user_storage["moneyA"] = user_storage["moneyA"] - money
                             response.set_text('Ход Алисы \n' + str(
-                                game.fields[int(user_storage["field_cellA"])]) + '\nАлиса оставила' + str(
+                                game.fields[int(user_storage["field_cellA"])]) + '\nАлиса оставила ' + str(
                                 money) + ' $ в банке')
 
                         if int(y) == 3:
