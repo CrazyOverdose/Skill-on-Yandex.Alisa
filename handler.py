@@ -14,7 +14,6 @@ class WinnerError1(Exception):
 class WinnerError2(Exception):
     pass
 
-
 class las_vegas:
     questions = [0, 'Чему равно 2+4-3*2', 'Какое из чисел натуральное? 0, 4, 0.2, 1/2', 'Cтолица Канады',
                  'Столица Южной Кореи',
@@ -49,7 +48,7 @@ class las_vegas:
               '\nОтправляйтесь в тюрьму\n', '\nЧасовня цветов Цена: 35$\n', '\nМузей мадам Тюссо Цена: 35$\n',
               '\nВыберете любую ячейку, на которую отправитесь. Действие этой ячейки на вас не распространиться\n',
               '\nРед-Рок-Каньон Цена: 35$\n', '\nОтправляйтесь на 3 ячейки вперед \n',
-              '\nБанк. Вы можете положить деньги (каждый круг +150$) (скажите, сколько денег хотите положить), забрать ранее вложенные деньги (с процентами) Для этого скажите "забрать"\n',
+              '\nБанк. Вы можете положить деньги под 10% за круг (скажите, сколько денег хотите положить), забрать ранее вложенные деньги (с процентами) Для этого скажите "забрать"\n',
               '\nНациональный парк "Долина смерти" Цена: 40$\n',
               '\nВы такой невнимательный! КАк умудрились потерять 50$?\n',
               '\nСансет Парк Цена: 40$\n']
@@ -67,9 +66,13 @@ FIELD = ['поле', 'карта', 'ячейки']
 
 MONEY = ['деньги', 'моиденьги', 'сколькоуменяденег', 'сколькоденег', 'финансы', 'сбережения']
 
-WORDS = ['броситькубик', 'я хожу', 'го', 'давайиграть', 'играть', 'начать']
+WORDS = ['броситькубик', 'яхожу', 'го', 'давайиграть', 'играть', 'начать']
 
 ENDING_WORDS = ['новаяигра', 'выход', 'начатьновуюигру']
+
+BURSE = ['биржа','сколькоденегнабирже','деньгинабирже','деньгисбиржи']
+
+BANKS = ['банк','деньгивбанке','сколькоденегвбанке','вклады']
 
 BURSEtake = ['взять', 'забрать', 'взятьденьги', 'забратьденьги', ]
 
@@ -103,20 +106,20 @@ def handle_dialog(request, response, user_storage):
             # имущество пользователя
             "moneyU": 200,  # Деньги Пользователя
             "moneyA": 200,  # Деньги Алисы
-            "field_cellA": 11,  # Клетка, на которой находится Алиса
-            "field_cellU": 11,  # Клетка, на которой находится пользователь
+            "field_cellA": 37,  # Клетка, на которой находится Алиса
+            "field_cellU": 37,  # Клетка, на которой находится пользователь
             "bankU": 0,  # вклады пользователя (ячейка поля 37)
             "bankA": 0,  # вклады алисы (ячейка поля 37)
-            "exchange": 0,  # биржа (ячейка поля 13)
+            "exchange": 0,  # деньги на бирже (ячейка поля 13)
             "user_id": request.user_id,
             "users_turn": True,  # чей ход
             "bank": False,  # пользователь попал в банк
             "property": 0,  # пользователь попал на ячейку недвижимости
             "go": False,  # на любую ячейку
             "school": 0,  # пользователь попал на "назад в школу"
-            "choice": False,
-            "prison1": False,
-            "prison2": False
+            "choice": False,  # пользователь попал на биржу
+            "prison1": False,  # тюрьма Алисы
+            "prison2": False  # тюрьма пользователя
         }
 
         global backup_turn
@@ -126,15 +129,14 @@ def handle_dialog(request, response, user_storage):
         # Приветствие
         response.set_text(
             'Добро пожаловать в "Лас-Вегас"! Ты пришёл почувствовать себя успешным предпринимателем!'
-            'Каждый участник бросает кубик и в зависимости от выпавшего количества очков перемещает фишку по '
-            'полю. За каждый пройденный круг банк выплачивает 200$. Ваша цель – не обанкротиться. '
-            '\n Покупка недвижимости: Если '
-            'вы остановились на поле недвижимости и оно не занято другими участниками, у вас есть право на '
-            'его покупку или отказ от покупки. \n Владение недвижимостью: Владение зданием дает право '
-            'взыскивать арендную плату с человека, остановившегося на этом поле.\n «Тюрьма»: Чтобы покинуть '
-            'этот сектор, необходимо заплатить штраф в 100 $. \n Если вам не хватает средств на какие-то '
-            'обязательные выплаты, вы становитесь банкротом. \n \n Чтобы начать новую игру наберите "новая игра", '
-            'чтобы сделать свой ход наберите "бросить кубик"')
+            'Каждый участник бросает кубик и в зависимости от выпавшего количества '
+                                  'очков перемещает фишку по полю. За каждый пройденный круг банк выплачивает 200$. Ваша цель – '
+                                  'не обанкротиться. \n Если вы остановились на поле недвижимости и оно не '
+                                  'занято другими участниками, у вас есть право на его покупку или отказ от покупки. \n Владение зданием '
+                                  'дает право взыскивать арендную плату с человека, '
+                                  'остановившегося на этом поле.\n «Тюрьма»: Попав на эту ячейку, вы теряете 100$ и пропускаете ход'
+                                  '\n Если вам не хватает средств на какие-то обязательные выплаты, вы становитесь '
+                                  'банкротом. \n \n Чтобы начать игру "бросить кубик"')
         # Выходим из функции и ждем ответа
         return response, user_storage
 
@@ -147,6 +149,14 @@ def handle_dialog(request, response, user_storage):
 
         if float(user_storage["moneyA"]) < 0:
             raise WinnerError2
+
+        if user_message in BURSE:
+            response.set_text('Сейчас на бирже ' + str(user_storage["exchange"]) + ' $')
+            return response, user_storage
+
+        if user_message in BANKS:
+            response.set_text('Вклады Алисы: ' + str(user_storage["bankA"]) + ' $\n Ваши вклады ' + str(user_storage["bankU"]) + ' $')
+            return response, user_storage
 
         if int(user_storage["school"]) != 0:
             if str(user_message) == str(game.answers[int(user_storage["school"])]):
@@ -191,6 +201,13 @@ def handle_dialog(request, response, user_storage):
             user_storage["choice"] = False
             return response, user_storage
 
+        if bool(user_storage["prison1"]) and bool(user_storage["prison2"]):
+            user_storage["users_turn"] = True
+            user_storage["prison1"] = False
+            user_storage["prison2"] = False
+            response.set_text('Алиса помогла сбежать вам из тюрьмы, ходите ')
+            return response, user_storage
+
         if bool(user_storage["prison1"]):
             if not bool(user_storage["users_turn"]):
                 user_storage["users_turn"] = True
@@ -212,6 +229,24 @@ def handle_dialog(request, response, user_storage):
                 response.set_text('Ваш ход \n' + str(
                     game.fields[int(user_storage["field_cellA"])]) + '\n Вы остались на месте ')
             user_storage["go"] = False
+            return response, user_storage
+
+        if bool(user_storage["bank"]):
+            if user_message in BURSEtake:
+                user_storage["moneyU"] = float(user_storage["moneyU"]) + float(user_storage["bankU"])
+                response.set_text('Вы обналичили ' + str(user_storage["exchange"]) + ' $ ')
+                user_storage["bankU"] = 0
+
+            if user_message.isdigit():
+                if float(user_message) > float(user_storage["moneyU"]):
+                    response.set_text('Нехорошо врать, у тебя нет столько денег')
+                else:
+                    user_storage["bankU"] = user_storage["bankU"] + float(user_message)
+                    user_storage["moneyU"] = float(user_storage["moneyU"]) - float(user_message)
+                    response.set_text('Вы оставили ' + str(user_message) + ' $ в банке')
+            else:
+                response.set_text('Денюжки греют душу,когда они под рукой, не так ли?')
+            user_storage["bank"] = False
             return response, user_storage
 
         if int(user_storage["property"]) != 0:
@@ -243,10 +278,9 @@ def handle_dialog(request, response, user_storage):
                                   'не обанкротиться. \n Если вы остановились на поле недвижимости и оно не '
                                   'занято другими участниками, у вас есть право на его покупку или отказ от покупки. \n Владение зданием '
                                   'дает право взыскивать арендную плату с человека, '
-                                  'остановившегося на этом поле.\n «Тюрьма»: Чтобы покинуть этот сектор, необходимо заплатить '
-                                  'штраф в 100 $. \n Если вам не хватает средств на какие-то обязательные выплаты, вы становитесь '
-                                  'банкротом. \n \n Чтобы начать новую игру наберите "новая игра", чтобы сделать свой ход '
-                                  'наберите "бросить кубик"')
+                                  'остановившегося на этом поле.\n «Тюрьма»: Попав на эту ячейку, вы теряете 100$ и пропускаете ход'
+                                  '\n Если вам не хватает средств на какие-то обязательные выплаты, вы становитесь '
+                                  'банкротом. \n \n Чтобы начать игру "бросить кубик"')
 
             if user_message in MAP:
                 response.set_text(
@@ -280,10 +314,10 @@ def handle_dialog(request, response, user_storage):
                 if not bool(user_storage["users_turn"]):
                     if int(cube) + int(user_storage["field_cellA"]) > 40:
                         user_storage["moneyA"] = float(user_storage["moneyA"]) + 200
-                        user_storage["bankA"] = float(user_storage["bankA"]) * 1.2
+                        user_storage["bankA"] = float(user_storage["bankA"]) + float(float(user_storage["bankA"])/100*10)
                         user_storage["field_cellA"] = int(user_storage["field_cellA"]) + int(cube) - 40
 
-                    if int(cube) + int(user_storage["field_cellA"]) < 40:
+                    if int(cube) + int(user_storage["field_cellA"]) <= 40:
                         user_storage["field_cellA"] = int(user_storage["field_cellA"]) + int(cube)
 
                     if int(user_storage["field_cellA"]) == 23:
@@ -414,6 +448,37 @@ def handle_dialog(request, response, user_storage):
                                 user_storage["moneyA"] = float(user_storage["moneyA"]) - 100
                                 user_storage["exchange"] = user_storage["exchange"] + 100
 
+                    if int(user_storage["field_cellA"]) == 37:
+                        y = randint(1, 3)
+
+                        if user_storage["moneyA"] < 100 and user_storage["bankA"] == 0:
+                            y = 2
+
+                        if user_storage["bankA"] == 0:
+                            y = randint(1, 2)
+
+                        if user_storage["moneyA"] < 100:
+                            y = randint(2, 3)
+
+                        if int(y) == 2:
+                            response.set_text('Ход Алисы \n' + str(
+                                game.fields[int(user_storage["field_cellA"])]) + '\nАлиса оставила денюжки у себя')
+
+                        if int(y) == 1:
+                            money = randint(int(user_storage["moneyA"] // 5), int(user_storage["moneyA"] // 2))
+                            user_storage["bankA"] = user_storage["bankA"] + money
+                            user_storage["moneyA"] = user_storage["moneyA"] - money
+                            response.set_text('Ход Алисы \n' + str(
+                                game.fields[int(user_storage["field_cellA"])]) + '\nАлиса оставила' + str(
+                                money) + ' $ в банке')
+
+                        if int(y) == 3:
+                            user_storage["moneyA"] = float(user_storage["moneyA"]) + float(user_storage["bankA"])
+                            response.set_text('Ход Алисы \n' + str(game.fields[int(
+                                user_storage["field_cellA"])]) + '\nАлиса обналичила свой счёт в банке на сумму' + str(
+                                user_storage["bankA"]) + ' $ ')
+                            user_storage["bankA"] = 0
+
                     if int(user_storage["field_cellA"]) == 18:
                         rand = int(randint(1, 11))
                         choise = int(randint(1, 2))
@@ -447,10 +512,10 @@ def handle_dialog(request, response, user_storage):
                 if bool(user_storage["users_turn"]):
                     if int(cube) + int(user_storage["field_cellU"]) > 40:
                         user_storage["moneyU"] = float(user_storage["moneyU"]) + 200
-                        user_storage["bankU"] = float(user_storage["bankU"]) * 1.2
+                        user_storage["bankU"] = float(user_storage["bankU"]) +  float(float(user_storage["bankU"])/100*10)
                         user_storage["field_cellU"] = int(user_storage["field_cellU"]) + int(cube) - 40
 
-                    if int(cube) + int(user_storage["field_cellU"]) < 40:
+                    if int(cube) + int(user_storage["field_cellU"]) <= 40:
                         user_storage["field_cellU"] = int(user_storage["field_cellU"]) + int(cube)
 
                     if int(user_storage["field_cellU"]) == 23:
@@ -518,7 +583,8 @@ def handle_dialog(request, response, user_storage):
                         a = int(conversion(int(user_storage["field_cellU"])))
                         if int(user_storage["propertyA"][int(a)]) == 1:
                             response.set_text(str('Ваш ход \n' + str(game.fields[int(
-                                user_storage["field_cellU"])]) + ' \nВы попали на недвижимость Алисы и заплатили ' + str(
+                                user_storage[
+                                    "field_cellU"])]) + ' \nВы попали на недвижимость Алисы и заплатили ' + str(
                                 abs(int(game.price_foreign_field[int(user_storage["field_cellU"])]))) + '$\n'))
                             user_storage["moneyU"] = float(user_storage["moneyU"]) + float(
                                 game.price_foreign_field[int(user_storage["field_cellU"])])
@@ -560,6 +626,12 @@ def handle_dialog(request, response, user_storage):
                                           str(game.fields[int(
                                               user_storage["field_cellU"])]))
 
+                    if int(user_storage["field_cellU"]) == 37:
+                        user_storage["bank"] = True
+                        response.set_text('Ваш ход \n' +
+                                          str(game.fields[int(
+                                              user_storage["field_cellU"])]))
+
                     user_storage["users_turn"] = False
                     return response, user_storage
 
@@ -585,14 +657,13 @@ def end(request, response, text):
 
     response.set_text(str(text) +
                       'Давай напомню правила: Каждый участник бросает кубик и в зависимости от выпавшего количества '
-                      'очков перемещает фишку по полю. За каждый пройденный круг банк выплачивает 200$. Ваша цель – '
-                      'не обанкротиться. \n Если вы остановились на поле недвижимости и оно не '
-                      'занято другими участниками, у вас есть право на его покупку или отказ от покупки. \n Владение зданием '
-                      'дает право взыскивать арендную плату с человека, '
-                      'остановившегося на этом поле.\n «Тюрьма»: Чтобы покинуть этот сектор, необходимо заплатить '
-                      'штраф в 100 $. \n Если вам не хватает средств на какие-то обязательные выплаты, вы становитесь '
-                      'банкротом. \n \n Чтобы начать новую игру наберите "новая игра", чтобы сделать свой ход '
-                      'наберите "бросить кубик"')
+                                  'очков перемещает фишку по полю. За каждый пройденный круг банк выплачивает 200$. Ваша цель – '
+                                  'не обанкротиться. \n Если вы остановились на поле недвижимости и оно не '
+                                  'занято другими участниками, у вас есть право на его покупку или отказ от покупки. \n Владение зданием '
+                                  'дает право взыскивать арендную плату с человека, '
+                                  'остановившегося на этом поле.\n «Тюрьма»: Попав на эту ячейку, вы теряете 100$ и пропускаете ход'
+                                  '\n Если вам не хватает средств на какие-то обязательные выплаты, вы становитесь '
+                                  'банкротом. \n \n Чтобы начать игру "бросить кубик"')
 
     user_storage = {
         "propertyA": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -665,6 +736,7 @@ def conversion(a):
     if a == 40:
         a = 21
     return int(a)
+
 
 def deconversion(a):
     if a == 1:
