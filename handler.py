@@ -112,7 +112,8 @@ def handle_dialog(request, response, user_storage):
             "go": False,  # на любую ячейку
             "school": 0,  # пользователь попал на "назад в школу"
             "choice": False,
-            "prison": False
+            "prison1": False,
+            "prison2": False
         }
 
         global backup_turn
@@ -157,16 +158,17 @@ def handle_dialog(request, response, user_storage):
             text = 'Собственность Алисы '
             i = 0
             j = 0
-
             while i < 22:
-                if user_storage["propertyA"][int(i)] == 1:
+                if int(user_storage["propertyA"][int(i)]) == 1:
                     text = text + str(game.fields[int(i)])
                 i = i + 1
             text = text + 'Ваша собственность '
             while j < 22:
-                if user_storage["propertyU"][int(j)] == 1:
+                if int(user_storage["propertyU"][int(j)]) == 1:
                     text = text + str(game.fields[int(j)])
                 j = j + 1
+            response.set_text(str(text))
+            return response, user_storage
 
         if bool(user_storage["choice"]):
             if user_message in BURSEtake:
@@ -184,12 +186,14 @@ def handle_dialog(request, response, user_storage):
             user_storage["choice"] = False
             return response, user_storage
 
-        if bool(user_storage["prison"]):
-
-            if user_storage["users_turn"]:
-                user_storage["users_turn"] = False
+        if bool(user_storage["prison1"]):
             if not user_storage["users_turn"]:
                 user_storage["users_turn"] = True
+            user_storage["prison"] = False
+
+        if bool(user_storage["prison2"]):
+            if user_storage["users_turn"]:
+                user_storage["users_turn"] = False
             user_storage["prison"] = False
 
         if bool(user_storage["go"]):
@@ -294,13 +298,13 @@ def handle_dialog(request, response, user_storage):
                             'Ход Алисы \n' + str(game.fields[int(user_storage["field_cellA"])]) + str(game.fields[11]))
                         user_storage["moneyA"] = float(user_storage["moneyA"]) + 100
                         user_storage["field_cellA"] = 11
-                        user_storage["prison"] = True
+                        user_storage["prison1"] = True
 
                     if int(user_storage["field_cellA"]) == 11:
                         user_storage["moneyA"] = float(user_storage["moneyA"]) + float(
                             game.price_field[int(user_storage["field_cellA"])])
                         response.set_text('Ход Алисы \n' + str(game.fields[int(user_storage["field_cellA"])]))
-                        user_storage["prison"] = True
+                        user_storage["prison1"] = True
 
                     if int(user_storage["field_cellA"]) == 6:
                         response.set_text(str('Ход Алисы \n' + str(game.fields[int(user_storage["field_cellA"])])))
@@ -477,12 +481,14 @@ def handle_dialog(request, response, user_storage):
                             'Ваш ход \n' + str(game.fields[int(user_storage["field_cellU"])]) + str(game.fields[11]))
                         user_storage["moneyU"] = float(user_storage["moneyU"]) + 100
                         user_storage["field_cellU"] = 11
+                        user_storage["prison2"] = True
+
 
                     if int(user_storage["field_cellU"]) == 11:
                         user_storage["moneyU"] = float(user_storage["moneyU"]) + float(
                             game.price_field[int(user_storage["field_cellU"])])
                         response.set_text('Ваш ход \n' + str(game.fields[int(user_storage["field_cellU"])]))
-
+                        user_storage["prison2"] = True
 
                     if int(user_storage["field_cellU"]) == 6:
                         response.set_text('Ваш ход \n' + str(game.fields[int(user_storage["field_cellU"])]))
@@ -606,7 +612,9 @@ def end(request, response, text):
         "property": 0,
         "go": False,
         "school": 0,
-        "choice": False
+        "choice": False,
+        "prison1": False,
+        "prison2": False
     }
 
     return user_storage
