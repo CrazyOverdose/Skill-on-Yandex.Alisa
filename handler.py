@@ -206,7 +206,7 @@ def handle_dialog(request, response, user_storage):
                 j = 0
                 flag = 0
                 while j < 22:
-                    if int(user_storage["propertyA"][int(j)]) == 1:
+                    if int(user_storage["propertyU"][int(j)]) == 1:
                         flag = j
                         break
                     j = j+1
@@ -849,9 +849,9 @@ def deconversion(a):
 
 def realty(user_storage):
     flag = 0
-    if user_storage["users_turn"]:
+    if not user_storage["users_turn"]:
         i = 0
         while i < 22:
-            if int(user_storage["propertyU"][int(i)]) == 1:
+            if int(user_storage["propertyA"][int(i)]) == 1:
                 flag = i
                 return flag
