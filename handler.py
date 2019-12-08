@@ -190,47 +190,51 @@ def handle_dialog(request, response, user_storage):
                 '38 - Национальный парк "Долина смерти"\n 39 - Потеря\n'
                 '40 - Сансет Парк')
 
-        if float(user_storage["moneyA"]) <= 0:
-            if int(realty(user_storage)) != 0:
-                i = int(deconversion(int(realty(user_storage))))
-                response.set_text('Алиса продала свою недвижимость ' + str(game.fields[int(i)]))
-                user_storage["moneyA"] = float(user_storage["moneyA"]) - float(game.price_field[int(i)] // 2)
-                user_storage["propertyA"][int(realty(user_storage))] = 0
-                return response, user_storage
-
-        if float(user_storage["moneyU"]) <= 0:
-            if int(realty(user_storage)) != 0:
-                if not bool(user_storage["crash"]):
-                    response.set_text(
-                        'Вы находитесь на грани банкротства, скажите, какую недвижимость хотите пролдать? ')
-                    user_storage["crash"] = True
+        if not bool(user_message["users_turn"]):
+            if float(user_storage["moneyA"]) <= 0:
+                if int(realty(user_storage)) != 0:
+                    i = int(deconversion(int(realty(user_storage))))
+                    response.set_text('Алиса продала свою недвижимость ' + str(game.fields[int(i)]))
+                    user_storage["moneyA"] = float(user_storage["moneyA"]) - float(game.price_field[int(i)] // 2)
+                    user_storage["propertyA"][int(realty(user_storage))] = 0
+                    user_message["users_turn"] = True
                     return response, user_storage
-                if bool(user_storage["crash"]):
-                    if user_message.isdigit():
-                        if int(user_message) == 2 or int(user_message) == 4 or int(user_message) == 5 or int(
-                                user_message) == 7 or int(user_message) == 9 or int(user_message) == 10 or int(
-                            user_message) == 12 or int(user_message) == 14 or int(user_message) == 15 or int(
-                            user_message) == 17 or int(user_message) == 19 or int(user_message) == 20 or int(
-                            user_message) == 22 or int(user_message) == 24 or int(user_message) == 25 or int(
-                            user_message) == 27 or int(user_message) == 28 or int(user_message) == 30 or int(
-                            user_message) == 32 or int(user_message) == 33 or int(user_message) == 35 or int(
-                            user_message) == 38 or int(user_message) == 40:
-                            if int(user_storage["propertyU"][int(conversion(int(user_message)))]) == 1:
-                                response.set_text('Вы продали свою недвижимость ' + str(game.fields[int(user_message)]))
-                                user_storage["moneyU"] = float(user_storage["moneyU"]) - float(
-                                    game.price_field[int(user_message)] // 2)
-                                user_storage["propertyU"][int(conversion(int(user_message)))] = 0
-                                user_storage["crash"] = False
-                                return response, user_storage
+
+        if bool(user_message["users_turn"]):
+            if float(user_storage["moneyU"]) <= 0:
+                if int(realty(user_storage)) != 0:
+                    if not bool(user_storage["crash"]):
+                        response.set_text(
+                            'Вы находитесь на грани банкротства, скажите, какую недвижимость хотите пролдать? ')
+                        user_storage["crash"] = True
+                        return response, user_storage
+                    if bool(user_storage["crash"]):
+                        if user_message.isdigit():
+                            if int(user_message) == 2 or int(user_message) == 4 or int(user_message) == 5 or int(
+                                    user_message) == 7 or int(user_message) == 9 or int(user_message) == 10 or int(
+                                user_message) == 12 or int(user_message) == 14 or int(user_message) == 15 or int(
+                                user_message) == 17 or int(user_message) == 19 or int(user_message) == 20 or int(
+                                user_message) == 22 or int(user_message) == 24 or int(user_message) == 25 or int(
+                                user_message) == 27 or int(user_message) == 28 or int(user_message) == 30 or int(
+                                user_message) == 32 or int(user_message) == 33 or int(user_message) == 35 or int(
+                                user_message) == 38 or int(user_message) == 40:
+                                if int(user_storage["propertyU"][int(conversion(int(user_message)))]) == 1:
+                                    response.set_text('Вы продали свою недвижимость ' + str(game.fields[int(user_message)]))
+                                    user_storage["moneyU"] = float(user_storage["moneyU"]) - float(
+                                        game.price_field[int(user_message)] // 2)
+                                    user_storage["propertyU"][int(conversion(int(user_message)))] = 0
+                                    user_storage["crash"] = False
+                                    user_message["users_turn"] = False
+                                    return response, user_storage
+                                else:
+                                    response.set_text('Вы не владеете данным имуществом')
+                                    return response, user_storage
                             else:
-                                response.set_text('Вы не владеете данным имуществом')
+                                response.set_text('Зачем вы ввели номер несуществующей ячейки недвижимости?')
                                 return response, user_storage
                         else:
-                            response.set_text('Зачем вы ввели номер несуществующей ячейки недвижимости?')
+                            response.set_text('Вы не ввели номер ячейки недвижимости')
                             return response, user_storage
-                    else:
-                        response.set_text('Вы не ввели номер ячейки недвижимости')
-                        return response, user_storage
 
         if float(user_storage["moneyU"]) < 0:
             raise WinnerError1
