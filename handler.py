@@ -193,13 +193,13 @@ def handle_dialog(request, response, user_storage):
 
         if not bool(user_message["users_turn"]):
             if float(user_storage["moneyA"]) <= 0:
-                if int(realty(user_storage)) != 0:
-                    i = int(deconversion(int(realty(user_storage))))
-                    response.set_text('Алиса продала свою недвижимость ' + str(game.fields[int(i)]))
-                    user_storage["moneyA"] = float(user_storage["moneyA"]) - float(game.price_field[int(i)] // 2)
-                    user_storage["propertyA"][int(realty(user_storage))] = 0
-                    user_message["users_turn"] = True
-                    return response, user_storage
+               # if int(realty(user_storage)) != 0:
+                #    i = int(deconversion(int(realty(user_storage))))
+                response.set_text('Алиса продала свою недвижимость ' + str(game.fields[int(23)]))
+                 #   user_storage["moneyA"] = float(user_storage["moneyA"]) - float(game.price_field[int(i)] // 2)
+                  #  user_storage["propertyA"][int(realty(user_storage))] = 0
+                   # user_message["users_turn"] = True
+                return response, user_storage
 
         if bool(user_message["users_turn"]):
             if float(user_storage["moneyU"]) <= 0:
