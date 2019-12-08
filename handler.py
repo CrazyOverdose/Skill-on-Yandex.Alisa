@@ -193,11 +193,18 @@ def handle_dialog(request, response, user_storage):
 
         if not bool(user_storage["users_turn"]):
             if float(user_storage["moneyA"]) <= 0:
-                if int(realty(user_storage)) != 0:
-                    i = int(deconversion(int(realty(user_storage))))
+                flag = 0
+                i = 0
+                while i < 22:
+                    if int(user_storage["propertyA"][int(i)]) == 1:
+                        flag = i
+                        break
+                    i = i+1
+                if int(flag) != 0:
+                    i = int(deconversion(int(flag)))
                     response.set_text('Алиса продала свою недвижимость ' + str(game.fields[int(i)]))
                     user_storage["moneyA"] = float(user_storage["moneyA"]) - float(game.price_field[int(i)] // 2)
-                    user_storage["propertyA"][int(realty(user_storage))] = 0
+                    user_storage["propertyA"][int(flag)] = 0
                     user_storage["users_turn"] = True
                     return response, user_storage
 
@@ -846,12 +853,3 @@ def deconversion(a):
         a = 40
     return int(a)
 
-
-def realty(user_storage):
-    flag = 0
-    if not user_storage["users_turn"]:
-        i = 0
-        while i < 22:
-            if int(user_storage["propertyA"][int(i)]) == 1:
-                flag = i
-                return flag
