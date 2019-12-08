@@ -78,8 +78,6 @@ RULES = ['правила', 'какиграть', 'описание', 'описа
 
 MAP = ['ячейки', 'карта', 'поле', 'описаниеячеек']
 
-OWN = ['моясобственность', 'мое', 'активы', 'собственность', 'недвижимость']
-
 ALL_WORDS = WORDS + ENDING_WORDS + MONEY + FIELD + PLACE + RULES + MAP
 
 
@@ -100,8 +98,8 @@ def handle_dialog(request, response, user_storage):
             # имущество пользователя
             "moneyU": 200,  # Деньги Пользователя
             "moneyA": 200,  # Деньги Алисы
-            "field_cellA": 11,  # Клетка, на которой находится Алиса
-            "field_cellU": 30,  # Клетка, на которой находится пользователь
+            "field_cellA": 1,  # Клетка, на которой находится Алиса
+            "field_cellU": 1,  # Клетка, на которой находится пользователь
             "bankU": 0,  # вклады пользователя (ячейка поля 37)
             "bankA": 0,  # вклады алисы (ячейка поля 37)
             "exchange": 0,  # биржа (ячейка поля 13)
@@ -111,8 +109,6 @@ def handle_dialog(request, response, user_storage):
             "property": 0,  # пользователь попал на ячейку недвижимости
             "go": False,  # на любую ячейку
             "school": 0,  # пользователь попал на "назад в школу"
-            "prison": False  # тюрьма - пропуск хода
-
         }
 
         global backup_turn
@@ -152,13 +148,6 @@ def handle_dialog(request, response, user_storage):
                 response.set_text('Неправильный ответ')
             user_storage["school"] = 0
             return response, user_storage
-
-        if bool(user_storage["prison"]):
-            if bool(user_storage["users_turn"]):
-                user_storage["users_turn"] = False
-            if not bool(user_storage["users_turn"]):
-                user_storage["users_turn"] = True
-            user_storage["prison"] = False
 
         if bool(user_storage["choice"]):
             if user_message in BURSEtake:
@@ -461,13 +450,12 @@ def handle_dialog(request, response, user_storage):
                             'Ваш ход \n' + str(game.fields[int(user_storage["field_cellU"])]) + str(game.fields[11]))
                         user_storage["moneyU"] = float(user_storage["moneyU"]) + 100
                         user_storage["field_cellU"] = 11
-                        user_storage["prison"] = True
 
                     if int(user_storage["field_cellU"]) == 11:
                         user_storage["moneyU"] = float(user_storage["moneyU"]) + float(
                             game.price_field[int(user_storage["field_cellU"])])
                         response.set_text('Ваш ход \n' + str(game.fields[int(user_storage["field_cellU"])]))
-                        user_storage["prison"] = True
+
 
                     if int(user_storage["field_cellU"]) == 6:
                         response.set_text('Ваш ход \n' + str(game.fields[int(user_storage["field_cellU"])]))
@@ -610,6 +598,7 @@ def chances(user_storage, game):
 # Начало новой игры
 def end(request, response, text):
     game = las_vegas()
+    random.seed()
 
     response.set_text(str(text) +
                       'Давай напомню правила: Каждый участник бросает кубик и в зависимости от выпавшего количества '
@@ -630,8 +619,8 @@ def end(request, response, text):
         # имущество пользователя
         "moneyU": 200,  # Деньги Пользователя
         "moneyA": 200,  # Деньги Алисы
-        "field_cellA": 30,  # Клетка, на которой находится Алиса
-        "field_cellU": 31,  # Клетка, на которой находится пользователь
+        "field_cellA": 1,  # Клетка, на которой находится Алиса
+        "field_cellU": 1,  # Клетка, на которой находится пользователь
         "bankU": 0,  # вклады пользователя (ячейка поля 37)
         "bankA": 0,  # вклады алисы (ячейка поля 37)
         "exchange": 0,  # биржа (ячейка поля 13)
