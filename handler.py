@@ -29,7 +29,8 @@ class las_vegas:
               '\nРанчо "Casa de Shenandoah" Цена: 5$\n', '\nОтправляйтесь на 2 ячейки назад\n',
               '\nБрат за брата. Отдайте второму игроку 50$\n',
               '\nПлотина Гувера Цена: 10$\n', '\nКакая жалость...у вас сломался холодильник -50$\n',
-              '\nУлица Фримонт-стрит Цена: 10$\n', '\nАллея Лас-Вегас Цена: 10$\n', '\nТюрьма. Вы пропускаете ход и теряете 100$\n',
+              '\nУлица Фримонт-стрит Цена: 10$\n', '\nАллея Лас-Вегас Цена: 10$\n',
+              '\nТюрьма. Вы пропускаете ход и теряете 100$\n',
               '\nПарка развлечений "Adventuredome" Цена: 15$\n',
               '\nБиржа. Если она пуста, то должен оставить 100$, если нет,то вправе забрать в 1.5 раза больше, чем на ней '
               'есть или оставить еще 100\n',
@@ -43,12 +44,14 @@ class las_vegas:
               '\nОтель-казино "Париж Лас-Вегас" Цена: 25$\n', '\nОтель-казино "Венецианский Лас-Вегас Цена: 25$"\n',
               '\nМотель. Вы остановились переночевать в мотеле. Заплатите 50$\n', '\nОтель-казино "Wynn" Цена: 30$\n',
               '\nРазвлекательный комплекс "Сизарс-Пэлас" Цена: 30$\n',
-              '\nЛотерея. Да вы везунчик, заберите свои законные 95$\n', '\nОтель-казино "Стратосфера Лас-Вегас" Цена: 30$\n',
+              '\nЛотерея. Да вы везунчик, заберите свои законные 95$\n',
+              '\nОтель-казино "Стратосфера Лас-Вегас" Цена: 30$\n',
               '\nОтправляйтесь в тюрьму\n', '\nЧасовня цветов Цена: 35$\n', '\nМузей мадам Тюссо Цена: 35$\n',
               '\nВыберете любую ячейку, на которую отправитесь. Действие этой ячейки на вас не распространиться\n',
               '\nРед-Рок-Каньон Цена: 35$\n', '\nОтправляйтесь на 3 ячейки вперед \n',
               '\nБанк. Вы можете положить деньги (каждый круг +150$) (скажите, сколько денег хотите положить), забрать ранее вложенные деньги (с процентами) Для этого скажите "забрать"\n',
-              '\nНациональный парк "Долина смерти" Цена: 40$\n', '\nВы такой невнимательный! КАк умудрились потерять 50$?\n',
+              '\nНациональный парк "Долина смерти" Цена: 40$\n',
+              '\nВы такой невнимательный! КАк умудрились потерять 50$?\n',
               '\nСансет Парк Цена: 40$\n']
 
     price_field = [0, 200, -5, 100, -5, 0, -50, -10, -50, -10, -10, -200, -15, 0, -15, -15, 0, -20, 0, -20, -20, 0, -25,
@@ -78,7 +81,7 @@ RULES = ['правила', 'какиграть', 'описание', 'описа
 
 MAP = ['ячейки', 'карта', 'поле', 'описаниеячеек']
 
-OWN = ['недвижимость', 'моянедвижимость','собственность','мое','моясобственность']
+OWN = ['недвижимость', 'моянедвижимость', 'собственность', 'мое', 'моясобственность']
 
 ALL_WORDS = WORDS + ENDING_WORDS + MONEY + FIELD + PLACE + RULES + MAP + OWN
 
@@ -155,14 +158,14 @@ def handle_dialog(request, response, user_storage):
             return response, user_storage
 
         if user_message in OWN:
-            text = 'Собственность Алисы '
+            text = 'Собственность Алисы: '
             i = 0
             j = 0
             while i < 22:
                 if int(user_storage["propertyA"][int(i)]) == 1:
                     text = text + str(game.fields[int(i)])
                 i = i + 1
-            text = text + '\nВаша собственность '
+            text = text + '\nВаша собственность: '
             while j < 22:
                 if int(user_storage["propertyU"][int(j)]) == 1:
                     text = text + str(game.fields[int(j)])
@@ -189,12 +192,12 @@ def handle_dialog(request, response, user_storage):
         if bool(user_storage["prison1"]):
             if not bool(user_storage["users_turn"]):
                 user_storage["users_turn"] = True
-            user_storage["prison1"] = False
+                user_storage["prison1"] = False
 
         if bool(user_storage["prison2"]):
             if bool(user_storage["users_turn"]):
                 user_storage["users_turn"] = False
-            user_storage["prison2"] = False
+                user_storage["prison2"] = False
 
         if bool(user_storage["go"]):
             if user_message.isdigit():
@@ -351,9 +354,13 @@ def handle_dialog(request, response, user_storage):
                             b = 2
 
                         if int(user_storage["propertyU"][a]) == 1:
-                            response.set_text('Ход Алисы \n' +'Алиса попала на ваш участок: ' + str(game.fields[int(user_storage["field_cellA"])]) + 'и заплатила' + str(game.price_foreign_field[int(user_storage["field_cellA"])]))
-                            user_storage["moneyA"] = float(user_storage["moneyA"]) + float(game.price_foreign_field[int(user_storage["field_cellA"])])
-                            user_storage["moneyU"] = float(user_storage["moneyU"]) - float(game.price_foreign_field[int(user_storage["field_cellA"])])
+                            response.set_text('Ход Алисы \n' + 'Алиса попала на ваш участок: ' + str(
+                                game.fields[int(user_storage["field_cellA"])]) + 'и заплатила' + str(
+                                abs(int(game.price_foreign_field[int(user_storage["field_cellA"])]))) + '$\n')
+                            user_storage["moneyA"] = float(user_storage["moneyA"]) + float(
+                                game.price_foreign_field[int(user_storage["field_cellA"])])
+                            user_storage["moneyU"] = float(user_storage["moneyU"]) - float(
+                                game.price_foreign_field[int(user_storage["field_cellA"])])
 
                         if int(user_storage["propertyA"][a]) == 1:
                             response.set_text('Ход Алисы \n' +
@@ -362,7 +369,8 @@ def handle_dialog(request, response, user_storage):
 
                         if int(user_storage["propertyA"][a]) == 0 and int(user_storage["propertyU"][a]) == 0:
                             if b == 1:
-                                response.set_text('Ход Алисы \n' + str(game.fields[int(user_storage["field_cellA"])]) + ' и решила купить')
+                                response.set_text('Ход Алисы \n' + str(
+                                    game.fields[int(user_storage["field_cellA"])]) + ' и решила купить')
                                 user_storage["moneyA"] = float(user_storage["moneyA"]) + float(
                                     game.price_field[int(user_storage["field_cellA"])])
                                 user_storage["propertyA"][a] = 1
@@ -478,7 +486,6 @@ def handle_dialog(request, response, user_storage):
                         user_storage["field_cellU"] = 11
                         user_storage["prison2"] = True
 
-
                     if int(user_storage["field_cellU"]) == 11:
                         user_storage["moneyU"] = float(user_storage["moneyU"]) + float(
                             game.price_field[int(user_storage["field_cellU"])])
@@ -508,9 +515,13 @@ def handle_dialog(request, response, user_storage):
 
                         a = int(conversion(int(user_storage["field_cellU"])))
                         if int(user_storage["propertyA"][int(a)]) == 1:
-                            response.set_text(str('Ваш ход \n' + str(game.fields[int(user_storage["field_cellU"])]) + ' \nВы попали на недвижимость Алисы и заплатили' + str(game.price_foreign_field[int(user_storage["field_cellU"])] + '$\n')))
-                            user_storage["moneyU"] = float(user_storage["moneyU"]) + float(game.price_foreign_field[int(user_storage["field_cellU"])])
-                            user_storage["moneyA"] = float(user_storage["moneyA"]) - float(game.price_foreign_field[int(user_storage["field_cellU"])])
+                            response.set_text(str('Ваш ход \n' + str(game.fields[int(
+                                user_storage["field_cellU"])]) + ' \nВы попали на недвижимость Алисы и заплатили' + str(
+                                abs(int(game.price_foreign_field[int(user_storage["field_cellU"])]))) + '$\n'))
+                            user_storage["moneyU"] = float(user_storage["moneyU"]) + float(
+                                game.price_foreign_field[int(user_storage["field_cellU"])])
+                            user_storage["moneyA"] = float(user_storage["moneyA"]) - float(
+                                game.price_foreign_field[int(user_storage["field_cellU"])])
 
                         if int(user_storage["propertyU"][int(a)]) == 1:
                             response.set_text(
