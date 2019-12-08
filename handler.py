@@ -163,27 +163,50 @@ def handle_dialog(request, response, user_storage):
             response.set_text(str(text))
             return response, user_storage
 
+        if user_message in MAP:
+            response.set_text(
+                '1 - Cтарт\n2 - Колесо обозрения "High Roller"\n3 - Лучший предприниматель\n'
+                '4 - Ранчо "Casa de Shenandoah"\n5 - Идите на 2 ячейки назад\n6 - Брат за брата\n'
+                '7 - Плотина Гувера\n 8 - Сломанный холодильник\n'
+                '9 - Улица Фримонт-стрит\n 10 - Аллея Лас-Вегас\n 11 - Тюрьма'
+                '\n 12 - Парка развлечений "Adventuredome"\n'
+                '13 - Биржа\n'
+                '14 - Музей Shelby American\n 15 - Музей атомных испытаний\n 16 - Отправляйтесь на биржу \n'
+                '17 - Музей Моб\n '
+                '18 - Назад в будущее\n'
+                '19 - Отель-Казино "Белладжио"\n20 - Музей Неона\n  21 - Бесплатный ночлег\n'
+                '22 - Развлекательный комплекс "Луксор Лас-Вегас"\n 23 - Отправляйтесь на начало\n'
+                '24 - Отель-казино "Париж Лас-Вегас"\n25 - Отель-казино "Венецианский Лас-Вегас"\n'
+                '26 - Мотель\n 27 - Отель-казино "Wynn"\n'
+                '28 - Развлекательный комплекс "Сизарс-Пэлас"\n'
+                '29 - Лотерея\n 30 - Отель-казино "Стратосфера Лас-Вегас"\n'
+                '31 - Отправляйтесь в тюрьму\n 32 - Часовня цветов\n 33 - Музей мадам Тюссо\n'
+                '34 - Любая ячейка.\n'
+                '35 - Ред-Рок-Каньон\n 36 - Идите на 3 ячейки вперед \n'
+                '37 - Банк\n'
+                '38 - Национальный парк "Долина смерти"\n 39 - Потеря\n'
+                '40 - Сансет Парк')
+
         if float(user_storage["moneyA"]) <= 0:
             if int(realty(user_storage)) != 0:
                 i = int(deconversion(int(realty(user_storage))))
                 response.set_text('Алиса продала свою недвижимость ' + str(game.fields[int(i)]))
-                user_storage["moneyA"] = user_storage["moneyA"] - float(game.price_field[int(i)]//2)
+                user_storage["moneyA"] = float(user_storage["moneyA"]) - float(game.price_field[int(i)]//2)
                 user_storage["propertyA"][int(realty(user_storage))] = 0
                 return response, user_storage
 
         if float(user_storage["moneyU"]) <= 0:
             if int(realty(user_storage)) != 0:
-                if not user_storage["crash"]:
+                if not bool(user_storage["crash"]):
                     response.set_text('Вы находитесь на грани банкротства, скажите, какую недвижимость хотите пролдать? ')
                     user_storage["crash"] = True
                     return response, user_storage
-                if user_storage["crash"]:
+                if bool(user_storage["crash"]):
                     if user_message.isdigit():
                         if int(user_message) == 2 or int(user_message) == 4 or int(user_message) == 5 or int(user_message) == 7 or int(user_message) == 9 or int(user_message) == 10 or int(user_message) == 12 or int(user_message) == 14 or int(user_message) == 15 or int(user_message) == 17 or int(user_message) == 19 or int(user_message) == 20 or int(user_message) == 22 or int(user_message) == 24 or int(user_message) == 25 or int(user_message) == 27 or int(user_message) == 28 or int(user_message) == 30 or int(user_message) == 32 or int(user_message) == 33 or int(user_message) == 35 or int(user_message) == 38 or int(user_message)== 40:
-
-                            if user_storage["propertyU"][int(conversion(int(user_message)))] == 1:
+                            if int(user_storage["propertyU"][int(conversion(int(user_message)))]) == 1:
                                 response.set_text('Вы продали свою недвижимость ' + str(game.fields[int(user_message)]))
-                                user_storage["moneyU"] = user_storage["moneyU"] - float(game.price_field[int(user_message)] // 2)
+                                user_storage["moneyU"] = float(user_storage["moneyU"]) - float(game.price_field[int(user_message)] // 2)
                                 user_storage["propertyA"][int(conversion(int(user_message)))] = 0
                                 user_storage["crash"] = False
                                 return response, user_storage
@@ -317,30 +340,6 @@ def handle_dialog(request, response, user_storage):
                                   'остановившегося на этом поле.\n «Тюрьма»: Попав на эту ячейку, вы теряете 100$ и пропускаете ход'
                                   '\n Если вам не хватает средств на какие-то обязательные выплаты, вы становитесь '
                                   'банкротом. \n \n Чтобы начать игру "бросить кубик"')
-
-            if user_message in MAP:
-                response.set_text(
-                    '1 - Cтарт\n2 - Колесо обозрения "High Roller"\n3 - Лучший предприниматель\n'
-                    '4 - Ранчо "Casa de Shenandoah"\n5 - Идите на 2 ячейки назад\n6 - Брат за брата\n'
-                    '7 - Плотина Гувера\n 8 - Сломанный холодильник\n'
-                    '9 - Улица Фримонт-стрит\n 10 - Аллея Лас-Вегас\n 11 - Тюрьма'
-                    '\n 12 - Парка развлечений "Adventuredome"\n'
-                    '13 - Биржа\n'
-                    '14 - Музей Shelby American\n 15 - Музей атомных испытаний\n 16 - Отправляйтесь на биржу \n'
-                    '17 - Музей Моб\n '
-                    '18 - Назад в будущее\n'
-                    '19 - Отель-Казино "Белладжио"\n20 - Музей Неона\n  21 - Бесплатный ночлег\n'
-                    '22 - Развлекательный комплекс "Луксор Лас-Вегас"\n 23 - Отправляйтесь на начало\n'
-                    '24 - Отель-казино "Париж Лас-Вегас"\n25 - Отель-казино "Венецианский Лас-Вегас"\n'
-                    '26 - Мотель\n 27 - Отель-казино "Wynn"\n'
-                    '28 - Развлекательный комплекс "Сизарс-Пэлас"\n'
-                    '29 - Лотерея\n 30 - Отель-казино "Стратосфера Лас-Вегас"\n'
-                    '31 - Отправляйтесь в тюрьму\n 32 - Часовня цветов\n 33 - Музей мадам Тюссо\n'
-                    '34 - Любая ячейка.\n'
-                    '35 - Ред-Рок-Каньон\n 36 - Идите на 3 ячейки вперед \n'
-                    '37 - Банк\n'
-                    '38 - Национальный парк "Долина смерти"\n 39 - Потеря\n'
-                    '40 - Сансет Парк')
 
             if user_message in MONEY:
                 response.set_text(
@@ -826,12 +825,12 @@ def realty(user_storage):
     if user_storage["users_turn"]:
         i = 0
         while i < 22:
-            if int(user_storage["propertyA"][int(i)]) == 1:
+            if int(user_storage["propertyU"][int(i)]) == 1:
                flag = i
     if not user_storage["users_turn"]:
         j = 0
         while j < 22:
-            if int(user_storage["propertyU"][int(j)]) == 1:
+            if int(user_storage["propertyA"][int(j)]) == 1:
                 flag = j
             j = j + 1
 
