@@ -198,7 +198,7 @@ def handle_dialog(request, response, user_storage):
                     response.set_text('Алиса продала свою недвижимость ' + str(game.fields[int(i)]))
                     user_storage["moneyA"] = float(user_storage["moneyA"]) - float(game.price_field[int(i)] // 2)
                     user_storage["propertyA"][int(realty(user_storage))] = 0
-                    user_message["users_turn"] = True
+                    user_storage["users_turn"] = True
                     return response, user_storage
 
         if bool(user_storage["users_turn"]):
@@ -225,7 +225,7 @@ def handle_dialog(request, response, user_storage):
                                         game.price_field[int(user_message)] // 2)
                                     user_storage["propertyU"][int(conversion(int(user_message)))] = 0
                                     user_storage["crash"] = False
-                                    user_message["users_turn"] = False
+                                    user_storage["users_turn"] = False
                                     return response, user_storage
                                 else:
                                     response.set_text('Вы не владеете данным имуществом')
