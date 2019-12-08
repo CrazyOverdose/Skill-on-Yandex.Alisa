@@ -53,7 +53,7 @@ class las_vegas:
               '\nРед-Рок-Каньон Цена: 35$\n', '\nОтправляйтесь на 3 ячейки вперед \n',
               '\nБанк. Вы можете положить деньги под 10% за круг (скажите, сколько денег хотите положить), забрать ранее вложенные деньги (с процентами) Для этого скажите "забрать"\n',
               '\nНациональный парк "Долина смерти" Цена: 40$\n',
-              '\nВы такой невнимательный! КАк умудрились потерять 50$?\n',
+              '\nВы такой невнимательный! Как умудрились потерять 50$?\n',
               '\nСансет Парк Цена: 40$\n']
 
     price_field = [0, 200, -5, 100, -5, 0, -50, -10, -50, -10, -10, -200, -15, 0, -15, -15, 0, -20, 0, -20, -20, 0, -25,
@@ -196,6 +196,40 @@ def handle_dialog(request, response, user_storage):
                 '40 - Сансет Парк')
             return response, user_storage
 
+
+        if user_message in BURSE:
+            response.set_text('Сейчас на бирже ' + str(user_storage["exchange"]) + ' $')
+            return response, user_storage
+
+        if user_message in BANKS:
+            response.set_text(
+                'Вклады Алисы: ' + str(user_storage["bankA"]) + ' $\n Ваши вклады ' + str(user_storage["bankU"]) + ' $')
+            return response, user_storage
+
+        if user_message in PLACE:
+            response.set_text('Вы находитесь на ' + str(user_storage["field_cellU"]) + ' ячейке \n Алиса на ' + str(
+                user_storage["field_cellA"]))
+            return response, user_storage
+
+            # Проверка наличия слова в словах о начале игры
+        if user_message in ENDING_WORDS:
+            text = ''
+            user_storage = end(request, response, text)
+
+        if user_message in RULES:
+            response.set_text('Каждый участник бросает кубик и в зависимости от выпавшего количества '
+                              'очков перемещает фишку по полю. За каждый пройденный круг банк выплачивает 200$. '
+                              'Ваша цель – '
+                              'не обанкротиться. \n Если вы остановились на поле недвижимости и оно не '
+                              'занято другими участниками, у вас есть право на его покупку или отказ от покупки. '
+                              '\n Владение зданием '
+                              'дает право взыскивать арендную плату с человека, '
+                              'остановившегося на этом поле.\n «Тюрьма»: Попав на эту ячейку, вы теряете 100$ и '
+                              'пропускаете ход '
+                              '\n Если вам не хватает средств на какие-то обязательные выплаты, вы становитесь '
+                              'банкротом. \n \n Чтобы начать игру "бросить кубик"')
+            return response, user_storage
+
         if not bool(user_storage["users_turn"]):
             if float(user_storage["moneyA"]) <= 0:
                 flag = 0
@@ -262,15 +296,6 @@ def handle_dialog(request, response, user_storage):
         if float(user_storage["moneyA"]) < 0:
             raise WinnerError2
 
-        if user_message in BURSE:
-            response.set_text('Сейчас на бирже ' + str(user_storage["exchange"]) + ' $')
-            return response, user_storage
-
-        if user_message in BANKS:
-            response.set_text(
-                'Вклады Алисы: ' + str(user_storage["bankA"]) + ' $\n Ваши вклады ' + str(user_storage["bankU"]) + ' $')
-            return response, user_storage
-
         if int(user_storage["school"]) != 0:
             if str(user_message) == str(game.answers[int(user_storage["school"])]):
                 response.set_text('Правильный ответ')
@@ -283,7 +308,7 @@ def handle_dialog(request, response, user_storage):
         if bool(user_storage["choice"]):
             if user_message in BURSEtake:
                 user_storage["moneyU"] = float(user_storage["moneyU"]) + float(user_storage["exchange"]) * 1.5
-                response.set_text('Вы взяли ' + str(user_storage["exchange"]) + ' $ с биржи')
+                response.set_text('Вы взяли ' + str(float(user_storage["exchange"])*1.5) + ' $ с биржи')
                 user_storage["exchange"] = 0
 
             if user_message in BURSEgive:
@@ -357,30 +382,6 @@ def handle_dialog(request, response, user_storage):
 
         if user_message in ALL_WORDS:
             cube = randint(2, 12)
-
-            if user_message in PLACE:
-                response.set_text('Вы находитесь на ' + str(user_storage["field_cellU"]) + ' ячейке \n Алиса на ' + str(
-                    user_storage["field_cellA"]))
-                return response, user_storage
-
-                # Проверка наличия слова в словах о начале игры
-            if user_message in ENDING_WORDS:
-                text = ''
-                user_storage = end(request, response, text)
-
-            if user_message in RULES:
-                response.set_text('Каждый участник бросает кубик и в зависимости от выпавшего количества '
-                                  'очков перемещает фишку по полю. За каждый пройденный круг банк выплачивает 200$. '
-                                  'Ваша цель – '
-                                  'не обанкротиться. \n Если вы остановились на поле недвижимости и оно не '
-                                  'занято другими участниками, у вас есть право на его покупку или отказ от покупки. '
-                                  '\n Владение зданием '
-                                  'дает право взыскивать арендную плату с человека, '
-                                  'остановившегося на этом поле.\n «Тюрьма»: Попав на эту ячейку, вы теряете 100$ и '
-                                  'пропускаете ход '
-                                  '\n Если вам не хватает средств на какие-то обязательные выплаты, вы становитесь '
-                                  'банкротом. \n \n Чтобы начать игру "бросить кубик"')
-                return response, user_storage
 
             if user_message in WORDS:
                 if not bool(user_storage["users_turn"]):
