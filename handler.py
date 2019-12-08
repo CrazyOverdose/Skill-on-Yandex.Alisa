@@ -187,12 +187,12 @@ def handle_dialog(request, response, user_storage):
             return response, user_storage
 
         if bool(user_storage["prison1"]):
-            if not user_storage["users_turn"]:
+            if not bool(user_storage["users_turn"]):
                 user_storage["users_turn"] = True
             user_storage["prison1"] = False
 
         if bool(user_storage["prison2"]):
-            if user_storage["users_turn"]:
+            if bool(user_storage["users_turn"]):
                 user_storage["users_turn"] = False
             user_storage["prison2"] = False
 
@@ -587,8 +587,8 @@ def end(request, response, text):
         "propertyU": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                       0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         # имущество пользователя
-        "moneyU": 28,  # Деньги Пользователя
-        "moneyA": 31,  # Деньги Алисы
+        "moneyU": 200,  # Деньги Пользователя
+        "moneyA": 200,  # Деньги Алисы
         "field_cellA": 28,  # Клетка, на которой находится Алиса
         "field_cellU": 28,  # Клетка, на которой находится пользователь
         "bankU": 0,  # вклады пользователя (ячейка поля 37)
