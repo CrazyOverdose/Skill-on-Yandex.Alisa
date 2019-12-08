@@ -80,7 +80,7 @@ MAP = ['ячейки', 'карта', 'поле', 'описаниеячеек']
 
 OWN = ['моясобственность', 'мое', 'активы', 'собственность', 'недвижимость']
 
-ALL_WORDS = WORDS + ENDING_WORDS + MONEY + FIELD + PLACE + RULES + MAP + OWN
+ALL_WORDS = WORDS + ENDING_WORDS + MONEY + FIELD + PLACE + RULES + MAP
 
 
 # Функция для непосредственной обработки диалога.
@@ -153,10 +153,10 @@ def handle_dialog(request, response, user_storage):
             user_storage["school"] = 0
             return response, user_storage
 
-        if user_storage["prison"]:
-            if user_storage["users_turn"]:
+        if bool(user_storage["prison"]):
+            if bool(user_storage["users_turn"]):
                 user_storage["users_turn"] = False
-            if not user_storage["users_turn"]:
+            if not bool(user_storage["users_turn"]):
                 user_storage["users_turn"] = True
             user_storage["prison"] = False
 
@@ -625,7 +625,6 @@ def chances(user_storage, game):
 # Начало новой игры
 def end(request, response, text):
     game = las_vegas()
-    random.seed()
 
     response.set_text(str(text) +
                       'Давай напомню правила: Каждый участник бросает кубик и в зависимости от выпавшего количества '
