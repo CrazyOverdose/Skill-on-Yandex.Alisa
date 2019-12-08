@@ -203,7 +203,14 @@ def handle_dialog(request, response, user_storage):
 
         if bool(user_storage["users_turn"]):
             if float(user_storage["moneyU"]) <= 0:
-                if int(realty(user_storage)) != 0:
+                j = 0
+                flag = 0
+                while j < 22:
+                    if int(user_storage["propertyA"][int(j)]) == 1:
+                        flag = j
+                        break
+                    j = j+1
+                if int(flag) != 0:
                     if not bool(user_storage["crash"]):
                         response.set_text(
                             'Вы находитесь на грани банкротства, скажите, какую недвижимость хотите продать? ')
@@ -848,12 +855,3 @@ def realty(user_storage):
             if int(user_storage["propertyU"][int(i)]) == 1:
                 flag = i
                 return flag
-    if not user_storage["users_turn"]:
-        j = 0
-        while j < 22:
-            if int(user_storage["propertyA"][int(j)]) == 1:
-                flag = j
-                return flag
-            j = j + 1
-
-    return flag
