@@ -99,13 +99,13 @@ def handle_dialog(request, response, user_storage):
         # Инициализируем сессию и поприветствуем его.
 
         user_storage = {
-            "propertyA": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            "propertyA": [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
                           0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # имущество Алисы
             "propertyU": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                          0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                          0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
             # имущество пользователя
-            "moneyU": 200,  # Деньги Пользователя
-            "moneyA": 200,  # Деньги Алисы
+            "moneyU": -5,  # Деньги Пользователя
+            "moneyA": 0,  # Деньги Алисы
             "field_cellA": 37,  # Клетка, на которой находится Алиса
             "field_cellU": 37,  # Клетка, на которой находится пользователь
             "bankU": 0,  # вклады пользователя (ячейка поля 37)
@@ -119,7 +119,8 @@ def handle_dialog(request, response, user_storage):
             "school": 0,  # пользователь попал на "назад в школу"
             "choice": False,  # пользователь попал на биржу
             "prison1": False,  # тюрьма Алисы
-            "prison2": False  # тюрьма пользователя
+            "prison2": False,  # тюрьма пользователя
+            "crash": False     #если пользователь почти банкрот
         }
 
         global backup_turn
@@ -144,6 +145,58 @@ def handle_dialog(request, response, user_storage):
     user_message = request.command.lower().strip().replace(' ', '')
 
     try:
+        if user_message in OWN:
+            text = 'Собственность Алисы: '
+            i = 0
+            j = 0
+            while i < 22:
+                if int(user_storage["propertyA"][int(i)]) == 1:
+                    desipher = int(deconversion(int(i)))
+                    text = text + str(game.fields[int(desipher)])
+                i = i + 1
+            text = text + '\nВаша собственность: '
+            while j < 22:
+                if int(user_storage["propertyU"][int(j)]) == 1:
+                    desipher = int(deconversion(int(j)))
+                    text = text + str(game.fields[int(desipher)])
+                j = j + 1
+            response.set_text(str(text))
+            return response, user_storage
+
+        if float(user_storage["moneyA"]) <= 0:
+            if int(realty(user_storage)) != 0:
+                i = int(deconversion(int(realty(user_storage))))
+                response.set_text('Алиса продала свою недвижимость ' + str(game.fields[int(i)]))
+                user_storage["moneyA"] = user_storage["moneyA"] - float(game.price_field[int(i)]//2)
+                user_storage["propertyA"][int(realty(user_storage))] = 0
+                return response, user_storage
+
+        if float(user_storage["moneyU"]) <= 0:
+            if int(realty(user_storage)) != 0:
+                if not user_storage["crash"]:
+                    response.set_text('Вы находитесь на грани банкротства, скажите, какую недвижимость хотите пролдать? ')
+                    user_storage["crash"] = True
+                    return response, user_storage
+                if user_storage["crash"]:
+                    if user_message.isdigit():
+                        if int(user_message) == 2 or int(user_message) == 4 or int(user_message) == 5 or int(user_message) == 7 or int(user_message) == 9 or int(user_message) == 10 or int(user_message) == 12 or int(user_message) == 14 or int(user_message) == 15 or int(user_message) == 17 or int(user_message) == 19 or int(user_message) == 20 or int(user_message) == 22 or int(user_message) == 24 or int(user_message) == 25 or int(user_message) == 27 or int(user_message) == 28 or int(user_message) == 30 or int(user_message) == 32 or int(user_message) == 33 or int(user_message) == 35 or int(user_message) == 38 or int(user_message)== 40:
+
+                            if user_storage["propertyU"][int(conversion(int(user_message)))] == 1:
+                                response.set_text('Вы продали свою недвижимость ' + str(game.fields[int(user_message)]))
+                                user_storage["moneyU"] = user_storage["moneyU"] - float(game.price_field[int(user_message)] // 2)
+                                user_storage["propertyA"][int(conversion(int(user_message)))] = 0
+                                user_storage["crash"] = False
+                                return response, user_storage
+                            else:
+                                response.set_text('Вы не владеете данным имуществом')
+                                return response, user_storage
+                        else:
+                            response.set_text('Зачем вы ввели номер несуществующей ячейки недвижимости?')
+                            return response, user_storage
+                    else:
+                        response.set_text('Вы не ввели номер ячейки недвижимости')
+                        return response, user_storage
+
         if float(user_storage["moneyU"]) < 0:
             raise WinnerError1
 
@@ -167,23 +220,6 @@ def handle_dialog(request, response, user_storage):
             user_storage["school"] = 0
             return response, user_storage
 
-        if user_message in OWN:
-            text = 'Собственность Алисы: '
-            i = 0
-            j = 0
-            while i < 22:
-                if int(user_storage["propertyA"][int(i)]) == 1:
-                    desipher = int(deconversion(int(i)))
-                    text = text + str(game.fields[int(desipher)])
-                i = i + 1
-            text = text + '\nВаша собственность: '
-            while j < 22:
-                if int(user_storage["propertyU"][int(j)]) == 1:
-                    desipher = int(deconversion(int(j)))
-                    text = text + str(game.fields[int(desipher)])
-                j = j + 1
-            response.set_text(str(text))
-            return response, user_storage
 
         if bool(user_storage["choice"]):
             if user_message in BURSEtake:
@@ -234,7 +270,7 @@ def handle_dialog(request, response, user_storage):
         if bool(user_storage["bank"]):
             if user_message in BURSEtake:
                 user_storage["moneyU"] = float(user_storage["moneyU"]) + float(user_storage["bankU"])
-                response.set_text('Вы обналичили ' + str(user_storage["exchange"]) + ' $ ')
+                response.set_text('Вы обналичили ' + str(user_storage["bankU"]) + ' $ ')
                 user_storage["bankU"] = 0
 
             if user_message.isdigit():
@@ -261,7 +297,7 @@ def handle_dialog(request, response, user_storage):
             return response, user_storage
 
         if user_message in ALL_WORDS:
-            cube = 0
+            cube = randint (2,12)
 
             if user_message in PLACE:
                 response.set_text('Вы находитесь на ' + str(user_storage["field_cellU"]) + ' ячейке \n Алиса на ' + str(
@@ -782,3 +818,21 @@ def deconversion(a):
     if a == 21:
         a = 40
     return int(a)
+
+
+def realty(user_storage):
+
+    flag = 0
+    if user_storage["users_turn"]:
+        i = 0
+        while i < 22:
+            if int(user_storage["propertyA"][int(i)]) == 1:
+               flag = i
+    if not user_storage["users_turn"]:
+        j = 0
+        while j < 22:
+            if int(user_storage["propertyU"][int(j)]) == 1:
+                flag = j
+            j = j + 1
+
+    return flag
