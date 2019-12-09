@@ -15,6 +15,10 @@ class WinnerError2(Exception):
     pass
 
 
+class Draw(Exception):
+    pass
+
+
 class las_vegas:
     questions = [0, 'Чему равно 2+4-3*2', 'Какое из чисел натуральное? 0, 4, 0.2, 1/2', 'Cтолица Канады',
                  'Столица Южной Кореи',
@@ -25,7 +29,8 @@ class las_vegas:
 
     answers = [0, 0, 4, 'оттава', 'сеул', 'е', 'ю', 'грибоедов', 'нет', '6', '100000', '4']
 
-    fields = [0, '\n 1. Cтарт \n', '\n 2. Колесо обозрения "High Roller" Цена: 10$ \n ', '\n 3. Инвестроры вложили в вас 100$\n',
+    fields = [0, '\n 1. Cтарт \n', '\n 2. Колесо обозрения "High Roller" Цена: 10$ \n ',
+              '\n 3. Инвестроры вложили в вас 100$\n',
               '\n 4. Ранчо "Casa de Shenandoah" Цена: 10$\n', '\n 5. Отправляйтесь на 2 ячейки назад\n',
               '\n 6. Брат за брата. Отдайте второму игроку 50$\n',
               '\n7. Плотина Гувера Цена: 20$\n', '\n 8. Какая жалость...у вас сломался холодильник -50$\n',
@@ -41,14 +46,18 @@ class las_vegas:
               'есть или оставить еще 100\n',
               '\n 17. Музей Моб Цена: 40$\n',
               '\n 18. Назад в будущее. Игроку будет задан один школьный вопрос. За правильный ответ +50$\n',
-              '\n 19. Отель-Казино "Белладжио" Цена: 40$\n', '\n20. Музей Неона Цена: 40$\n', '\n 21. Бесплатный ночлег\n',
+              '\n 19. Отель-Казино "Белладжио" Цена: 40$\n', '\n20. Музей Неона Цена: 40$\n',
+              '\n 21. Бесплатный ночлег\n',
               '\n 22. Развлекательный комплекс "Луксор Лас-Вегас" Цена: 45$\n', '\n 23. Отправляйтесь на начало\n',
-              '\n 24. Отель-казино "Париж Лас-Вегас" Цена: 45$\n', '\n 25. Отель-казино "Венецианский Лас-Вегас Цена: 45$"\n',
-              '\n 26. Мотель. Вы остановились переночевать в мотеле. Заплатите 100$\n', '\n 27. Отель-казино "Wynn" Цена: 50$\n',
+              '\n 24. Отель-казино "Париж Лас-Вегас" Цена: 45$\n',
+              '\n 25. Отель-казино "Венецианский Лас-Вегас Цена: 45$"\n',
+              '\n 26. Мотель. Вы остановились переночевать в мотеле. Заплатите 100$\n',
+              '\n 27. Отель-казино "Wynn" Цена: 50$\n',
               '\n 28. Развлекательный комплекс "Сизарс-Пэлас" Цена: 50$\n',
               '\n 29. Лотерея. Да вы везунчик, заберите свои законные 95$\n',
               '\n 30. Отель-казино "Стратосфера Лас-Вегас" Цена: 50$\n',
-              '\n 31. Отправляйтесь в тюрьму\n', '\n 32. Часовня цветов Цена: 55$\n', '\n 33. Музей мадам Тюссо Цена: 55$\n',
+              '\n 31. Отправляйтесь в тюрьму\n', '\n 32. Часовня цветов Цена: 55$\n',
+              '\n 33. Музей мадам Тюссо Цена: 55$\n',
               '\n 34. Выберете любую ячейку, на которую отправитесь. Действие этой ячейки на вас не распространиться\n',
               '\n 35. Ред-Рок-Каньон Цена: 55$\n', '\n 36. Отправляйтесь на 3 ячейки вперед \n',
               '\n 37. Банк. Вы можете положить деньги под 10% за круг (скажите, сколько денег хотите положить), забрать ранее вложенные деньги (с процентами) Для этого скажите "забрать"\n',
@@ -56,13 +65,15 @@ class las_vegas:
               '\n 39. Вы такой невнимательный! Как умудрились потерять 50$?\n',
               '\n 40. Сансет Парк Цена: 60$\n']
 
-    price_field = [0, 200, -10, 100, -10, 0, -50, -20, -50, -20, -20, -150, -30, 0, -30, -30, 0, -40, 0, -40, -40, 0, -45,
+    price_field = [0, 200, -10, 100, -10, 0, -50, -20, -50, -20, -20, -150, -30, 0, -30, -30, 0, -40, 0, -40, -40, 0,
+                   -45,
                    200,
                    -45, -45, -100, -50, -50, 95, -50, 0, -55, -55, 0, -55, 0, 0, -60, -50, -60]
 
-    price_foreign_field = [0, 200, -10, 100, -10, 0, -50, -20, -50, -20, -20, -200, -25, 0, -25, -25, 0, -30, 0, -30, -30, 0, -35,
-                   200,
-                   -35, -35, -50, -40, -40, 95, -40, 0, -45, -45, 0, -45, 0, 0, -50, -50, -55]
+    price_foreign_field = [0, 200, -10, 100, -10, 0, -50, -20, -50, -20, -20, -200, -25, 0, -25, -25, 0, -30, 0, -30,
+                           -30, 0, -35,
+                           200,
+                           -35, -35, -50, -40, -40, 95, -40, 0, -45, -45, 0, -45, 0, 0, -50, -50, -55]
 
 
 FIELD = ['поле', 'карта', 'ячейки']
@@ -196,7 +207,6 @@ def handle_dialog(request, response, user_storage):
                 '40 - Сансет Парк')
             return response, user_storage
 
-
         if user_message in BURSE:
             response.set_text('Сейчас на бирже ' + str(user_storage["exchange"]) + ' $')
             return response, user_storage
@@ -230,7 +240,6 @@ def handle_dialog(request, response, user_storage):
                               'банкротом. \n \n Чтобы начать игру "бросить кубик"')
             return response, user_storage
 
-
         if int(user_storage["school"]) != 0:
             if str(user_message) == str(game.answers[int(user_storage["school"])]):
                 response.set_text('Правильный ответ')
@@ -243,7 +252,7 @@ def handle_dialog(request, response, user_storage):
         if bool(user_storage["choice"]):
             if user_message in BURSEtake:
                 user_storage["moneyU"] = float(user_storage["moneyU"]) + float(user_storage["exchange"]) * 1.5
-                response.set_text('Вы взяли ' + str(float(user_storage["exchange"])*1.5) + ' $ с биржи')
+                response.set_text('Вы взяли ' + str(float(user_storage["exchange"]) * 1.5) + ' $ с биржи')
                 user_storage["exchange"] = 0
 
             if user_message in BURSEgive:
@@ -323,7 +332,7 @@ def handle_dialog(request, response, user_storage):
                     if int(user_storage["propertyA"][int(i)]) == 1:
                         flag = i
                         break
-                    i = i+1
+                    i = i + 1
                 if int(flag) != 0:
                     i = int(deconversion(int(flag)))
                     response.set_text('Алиса продала свою недвижимость ' + str(game.fields[int(i)]))
@@ -340,7 +349,7 @@ def handle_dialog(request, response, user_storage):
                     if int(user_storage["propertyU"][int(j)]) == 1:
                         flag = j
                         break
-                    j = j+1
+                    j = j + 1
                 if int(flag) != 0:
                     if not bool(user_storage["crash"]):
                         response.set_text(
@@ -358,7 +367,8 @@ def handle_dialog(request, response, user_storage):
                                 user_message) == 32 or int(user_message) == 33 or int(user_message) == 35 or int(
                                 user_message) == 38 or int(user_message) == 40:
                                 if int(user_storage["propertyU"][int(conversion(int(user_message)))]) == 1:
-                                    response.set_text('Вы продали свою недвижимость ' + str(game.fields[int(user_message)]))
+                                    response.set_text(
+                                        'Вы продали свою недвижимость ' + str(game.fields[int(user_message)]))
                                     user_storage["moneyU"] = float(user_storage["moneyU"]) - float(
                                         game.price_field[int(user_message)] // 2)
                                     user_storage["propertyU"][int(conversion(int(user_message)))] = 0
@@ -375,6 +385,9 @@ def handle_dialog(request, response, user_storage):
                             response.set_text('Вы не ввели номер ячейки недвижимости')
                             return response, user_storage
 
+        if float(user_storage["moneyU"]) < 0 and float(user_storage["moneyA"]) < 0:
+            raise Draw
+
         if bool(user_storage["users_turn"]):
             if float(user_storage["moneyU"]) < 0:
                 raise WinnerError1
@@ -384,7 +397,7 @@ def handle_dialog(request, response, user_storage):
                 raise WinnerError2
 
         if user_message in ALL_WORDS:
-            cube = randint(2,12)
+            cube = randint(2, 12)
 
             if user_message in WORDS:
                 if not bool(user_storage["users_turn"]):
@@ -493,18 +506,22 @@ def handle_dialog(request, response, user_storage):
 
                         if int(user_storage["propertyA"][a]) == 1:
                             response.set_text('Ход Алисы \n' +
-                                              'Алиса попала на свою территорию: ' + str(game.fields[int(user_storage["field_cellA"])]))
+                                              'Алиса попала на свою территорию: ' + str(
+                                game.fields[int(user_storage["field_cellA"])]))
 
                         if int(user_storage["propertyA"][a]) == 0 and int(user_storage["propertyU"][a]) == 0:
                             if b == 1:
                                 response.set_text('Ход Алисы \n' + str(
-                                    game.fields[int(user_storage["field_cellA"])]) + ' и решила купить \n Если вы попадете на данный сектор, то заплатите ' + str(abs(game.price_foreign_field[int(user_storage["field_cellA"])])) + ' $')
+                                    game.fields[int(user_storage[
+                                                        "field_cellA"])]) + ' и решила купить \n Если вы попадете на данный сектор, то заплатите ' + str(
+                                    abs(game.price_foreign_field[int(user_storage["field_cellA"])])) + ' $')
                                 user_storage["moneyA"] = float(user_storage["moneyA"]) + float(
                                     game.price_field[int(user_storage["field_cellA"])])
                                 user_storage["propertyA"][a] = 1
                             else:
                                 response.set_text('Ход Алисы \n' +
-                                                  'Алиса попала: ' + str(game.fields[int(user_storage["field_cellA"])]) + ' и решила не покупать')
+                                                  'Алиса попала: ' + str(
+                                    game.fields[int(user_storage["field_cellA"])]) + ' и решила не покупать')
                         user_storage["users_turn"] = True
                         return response, user_storage
 
@@ -716,7 +733,10 @@ def handle_dialog(request, response, user_storage):
                         if int(user_storage["propertyU"][int(a)]) == 0 and int(user_storage["propertyA"][int(a)]) == 0:
                             response.set_text(
                                 str('Ваш ход \n' + game.fields[int(
-                                    user_storage["field_cellU"])]) + '\n Если Алиса попадет на эту недвижимость, она заплатит ' + str(abs(game.price_foreign_field[int(user_storage["field_cellU"])])) + ' $ \n Чтобы приобрести: введите "купить"')
+                                    user_storage[
+                                        "field_cellU"])]) + '\n Если Алиса попадет на эту недвижимость, она заплатит ' + str(
+                                    abs(game.price_foreign_field[int(
+                                        user_storage["field_cellU"])])) + ' $ \n Чтобы приобрести: введите "купить"')
                             user_storage["property"] = int(a)
                         user_storage["users_turn"] = False
                         return response, user_storage
@@ -772,6 +792,10 @@ def handle_dialog(request, response, user_storage):
         text = 'Поздравляю, вы победили! \n '
         user_storage = end(request, response, text)
 
+    except Draw:
+        text = 'Победила дружба :3 \n '
+        user_storage = end(request, response, text)
+
     # В любом случае
     return response, user_storage
 
@@ -818,6 +842,7 @@ def end(request, response, text):
     }
 
     return user_storage
+
 
 def conversion(a):
     if a == 2:
@@ -956,5 +981,3 @@ def deconversion(a):
     if a == 22:
         a = 40
     return int(a)
-
-
