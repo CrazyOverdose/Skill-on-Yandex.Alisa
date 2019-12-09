@@ -9,7 +9,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb38bc6d-9667-4c33-a38c-0406a6ca14d4" name="Default Changelist" comment="test 42">
+    <list default="true" id="cb38bc6d-9667-4c33-a38c-0406a6ca14d4" name="Default Changelist" comment="test 44">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -137,20 +138,6 @@
       <option name="presentableId" value="Default" />
       <updated>1572786424239</updated>
       <workItem from="1575421225998" duration="128000" />
-    </task>
-    <task id="LOCAL-00059" summary="test 69">
-      <created>1575740103698</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1575740103699</updated>
-    </task>
-    <task id="LOCAL-00060" summary="test 70">
-      <created>1575740679065</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1575740679065</updated>
     </task>
     <task id="LOCAL-00061" summary="test 71">
       <created>1575742621114</created>
@@ -481,7 +468,21 @@
       <option name="project" value="LOCAL" />
       <updated>1575914135891</updated>
     </task>
-    <option name="localTasksCounter" value="108" />
+    <task id="LOCAL-00108" summary="test 43">
+      <created>1575914842378</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1575914842379</updated>
+    </task>
+    <task id="LOCAL-00109" summary="test 44">
+      <created>1575915002992</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1575915002992</updated>
+    </task>
+    <option name="localTasksCounter" value="110" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -501,8 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="test 8" />
-    <MESSAGE value="test 9" />
     <MESSAGE value="test 10" />
     <MESSAGE value="test 12" />
     <MESSAGE value="test 13" />
@@ -526,7 +525,9 @@
     <MESSAGE value="test 40" />
     <MESSAGE value="test 41" />
     <MESSAGE value="test 42" />
-    <option name="LAST_COMMIT_MESSAGE" value="test 42" />
+    <MESSAGE value="test 43" />
+    <MESSAGE value="test 44" />
+    <option name="LAST_COMMIT_MESSAGE" value="test 44" />
   </component>
   <component name="WindowStateProjectService">
     <state x="297" y="0" width="839" height="869" key="#Dockerfile" timestamp="1575238486279">

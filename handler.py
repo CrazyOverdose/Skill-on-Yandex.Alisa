@@ -375,11 +375,13 @@ def handle_dialog(request, response, user_storage):
                             response.set_text('Вы не ввели номер ячейки недвижимости')
                             return response, user_storage
 
-        if float(user_storage["moneyU"]) < 0:
-            raise WinnerError1
+        if bool(user_storage["users_turn"]):
+            if float(user_storage["moneyU"]) < 0:
+                raise WinnerError1
 
-        if float(user_storage["moneyA"]) < 0:
-            raise WinnerError2
+        if not bool(user_storage["users_turn"]):
+            if float(user_storage["moneyA"]) < 0:
+                raise WinnerError2
 
         if user_message in ALL_WORDS:
             cube = randint(2,12)
@@ -477,7 +479,7 @@ def handle_dialog(request, response, user_storage):
 
                         b = int(randint(1, 2))
 
-                        if int(user_storage["moneyA"]) < 45:
+                        if int(user_storage["moneyA"]) + float(game.price_field[int(user_storage["field_cellA"])]) < 70:
                             b = 2
 
                         if int(user_storage["propertyU"][a]) == 1:
@@ -496,7 +498,7 @@ def handle_dialog(request, response, user_storage):
                         if int(user_storage["propertyA"][a]) == 0 and int(user_storage["propertyU"][a]) == 0:
                             if b == 1:
                                 response.set_text('Ход Алисы \n' + str(
-                                    game.fields[int(user_storage["field_cellA"])]) + ' и решила купить \n Если вы попадете на данный сектор, то заплатите' + str(abs(game.price_foreign_field[int(user_storage["field_cellA"])])) + ' $')
+                                    game.fields[int(user_storage["field_cellA"])]) + ' и решила купить \n Если вы попадете на данный сектор, то заплатите ' + str(abs(game.price_foreign_field[int(user_storage["field_cellA"])])) + ' $')
                                 user_storage["moneyA"] = float(user_storage["moneyA"]) + float(
                                     game.price_field[int(user_storage["field_cellA"])])
                                 user_storage["propertyA"][a] = 1
