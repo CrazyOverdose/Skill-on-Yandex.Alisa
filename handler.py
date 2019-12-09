@@ -815,48 +815,67 @@ def end(request, response, text):
 
     return user_storage
 
-
 def conversion(a):
     if a == 2:
         a = 1
+        return int(a)
     if a == 4:
         a = 2
+        return int(a)
     if a == 7:
         a = 3
+        return int(a)
     if a == 9:
         a = 4
+        return int(a)
     if a == 10:
         a = 5
+        return int(a)
     if a == 12:
         a = 6
+        return int(a)
     if a == 14:
         a = 7
+        return int(a)
     if a == 15:
         a = 8
+        return int(a)
     if a == 17:
         a = 9
+        return int(a)
     if a == 19:
         a = 10
+        return int(a)
     if a == 20:
         a = 11
+        return int(a)
     if a == 22:
         a = 12
+        return int(a)
     if a == 24:
         a = 13
+        return int(a)
     if a == 25:
         a = 14
+        return int(a)
     if a == 27:
         a = 15
+        return int(a)
     if a == 28:
         a = 16
+        return int(a)
     if a == 30:
         a = 17
+        return int(a)
     if a == 32:
         a = 18
+        return int(a)
     if a == 33:
         a = 19
+        return int(a)
     if a == 38:
         a = 20
+        return int(a)
     if a == 40:
         a = 21
     return int(a)
@@ -865,45 +884,66 @@ def conversion(a):
 def deconversion(a):
     if a == 1:
         a = 2
+        return int(a)
     if a == 2:
         a = 4
+        return int(a)
     if a == 3:
         a = 7
+        return int(a)
     if a == 4:
         a = 9
+        return int(a)
     if a == 5:
         a = 10
+        return int(a)
     if a == 6:
         a = 12
+        return int(a)
     if a == 7:
         a = 14
+        return int(a)
     if a == 8:
         a = 15
+        return int(a)
     if a == 9:
         a = 17
+        return int(a)
     if a == 10:
         a = 19
+        return int(a)
     if a == 11:
         a = 20
+        return int(a)
     if a == 12:
         a = 22
+        return int(a)
     if a == 13:
         a = 24
+        return int(a)
     if a == 14:
         a = 25
+        return int(a)
     if a == 15:
         a = 27
+        return int(a)
     if a == 16:
         a = 28
+        return int(a)
     if a == 17:
         a = 30
+        return int(a)
     if a == 18:
         a = 32
+        return int(a)
     if a == 19:
         a = 33
+        return int(a)
     if a == 20:
         a = 38
+        return int(a)
     if a == 21:
         a = 40
     return int(a)
+
 
