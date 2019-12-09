@@ -107,10 +107,10 @@ def handle_dialog(request, response, user_storage):
             "propertyU": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                           0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
             # имущество пользователя
-            "moneyU": -5,  # Деньги Пользователя
-            "moneyA": 0,  # Деньги Алисы
-            "field_cellA": 37,  # Клетка, на которой находится Алиса
-            "field_cellU": 37,  # Клетка, на которой находится пользователь
+            "moneyU": 200,  # Деньги Пользователя
+            "moneyA": 200,  # Деньги Алисы
+            "field_cellA": 29,  # Клетка, на которой находится Алиса
+            "field_cellU": 29,  # Клетка, на которой находится пользователь
             "bankU": 0,  # вклады пользователя (ячейка поля 37)
             "bankA": 0,  # вклады алисы (ячейка поля 37)
             "exchange": 0,  # деньги на бирже (ячейка поля 13)
@@ -381,7 +381,7 @@ def handle_dialog(request, response, user_storage):
             return response, user_storage
 
         if user_message in ALL_WORDS:
-            cube = randint(2, 12)
+            cube = 2
 
             if user_message in WORDS:
                 if not bool(user_storage["users_turn"]):
@@ -567,7 +567,7 @@ def handle_dialog(request, response, user_storage):
                         if int(y) == 3:
                             user_storage["moneyA"] = float(user_storage["moneyA"]) + float(user_storage["bankA"])
                             response.set_text('Ход Алисы \n' + str(game.fields[int(
-                                user_storage["field_cellA"])]) + '\nАлиса обналичила свой счёт в банке на сумму' + str(
+                                user_storage["field_cellA"])]) + '\nАлиса обналичила свой счёт в банке на сумму ' + str(
                                 user_storage["bankA"]) + ' $ ')
                             user_storage["bankA"] = 0
                         user_storage["users_turn"] = True
