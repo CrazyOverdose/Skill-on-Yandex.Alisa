@@ -9,7 +9,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb38bc6d-9667-4c33-a38c-0406a6ca14d4" name="Default Changelist" comment="test 30">
+    <list default="true" id="cb38bc6d-9667-4c33-a38c-0406a6ca14d4" name="Default Changelist" comment="test 37">
       <change beforePath="$PROJECT_DIR$/handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -137,13 +137,6 @@
       <option name="presentableId" value="Default" />
       <updated>1572786424239</updated>
       <workItem from="1575421225998" duration="128000" />
-    </task>
-    <task id="LOCAL-00052" summary="test 58">
-      <created>1575729850322</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1575729850322</updated>
     </task>
     <task id="LOCAL-00053" summary="test 59">
       <created>1575730678124</created>
@@ -481,7 +474,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575910376784</updated>
     </task>
-    <option name="localTasksCounter" value="101" />
+    <task id="LOCAL-00101" summary="test 37">
+      <created>1575912277706</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1575912277706</updated>
+    </task>
+    <option name="localTasksCounter" value="102" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -501,7 +501,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="test 83" />
     <MESSAGE value="test 1" />
     <MESSAGE value="test 4" />
     <MESSAGE value="test 5" />
@@ -526,7 +525,8 @@
     <MESSAGE value="test 27" />
     <MESSAGE value="test 29" />
     <MESSAGE value="test 30" />
-    <option name="LAST_COMMIT_MESSAGE" value="test 30" />
+    <MESSAGE value="test 37" />
+    <option name="LAST_COMMIT_MESSAGE" value="test 37" />
   </component>
   <component name="WindowStateProjectService">
     <state x="297" y="0" width="839" height="869" key="#Dockerfile" timestamp="1575238486279">
