@@ -120,8 +120,8 @@ def handle_dialog(request, response, user_storage):
             # имущество пользователя
             "moneyU": 200,  # Деньги Пользователя
             "moneyA": 200,  # Деньги Алисы
-            "field_cellA": 34,  # Клетка, на которой находится Алиса
-            "field_cellU": 34,  # Клетка, на которой находится пользователь
+            "field_cellA": 1,  # Клетка, на которой находится Алиса
+            "field_cellU": 1,  # Клетка, на которой находится пользователь
             "bankU": 0,  # вклады пользователя (ячейка поля 37)
             "bankA": 0,  # вклады алисы (ячейка поля 37)
             "exchange": 0,  # деньги на бирже (ячейка поля 13)
@@ -318,11 +318,10 @@ def handle_dialog(request, response, user_storage):
 
         if bool(user_storage["anycell"]):
             user_message = 'го'
-            if bool(user_storage["users_turn"]) == True:
+            if bool(user_storage["users_turn"]):
                 user_storage["users_turn"] = False
-            if bool(user_storage["users_turn"]) == False:
+            else:
                 user_storage["users_turn"] = True
-
 
         if int(user_storage["property"]) != 0:
             if str(user_message) == 'купить':
@@ -346,7 +345,8 @@ def handle_dialog(request, response, user_storage):
                     i = i + 1
                 if int(flag) != 0:
                     i = int(deconversion(int(flag)))
-                    response.set_text('Алиса продала свою недвижимость ' + str(game.fields[int(i)]) + ' за ' + str(abs(game.price_field[int(i)] // 2)) + ' $')
+                    response.set_text('Алиса продала свою недвижимость ' + str(game.fields[int(i)]) + ' за ' + str(
+                        abs(game.price_field[int(i)] // 2)) + ' $')
                     user_storage["moneyA"] = float(user_storage["moneyA"]) - float(game.price_field[int(i)] // 2)
                     user_storage["propertyA"][int(flag)] = 0
                     user_storage["users_turn"] = True
@@ -379,7 +379,9 @@ def handle_dialog(request, response, user_storage):
                                 user_message) == 38 or int(user_message) == 40:
                                 if int(user_storage["propertyU"][int(conversion(int(user_message)))]) == 1:
                                     response.set_text(
-                                        'Вы продали свою недвижимость ' + str(game.fields[int(user_message)]) + ' за ' + str(abs(game.price_field[int(user_message)] // 2)) + ' $')
+                                        'Вы продали свою недвижимость ' + str(
+                                            game.fields[int(user_message)]) + ' за ' + str(
+                                            abs(game.price_field[int(user_message)] // 2)) + ' $')
                                     user_storage["moneyU"] = float(user_storage["moneyU"]) - float(
                                         game.price_field[int(user_message)] // 2)
                                     user_storage["propertyU"][int(conversion(int(user_message)))] = 0
@@ -408,6 +410,7 @@ def handle_dialog(request, response, user_storage):
                 raise WinnerError2
 
         if user_message in ALL_WORDS:
+            random.seed()
             cube = randint(2, 12)
 
             if user_message in WORDS:
@@ -506,6 +509,7 @@ def handle_dialog(request, response, user_storage):
 
                         a = int(conversion(int(user_storage["field_cellA"])))
 
+                        random.seed()
                         b = int(randint(1, 2))
 
                         if int(user_storage["moneyA"]) + float(game.price_field[int(user_storage["field_cellA"])]) < 70:
@@ -542,6 +546,7 @@ def handle_dialog(request, response, user_storage):
                         return response, user_storage
 
                     if int(user_storage["field_cellA"]) == 13 or int(user_storage["field_cellA"]) == 16:
+                        random.seed()
                         y = randint(1, 2)
 
                         rialto = user_storage["exchange"]
@@ -577,15 +582,18 @@ def handle_dialog(request, response, user_storage):
                         return response, user_storage
 
                     if int(user_storage["field_cellA"]) == 37:
+                        random.seed()
                         y = randint(1, 3)
 
                         if user_storage["moneyA"] < 100 and user_storage["bankA"] == 0:
                             y = 2
 
                         if user_storage["bankA"] == 0:
+                            random.seed()
                             y = randint(1, 2)
 
                         if user_storage["moneyA"] < 100:
+                            random.seed()
                             y = randint(2, 3)
 
                         if int(y) == 2:
@@ -593,6 +601,7 @@ def handle_dialog(request, response, user_storage):
                                 game.fields[int(user_storage["field_cellA"])]) + '\nАлиса оставила денюжки у себя')
 
                         if int(y) == 1:
+                            random.seed()
                             money = randint(int(user_storage["moneyA"] // 5), int(user_storage["moneyA"] // 2))
                             user_storage["bankA"] = user_storage["bankA"] + money
                             user_storage["moneyA"] = user_storage["moneyA"] - money
@@ -610,6 +619,7 @@ def handle_dialog(request, response, user_storage):
                         return response, user_storage
 
                     if int(user_storage["field_cellA"]) == 18:
+                        random.seed()
                         rand = int(randint(1, 11))
                         choise = int(randint(1, 2))
                         if choise == 1:
@@ -626,6 +636,7 @@ def handle_dialog(request, response, user_storage):
                         return response, user_storage
 
                     if int(user_storage["field_cellA"]) == 34:
+                        random.seed()
                         cell = int(randint(1, 40))
 
                         if cell + int(user_storage["field_cellA"]) > 40:
@@ -773,6 +784,7 @@ def handle_dialog(request, response, user_storage):
                         return response, user_storage
 
                     if int(user_storage["field_cellU"]) == 18:
+                        random.seed()
                         rand = int(randint(1, 11))
                         user_storage["school"] = int(rand)
                         response.set_text(str(game.fields[18]) + '\n' + str(game.questions[int(rand)]))
@@ -819,7 +831,6 @@ def handle_dialog(request, response, user_storage):
 
 # Начало новой игры
 def end(request, response, text):
-    random.seed()
 
     response.set_text(str(text) +
                       'Давай напомню правила: Каждый участник бросает кубик и в зависимости от выпавшего количества '
