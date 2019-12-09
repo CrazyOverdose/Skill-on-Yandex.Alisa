@@ -9,7 +9,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb38bc6d-9667-4c33-a38c-0406a6ca14d4" name="Default Changelist" comment="test 38">
+    <list default="true" id="cb38bc6d-9667-4c33-a38c-0406a6ca14d4" name="Default Changelist" comment="test 39">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler.py" afterDir="false" />
     </list>
@@ -114,10 +114,10 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Docker.Dockerfile" />
       <item itemvalue="Python.alice_sdk" />
       <item itemvalue="Python.api" />
       <item itemvalue="Python.main" />
+      <item itemvalue="Docker.Dockerfile" />
     </list>
     <recent_temporary>
       <list>
@@ -138,13 +138,6 @@
       <option name="presentableId" value="Default" />
       <updated>1572786424239</updated>
       <workItem from="1575421225998" duration="128000" />
-    </task>
-    <task id="LOCAL-00055" summary="test 61">
-      <created>1575731545771</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1575731545771</updated>
     </task>
     <task id="LOCAL-00056" summary="test 64">
       <created>1575735293006</created>
@@ -482,7 +475,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575912805376</updated>
     </task>
-    <option name="localTasksCounter" value="104" />
+    <task id="LOCAL-00104" summary="test 39">
+      <created>1575913287854</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1575913287854</updated>
+    </task>
+    <option name="localTasksCounter" value="105" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -502,7 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="test 4" />
     <MESSAGE value="test 5" />
     <MESSAGE value="test 6" />
     <MESSAGE value="test 7" />
@@ -527,7 +526,8 @@
     <MESSAGE value="test 30" />
     <MESSAGE value="test 37" />
     <MESSAGE value="test 38" />
-    <option name="LAST_COMMIT_MESSAGE" value="test 38" />
+    <MESSAGE value="test 39" />
+    <option name="LAST_COMMIT_MESSAGE" value="test 39" />
   </component>
   <component name="WindowStateProjectService">
     <state x="297" y="0" width="839" height="869" key="#Dockerfile" timestamp="1575238486279">
@@ -590,10 +590,10 @@
       <screen x="0" y="0" width="1440" height="872" />
     </state>
     <state x="164" y="71" width="1106" height="728" key="SettingsEditor/0.0.1440.872@0.0.1440.872" timestamp="1575238495689" />
-    <state x="315" y="169" width="804" height="533" key="Vcs.Push.Dialog.v2" timestamp="1575912806761">
+    <state x="315" y="169" width="804" height="533" key="Vcs.Push.Dialog.v2" timestamp="1575913289894">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
-    <state x="315" y="169" width="804" height="533" key="Vcs.Push.Dialog.v2/0.0.1440.872@0.0.1440.872" timestamp="1575912806761" />
+    <state x="315" y="169" width="804" height="533" key="Vcs.Push.Dialog.v2/0.0.1440.872@0.0.1440.872" timestamp="1575913289894" />
     <state x="306" y="262" key="com.intellij.ide.util.TipDialog" timestamp="1575794161836">
       <screen x="0" y="0" width="1440" height="872" />
     </state>

@@ -109,13 +109,13 @@ def handle_dialog(request, response, user_storage):
             # имущество пользователя
             "moneyU": 200,  # Деньги Пользователя
             "moneyA": 200,  # Деньги Алисы
-            "field_cellA": 31,  # Клетка, на которой находится Алиса
-            "field_cellU": 31,  # Клетка, на которой находится пользователь
+            "field_cellA": 1,  # Клетка, на которой находится Алиса
+            "field_cellU": 1,  # Клетка, на которой находится пользователь
             "bankU": 0,  # вклады пользователя (ячейка поля 37)
             "bankA": 0,  # вклады алисы (ячейка поля 37)
             "exchange": 0,  # деньги на бирже (ячейка поля 13)
             "user_id": request.user_id,
-            "users_turn": False,  # чей ход
+            "users_turn": True,  # чей ход
             "bank": False,  # пользователь попал в банк
             "property": 0,  # пользователь попал на ячейку недвижимости
             "go": False,  # на любую ячейку
@@ -381,7 +381,7 @@ def handle_dialog(request, response, user_storage):
             return response, user_storage
 
         if user_message in ALL_WORDS:
-            cube = randint(2, 12)
+            cube = randint(2,12)
 
             if user_message in WORDS:
                 if not bool(user_storage["users_turn"]):
@@ -797,20 +797,21 @@ def end(request, response, text):
         # имущество пользователя
         "moneyU": 200,  # Деньги Пользователя
         "moneyA": 200,  # Деньги Алисы
-        "field_cellA": 35,  # Клетка, на которой находится Алиса
-        "field_cellU": 35,  # Клетка, на которой находится пользователь
+        "field_cellA": 1,  # Клетка, на которой находится Алиса
+        "field_cellU": 1,  # Клетка, на которой находится пользователь
         "bankU": 0,  # вклады пользователя (ячейка поля 37)
         "bankA": 0,  # вклады алисы (ячейка поля 37)
-        "exchange": 0,  # биржа (ячейка поля 13)
+        "exchange": 0,  # деньги на бирже (ячейка поля 13)
         "user_id": request.user_id,
-        "users_turn": False,
-        "bank": False,
-        "property": 0,
-        "go": False,
-        "school": 0,
-        "choice": False,
-        "prison1": False,
-        "prison2": False
+        "users_turn": True,  # чей ход
+        "bank": False,  # пользователь попал в банк
+        "property": 0,  # пользователь попал на ячейку недвижимости
+        "go": False,  # на любую ячейку
+        "school": 0,  # пользователь попал на "назад в школу"
+        "choice": False,  # пользователь попал на биржу
+        "prison1": False,  # тюрьма Алисы
+        "prison2": False,  # тюрьма пользователя
+        "crash": False  # если пользователь почти банкрот
     }
 
     return user_storage
