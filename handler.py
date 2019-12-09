@@ -381,7 +381,7 @@ def handle_dialog(request, response, user_storage):
             return response, user_storage
 
         if user_message in ALL_WORDS:
-            cube = randint(2,12)
+            cube = randint(2, 12)
 
             if user_message in WORDS:
                 if not bool(user_storage["users_turn"]):
