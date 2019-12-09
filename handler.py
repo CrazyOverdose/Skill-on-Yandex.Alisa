@@ -35,7 +35,7 @@ class las_vegas:
               '\n 13. Биржа. Если она пуста, то должен оставить 100$, если нет,то вправе забрать в 1.5 раза больше, '
               'чем на ней '
               'есть или оставить еще 100\n',
-              '\n 14. Музей Shelby American Цена: 30$\n', '\nН 15. ациональный музей атомных испытаний Цена: 30$\n',
+              '\n 14. Музей Shelby American Цена: 30$\n', '\n 15. ациональный музей атомных испытаний Цена: 30$\n',
               '\n 16. Отправляйтесь на биржу. Если биржа пуста, то должен оставить 100$, если нет,то вправе забрать в 1.5 '
               'раза больше, чем на ней '
               'есть или оставить еще 100\n',
@@ -230,6 +230,91 @@ def handle_dialog(request, response, user_storage):
                               'банкротом. \n \n Чтобы начать игру "бросить кубик"')
             return response, user_storage
 
+
+        if int(user_storage["school"]) != 0:
+            if str(user_message) == str(game.answers[int(user_storage["school"])]):
+                response.set_text('Правильный ответ')
+                user_storage["moneyU"] = float(user_storage["moneyU"]) + 50
+            else:
+                response.set_text('Неправильный ответ')
+            user_storage["school"] = 0
+            return response, user_storage
+
+        if bool(user_storage["choice"]):
+            if user_message in BURSEtake:
+                user_storage["moneyU"] = float(user_storage["moneyU"]) + float(user_storage["exchange"]) * 1.5
+                response.set_text('Вы взяли ' + str(float(user_storage["exchange"])*1.5) + ' $ с биржи')
+                user_storage["exchange"] = 0
+
+            if user_message in BURSEgive:
+                user_storage["moneyU"] = float(user_storage["moneyU"]) - 100
+                user_storage["exchange"] = float(user_storage["exchange"]) + 100
+                response.set_text('Вы оставили 100$ на бирже')
+
+            if user_message not in BURSEgive + BURSEtake:
+                response.set_text('Иногда ничего не делать - лучшее решение')
+            user_storage["choice"] = False
+            return response, user_storage
+
+        if bool(user_storage["prison1"]) and bool(user_storage["prison2"]):
+            user_storage["users_turn"] = True
+            user_storage["prison1"] = False
+            user_storage["prison2"] = False
+            response.set_text('Алиса помогла сбежать вам из тюрьмы, ходите ')
+            return response, user_storage
+
+        if bool(user_storage["prison1"]):
+            if not bool(user_storage["users_turn"]):
+                user_storage["users_turn"] = True
+                user_storage["prison1"] = False
+
+        if bool(user_storage["prison2"]):
+            if bool(user_storage["users_turn"]):
+                user_storage["users_turn"] = False
+                user_storage["prison2"] = False
+
+        if bool(user_storage["go"]):
+            if user_message.isdigit():
+                response.set_text(
+                    '\n Вы перешли на ячейку ' + str(user_message) + '\n' + str(game.fields[int(user_message)]))
+                if user_storage["field_cellU"] + int(user_message) < 40:
+                    user_storage["moneyU"] = user_storage["moneyU"] + 200
+                user_storage["field_cellU"] = int(user_message)
+            if not user_message.isdigit():
+                response.set_text('Ваш ход \n' + str(
+                    game.fields[int(user_storage["field_cellU"])]) + '\n Вы остались на месте ')
+            user_storage["go"] = False
+            return response, user_storage
+
+        if bool(user_storage["bank"]):
+            if user_message in BURSEtake:
+                user_storage["moneyU"] = float(user_storage["moneyU"]) + float(user_storage["bankU"])
+                response.set_text('Вы обналичили ' + str(user_storage["bankU"]) + ' $ ')
+                user_storage["bankU"] = 0
+
+            if user_message.isdigit():
+                if float(user_message) > float(user_storage["moneyU"]):
+                    response.set_text('Нехорошо врать, у тебя нет столько денег')
+                else:
+                    user_storage["bankU"] = user_storage["bankU"] + float(user_message)
+                    user_storage["moneyU"] = float(user_storage["moneyU"]) - float(user_message)
+                    response.set_text('Вы оставили ' + str(user_message) + ' $ в банке')
+            if user_message.isdigit() == False and user_message not in BURSEtake:
+                response.set_text('Денюжки греют душу,когда они под рукой, не так ли?')
+            user_storage["bank"] = False
+            return response, user_storage
+
+        if int(user_storage["property"]) != 0:
+            if str(user_message) == 'купить':
+                user_storage["moneyU"] = float(user_storage["moneyU"]) + float(
+                    game.price_field[int(user_storage["field_cellU"])])
+                user_storage["propertyU"][int(user_storage["property"])] = 1
+                response.set_text('Поздравляю с приобретением! ')
+            else:
+                response.set_text('Может, это действительно не лучшее вложение денег')
+            user_storage["property"] = 0
+            return response, user_storage
+
         if not bool(user_storage["users_turn"]):
             if float(user_storage["moneyA"]) <= 0:
                 flag = 0
@@ -295,90 +380,6 @@ def handle_dialog(request, response, user_storage):
 
         if float(user_storage["moneyA"]) < 0:
             raise WinnerError2
-
-        if int(user_storage["school"]) != 0:
-            if str(user_message) == str(game.answers[int(user_storage["school"])]):
-                response.set_text('Правильный ответ')
-                user_storage["moneyU"] = float(user_storage["moneyU"]) + 50
-            else:
-                response.set_text('Неправильный ответ')
-            user_storage["school"] = 0
-            return response, user_storage
-
-        if bool(user_storage["choice"]):
-            if user_message in BURSEtake:
-                user_storage["moneyU"] = float(user_storage["moneyU"]) + float(user_storage["exchange"]) * 1.5
-                response.set_text('Вы взяли ' + str(float(user_storage["exchange"])*1.5) + ' $ с биржи')
-                user_storage["exchange"] = 0
-
-            if user_message in BURSEgive:
-                user_storage["moneyU"] = float(user_storage["moneyU"]) - 100
-                user_storage["exchange"] = float(user_storage["exchange"]) + 100
-                response.set_text('Вы оставили 100$ на бирже')
-
-            if user_message not in BURSEgive + BURSEtake:
-                response.set_text('Иногда ничего не делать - лучшее решение')
-            user_storage["choice"] = False
-            return response, user_storage
-
-        if bool(user_storage["prison1"]) and bool(user_storage["prison2"]):
-            user_storage["users_turn"] = True
-            user_storage["prison1"] = False
-            user_storage["prison2"] = False
-            response.set_text('Алиса помогла сбежать вам из тюрьмы, ходите ')
-            return response, user_storage
-
-        if bool(user_storage["prison1"]):
-            if not bool(user_storage["users_turn"]):
-                user_storage["users_turn"] = True
-                user_storage["prison1"] = False
-
-        if bool(user_storage["prison2"]):
-            if bool(user_storage["users_turn"]):
-                user_storage["users_turn"] = False
-                user_storage["prison2"] = False
-
-        if bool(user_storage["go"]):
-            if user_message.isdigit():
-                response.set_text(
-                    '\n Вы перешли на ячейку ' + str(user_message) + '\n' + str(game.fields[int(user_message)]))
-                if user_storage["field_cellU"] + int(user_message) < 40:
-                    user_storage["moneyU"] = user_storage["moneyU"] + 200
-                user_storage["field_cellU"] = int(user_message)
-            if not user_message.isdigit():
-                response.set_text('Ваш ход \n' + str(
-                    game.fields[int(user_storage["field_cellA"])]) + '\n Вы остались на месте ')
-            user_storage["go"] = False
-            return response, user_storage
-
-        if bool(user_storage["bank"]):
-            if user_message in BURSEtake:
-                user_storage["moneyU"] = float(user_storage["moneyU"]) + float(user_storage["bankU"])
-                response.set_text('Вы обналичили ' + str(user_storage["bankU"]) + ' $ ')
-                user_storage["bankU"] = 0
-
-            if user_message.isdigit():
-                if float(user_message) > float(user_storage["moneyU"]):
-                    response.set_text('Нехорошо врать, у тебя нет столько денег')
-                else:
-                    user_storage["bankU"] = user_storage["bankU"] + float(user_message)
-                    user_storage["moneyU"] = float(user_storage["moneyU"]) - float(user_message)
-                    response.set_text('Вы оставили ' + str(user_message) + ' $ в банке')
-            if user_message.isdigit() == False and user_message not in BURSEtake:
-                response.set_text('Денюжки греют душу,когда они под рукой, не так ли?')
-            user_storage["bank"] = False
-            return response, user_storage
-
-        if int(user_storage["property"]) != 0:
-            if str(user_message) == 'купить':
-                user_storage["moneyU"] = float(user_storage["moneyU"]) + float(
-                    game.price_field[int(user_storage["field_cellU"])])
-                user_storage["propertyU"][int(user_storage["property"])] = 1
-                response.set_text('Поздравляю с приобретением! ')
-            else:
-                response.set_text('Может, это действительно не лучшее вложение денег')
-            user_storage["property"] = 0
-            return response, user_storage
 
         if user_message in ALL_WORDS:
             cube = randint(2,12)
@@ -495,7 +496,7 @@ def handle_dialog(request, response, user_storage):
                         if int(user_storage["propertyA"][a]) == 0 and int(user_storage["propertyU"][a]) == 0:
                             if b == 1:
                                 response.set_text('Ход Алисы \n' + str(
-                                    game.fields[int(user_storage["field_cellA"])]) + ' и решила купить \n Если вы попадете на данный сектор, то заплатите' + str(game.price_foreign_field[int(user_storage["field_cellA"])]) + ' $')
+                                    game.fields[int(user_storage["field_cellA"])]) + ' и решила купить \n Если вы попадете на данный сектор, то заплатите' + str(abs(game.price_foreign_field[int(user_storage["field_cellA"])])) + ' $')
                                 user_storage["moneyA"] = float(user_storage["moneyA"]) + float(
                                     game.price_field[int(user_storage["field_cellA"])])
                                 user_storage["propertyA"][a] = 1
@@ -713,7 +714,7 @@ def handle_dialog(request, response, user_storage):
                         if int(user_storage["propertyU"][int(a)]) == 0 and int(user_storage["propertyA"][int(a)]) == 0:
                             response.set_text(
                                 str('Ваш ход \n' + game.fields[int(
-                                    user_storage["field_cellU"])]) + '\n Если Алиса попадет на эту недвижимость, она заплатит ' + str(game.price_foreign_field[int(user_storage["field_cellU"])]) + ' $ \n Чтобы приобрести: введите "купить"')
+                                    user_storage["field_cellU"])]) + '\n Если Алиса попадет на эту недвижимость, она заплатит ' + str(abs(game.price_foreign_field[int(user_storage["field_cellU"])])) + ' $ \n Чтобы приобрести: введите "купить"')
                             user_storage["property"] = int(a)
                         user_storage["users_turn"] = False
                         return response, user_storage
