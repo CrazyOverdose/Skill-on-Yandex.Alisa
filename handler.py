@@ -109,8 +109,8 @@ def handle_dialog(request, response, user_storage):
             # имущество пользователя
             "moneyU": 200,  # Деньги Пользователя
             "moneyA": 200,  # Деньги Алисы
-            "field_cellA": 29,  # Клетка, на которой находится Алиса
-            "field_cellU": 29,  # Клетка, на которой находится пользователь
+            "field_cellA": 31,  # Клетка, на которой находится Алиса
+            "field_cellU": 31,  # Клетка, на которой находится пользователь
             "bankU": 0,  # вклады пользователя (ячейка поля 37)
             "bankA": 0,  # вклады алисы (ячейка поля 37)
             "exchange": 0,  # деньги на бирже (ячейка поля 13)
@@ -381,7 +381,7 @@ def handle_dialog(request, response, user_storage):
             return response, user_storage
 
         if user_message in ALL_WORDS:
-            cube = 2
+            cube = 0
 
             if user_message in WORDS:
                 if not bool(user_storage["users_turn"]):
@@ -391,7 +391,7 @@ def handle_dialog(request, response, user_storage):
                             float(user_storage["bankA"]) / 100 * 10)
                         user_storage["field_cellA"] = int(user_storage["field_cellA"]) + int(cube) - 40
 
-                    if int(cube) + int(user_storage["field_cellA"]) <= 40:
+                    else:
                         user_storage["field_cellA"] = int(user_storage["field_cellA"]) + int(cube)
 
                     if int(user_storage["field_cellA"]) == 23:
@@ -612,7 +612,7 @@ def handle_dialog(request, response, user_storage):
                             float(user_storage["bankU"]) / 100 * 10)
                         user_storage["field_cellU"] = int(user_storage["field_cellU"]) + int(cube) - 40
 
-                    if int(cube) + int(user_storage["field_cellU"]) <= 40:
+                    else:
                         user_storage["field_cellU"] = int(user_storage["field_cellU"]) + int(cube)
 
                     if int(user_storage["field_cellU"]) == 23:
@@ -797,8 +797,8 @@ def end(request, response, text):
         # имущество пользователя
         "moneyU": 200,  # Деньги Пользователя
         "moneyA": 200,  # Деньги Алисы
-        "field_cellA": 28,  # Клетка, на которой находится Алиса
-        "field_cellU": 28,  # Клетка, на которой находится пользователь
+        "field_cellA": 35,  # Клетка, на которой находится Алиса
+        "field_cellU": 35,  # Клетка, на которой находится пользователь
         "bankU": 0,  # вклады пользователя (ячейка поля 37)
         "bankA": 0,  # вклады алисы (ячейка поля 37)
         "exchange": 0,  # биржа (ячейка поля 13)
