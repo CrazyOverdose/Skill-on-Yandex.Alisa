@@ -40,7 +40,7 @@ class las_vegas:
               '\n 13. Биржа. Если она пуста, то должен оставить 100$, если нет,то вправе забрать в 1.5 раза больше, '
               'чем на ней '
               'есть или оставить еще 100\n',
-              '\n 14. Музей Shelby American Цена: 30$\n', '\n 15. ациональный музей атомных испытаний Цена: 30$\n',
+              '\n 14. Музей Shelby American Цена: 30$\n', '\n 15. Национальный музей атомных испытаний Цена: 30$\n',
               '\n 16. Отправляйтесь на биржу. Если биржа пуста, то должен оставить 100$, если нет,то вправе забрать в 1.5 '
               'раза больше, чем на ней '
               'есть или оставить еще 100\n',
@@ -58,7 +58,7 @@ class las_vegas:
               '\n 30. Отель-казино "Стратосфера Лас-Вегас" Цена: 50$\n',
               '\n 31. Отправляйтесь в тюрьму\n', '\n 32. Часовня цветов Цена: 55$\n',
               '\n 33. Музей мадам Тюссо Цена: 55$\n',
-              '\n 34. Выберете любую ячейку, на которую отправитесь. Действие этой ячейки на вас не распространиться\n',
+              '\n 34. Выберете любую ячейку, на которую отправитесь.\n',
               '\n 35. Ред-Рок-Каньон Цена: 55$\n', '\n 36. Отправляйтесь на 3 ячейки вперед \n',
               '\n 37. Банк. Вы можете положить деньги под 10% за круг (скажите, сколько денег хотите положить), забрать ранее вложенные деньги (с процентами) Для этого скажите "забрать"\n',
               '\n 38. Национальный парк "Долина смерти" Цена: 60$\n',
@@ -120,8 +120,8 @@ def handle_dialog(request, response, user_storage):
             # имущество пользователя
             "moneyU": 200,  # Деньги Пользователя
             "moneyA": 200,  # Деньги Алисы
-            "field_cellA": 1,  # Клетка, на которой находится Алиса
-            "field_cellU": 1,  # Клетка, на которой находится пользователь
+            "field_cellA": 34,  # Клетка, на которой находится Алиса
+            "field_cellU": 34,  # Клетка, на которой находится пользователь
             "bankU": 0,  # вклады пользователя (ячейка поля 37)
             "bankA": 0,  # вклады алисы (ячейка поля 37)
             "exchange": 0,  # деньги на бирже (ячейка поля 13)
@@ -134,7 +134,9 @@ def handle_dialog(request, response, user_storage):
             "choice": False,  # пользователь попал на биржу
             "prison1": False,  # тюрьма Алисы
             "prison2": False,  # тюрьма пользователя
-            "crash": False  # если пользователь почти банкрот
+            "crash": False,  # если пользователь почти банкрот
+            "anycell": False
+
         }
 
         global backup_turn
@@ -289,6 +291,7 @@ def handle_dialog(request, response, user_storage):
                 if user_storage["field_cellU"] + int(user_message) < 40:
                     user_storage["moneyU"] = user_storage["moneyU"] + 200
                 user_storage["field_cellU"] = int(user_message)
+                user_storage["anycell"] = True
             if not user_message.isdigit():
                 response.set_text('Ваш ход \n' + str(
                     game.fields[int(user_storage["field_cellU"])]) + '\n Вы остались на месте ')
@@ -312,6 +315,14 @@ def handle_dialog(request, response, user_storage):
                 response.set_text('Денюжки греют душу,когда они под рукой, не так ли?')
             user_storage["bank"] = False
             return response, user_storage
+
+        if bool(user_storage["anycell"]):
+            user_message = 'го'
+            if bool(user_storage["users_turn"]) == True:
+                user_storage["users_turn"] = False
+            if bool(user_storage["users_turn"]) == False:
+                user_storage["users_turn"] = True
+
 
         if int(user_storage["property"]) != 0:
             if str(user_message) == 'купить':
@@ -400,6 +411,11 @@ def handle_dialog(request, response, user_storage):
             cube = randint(2, 12)
 
             if user_message in WORDS:
+
+                if bool(user_storage["anycell"]):
+                    cube = 0
+                    user_storage["anycell"] = False
+
                 if not bool(user_storage["users_turn"]):
                     if int(cube) + int(user_storage["field_cellA"]) > 40:
                         user_storage["moneyA"] = float(user_storage["moneyA"]) + 200
@@ -621,6 +637,7 @@ def handle_dialog(request, response, user_storage):
                         response.set_text('Ход Алисы \n' + str(
                             game.fields[int(user_storage["field_cellA"])]) + '\n Алиса перешла на ячейку ' + str(cell))
                         user_storage["field_cellA"] = cell
+                        user_storage["anycell"] = True
 
                     user_storage["users_turn"] = True
                     return response, user_storage
