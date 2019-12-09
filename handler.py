@@ -81,7 +81,7 @@ BURSEtake = ['взять', 'забрать', 'взятьденьги', 'забр
 
 BURSEgive = ['оставить', 'отдать', 'отдатьденьги', 'положить', 'оставитьденьги', 'положитьденьги', ]
 
-PLACE = ['мояячейка', 'гдея', 'моеположение', 'накакойяячейке', 'клетка', 'мояклетка', 'накакойяклетке']
+PLACE = ['мояячейка', 'гдея', 'где', 'моеположение', 'накакойяячейке', 'клетка', 'мояклетка', 'накакойяклетке']
 
 RULES = ['правила', 'какиграть', 'описание', 'описаниеигры']
 
@@ -168,7 +168,7 @@ def handle_dialog(request, response, user_storage):
 
         if user_message in MONEY:
             response.set_text(
-                'Ваши деньги ' + str(user_storage["moneyU"]) + '  Деньги Алисы ' + str(user_storage["moneyA"]))
+                'Ваши деньги ' + str(user_storage["moneyU"]) + '\nДеньги Алисы ' + str(user_storage["moneyA"]))
             return response, user_storage
 
         if user_message in MAP:
