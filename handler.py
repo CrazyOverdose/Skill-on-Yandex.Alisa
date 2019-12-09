@@ -335,7 +335,7 @@ def handle_dialog(request, response, user_storage):
                     i = i + 1
                 if int(flag) != 0:
                     i = int(deconversion(int(flag)))
-                    response.set_text('Алиса продала свою недвижимость ' + str(game.fields[int(i)]))
+                    response.set_text('Алиса продала свою недвижимость ' + str(game.fields[int(i)]) + ' за ' + str(abs(game.price_field[int(i)] // 2)) + ' $')
                     user_storage["moneyA"] = float(user_storage["moneyA"]) - float(game.price_field[int(i)] // 2)
                     user_storage["propertyA"][int(flag)] = 0
                     user_storage["users_turn"] = True
@@ -368,7 +368,7 @@ def handle_dialog(request, response, user_storage):
                                 user_message) == 38 or int(user_message) == 40:
                                 if int(user_storage["propertyU"][int(conversion(int(user_message)))]) == 1:
                                     response.set_text(
-                                        'Вы продали свою недвижимость ' + str(game.fields[int(user_message)]))
+                                        'Вы продали свою недвижимость ' + str(game.fields[int(user_message)]) + ' за ' + str(abs(game.price_field[int(user_message)] // 2)) + ' $')
                                     user_storage["moneyU"] = float(user_storage["moneyU"]) - float(
                                         game.price_field[int(user_message)] // 2)
                                     user_storage["propertyU"][int(conversion(int(user_message)))] = 0
