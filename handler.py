@@ -168,7 +168,7 @@ def handle_dialog(request, response, user_storage):
 
         if user_message in MONEY:
             response.set_text(
-                'Ваши деньги ' + str(user_storage["moneyU"]) + '\nДеньги Алисы ' + str(user_storage["moneyA"]))
+                'Ваши деньги ' + str(user_storage["moneyU"]) + ' $\nДеньги Алисы ' + str(user_storage["moneyA"]) + ' $')
             return response, user_storage
 
         if user_message in MAP:
