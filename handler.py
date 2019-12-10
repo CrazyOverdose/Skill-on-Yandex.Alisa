@@ -870,7 +870,9 @@ def end(request, response, text):
         "choice": False,  # пользователь попал на биржу
         "prison1": False,  # тюрьма Алисы
         "prison2": False,  # тюрьма пользователя
-        "crash": False  # если пользователь почти банкрот
+        "crash": False,  # если пользователь почти банкрот
+        "anycell1": False,
+        "anycell2": False
     }
 
     return user_storage
