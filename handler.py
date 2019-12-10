@@ -224,6 +224,7 @@ def handle_dialog(request, response, user_storage):
         if user_message in ENDING_WORDS:
             text = ''
             user_storage = end(request, response, text)
+            return response, user_storage
 
         if user_message in RULES:
             response.set_text('Каждый участник бросает кубик и в зависимости от выпавшего количества '
@@ -290,8 +291,7 @@ def handle_dialog(request, response, user_storage):
                 user_storage["field_cellU"] = int(user_message)
                 user_storage["anycell2"] = True
             if not user_message.isdigit():
-                response.set_text('Ваш ход \n' + str(
-                    game.fields[int(user_storage["field_cellU"])]) + '\n Вы остались на месте ')
+                response.set_text('Ваш ход \n' + '\n Вы остались на месте ')
             user_storage["go"] = False
             return response, user_storage
 
