@@ -100,7 +100,7 @@ MAP = ['ячейки', 'карта', 'поле', 'описаниеячеек']
 
 OWN = ['недвижимость', 'моянедвижимость', 'собственность', 'мое', 'моясобственность']
 
-ALL_WORDS = WORDS + ENDING_WORDS + MONEY + FIELD + PLACE + RULES + MAP + OWN
+ALL_WORDS = WORDS + MONEY + FIELD + PLACE + RULES + MAP + OWN
 
 
 # Функция для непосредственной обработки диалога.
@@ -135,13 +135,10 @@ def handle_dialog(request, response, user_storage):
             "prison1": False,  # тюрьма Алисы
             "prison2": False,  # тюрьма пользователя
             "crash": False,  # если пользователь почти банкрот
-            "anycell": False
+            "anycell1": False,
+            "anycell2": False
 
         }
-
-        global backup_turn
-
-        backup_turn = user_storage
 
         # Приветствие
         response.set_text(
@@ -291,7 +288,7 @@ def handle_dialog(request, response, user_storage):
                 if user_storage["field_cellU"] + int(user_message) < 40:
                     user_storage["moneyU"] = user_storage["moneyU"] + 200
                 user_storage["field_cellU"] = int(user_message)
-                user_storage["anycell"] = True
+                user_storage["anycell2"] = True
             if not user_message.isdigit():
                 response.set_text('Ваш ход \n' + str(
                     game.fields[int(user_storage["field_cellU"])]) + '\n Вы остались на месте ')
@@ -316,11 +313,14 @@ def handle_dialog(request, response, user_storage):
             user_storage["bank"] = False
             return response, user_storage
 
-        if bool(user_storage["anycell"]):
+        if bool(user_storage["anycell1"]):
             user_message = 'го'
             if bool(user_storage["users_turn"]):
                 user_storage["users_turn"] = False
-            else:
+
+        if bool(user_storage["anycell2"]):
+            user_message = 'го'
+            if not bool(user_storage["users_turn"]):
                 user_storage["users_turn"] = True
 
         if int(user_storage["property"]) != 0:
@@ -415,9 +415,13 @@ def handle_dialog(request, response, user_storage):
 
             if user_message in WORDS:
 
-                if bool(user_storage["anycell"]):
+                if bool(user_storage["anycell1"]):
                     cube = 0
-                    user_storage["anycell"] = False
+                    user_storage["anycell1"] = False
+
+                if bool(user_storage["anycell2"]):
+                    cube = 0
+                    user_storage["anycell2"] = False
 
                 if not bool(user_storage["users_turn"]):
                     if int(cube) + int(user_storage["field_cellA"]) > 40:
@@ -648,7 +652,7 @@ def handle_dialog(request, response, user_storage):
                         response.set_text('Ход Алисы \n' + str(
                             game.fields[int(user_storage["field_cellA"])]) + '\n Алиса перешла на ячейку ' + str(cell))
                         user_storage["field_cellA"] = cell
-                        user_storage["anycell"] = True
+                        user_storage["anycell1"] = True
 
                     user_storage["users_turn"] = True
                     return response, user_storage
