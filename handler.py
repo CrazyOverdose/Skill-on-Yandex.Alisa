@@ -30,14 +30,14 @@ class las_vegas:
         fields(list): Описание всех клеток поля
         price_field(list): Цены всех ячеек поля
         price_foreign_field(list): Цены, которые заплатит тот, кто попал на чужую недвижимость """
-    questions = [0, 'Чему равно 2+4-3*2', 'Какое из чисел натуральное? 0, 4, 0.2, 1/2', 'Cтолица Канады',
-                 'Столица Южной Кореи',
+    questions = [0, 'Чему равно 2+4-3*2', 'Какое из чисел натуральное? 0, 4, 0.2, 1/2', 'Cтолица Канады (Соблюдайте правила русского языка, пожалуйста)',
+                 'Столица Южной Кореи (Соблюдайте правила русского языка, пожалуйста)',
                  'На какую букву ударание в слове "щавель"',
-                 'Какая буква пропущена? Параш..т', 'Кто написал "Горе от ума"?', 'Является ли банан фруктом?',
+                 'Какая буква пропущена? Параш..т', 'Кто написал "Горе от ума"? (Соблюдайте правила русского языка, пожалуйста)', 'Является ли банан фруктом?',
                  'Чему равна площадь треугольника со сторонами 4 на 3 на 5', 'Сколько в 1км сантиметров?',
                  'Сколько лет длилась Первая Мировая война?']
 
-    answers = [0, 0, 4, 'оттава', 'сеул', 'е', 'ю', 'грибоедов', 'нет', '6', '100000', '4']
+    answers = [0, 0, 4, 'Оттава', 'Сеул', 'е', 'ю', 'Грибоедов', 'нет', '6', '100000', '4']
 
     fields = [0, '\n 1. Cтарт \n', '\n 2. Колесо обозрения "High Roller" Цена: 10$ \n ',
               '\n 3. Инвестроры вложили в вас 100$\n',
@@ -60,7 +60,7 @@ class las_vegas:
               '\n 21. Бесплатный ночлег\n',
               '\n 22. Развлекательный комплекс "Луксор Лас-Вегас" Цена: 45$\n', '\n 23. Отправляйтесь на начало\n',
               '\n 24. Отель-казино "Париж Лас-Вегас" Цена: 45$\n',
-              '\n 25. Отель-казино "Венецианский Лас-Вегас Цена: 45$"\n',
+              '\n 25. Отель-казино "Венецианский Лас-Вегас" Цена: 45$\n',
               '\n 26. Мотель. Вы остановились переночевать в мотеле. Заплатите 100$\n',
               '\n 27. Отель-казино "Wynn" Цена: 50$\n',
               '\n 28. Развлекательный комплекс "Сизарс-Пэлас" Цена: 50$\n',
@@ -136,8 +136,8 @@ def handle_dialog(request, response, user_storage):
             "propertyU": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             # имущество пользователя
-            "moneyU": 100,  # Деньги Пользователя
-            "moneyA": 100,  # Деньги Алисы
+            "moneyU": 200,  # Деньги Пользователя
+            "moneyA": 200,  # Деньги Алисы
             "field_cellA": 1,  # Клетка, на которой находится Алиса
             "field_cellU": 1,  # Клетка, на которой находится пользователь
             "bankU": 0,  # вклады пользователя (ячейка поля 37)
@@ -330,10 +330,14 @@ def handle_dialog(request, response, user_storage):
 
         ##Обработка попадания пользователя в банк
         if bool(user_storage["bank"]):
+
             if user_message in BURSEtake:
-                user_storage["moneyU"] = float(user_storage["moneyU"]) + float(user_storage["bankU"])
-                response.set_text('Вы обналичили ' + str(user_storage["bankU"]) + ' $ ')
-                user_storage["bankU"] = 0
+                if float(user_storage["bankU"]) == 0:
+                    response.set_text('Ваши вклады пусты, вам нечего забирать')
+                else:
+                    user_storage["moneyU"] = float(user_storage["moneyU"]) + float(user_storage["bankU"])
+                    response.set_text('Вы обналичили ' + str(user_storage["bankU"]) + ' $ ')
+                    user_storage["bankU"] = 0
 
             if user_message.isdigit():
                 if float(user_message) > float(user_storage["moneyU"]):
@@ -350,10 +354,12 @@ def handle_dialog(request, response, user_storage):
         ##ОБработка решения пользователя насчет недвижимости (купить, не купить)
         if int(user_storage["property"]) != 0:
             if str(user_message) == 'купить':
-                user_storage["moneyU"] = float(user_storage["moneyU"]) + float(
-                    game.price_field[int(user_storage["field_cellU"])])
-                user_storage["propertyU"][int(user_storage["property"])] = 1
-                response.set_text('Поздравляю с приобретением! ')
+                if float(user_storage["moneyU"]) < float(game.price_field[int(user_storage["field_cellU"])]):
+                    response.set_text('У вас недостаточно средств ')
+                else:
+                    user_storage["moneyU"] = float(user_storage["moneyU"]) + float(game.price_field[int(user_storage["field_cellU"])])
+                    user_storage["propertyU"][int(user_storage["property"])] = 1
+                    response.set_text('Поздравляю с приобретением! ')
             else:
                 response.set_text('Может, это действительно не лучшее вложение денег')
             user_storage["property"] = 0
