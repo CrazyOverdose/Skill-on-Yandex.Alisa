@@ -30,10 +30,13 @@ class las_vegas:
         fields(list): Описание всех клеток поля
         price_field(list): Цены всех ячеек поля
         price_foreign_field(list): Цены, которые заплатит тот, кто попал на чужую недвижимость """
-    questions = ['0', 'Чему равно 2+4-3*2', 'Какое из чисел натуральное? 0, 4, 0.2, 1/2', 'Cтолица Канады (Соблюдайте правила русского языка, пожалуйста)',
+    questions = ['0', 'Чему равно 2+4-3*2', 'Какое из чисел натуральное? 0, 4, 0.2, 1/2',
+                 'Cтолица Канады (Соблюдайте правила русского языка, пожалуйста)',
                  'Столица Южной Кореи (Соблюдайте правила русского языка, пожалуйста)',
                  'На какую букву ударание в слове "щавель"',
-                 'Какая буква пропущена? Параш..т', 'Кто написал "Горе от ума"? (Соблюдайте правила русского языка, пожалуйста)', 'Является ли банан фруктом?',
+                 'Какая буква пропущена? Параш..т',
+                 'Кто написал "Горе от ума"? (Соблюдайте правила русского языка, пожалуйста)',
+                 'Является ли банан фруктом?',
                  'Чему равна площадь треугольника со сторонами 4 на 3 на 5', 'Сколько в 1км сантиметров?',
                  'Сколько лет длилась Первая Мировая война?']
 
@@ -75,9 +78,12 @@ class las_vegas:
               '\n 39. Вы такой невнимательный! Как умудрились потерять 50$?\n',
               '\n 40. Сансет Парк Цена: 60$\n']
 
-    price_field = [0, 200, -10, 100, -10, 0, -50, -20, -50, -20, -20, -150, -30, 0, -30, -30, 0, -40, 0, -40, -40, 0, -45, 200, -45, -45, -100, -50, -50, 95, -50, 0, -55, -55, 0, -55, 0, 0, -60, -50, -60]
+    price_field = [0, 200, -10, 100, -10, 0, -50, -20, -50, -20, -20, -150, -30, 0, -30, -30, 0, -40, 0, -40, -40, 0,
+                   -45, 200, -45, -45, -100, -50, -50, 95, -50, 0, -55, -55, 0, -55, 0, 0, -60, -50, -60]
 
-    price_foreign_field = [0, 200, -30, 100, -30, 0, -50, -50, -50, -50, -50, -200, -70, 0, -70, -70, 0, -85, 0, -85, -85, 0, -100, 200, -100, -100, -100, -120, -120, 95, -120, 0, -135, -135, 0, -135, 0, 0, -150, -50, -150]
+    price_foreign_field = [0, 200, -30, 100, -30, 0, -50, -50, -50, -50, -50, -200, -70, 0, -70, -70, 0, -85, 0, -85,
+                           -85, 0, -100, 200, -100, -100, -100, -120, -120, 95, -120, 0, -135, -135, 0, -135, 0, 0,
+                           -150, -50, -150]
 
 
 ## Слова для показа количества денег Алисы и пользователя
@@ -114,7 +120,6 @@ MAP = ['ячейки', 'карта', 'поле', 'описаниеячеек']
 OWN = ['недвижимость', 'моянедвижимость', 'собственность', 'мое', 'моё', 'моясобственность']
 
 
-
 def handle_dialog(request, response, user_storage):
     """Функция обработки самой игры
     Args:
@@ -129,7 +134,6 @@ def handle_dialog(request, response, user_storage):
     random.seed()
     ## Обработка новой сессии
     if request.is_new_session:
-
         user_storage = {
             "propertyA": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # имущество Алисы
@@ -191,7 +195,7 @@ def handle_dialog(request, response, user_storage):
                 if user_storage["propertyU"][j] == 1:
                     desipher = deconversion(j)
                     text = text + game.fields[desipher]
-                j +=1
+                j += 1
             response.set_text(text)
             return response, user_storage
 
@@ -240,20 +244,18 @@ def handle_dialog(request, response, user_storage):
 
         ##Вывод ячеек, на которых находятся Алиса и пользователь
         if user_message in PLACE:
-            response.set_text('Вы находитесь на ' + str(user_storage["field_cellU"]) + ' ячейке \n Алиса на ' + str(
-                user_storage["field_cellA"]))
+            response.set_text('Вы находитесь на ' + user_storage["field_cellU"] + ' ячейке \n Алиса на ' + user_storage[
+                "field_cellA"])
             return response, user_storage
 
         ##Обработка начала новой игры
         if user_message in ENDING_WORDS:
-
             text = ''
             user_storage = end(request, response, text)
             return response, user_storage
 
         ##Вывод правил игры
         if user_message in RULES:
-
             response.set_text('Каждый участник бросает кубик и в зависимости от выпавшего количества '
                               'очков перемещает фишку по полю. За каждый пройденный круг банк выплачивает 200$. '
                               'Ваша цель – '
@@ -268,7 +270,7 @@ def handle_dialog(request, response, user_storage):
             return response, user_storage
 
         if user_storage["school"] != 0:
-        ##Пользователь попал на ячейку "Назад в школу". Обработка ячейки
+            ##Пользователь попал на ячейку "Назад в школу". Обработка ячейки
             if str(user_message) == game.answers[user_storage["school"]]:
                 response.set_text('Правильный ответ')
                 user_storage["moneyU"] = user_storage["moneyU"] + 50
@@ -278,7 +280,7 @@ def handle_dialog(request, response, user_storage):
             return response, user_storage
 
         if bool(user_storage["choice"]):
-        ##Обработка попадания пользователя на биржу
+            ##Обработка попадания пользователя на биржу
             if user_message in BURSEtake:
                 user_storage["moneyU"] = float(user_storage["moneyU"]) + float(user_storage["exchange"]) * 1.5
                 response.set_text('Вы взяли ' + str(float(user_storage["exchange"]) * 1.5) + ' $ с биржи')
@@ -357,7 +359,8 @@ def handle_dialog(request, response, user_storage):
                 if float(user_storage["moneyU"]) < float(game.price_field[int(user_storage["field_cellU"])]):
                     response.set_text('У вас недостаточно средств ')
                 else:
-                    user_storage["moneyU"] = float(user_storage["moneyU"]) + float(game.price_field[int(user_storage["field_cellU"])])
+                    user_storage["moneyU"] = float(user_storage["moneyU"]) + float(
+                        game.price_field[int(user_storage["field_cellU"])])
                     user_storage["propertyU"][int(user_storage["property"])] = 1
                     response.set_text('Поздравляю с приобретением! ')
             else:
@@ -591,7 +594,8 @@ def handle_dialog(request, response, user_storage):
                     if int(user_storage["propertyU"][a]) == 1:
                         response.set_text('Ход Алисы \n' + 'Алиса попала на ваш участок: ' + str(
                             game.fields[int(user_storage["field_cellA"])]) + 'и заплатила ' + str(
-                            abs(int(game.price_foreign_field[int(user_storage["field_cellA"])] * k))) + '$\n' + '\n Если скуплены все ячейки недвижимости, стоимость попадания на них возрастает в 3 раза')
+                            abs(int(game.price_foreign_field[int(user_storage[
+                                                                     "field_cellA"])] * k))) + '$\n' + '\n Если скуплены все ячейки недвижимости, стоимость попадания на них возрастает в 3 раза')
                         user_storage["moneyA"] = float(user_storage["moneyA"]) + float(
                             game.price_foreign_field[int(user_storage["field_cellA"])] * k)
                         user_storage["moneyU"] = float(user_storage["moneyU"]) - float(
@@ -607,7 +611,8 @@ def handle_dialog(request, response, user_storage):
                             response.set_text('Ход Алисы \n' + str(
                                 game.fields[int(user_storage[
                                                     "field_cellA"])]) + ' и решила купить \n Если вы попадете на данный сектор, то заплатите ' + str(
-                                abs(game.price_foreign_field[int(user_storage["field_cellA"])])) + ' $' + '\n Если скуплены все ячейки недвижимости, стоимость попадания на них возрастает в 3 раза')
+                                abs(game.price_foreign_field[int(user_storage[
+                                                                     "field_cellA"])])) + ' $' + '\n Если скуплены все ячейки недвижимости, стоимость попадания на них возрастает в 3 раза')
                             user_storage["moneyA"] = float(user_storage["moneyA"]) + float(
                                 game.price_field[int(user_storage["field_cellA"])])
                             user_storage["propertyA"][a] = 1
@@ -704,9 +709,11 @@ def handle_dialog(request, response, user_storage):
                     if choise == 1:
                         user_storage["moneyA"] = user_storage["moneyA"] + 50
                         response.set_text(
-                            'Ход Алисы \n ' + game.fields[18] + '\n' + game.questions[rand] + '\n Ответ Алисы:' + game.answers[rand] + '\nПравильный ответ')
+                            'Ход Алисы \n ' + game.fields[18] + '\n' + game.questions[rand] + '\n Ответ Алисы:' +
+                            game.answers[rand] + '\nПравильный ответ')
                     else:
-                        response.set_text('Ход Алисы \n ' + game.fields[18] + '\n' + game.questions[rand] + '\n Ответ Алисы: я не знаю. Нe засчитано')
+                        response.set_text('Ход Алисы \n ' + game.fields[18] + '\n' + game.questions[
+                            rand] + '\n Ответ Алисы: я не знаю. Нe засчитано')
                     user_storage["users_turn"] = True
                     return response, user_storage
 
@@ -941,7 +948,6 @@ def handle_dialog(request, response, user_storage):
 
     # В любом случае
     return response, user_storage
-
 
 
 def end(request, response, text):
