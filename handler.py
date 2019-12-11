@@ -449,7 +449,7 @@ def handle_dialog(request, response, user_storage):
 
             random.seed()
             ##Бросок кубика
-            cube = randint(2, 12)
+            cube = 0
 
             ##Нарушение очередности хода для Алисы из-за ячейки 34 (переход на любую ячейку)
             if bool(user_storage["anycell1"]):
