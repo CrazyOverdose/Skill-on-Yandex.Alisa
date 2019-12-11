@@ -131,8 +131,8 @@ def handle_dialog(request, response, user_storage):
     if request.is_new_session:
 
         user_storage = {
-            "propertyA": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],  # имущество Алисы
+            "propertyA": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # имущество Алисы
             "propertyU": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             # имущество пользователя
@@ -591,7 +591,7 @@ def handle_dialog(request, response, user_storage):
                     if int(user_storage["propertyU"][a]) == 1:
                         response.set_text('Ход Алисы \n' + 'Алиса попала на ваш участок: ' + str(
                             game.fields[int(user_storage["field_cellA"])]) + 'и заплатила ' + str(
-                            abs(int(game.price_foreign_field[int(user_storage["field_cellA"])] * k))) + '$\n')
+                            abs(int(game.price_foreign_field[int(user_storage["field_cellA"])] * k))) + '$\n' + '\n Если скуплены все ячейки недвижимости, стоимость попадания на них возрастает в 3 раза')
                         user_storage["moneyA"] = float(user_storage["moneyA"]) + float(
                             game.price_foreign_field[int(user_storage["field_cellA"])] * k)
                         user_storage["moneyU"] = float(user_storage["moneyU"]) - float(
@@ -607,7 +607,7 @@ def handle_dialog(request, response, user_storage):
                             response.set_text('Ход Алисы \n' + str(
                                 game.fields[int(user_storage[
                                                     "field_cellA"])]) + ' и решила купить \n Если вы попадете на данный сектор, то заплатите ' + str(
-                                abs(game.price_foreign_field[int(user_storage["field_cellA"])])) + ' $')
+                                abs(game.price_foreign_field[int(user_storage["field_cellA"])])) + ' $' + '\n Если скуплены все ячейки недвижимости, стоимость попадания на них возрастает в 3 раза')
                             user_storage["moneyA"] = float(user_storage["moneyA"]) + float(
                                 game.price_field[int(user_storage["field_cellA"])])
                             user_storage["propertyA"][a] = 1
@@ -853,7 +853,7 @@ def handle_dialog(request, response, user_storage):
                     if int(user_storage["propertyA"][int(a)]) == 1:
                         response.set_text(str('Ваш ход \n' + str(game.fields[int(
                             user_storage[
-                                "field_cellU"])]) + ' \n Если скуплены все ячейки недвижимость, стоимость попадания на них возрастает в 3 раза \n Вы попали на недвижимость Алисы и заплатили ' + str(
+                                "field_cellU"])]) + ' \n Если скуплены все ячейки недвижимости, стоимость попадания на них возрастает в 3 раза \n Вы попали на недвижимость Алисы и заплатили ' + str(
                             abs(int(game.price_foreign_field[int(user_storage["field_cellU"])]) * k)) + '$\n'))
                         user_storage["moneyU"] = float(user_storage["moneyU"]) + float(
                             game.price_foreign_field[int(user_storage["field_cellU"])] * k)
@@ -874,7 +874,7 @@ def handle_dialog(request, response, user_storage):
                                     "field_cellU"])]) + '\n Если Алиса попадет на эту недвижимость, она заплатит ' + str(
                                 abs(game.price_foreign_field[int(
                                     user_storage[
-                                        "field_cellU"])])) + ' $  \n Если скуплены все ячейки недвижимость, стоимость попадания на них возрастает в 3 раза\n Чтобы приобрести: введите "купить"')
+                                        "field_cellU"])])) + ' $  \n Если скуплены все ячейки недвижимости, стоимость попадания на них возрастает в 3 раза\n Чтобы приобрести: введите "купить"')
                         user_storage["property"] = int(a)
                     user_storage["users_turn"] = False
                     return response, user_storage
