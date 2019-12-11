@@ -141,9 +141,9 @@ def handle_dialog(request, response, user_storage):
                           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             # имущество пользователя
             "moneyU": 200,  # Деньги Пользователя
-            "moneyA": 200,  # Деньги Алисы
-            "field_cellA": 18,  # Клетка, на которой находится Алиса
-            "field_cellU": 18,  # Клетка, на которой находится пользователь
+            "moneyA": 150,  # Деньги Алисы
+            "field_cellA": 11,  # Клетка, на которой находится Алиса
+            "field_cellU": 31,  # Клетка, на которой находится пользователь
             "bankU": 0,  # вклады пользователя (ячейка поля 37)
             "bankA": 0,  # вклады алисы (ячейка поля 37)
             "exchange": 0,  # деньги на бирже (ячейка поля 13)
@@ -183,19 +183,17 @@ def handle_dialog(request, response, user_storage):
         ##Собственность Алисы и пользователя
         if user_message in OWN:
             text = 'Собственность Алисы: '
-            i = 0
-            j = 0
-            while i < 23:
+            for i in range(1,23):
                 if user_storage["propertyA"][i] == 1:
                     desipher = deconversion(i)
                     text = text + game.fields[desipher]
-                i += 1
+
             text = text + '\nВаша собственность: '
-            while j < 23:
+            for j in range(1,23):
                 if user_storage["propertyU"][j] == 1:
                     desipher = deconversion(j)
                     text = text + game.fields[desipher]
-                j += 1
+
             response.set_text(text)
             return response, user_storage
 
@@ -297,7 +295,7 @@ def handle_dialog(request, response, user_storage):
             return response, user_storage
 
         ##Если Алиса и пользователь оказались в тюрьме одновременно
-        if bool(user_storage["prison1"]) and bool(user_storage["prison2"]):
+        if user_storage["prison1"] and user_storage["prison2"]:
             user_storage["users_turn"] = True
             user_storage["prison1"] = False
             user_storage["prison2"] = False
@@ -305,14 +303,14 @@ def handle_dialog(request, response, user_storage):
             return response, user_storage
 
         ##Алиса попала в тюрьму и пропускает ход
-        if bool(user_storage["prison1"]):
-            if not bool(user_storage["users_turn"]):
+        if user_storage["prison1"]:
+            if not user_storage["users_turn"]:
                 user_storage["users_turn"] = True
                 user_storage["prison1"] = False
 
         ##Пользователь попал в тюрьму и пропускает ход
-        if bool(user_storage["prison2"]):
-            if bool(user_storage["users_turn"]):
+        if user_storage["prison2"]:
+            if user_storage["users_turn"]:
                 user_storage["users_turn"] = False
                 user_storage["prison2"] = False
 
@@ -435,16 +433,16 @@ def handle_dialog(request, response, user_storage):
                             return response, user_storage
 
         ##Выпадение исключения в случае ничьи
-        if float(user_storage["moneyU"]) < 0 and float(user_storage["moneyA"]) < 0:
+        if user_storage["moneyU"] < 0 and user_storage["moneyA"] < 0:
             raise Draw
 
         ##Выпадение исключения в случае банкротства пользователя
-        if bool(user_storage["users_turn"]):
-            if float(user_storage["moneyU"]) < 0:
+        if user_storage["users_turn"]:
+            if user_storage["moneyU"] < 0:
                 raise WinnerError1
         ##Выпадение исключения в случае банкротства Алисы
-        if not bool(user_storage["users_turn"]):
-            if float(user_storage["moneyA"]) < 0:
+        if not user_storage["users_turn"]:
+            if user_storage["moneyA"] < 0:
                 raise WinnerError2
 
         ##Обработка самого хода Алисы или пользователя
@@ -498,21 +496,19 @@ def handle_dialog(request, response, user_storage):
                     return response, user_storage
 
                 ##Отправляйтесь в тюрьму
-                if int(user_storage["field_cellA"]) == 31:
+                if user_storage["field_cellA"] == 31:
                     response.set_text(
-                        'Ход Алисы \n' + str(game.fields[int(user_storage["field_cellA"])]) + str(
-                            game.fields[11]))
-                    user_storage["moneyA"] = float(user_storage["moneyA"]) + 50
+                        'Ход Алисы \n' + game.fields[user_storage["field_cellA"]] +game.fields[11])
+                    user_storage["moneyA"] = user_storage["moneyA"] + 50
                     user_storage["field_cellA"] = 11
                     user_storage["prison1"] = True
                     user_storage["users_turn"] = True
                     return response, user_storage
 
                 ##Тюрьма
-                if int(user_storage["field_cellA"]) == 11:
-                    user_storage["moneyA"] = float(user_storage["moneyA"]) + float(
-                        game.price_field[int(user_storage["field_cellA"])])
-                    response.set_text('Ход Алисы \n' + str(game.fields[int(user_storage["field_cellA"])]))
+                if user_storage["field_cellA"] == 11:
+                    user_storage["moneyA"] = user_storage["moneyA"] + game.price_field[user_storage["field_cellA"]]
+                    response.set_text('Ход Алисы \n' + game.fields[user_storage["field_cellA"]])
                     user_storage["prison1"] = True
                     user_storage["users_turn"] = True
                     return response, user_storage
@@ -790,21 +786,19 @@ def handle_dialog(request, response, user_storage):
                     return response, user_storage
 
                 ## Отправляйтесь в тюрьму
-                if int(user_storage["field_cellU"]) == 31:
+                if user_storage["field_cellU"] == 31:
                     response.set_text(
-                        'Ваш ход \n' + str(game.fields[int(user_storage["field_cellU"])]) + str(
-                            game.fields[11]))
-                    user_storage["moneyU"] = float(user_storage["moneyU"]) + 50
+                        'Ваш ход \n' + game.fields[user_storage["field_cellU"]] + game.fields[11])
+                    user_storage["moneyU"] = user_storage["moneyU"] + 50
                     user_storage["field_cellU"] = 11
                     user_storage["prison2"] = True
                     user_storage["users_turn"] = False
                     return response, user_storage
 
                 ##Тюрьма
-                if int(user_storage["field_cellU"]) == 11:
-                    user_storage["moneyU"] = float(user_storage["moneyU"]) + float(
-                        game.price_field[int(user_storage["field_cellU"])])
-                    response.set_text('Ваш ход \n' + str(game.fields[int(user_storage["field_cellU"])]))
+                if user_storage["field_cellU"] == 11:
+                    user_storage["moneyU"] = user_storage["moneyU"] + game.price_field[user_storage["field_cellU"]]
+                    response.set_text('Ваш ход \n' + game.fields[user_storage["field_cellU"]])
                     user_storage["prison2"] = True
                     user_storage["users_turn"] = False
                     return response, user_storage
@@ -978,8 +972,8 @@ def end(request, response, text):
         # имущество пользователя
         "moneyU": 200,  # Деньги Пользователя
         "moneyA": 200,  # Деньги Алисы
-        "field_cellA": 1,  # Клетка, на которой находится Алиса
-        "field_cellU": 1,  # Клетка, на которой находится пользователь
+        "field_cellA": 11,  # Клетка, на которой находится Алиса
+        "field_cellU": 31,  # Клетка, на которой находится пользователь
         "bankU": 0,  # вклады пользователя (ячейка поля 37)
         "bankA": 0,  # вклады алисы (ячейка поля 37)
         "exchange": 0,  # деньги на бирже (ячейка поля 13)
