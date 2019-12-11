@@ -539,7 +539,17 @@ def handle_dialog(request, response, user_storage):
                 ##Недвижимость
                 if int(user_storage["field_cellA"]) in game.havings:
 
-                    k = real_estate(user_storage)
+                    k = 1
+                    flag = 0
+                    for j in range(1, 41):
+                        if int(user_storage["propertyA"][int(j)]) == 1:
+                            flag = flag + 1
+                    j = 1
+                    for j in range(1, 41):
+                        if int(user_storage["propertyU"][int(j)]) == 1:
+                            flag = flag + 1
+                    if flag == 22:
+                        k = 3
 
                     b = randint(1, 2)
 
@@ -761,7 +771,17 @@ def handle_dialog(request, response, user_storage):
                 ##Недвижимость
                 if user_storage["field_cellU"] in game.havings:
 
-                    k = real_estate((user_storage))
+                    k = 1
+                    flag = 0
+                    for j in range(1, 41):
+                        if int(user_storage["propertyA"][int(j)]) == 1:
+                            flag = flag + 1
+                    j = 1
+                    for j in range(1, 41):
+                        if int(user_storage["propertyU"][int(j)]) == 1:
+                            flag = flag + 1
+                    if flag == 22:
+                        k = 3
 
                     if user_storage["propertyA"][user_storage["field_cellU"]] == 1:
                         response.set_text('Ваш ход \n' + game.fields[user_storage[
@@ -894,24 +914,3 @@ def end(request, response, text):
     }
 
     return user_storage
-
-
-def real_estate(user_storage):
-    """Проверка, что раскуплены все ячейки недвижимости
-    Args:
-        user_storage: Хранилище пользователя
-  Returns:
-        Коэффициент, на который умножается цена, которую заплатит тот, кто попадет на чужую недвижимость. Если раскуплены не все ячейки, k=1, если же раскуплены все ячейки, то k = 3"""
-    k = 1
-    flag = 0
-    for j in range(1, 41):
-        if int(user_storage["propertyA"][int(j)]) == 1:
-            flag = flag + 1
-    j = 1
-    for j in range(1, 41):
-        if int(user_storage["propertyU"][int(j)]) == 1:
-            flag = flag + 1
-    if flag == 22:
-        k = 3
-
-    return k
