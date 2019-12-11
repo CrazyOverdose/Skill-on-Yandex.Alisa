@@ -141,7 +141,6 @@ def handle_dialog(request, response, user_storage):
 
     ##Экземпляр поля
     game = las_vegas()
-    random.seed()
     ## Обработка новой сессии
     if request.is_new_session:
         user_storage = {
@@ -152,8 +151,8 @@ def handle_dialog(request, response, user_storage):
             # имущество пользователя
             "moneyU": 200.0,  # Деньги Пользователя
             "moneyA": 200.0,  # Деньги Алисы
-            "field_cellA": 1,  # Клетка, на которой находится Алиса
-            "field_cellU": 1,  # Клетка, на которой находится пользователь
+            "field_cellA": 8,  # Клетка, на которой находится Алиса
+            "field_cellU": 34,  # Клетка, на которой находится пользователь
             "bankU": 0.0,  # вклады пользователя (ячейка поля 37)
             "bankA": 0.0,  # вклады алисы (ячейка поля 37)
             "exchange": 0.0,  # деньги на бирже (ячейка поля 13)
@@ -200,7 +199,7 @@ def handle_dialog(request, response, user_storage):
             text = text + '\nВаша собственность: '
             for j in range(1, 41):
                 if user_storage["propertyU"][j] == 1:
-                    text = text + game.fields[i]
+                    text = text + game.fields[j]
 
             response.set_text(text)
             return response, user_storage
@@ -326,8 +325,8 @@ def handle_dialog(request, response, user_storage):
         if user_storage["go"]:
             if user_message.isdigit():
                 response.set_text(
-                    '\n Вы перешли на ячейку ' + str(user_message) + '\n' + game.fields[user_message])
-                if user_storage["field_cellU"] + int(user_message) < 40:
+                    '\n Вы перешли на ячейку ' + str(user_message) + '\n' + game.fields[int(user_message)])
+                if user_storage["field_cellU"] > int(user_message):
                     user_storage["moneyU"] = user_storage["moneyU"] + 200
                 user_storage["field_cellU"] = int(user_message)
                 user_storage["anycell2"] = True
@@ -443,6 +442,7 @@ def handle_dialog(request, response, user_storage):
         if user_message in WORDS:
 
             ##Бросок кубика
+            random.seed()
             cube = randint(2, 12)
 
             ##Нарушение очередности хода для Алисы из-за ячейки 34 (переход на любую ячейку)
@@ -606,7 +606,7 @@ def handle_dialog(request, response, user_storage):
 
                         if y == 2:
                             response.set_text('Ход Алисы \n' + game.fields[
-                                user_storage["field_cellA"]] + '\nАлиса взяла деньги с биржи')
+                                user_storage["field_cellA"]] + '\nАлиса взяла деньги с биржи ' + str(1.5 * user_storage["exchange"]) + ' $')
                             user_storage["moneyA"] = user_storage["moneyA"] + 1.5 * user_storage["exchange"]
                             user_storage["exchange"] = 0
 
@@ -670,7 +670,9 @@ def handle_dialog(request, response, user_storage):
                 ##Перемещение на любую ячейку
                 if user_storage["field_cellA"] == 34:
                     cell = 0
-                    while cell > 0:
+                    a = 12
+                    random.seed()
+                    while a == 12:
                         cell = randint(1, 40)
                         if cell not in game.bad:
                             break
@@ -887,18 +889,18 @@ def end(request, response, text):
                       'банкротом. \n \n Чтобы начать игру "бросить кубик"')
 
     user_storage = {
-        "propertyA": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # имущество Алисы
-        "propertyU": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        "propertyA": [2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                      0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],  # имущество Алисы
+        "propertyU": [2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                      0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],
         # имущество пользователя
-        "moneyU": 200,  # Деньги Пользователя
-        "moneyA": 200,  # Деньги Алисы
-        "field_cellA": 0,  # Клетка, на которой находится Алиса
-        "field_cellU": 0,  # Клетка, на которой находится пользователь
-        "bankU": 0,  # вклады пользователя (ячейка поля 37)
-        "bankA": 0,  # вклады алисы (ячейка поля 37)
-        "exchange": 0,  # деньги на бирже (ячейка поля 13)
+        "moneyU": 200.0,  # Деньги Пользователя
+        "moneyA": 200.0,  # Деньги Алисы
+        "field_cellA": 5,  # Клетка, на которой находится Алиса
+        "field_cellU": 34,  # Клетка, на которой находится пользователь
+        "bankU": 0.0,  # вклады пользователя (ячейка поля 37)
+        "bankA": 0.0,  # вклады алисы (ячейка поля 37)
+        "exchange": 0.0,  # деньги на бирже (ячейка поля 13)
         "user_id": request.user_id,
         "users_turn": True,  # чей ход
         "bank": False,  # пользователь попал в банк
