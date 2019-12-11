@@ -441,9 +441,8 @@ def handle_dialog(request, response, user_storage):
         ##Обработка самого хода Алисы или пользователя
         if user_message in WORDS:
 
-            random.seed()
             ##Бросок кубика
-            cube = 0
+            cube = randint(2, 12)
 
             ##Нарушение очередности хода для Алисы из-за ячейки 34 (переход на любую ячейку)
             if user_storage["anycell1"]:
