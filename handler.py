@@ -30,16 +30,16 @@ class las_vegas:
         fields(list): Описание всех клеток поля
         price_field(list): Цены всех ячеек поля
         price_foreign_field(list): Цены, которые заплатит тот, кто попал на чужую недвижимость """
-    questions = [0, 'Чему равно 2+4-3*2', 'Какое из чисел натуральное? 0, 4, 0.2, 1/2', 'Cтолица Канады (Соблюдайте правила русского языка, пожалуйста)',
+    questions = ['0', 'Чему равно 2+4-3*2', 'Какое из чисел натуральное? 0, 4, 0.2, 1/2', 'Cтолица Канады (Соблюдайте правила русского языка, пожалуйста)',
                  'Столица Южной Кореи (Соблюдайте правила русского языка, пожалуйста)',
                  'На какую букву ударание в слове "щавель"',
                  'Какая буква пропущена? Параш..т', 'Кто написал "Горе от ума"? (Соблюдайте правила русского языка, пожалуйста)', 'Является ли банан фруктом?',
                  'Чему равна площадь треугольника со сторонами 4 на 3 на 5', 'Сколько в 1км сантиметров?',
                  'Сколько лет длилась Первая Мировая война?']
 
-    answers = [0, 0, 4, 'Оттава', 'Сеул', 'е', 'ю', 'Грибоедов', 'нет', '6', '100000', '4']
+    answers = ['0', '0', '4', 'Оттава', 'Сеул', 'е', 'ю', 'Грибоедов', 'нет', '6', '100000', '4']
 
-    fields = [0, '\n 1. Cтарт \n', '\n 2. Колесо обозрения "High Roller" Цена: 10$ \n ',
+    fields = ['0', '\n 1. Cтарт \n', '\n 2. Колесо обозрения "High Roller" Цена: 10$ \n ',
               '\n 3. Инвестроры вложили в вас 100$\n',
               '\n 4. Ранчо "Casa de Shenandoah" Цена: 10$\n', '\n 5. Отправляйтесь на 2 ячейки назад\n',
               '\n 6. Брат за брата. Отдайте второму игроку 50$\n',
@@ -138,8 +138,8 @@ def handle_dialog(request, response, user_storage):
             # имущество пользователя
             "moneyU": 200,  # Деньги Пользователя
             "moneyA": 200,  # Деньги Алисы
-            "field_cellA": 1,  # Клетка, на которой находится Алиса
-            "field_cellU": 1,  # Клетка, на которой находится пользователь
+            "field_cellA": 18,  # Клетка, на которой находится Алиса
+            "field_cellU": 18,  # Клетка, на которой находится пользователь
             "bankU": 0,  # вклады пользователя (ячейка поля 37)
             "bankA": 0,  # вклады алисы (ячейка поля 37)
             "exchange": 0,  # деньги на бирже (ячейка поля 13)
@@ -697,20 +697,16 @@ def handle_dialog(request, response, user_storage):
                     return response, user_storage
 
                 ##Назад в школу
-                if int(user_storage["field_cellA"]) == 18:
+                if user_storage["field_cellA"] == 18:
                     random.seed()
-                    rand = int(randint(1, 11))
-                    choise = int(randint(1, 2))
+                    rand = randint(1, 11)
+                    choise = randint(1, 2)
                     if choise == 1:
-                        user_storage["moneyA"] = float(user_storage["moneyA"]) + 50
+                        user_storage["moneyA"] = user_storage["moneyA"] + 50
                         response.set_text(
-                            'Ход Алисы \n ' + str(game.fields[18]) + '\n' + str(
-                                game.questions[int(rand)]) + '\n Ответ Алисы:' + str(
-                                game.answers[int(rand)]) + '\nПравильный ответ')
+                            'Ход Алисы \n ' + game.fields[18] + '\n' + game.questions[rand] + '\n Ответ Алисы:' + game.answers[rand] + '\nПравильный ответ')
                     else:
-                        response.set_text(
-                            str('Ход Алисы \n ' + game.fields[18]) + '\n' + str(
-                                game.questions[int(rand)]) + '\n Ответ Алисы: я не знаю. Нe засчитано')
+                        response.set_text('Ход Алисы \n ' + game.fields[18] + '\n' + game.questions[rand] + '\n Ответ Алисы: я не знаю. Нe засчитано')
                     user_storage["users_turn"] = True
                     return response, user_storage
 
