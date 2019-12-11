@@ -155,7 +155,7 @@ def handle_dialog(request, response, user_storage):
             # имущество пользователя
             "moneyU": 200.0,  # Деньги Пользователя
             "moneyA": 200.0,  # Деньги Алисы
-            "field_cellA": 8,  # Клетка, на которой находится Алиса
+            "field_cellA": 34,  # Клетка, на которой находится Алиса
             "field_cellU": 34,  # Клетка, на которой находится пользователь
             "bankU": 0.0,  # вклады пользователя (ячейка поля 37)
             "bankA": 0.0,  # вклады алисы (ячейка поля 37)
@@ -517,8 +517,7 @@ def handle_dialog(request, response, user_storage):
                 ##На две ячейки назад
                 if user_storage["field_cellA"] == 5:
                     response.set_text(
-                        'Ход Алисы \n' + game.fields[user_storage["field_cellA"]]) + '\n Алиса попала на ' + \
-                    game.fields[user_storage["field_cellA"] - 2]
+                        'Ход Алисы \n' + game.fields[user_storage["field_cellA"]] + '\n Алиса попала на ' + game.fields[user_storage["field_cellA"] - 2])
                     user_storage["field_cellA"] = 3
                     user_storage["moneyA"] = user_storage["moneyA"] + game.price_field[user_storage["field_cellA"]]
                     user_storage["users_turn"] = True
