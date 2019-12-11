@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['level_86',['level',['../namespacehandler.html#a6cefb8ec323c906947f61716f8e3a6fd',1,'handler.level()'],['../namespacemain.html#ad39dcd94f0ffc845ab416c0783c20d25',1,'main.level()']]]
+  ['havings_89',['havings',['../classhandler_1_1las__vegas.html#a0f9d87398a4d28a26c2d0c5cdec5674f',1,'handler::las_vegas']]]
 ];

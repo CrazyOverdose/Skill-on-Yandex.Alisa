@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['words_97',['WORDS',['../namespacehandler.html#aac0b69fea9bd96d74a58a66f96393ef6',1,'handler']]]
+  ['session_5fstorage_100',['session_storage',['../namespacemain.html#a63508d5f041478616679a4e083732b78',1,'main']]]
 ];

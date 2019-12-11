@@ -1,6 +1,6 @@
-\hypertarget{namespacehandler}{}\doxysection{handler Namespace Reference}
+\hypertarget{namespacehandler}{}\doxysection{Пространство имен handler}
 \label{namespacehandler}\index{handler@{handler}}
-\doxysubsection*{Classes}
+\doxysubsection*{Классы}
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classhandler_1_1_draw}{Draw}}
@@ -11,18 +11,14 @@ class \mbox{\hyperlink{classhandler_1_1_winner_error1}{Winner\+Error1}}
 \begin{DoxyCompactList}\small\item\em Класс исключение для победы Алисы \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classhandler_1_1_winner_error2}{Winner\+Error2}}
 \begin{DoxyCompactList}\small\item\em Класс исключение для победы пользователя \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Functions}
+\doxysubsection*{Функции}
 \begin{DoxyCompactItemize}
 \item 
 def \mbox{\hyperlink{namespacehandler_a57f63d790fc995cdbc13816c7dd88c43}{handle\+\_\+dialog}} (request, response, user\+\_\+storage)
 \begin{DoxyCompactList}\small\item\em Функция обработки самой игры \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{namespacehandler_a9d7e6870ac937bc25def6d4320f7e57c}{end}} (request, response, text)
-\begin{DoxyCompactList}\small\item\em Начало новой игры \end{DoxyCompactList}\item 
-def \mbox{\hyperlink{namespacehandler_a8f151ae92314afd06773f0f3f0edafa0}{conversion}} (a)
-\begin{DoxyCompactList}\small\item\em Конвертация ячейки на поле в ячейку собственности \end{DoxyCompactList}\item 
-def \mbox{\hyperlink{namespacehandler_a27943b0c9ccc6b743b636b6f277f55cf}{deconversion}} (a)
-\begin{DoxyCompactList}\small\item\em Конвертация ячейки на поле в ячейку собственности \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Variables}
+\begin{DoxyCompactList}\small\item\em Начало новой игры \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Переменные}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{namespacehandler_a6cefb8ec323c906947f61716f8e3a6fd}{level}}
@@ -48,46 +44,12 @@ list \mbox{\hyperlink{namespacehandler_aa9694cf0223f7c92db239a19f98334fe}{R\+U\+
 list \mbox{\hyperlink{namespacehandler_a4bcc0760ad5d19b878b05e639bab3b58}{M\+AP}} = \mbox{[}\textquotesingle{}ячейки\textquotesingle{}, \textquotesingle{}карта\textquotesingle{}, \textquotesingle{}поле\textquotesingle{}, \textquotesingle{}описаниеячеек\textquotesingle{}\mbox{]}
 \begin{DoxyCompactList}\small\item\em Слова для вызова списка всех ячеек поля \end{DoxyCompactList}\item 
 list \mbox{\hyperlink{namespacehandler_ad065b932362cadc1a035f55af250ae47}{O\+WN}} = \mbox{[}\textquotesingle{}недвижимость\textquotesingle{}, \textquotesingle{}моянедвижимость\textquotesingle{}, \textquotesingle{}собственность\textquotesingle{}, \textquotesingle{}мое\textquotesingle{}, \textquotesingle{}моё\textquotesingle{}, \textquotesingle{}моясобственность\textquotesingle{}\mbox{]}
-\begin{DoxyCompactList}\small\item\em Слова для показа собственности Алисы и пользователя \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Слова для показа собственности Алисы и пользователя \end{DoxyCompactList}\item 
+list \mbox{\hyperlink{namespacehandler_a2a35eb1508b8c05f93b2ebb1431672d6}{B\+UY}} = \mbox{[}\textquotesingle{}купить\textquotesingle{},\textquotesingle{}да\textquotesingle{},\textquotesingle{}забрать\textquotesingle{},\textquotesingle{}приобрести\textquotesingle{},\textquotesingle{}хочу\textquotesingle{},\textquotesingle{}скупить\textquotesingle{}, \textquotesingle{}взять\textquotesingle{}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Слова для покупки недвижимости \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\doxysubsection{Function Documentation}
-\mbox{\Hypertarget{namespacehandler_a8f151ae92314afd06773f0f3f0edafa0}\label{namespacehandler_a8f151ae92314afd06773f0f3f0edafa0}} 
-\index{handler@{handler}!conversion@{conversion}}
-\index{conversion@{conversion}!handler@{handler}}
-\doxysubsubsection{\texorpdfstring{conversion()}{conversion()}}
-{\footnotesize\ttfamily def handler.\+conversion (\begin{DoxyParamCaption}\item[{}]{a }\end{DoxyParamCaption})}
-
-
-
-Конвертация ячейки на поле в ячейку собственности 
-
-
-\begin{DoxyParams}{Parameters}
-{\em a} & Ячейка, на которую попал пользователь/Алиса \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-Номер ячейки недвижимости Алисы/пользователя 
-\end{DoxyReturn}
-\mbox{\Hypertarget{namespacehandler_a27943b0c9ccc6b743b636b6f277f55cf}\label{namespacehandler_a27943b0c9ccc6b743b636b6f277f55cf}} 
-\index{handler@{handler}!deconversion@{deconversion}}
-\index{deconversion@{deconversion}!handler@{handler}}
-\doxysubsubsection{\texorpdfstring{deconversion()}{deconversion()}}
-{\footnotesize\ttfamily def handler.\+deconversion (\begin{DoxyParamCaption}\item[{}]{a }\end{DoxyParamCaption})}
-
-
-
-Конвертация ячейки на поле в ячейку собственности 
-
-
-\begin{DoxyParams}{Parameters}
-{\em a} & Ячейка недвижимости Алисы/пользователя \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-Ячейка, на которую попал пользователь/Алиса 
-\end{DoxyReturn}
+\doxysubsection{Функции}
 \mbox{\Hypertarget{namespacehandler_a9d7e6870ac937bc25def6d4320f7e57c}\label{namespacehandler_a9d7e6870ac937bc25def6d4320f7e57c}} 
 \index{handler@{handler}!end@{end}}
 \index{end@{end}!handler@{handler}}
@@ -99,7 +61,7 @@ list \mbox{\hyperlink{namespacehandler_ad065b932362cadc1a035f55af250ae47}{O\+WN}
 Начало новой игры 
 
 
-\begin{DoxyParams}{Parameters}
+\begin{DoxyParams}{Аргументы}
 {\em request} & Запрос пользователя \\
 \hline
 {\em response} & Ответ пользователю \\
@@ -107,7 +69,7 @@ list \mbox{\hyperlink{namespacehandler_ad065b932362cadc1a035f55af250ae47}{O\+WN}
 {\em text} & Добавляется к ответу для пользователя в случае завершения игры (победа, ничья, поражение) \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{Returns}
+\begin{DoxyReturn}{Возвращает}
 Хранилище пользователя 
 \end{DoxyReturn}
 \mbox{\Hypertarget{namespacehandler_a57f63d790fc995cdbc13816c7dd88c43}\label{namespacehandler_a57f63d790fc995cdbc13816c7dd88c43}} 
@@ -121,7 +83,7 @@ list \mbox{\hyperlink{namespacehandler_ad065b932362cadc1a035f55af250ae47}{O\+WN}
 Функция обработки самой игры 
 
 
-\begin{DoxyParams}{Parameters}
+\begin{DoxyParams}{Аргументы}
 {\em request} & Запрос пользователя \\
 \hline
 {\em response} & Ответ пользователю \\
@@ -129,12 +91,12 @@ list \mbox{\hyperlink{namespacehandler_ad065b932362cadc1a035f55af250ae47}{O\+WN}
 {\em user\+\_\+storage} & Состояние пользователя \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{Returns}
+\begin{DoxyReturn}{Возвращает}
 Ответ для пользователя и его хранилище 
 \end{DoxyReturn}
 
 
-\doxysubsection{Variable Documentation}
+\doxysubsection{Переменные}
 \mbox{\Hypertarget{namespacehandler_aa6549c031434dc6397d0413a0292bc56}\label{namespacehandler_aa6549c031434dc6397d0413a0292bc56}} 
 \index{handler@{handler}!BANKS@{BANKS}}
 \index{BANKS@{BANKS}!handler@{handler}}
@@ -174,6 +136,16 @@ list \mbox{\hyperlink{namespacehandler_ad065b932362cadc1a035f55af250ae47}{O\+WN}
 
 
 Слова для того, чтобы забрать деньги с биржи или банка 
+
+\mbox{\Hypertarget{namespacehandler_a2a35eb1508b8c05f93b2ebb1431672d6}\label{namespacehandler_a2a35eb1508b8c05f93b2ebb1431672d6}} 
+\index{handler@{handler}!BUY@{BUY}}
+\index{BUY@{BUY}!handler@{handler}}
+\doxysubsubsection{\texorpdfstring{BUY}{BUY}}
+{\footnotesize\ttfamily list handler.\+B\+UY = \mbox{[}\textquotesingle{}купить\textquotesingle{},\textquotesingle{}да\textquotesingle{},\textquotesingle{}забрать\textquotesingle{},\textquotesingle{}приобрести\textquotesingle{},\textquotesingle{}хочу\textquotesingle{},\textquotesingle{}скупить\textquotesingle{}, \textquotesingle{}взять\textquotesingle{}\mbox{]}}
+
+
+
+Слова для покупки недвижимости 
 
 \mbox{\Hypertarget{namespacehandler_a7fdf0040ee22c2ffd168879ca9f36560}\label{namespacehandler_a7fdf0040ee22c2ffd168879ca9f36560}} 
 \index{handler@{handler}!ENDING\_WORDS@{ENDING\_WORDS}}

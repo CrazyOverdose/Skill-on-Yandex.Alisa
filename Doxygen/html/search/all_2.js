@@ -1,7 +1,10 @@
 var searchData=
 [
-  ['banks_9',['BANKS',['../namespacehandler.html#aa6549c031434dc6397d0413a0292bc56',1,'handler']]],
-  ['burse_10',['BURSE',['../namespacehandler.html#a284c90e456c05379b1b4267c21ffacd2',1,'handler']]],
-  ['bursegive_11',['BURSEgive',['../namespacehandler.html#ab47d03327bdddca5e6d57aca10502a06',1,'handler']]],
-  ['bursetake_12',['BURSEtake',['../namespacehandler.html#a56afacd97418cbec6fad372318bba081',1,'handler']]]
+  ['bad_9',['bad',['../classhandler_1_1las__vegas.html#ade45844b21ff6712dc4256022bd777b1',1,'handler::las_vegas']]],
+  ['banks_10',['BANKS',['../namespacehandler.html#aa6549c031434dc6397d0413a0292bc56',1,'handler']]],
+  ['budget_5fchange_11',['budget_change',['../classhandler_1_1las__vegas.html#a2a5f90f481f5d77a08aeb1bc7ce63c9a',1,'handler::las_vegas']]],
+  ['burse_12',['BURSE',['../namespacehandler.html#a284c90e456c05379b1b4267c21ffacd2',1,'handler']]],
+  ['bursegive_13',['BURSEgive',['../namespacehandler.html#ab47d03327bdddca5e6d57aca10502a06',1,'handler']]],
+  ['bursetake_14',['BURSEtake',['../namespacehandler.html#a56afacd97418cbec6fad372318bba081',1,'handler']]],
+  ['buy_15',['BUY',['../namespacehandler.html#a2a35eb1508b8c05f93b2ebb1431672d6',1,'handler']]]
 ];
