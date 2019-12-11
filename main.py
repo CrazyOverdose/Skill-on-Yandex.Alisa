@@ -9,10 +9,10 @@ import logging
 import json
 
 """Импортируем модуль для работы с API Алисы"""
-from alice_sdk import AliceRequest, AliceResponse
+from alice import AliceRequest, AliceResponse
 
 """Импортируем модуль с логикой игры"""
-from handler import handle_dialog
+from las_vegas import handle_dialog
 
 """Импортируем подмодули Flask для запуска веб-сервиса."""
 from flask import Flask, request
