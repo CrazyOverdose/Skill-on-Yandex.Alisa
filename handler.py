@@ -229,19 +229,19 @@ def handle_dialog(request, response, user_storage):
 
         ##Вывод количества денег на бирже
         if user_message in BURSE:
-            response.set_text('Сейчас на бирже ' + str(user_storage["exchange"]) + ' $')
+            response.set_text('Сейчас на бирже ' + user_storage["exchange"] + ' $')
             return response, user_storage
 
         ##Вывод количества денег, вложенных Алисой и пользователем в банк
         if user_message in BANKS:
             response.set_text(
-                'Вклады Алисы: ' + str(user_storage["bankA"]) + ' $\n Ваши вклады ' + str(user_storage["bankU"]) + ' $')
+                'Вклады Алисы: ' + user_storage["bankA"] + ' $\n Ваши вклады ' + user_storage["bankU"] + ' $')
             return response, user_storage
 
         ##Вывод ячеек, на которых находятся Алиса и пользователь
         if user_message in PLACE:
-            response.set_text('Вы находитесь на ' + str(user_storage["field_cellU"]) + ' ячейке \n Алиса на ' + str(
-                user_storage["field_cellA"]))
+            response.set_text('Вы находитесь на ' + user_storage["field_cellU"] + ' ячейке \n Алиса на ' +
+                user_storage["field_cellA"])
             return response, user_storage
 
         ##Обработка начала новой игры
@@ -267,13 +267,13 @@ def handle_dialog(request, response, user_storage):
                               'банкротом. \n \n Чтобы начать игру "бросить кубик"')
             return response, user_storage
 
-        if int(user_storage["school"]) != 0:
+        if user_storage["school"] != 0:
         ##Пользователь попал на ячейку "Назад в школу". Обработка ячейки
-            if str(user_message) == str(game.answers[int(user_storage["school"])]):
+            if str(user_message) == game.answers[user_storage["school"]]:
                 response.set_text('Правильный ответ')
-                user_storage["moneyU"] = float(user_storage["moneyU"]) + 50
+                user_storage["moneyU"] = user_storage["moneyU"] + 50
             else:
-                response.set_text('Неправильный ответ \n Правильный ответ: ' + str(game.answers[int(user_storage["school"])]))
+                response.set_text('Неправильный ответ \n Правильный ответ: ' + game.answers[user_storage["school"]])
             user_storage["school"] = 0
             return response, user_storage
 
