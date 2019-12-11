@@ -131,10 +131,10 @@ def handle_dialog(request, response, user_storage):
     if request.is_new_session:
 
         user_storage = {
-            "propertyA": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # имущество Алисы
-            "propertyU": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "propertyA": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],  # имущество Алисы
+            "propertyU": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
             # имущество пользователя
             "moneyU": 200,  # Деньги Пользователя
             "moneyA": 200,  # Деньги Алисы
@@ -181,13 +181,13 @@ def handle_dialog(request, response, user_storage):
             text = 'Собственность Алисы: '
             i = 0
             j = 0
-            while i < 22:
+            while i < 23:
                 if int(user_storage["propertyA"][int(i)]) == 1:
                     desipher = int(deconversion(int(i)))
                     text = text + str(game.fields[int(desipher)])
                 i = i + 1
             text = text + '\nВаша собственность: '
-            while j < 22:
+            while j < 23:
                 if int(user_storage["propertyU"][int(j)]) == 1:
                     desipher = int(deconversion(int(j)))
                     text = text + str(game.fields[int(desipher)])
@@ -370,7 +370,7 @@ def handle_dialog(request, response, user_storage):
             if float(user_storage["moneyA"]) <= 0:
                 flag = 0
                 i = 0
-                while i < 22:
+                while i < 23:
                     if int(user_storage["propertyA"][int(i)]) == 1:
                         flag = i
                         break
@@ -389,7 +389,7 @@ def handle_dialog(request, response, user_storage):
             if float(user_storage["moneyU"]) <= 0:
                 j = 0
                 flag = 0
-                while j < 22:
+                while j < 23:
                     if int(user_storage["propertyU"][int(j)]) == 1:
                         flag = j
                         break
@@ -564,6 +564,21 @@ def handle_dialog(request, response, user_storage):
                     user_storage["field_cellA"]) == 35 or int(user_storage["field_cellA"]) == 38 or int(
                     user_storage["field_cellA"]) == 40:
 
+                    k = 1
+                    j = 1
+                    flag = 0
+                    while j < 23:
+                        if int(user_storage["propertyA"][int(j)]) == 1:
+                            flag = flag + 1
+                        j = j + 1
+                    j = 1
+                    while j < 23:
+                        if int(user_storage["propertyU"][int(j)]) == 1:
+                            flag = flag + 1
+                        j = j + 1
+                    if int(flag) == 44:
+                        k = 3
+
                     a = int(conversion(int(user_storage["field_cellA"])))
 
                     random.seed()
@@ -576,11 +591,11 @@ def handle_dialog(request, response, user_storage):
                     if int(user_storage["propertyU"][a]) == 1:
                         response.set_text('Ход Алисы \n' + 'Алиса попала на ваш участок: ' + str(
                             game.fields[int(user_storage["field_cellA"])]) + 'и заплатила ' + str(
-                            abs(int(game.price_foreign_field[int(user_storage["field_cellA"])]))) + '$\n')
+                            abs(int(game.price_foreign_field[int(user_storage["field_cellA"])] * k))) + '$\n')
                         user_storage["moneyA"] = float(user_storage["moneyA"]) + float(
-                            game.price_foreign_field[int(user_storage["field_cellA"])])
+                            game.price_foreign_field[int(user_storage["field_cellA"])] * k)
                         user_storage["moneyU"] = float(user_storage["moneyU"]) - float(
-                            game.price_foreign_field[int(user_storage["field_cellA"])])
+                            game.price_foreign_field[int(user_storage["field_cellA"])] * k)
 
                     if int(user_storage["propertyA"][a]) == 1:
                         response.set_text('Ход Алисы \n' +
@@ -819,16 +834,31 @@ def handle_dialog(request, response, user_storage):
                     user_storage["field_cellU"]) == 35 or int(user_storage["field_cellU"]) == 38 or int(
                     user_storage["field_cellU"]) == 40:
 
+                    k = 1
+                    j = 1
+                    flag = 0
+                    while j < 23:
+                        if int(user_storage["propertyA"][int(j)]) == 1:
+                            flag = flag + 1
+                        j = j + 1
+                    j = 1
+                    while j < 23:
+                        if int(user_storage["propertyU"][int(j)]) == 1:
+                            flag = flag + 1
+                        j = j + 1
+                    if int(flag) == 44:
+                        k = 3
+
                     a = int(conversion(int(user_storage["field_cellU"])))
                     if int(user_storage["propertyA"][int(a)]) == 1:
                         response.set_text(str('Ваш ход \n' + str(game.fields[int(
                             user_storage[
-                                "field_cellU"])]) + ' \nВы попали на недвижимость Алисы и заплатили ' + str(
-                            abs(int(game.price_foreign_field[int(user_storage["field_cellU"])]))) + '$\n'))
+                                "field_cellU"])]) + ' \n Если скуплены все ячейки недвижимость, стоимость попадания на них возрастает в 3 раза \n Вы попали на недвижимость Алисы и заплатили ' + str(
+                            abs(int(game.price_foreign_field[int(user_storage["field_cellU"])]) * k)) + '$\n'))
                         user_storage["moneyU"] = float(user_storage["moneyU"]) + float(
-                            game.price_foreign_field[int(user_storage["field_cellU"])])
+                            game.price_foreign_field[int(user_storage["field_cellU"])] * k)
                         user_storage["moneyA"] = float(user_storage["moneyA"]) - float(
-                            game.price_foreign_field[int(user_storage["field_cellU"])])
+                            game.price_foreign_field[int(user_storage["field_cellU"])] * k)
 
                     if int(user_storage["propertyU"][int(a)]) == 1:
                         response.set_text(
@@ -844,7 +874,7 @@ def handle_dialog(request, response, user_storage):
                                     "field_cellU"])]) + '\n Если Алиса попадет на эту недвижимость, она заплатит ' + str(
                                 abs(game.price_foreign_field[int(
                                     user_storage[
-                                        "field_cellU"])])) + ' $ \n Чтобы приобрести: введите "купить"')
+                                        "field_cellU"])])) + ' $  \n Если скуплены все ячейки недвижимость, стоимость попадания на них возрастает в 3 раза\n Чтобы приобрести: введите "купить"')
                         user_storage["property"] = int(a)
                     user_storage["users_turn"] = False
                     return response, user_storage

@@ -9,7 +9,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb38bc6d-9667-4c33-a38c-0406a6ca14d4" name="Default Changelist" comment="test 56">
+    <list default="true" id="cb38bc6d-9667-4c33-a38c-0406a6ca14d4" name="Default Changelist" comment="test 57">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler.py" afterDir="false" />
     </list>
@@ -114,10 +114,10 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Docker.Dockerfile" />
       <item itemvalue="Python.alice_sdk" />
       <item itemvalue="Python.api" />
       <item itemvalue="Python.main" />
-      <item itemvalue="Docker.Dockerfile" />
     </list>
     <recent_temporary>
       <list>
@@ -138,13 +138,6 @@
       <option name="presentableId" value="Default" />
       <updated>1572786424239</updated>
       <workItem from="1575421225998" duration="128000" />
-    </task>
-    <task id="LOCAL-00072" summary="test 81">
-      <created>1575796706468</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1575796706468</updated>
     </task>
     <task id="LOCAL-00073" summary="test 82">
       <created>1575797024218</created>
@@ -482,7 +475,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575995134148</updated>
     </task>
-    <option name="localTasksCounter" value="121" />
+    <task id="LOCAL-00121" summary="test 57">
+      <created>1575996870230</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1575996870231</updated>
+    </task>
+    <option name="localTasksCounter" value="122" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -502,7 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="test 23" />
     <MESSAGE value="test 24" />
     <MESSAGE value="test 26" />
     <MESSAGE value="test 27" />
@@ -527,7 +526,8 @@
     <MESSAGE value="test 53" />
     <MESSAGE value="test 54" />
     <MESSAGE value="test 56" />
-    <option name="LAST_COMMIT_MESSAGE" value="test 56" />
+    <MESSAGE value="test 57" />
+    <option name="LAST_COMMIT_MESSAGE" value="test 57" />
   </component>
   <component name="WindowStateProjectService">
     <state x="297" y="0" width="839" height="869" key="#Dockerfile" timestamp="1575238486279">
@@ -590,14 +590,14 @@
       <screen x="0" y="0" width="1440" height="872" />
     </state>
     <state x="164" y="71" width="1106" height="728" key="SettingsEditor/0.0.1440.872@0.0.1440.872" timestamp="1575238495689" />
-    <state x="315" y="169" width="804" height="533" key="Vcs.Push.Dialog.v2" timestamp="1575994096271">
+    <state x="315" y="169" width="804" height="533" key="Vcs.Push.Dialog.v2" timestamp="1575996874252">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
-    <state x="315" y="169" width="804" height="533" key="Vcs.Push.Dialog.v2/0.0.1440.872@0.0.1440.872" timestamp="1575994096271" />
-    <state x="306" y="262" key="com.intellij.ide.util.TipDialog" timestamp="1575977088773">
+    <state x="315" y="169" width="804" height="533" key="Vcs.Push.Dialog.v2/0.0.1440.872@0.0.1440.872" timestamp="1575996874252" />
+    <state x="306" y="262" key="com.intellij.ide.util.TipDialog" timestamp="1576039949195">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
-    <state x="306" y="262" key="com.intellij.ide.util.TipDialog/0.0.1440.872@0.0.1440.872" timestamp="1575977088773" />
+    <state x="306" y="262" key="com.intellij.ide.util.TipDialog/0.0.1440.872@0.0.1440.872" timestamp="1576039949195" />
     <state x="215" y="124" width="1004" height="622" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1575239331118">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
