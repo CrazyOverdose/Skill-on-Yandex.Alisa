@@ -29,7 +29,11 @@ class las_vegas:
         answers(list): Ответы для клетки "Назад в школу"
         fields(list): Описание всех клеток поля
         price_field(list): Цены всех ячеек поля
-        price_foreign_field(list): Цены, которые заплатит тот, кто попал на чужую недвижимость """
+        price_foreign_field(list): Цены, которые заплатит тот, кто попал на чужую недвижимость
+        havings(list): Все ячейки недвижимости
+        budget_change(list): = Ячейки простых уменьшений/увеличений состояния пользователя
+        bad(list): Ячейки, на которые не должна переходить Алиса (негативные)"""
+
     questions = ['0', 'Чему равно 2+4-3*2', 'Какое из чисел натуральное? 0, 4, 0.2, 1/2',
                  'Cтолица Канады (Соблюдайте правила русского языка, пожалуйста)',
                  'Столица Южной Кореи (Соблюдайте правила русского языка, пожалуйста)',
@@ -85,6 +89,12 @@ class las_vegas:
                            -85, 0, -100, 200, -100, -100, -100, -120, -120, 95, -120, 0, -135, -135, 0, -135, 0, 0,
                            -150, -50, -150]
 
+    havings = [2, 4, 5, 7, 9, 10, 12, 14, 15, 17, 19, 20, 22, 24, 25, 27, 28, 30, 32, 33, 35, 38, 40]
+
+    budget_change = [26, 21, 29, 39, 3, 8]
+
+    bad = [26, 11, 36, 6, 31, 39, 8]
+
 
 ## Слова для показа количества денег Алисы и пользователя
 MONEY = ['деньги', 'моиденьги', 'сколькоуменяденег', 'сколькоденег', 'финансы', 'сбережения']
@@ -135,10 +145,10 @@ def handle_dialog(request, response, user_storage):
     ## Обработка новой сессии
     if request.is_new_session:
         user_storage = {
-            "propertyA": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # имущество Алисы
-            "propertyU": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "propertyA": [2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],  # имущество Алисы
+            "propertyU": [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+                          2 , 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
             # имущество пользователя
             "moneyU": 200.0,  # Деньги Пользователя
             "moneyA": 200.0,  # Деньги Алисы
@@ -183,16 +193,14 @@ def handle_dialog(request, response, user_storage):
         ##Собственность Алисы и пользователя
         if user_message in OWN:
             text = 'Собственность Алисы: '
-            for i in range(1, 23):
+            for i in range(1, 41):
                 if user_storage["propertyA"][i] == 1:
-                    desipher = deconversion(i)
-                    text = text + game.fields[desipher]
+                    text = text + game.fields[i]
 
             text = text + '\nВаша собственность: '
-            for j in range(1, 23):
+            for j in range(1, 41):
                 if user_storage["propertyU"][j] == 1:
-                    desipher = deconversion(j)
-                    text = text + game.fields[desipher]
+                    text = text + game.fields[i]
 
             response.set_text(text)
             return response, user_storage
@@ -369,13 +377,13 @@ def handle_dialog(request, response, user_storage):
         if not user_storage["users_turn"]:
             if user_storage["moneyA"] <= 0:
                 flag = 0
-                for i in range(1, 23):
+                for i in range(1, 41):
                     if user_storage["propertyA"][i] == 1:
                         flag = i
                         break
                 if flag != 0:
-                    i = deconversion(flag)
-                    response.set_text('Алиса продала свою недвижимость ' + game.fields[i] + ' за ' + str(abs(game.price_field[i] // 2)) + ' $')
+                    response.set_text('Алиса продала свою недвижимость ' + game.fields[i] + ' за ' + str(
+                        abs(game.price_field[i] // 2)) + ' $')
                     user_storage["moneyA"] = user_storage["moneyA"] - (game.price_field[i] // 2)
                     user_storage["propertyA"][flag] = 0
                     user_storage["users_turn"] = True
@@ -385,7 +393,7 @@ def handle_dialog(request, response, user_storage):
         if user_storage["users_turn"]:
             if user_storage["moneyU"] <= 0:
                 flag = 0
-                for j in range(1, 23):
+                for j in range(1, 41):
                     if int(user_storage["propertyU"][int(j)]) == 1:
                         flag = j
                         break
@@ -397,21 +405,14 @@ def handle_dialog(request, response, user_storage):
                         return response, user_storage
                     if user_storage["crash"]:
                         if user_message.isdigit():
-                            if int(user_message) == 2 or int(user_message) == 4 or int(user_message) == 5 or int(
-                                    user_message) == 7 or int(user_message) == 9 or int(user_message) == 10 or int(
-                                user_message) == 12 or int(user_message) == 14 or int(user_message) == 15 or int(
-                                user_message) == 17 or int(user_message) == 19 or int(user_message) == 20 or int(
-                                user_message) == 22 or int(user_message) == 24 or int(user_message) == 25 or int(
-                                user_message) == 27 or int(user_message) == 28 or int(user_message) == 30 or int(
-                                user_message) == 32 or int(user_message) == 33 or int(user_message) == 35 or int(
-                                user_message) == 38 or int(user_message) == 40:
-                                if user_storage["propertyU"][conversion(int(user_message))] == 1:
+                            if int(user_message) in game.havings:
+                                if user_storage["propertyU"][(int(user_message))] == 1:
                                     response.set_text(
                                         'Вы продали свою недвижимость ' + game.fields[int(user_message)] + ' за ' + str(
                                             abs(game.price_field[int(user_message)] // 2)) + ' $')
                                     user_storage["moneyU"] = user_storage["moneyU"] - (
-                                                game.price_field[int(user_message)] // 2)
-                                    user_storage["propertyU"][conversion(int(user_message))] = 0
+                                            game.price_field[int(user_message)] // 2)
+                                    user_storage["propertyU"][int(user_message)] = 0
                                     user_storage["crash"] = False
                                     user_storage["users_turn"] = False
                                     return response, user_storage
@@ -477,9 +478,7 @@ def handle_dialog(request, response, user_storage):
                     return response, user_storage
 
                 ##Обработка ячеек простого уменьшения/увеличения денег
-                if int(user_storage["field_cellA"]) == 26 or int(user_storage["field_cellA"]) == 21 or int(
-                        user_storage["field_cellA"]) == 29 or int(user_storage["field_cellA"]) == 39 or int(
-                    user_storage["field_cellA"]) == 3 or int(user_storage["field_cellA"]) == 8:
+                if user_storage["field_cellA"] in game.budget_change:
                     user_storage["moneyA"] = user_storage["moneyA"] + game.price_field[user_storage["field_cellA"]]
                     response.set_text('Ход Алисы \n' + game.fields[user_storage["field_cellA"]])
                     user_storage["users_turn"] = True
@@ -514,7 +513,8 @@ def handle_dialog(request, response, user_storage):
                 ##На две ячейки назад
                 if user_storage["field_cellA"] == 5:
                     response.set_text(
-                        'Ход Алисы \n' + game.fields[user_storage["field_cellA"]]) + '\n Алиса попала на ' + game.fields[user_storage["field_cellA"] - 2]
+                        'Ход Алисы \n' + game.fields[user_storage["field_cellA"]]) + '\n Алиса попала на ' + \
+                    game.fields[user_storage["field_cellA"] - 2]
                     user_storage["field_cellA"] = 3
                     user_storage["moneyA"] = user_storage["moneyA"] + game.price_field[user_storage["field_cellA"]]
                     user_storage["users_turn"] = True
@@ -537,54 +537,31 @@ def handle_dialog(request, response, user_storage):
                     return response, user_storage
 
                 ##Недвижимость
-                if int(user_storage["field_cellA"]) == 2 or int(user_storage["field_cellA"]) == 4 or int(
-                        user_storage["field_cellA"]) == 5 or int(user_storage["field_cellA"]) == 7 or int(
-                    user_storage["field_cellA"]) == 9 or int(user_storage["field_cellA"]) == 10 or int(
-                    user_storage["field_cellA"]) == 12 or int(user_storage["field_cellA"]) == 14 or int(
-                    user_storage["field_cellA"]) == 15 or int(user_storage["field_cellA"]) == 17 or int(
-                    user_storage["field_cellA"]) == 19 or int(user_storage["field_cellA"]) == 20 or int(
-                    user_storage["field_cellA"]) == 22 or int(user_storage["field_cellA"]) == 24 or int(
-                    user_storage["field_cellA"]) == 25 or int(user_storage["field_cellA"]) == 27 or int(
-                    user_storage["field_cellA"]) == 28 or int(user_storage["field_cellA"]) == 30 or int(
-                    user_storage["field_cellA"]) == 32 or int(user_storage["field_cellA"]) == 33 or int(
-                    user_storage["field_cellA"]) == 35 or int(user_storage["field_cellA"]) == 38 or int(
-                    user_storage["field_cellA"]) == 40:
+                if int(user_storage["field_cellA"]) in game.havings:
 
-                    k = 1
-                    flag = 0
-                    for j in range(1, 23):
-                        if int(user_storage["propertyA"][int(j)]) == 1:
-                            flag = flag + 1
-                    j = 1
-                    for j in range(1, 23):
-                        if int(user_storage["propertyU"][int(j)]) == 1:
-                            flag = flag + 1
-                    if flag == 22:
-                        k = 3
-
-                    a = conversion(user_storage["field_cellA"])
+                    k = real_estate(user_storage)
 
                     b = randint(1, 2)
 
                     if user_storage["moneyA"] + game.price_field[user_storage["field_cellA"]] < 70:
                         b = 2
 
-                    if user_storage["propertyU"][a] == 1:
+                    if user_storage["propertyU"][user_storage["field_cellA"]] == 1:
                         response.set_text('Ход Алисы \n' + 'Алиса попала на ваш участок: ' + game.fields[
                             user_storage["field_cellA"]] + 'и заплатила ' + str(abs(game.price_foreign_field[
                                                                                         user_storage[
                                                                                             "field_cellA"]] * k)) + '$\n' + '\n Если скуплены все ячейки недвижимости, стоимость попадания на них возрастает в 3 раза')
                         user_storage["moneyA"] = user_storage["moneyA"] + (
-                                    game.price_foreign_field[user_storage["field_cellA"]] * k)
+                                game.price_foreign_field[user_storage["field_cellA"]] * k)
                         user_storage["moneyU"] = user_storage["moneyU"] - (
-                                    game.price_foreign_field[user_storage["field_cellA"]] * k)
+                                game.price_foreign_field[user_storage["field_cellA"]] * k)
 
-                    if user_storage["propertyA"][a] == 1:
+                    if user_storage["propertyA"][user_storage["field_cellA"]] == 1:
                         response.set_text('Ход Алисы \n' +
                                           'Алиса попала на свою территорию: ' + game.fields[
                                               user_storage["field_cellA"]])
 
-                    if user_storage["propertyA"][a] == 0 and user_storage["propertyU"][a] == 0:
+                    if user_storage["propertyA"][user_storage["field_cellA"]] == 0 and user_storage["propertyU"][user_storage["field_cellA"]] == 0:
                         if b == 1:
                             response.set_text('Ход Алисы \n' + game.fields[user_storage[
                                 "field_cellA"]] + ' и решила купить \n Если вы попадете на данный сектор, то заплатите ' + str(
@@ -592,7 +569,7 @@ def handle_dialog(request, response, user_storage):
                                     "field_cellA"]])) + ' $' + '\n Если скуплены все ячейки недвижимости, стоимость попадания на них возрастает в 3 раза')
                             user_storage["moneyA"] = user_storage["moneyA"] + game.price_field[
                                 user_storage["field_cellA"]]
-                            user_storage["propertyA"][a] = 1
+                            user_storage["propertyA"][user_storage["field_cellA"]] = 1
                         else:
                             response.set_text('Ход Алисы \n' +
                                               'Алиса попала: ' + game.fields[
@@ -604,7 +581,7 @@ def handle_dialog(request, response, user_storage):
                 if user_storage["field_cellA"] == 13 or user_storage["field_cellA"] == 16:
                     y = randint(1, 2)
 
-                    rialto = user_storage["exchange"]
+                    rialto = user_storage["exchange"] #деньги на бирже
 
                     if rialto == 0:
                         response.set_text('Ход Алисы \n' + game.fields[
@@ -638,10 +615,10 @@ def handle_dialog(request, response, user_storage):
                     if user_storage["moneyA"] < 100 and user_storage["bankA"] == 0:
                         y = 2
 
-                    if user_storage["bankA"] == 0:
+                    if user_storage["bankA"] == 0 and user_storage["moneyA"] > 100 :
                         y = randint(1, 2)
 
-                    if user_storage["moneyA"] < 100:
+                    if user_storage["moneyA"] < 100 and user_storage["bankA"] > 0:
                         y = randint(2, 3)
 
                     if y == 2:
@@ -682,7 +659,11 @@ def handle_dialog(request, response, user_storage):
 
                 ##Перемещение на любую ячейку
                 if user_storage["field_cellA"] == 34:
-                    cell = randint(1, 40)
+                    cell = 0
+                    while cell > 0:
+                        cell = randint(1, 40)
+                        if cell not in game.bad:
+                            break
 
                     if cell + user_storage["field_cellA"] > 40:
                         user_storage["moneyA"] = user_storage["moneyA"] + 200
@@ -739,9 +720,7 @@ def handle_dialog(request, response, user_storage):
                     return response, user_storage
 
                 ## Обработка простых уменьшений/увеличений состояния пользователя
-                if int(user_storage["field_cellU"]) == 26 or int(user_storage["field_cellU"]) == 21 or int(
-                        user_storage["field_cellU"]) == 29 or int(user_storage["field_cellU"]) == 39 or int(
-                    user_storage["field_cellU"]) == 3 or int(user_storage["field_cellU"]) == 8:
+                if int(user_storage["field_cellU"]) in game.budget_change:
                     user_storage["moneyU"] = user_storage["moneyU"] + game.price_field[user_storage["field_cellU"]]
                     response.set_text('Ваш ход \n' + game.fields[user_storage["field_cellU"]])
                     user_storage["users_turn"] = False
@@ -780,32 +759,11 @@ def handle_dialog(request, response, user_storage):
                     return response, user_storage
 
                 ##Недвижимость
-                if int(user_storage["field_cellU"]) == 2 or int(user_storage["field_cellU"]) == 4 or int(
-                        user_storage["field_cellU"]) == 5 or int(user_storage["field_cellU"]) == 7 or int(
-                    user_storage["field_cellU"]) == 9 or int(user_storage["field_cellU"]) == 10 or int(
-                    user_storage["field_cellU"]) == 12 or int(user_storage["field_cellU"]) == 14 or int(
-                    user_storage["field_cellU"]) == 15 or int(user_storage["field_cellU"]) == 17 or int(
-                    user_storage["field_cellU"]) == 19 or int(user_storage["field_cellU"]) == 20 or int(
-                    user_storage["field_cellU"]) == 22 or int(user_storage["field_cellU"]) == 24 or int(
-                    user_storage["field_cellU"]) == 25 or int(user_storage["field_cellU"]) == 27 or int(
-                    user_storage["field_cellU"]) == 28 or int(user_storage["field_cellU"]) == 30 or int(
-                    user_storage["field_cellU"]) == 32 or int(user_storage["field_cellU"]) == 33 or int(
-                    user_storage["field_cellU"]) == 35 or int(user_storage["field_cellU"]) == 38 or int(
-                    user_storage["field_cellU"]) == 40:
+                if user_storage["field_cellU"] in game.havings:
 
-                    k = 1
-                    flag = 0
-                    for j in range(1, 23):
-                        if user_storage["propertyA"][j] == 1:
-                            flag = flag + 1
-                    for j in range(1, 23):
-                        if user_storage["propertyU"][j] == 1:
-                            flag = flag + 1
-                    if flag == 22:
-                        k = 3
+                    k = real_estate((user_storage))
 
-                    a = conversion(user_storage["field_cellU"])
-                    if user_storage["propertyA"][a] == 1:
+                    if user_storage["propertyA"][user_storage["field_cellU"]] == 1:
                         response.set_text('Ваш ход \n' + game.fields[user_storage[
                             "field_cellU"]] + ' \n Если скуплены все ячейки недвижимости, стоимость попадания на них возрастает в 3 раза \n Вы попали на недвижимость Алисы и заплатили ' + str(
                             abs(game.price_foreign_field[user_storage["field_cellU"]] * k)) + '$\n')
@@ -814,16 +772,16 @@ def handle_dialog(request, response, user_storage):
                         user_storage["moneyA"] = user_storage["moneyA"] - game.price_foreign_field[
                             user_storage["field_cellU"]] * k
 
-                    if user_storage["propertyU"][a] == 1:
+                    if user_storage["propertyU"][user_storage["field_cellU"]] == 1:
                         response.set_text(
                             'Ваш ход \n' + game.fields[user_storage["field_cellU"]] + ' \nВы попали на свою территорию')
 
-                    if user_storage["propertyU"][a] == 0 and user_storage["propertyA"][a] == 0:
+                    if user_storage["propertyU"][user_storage["field_cellU"]] == 0 and user_storage["propertyA"][user_storage["field_cellU"]] == 0:
                         response.set_text('Ваш ход \n' + game.fields[user_storage[
                             "field_cellU"]] + '\n Если Алиса попадет на эту недвижимость, она заплатит ' + str(abs(
                             game.price_foreign_field[user_storage[
                                 "field_cellU"]])) + ' $  \n Если скуплены все ячейки недвижимости, стоимость попадания на них возрастает в 3 раза\n Чтобы приобрести: введите "купить"')
-                        user_storage["property"] = a
+                        user_storage["property"] = user_storage["field_cellU"]
                     user_storage["users_turn"] = False
                     return response, user_storage
 
@@ -938,150 +896,22 @@ def end(request, response, text):
     return user_storage
 
 
-def conversion(a):
-    """Конвертация ячейки на поле в ячейку собственности
+def real_estate(user_storage):
+    """Проверка, что раскуплены все ячейки недвижимости
     Args:
-          a(int): Ячейка, на которую попал пользователь/Алиса
-    Returns:
-          Номер ячейки недвижимости Алисы/пользователя"""
-    if a == 2:
-        a = 1
-        return int(a)
-    if a == 4:
-        a = 2
-        return int(a)
-    if a == 7:
-        a = 3
-        return int(a)
-    if a == 9:
-        a = 4
-        return int(a)
-    if a == 10:
-        a = 5
-        return int(a)
-    if a == 12:
-        a = 6
-        return int(a)
-    if a == 14:
-        a = 7
-        return int(a)
-    if a == 15:
-        a = 8
-        return int(a)
-    if a == 17:
-        a = 9
-        return int(a)
-    if a == 19:
-        a = 10
-        return int(a)
-    if a == 20:
-        a = 11
-        return int(a)
-    if a == 22:
-        a = 12
-        return int(a)
-    if a == 24:
-        a = 13
-        return int(a)
-    if a == 25:
-        a = 14
-        return int(a)
-    if a == 27:
-        a = 15
-        return int(a)
-    if a == 28:
-        a = 16
-        return int(a)
-    if a == 30:
-        a = 17
-        return int(a)
-    if a == 32:
-        a = 18
-        return int(a)
-    if a == 33:
-        a = 19
-        return int(a)
-    if a == 35:
-        a = 20
-        return int(a)
-    if a == 38:
-        a = 21
-        return int(a)
-    if a == 40:
-        a = 22
+        user_storage: Хранилище пользователя
+  Returns:
+        Коэффициент, на который умножается цена, которую заплатит тот, кто попадет на чужую недвижимость. Если раскуплены не все ячейки, k=1, если же раскуплены все ячейки, то k = 3"""
+    k = 1
+    flag = 0
+    for j in range(1, 41):
+        if int(user_storage["propertyA"][int(j)]) == 1:
+            flag = flag + 1
+    j = 1
+    for j in range(1, 41):
+        if int(user_storage["propertyU"][int(j)]) == 1:
+            flag = flag + 1
+    if flag == 22:
+        k = 3
 
-    return int(a)
-
-
-def deconversion(a):
-    """Конвертация ячейки на поле в ячейку собственности
-        Args:
-              a(int): Ячейка недвижимости Алисы/пользователя
-        Returns:
-              Ячейка, на которую попал пользователь/Алиса"""
-    if a == 1:
-        a = 2
-        return int(a)
-    if a == 2:
-        a = 4
-        return int(a)
-    if a == 3:
-        a = 7
-        return int(a)
-    if a == 4:
-        a = 9
-        return int(a)
-    if a == 5:
-        a = 10
-        return int(a)
-    if a == 6:
-        a = 12
-        return int(a)
-    if a == 7:
-        a = 14
-        return int(a)
-    if a == 8:
-        a = 15
-        return int(a)
-    if a == 9:
-        a = 17
-        return int(a)
-    if a == 10:
-        a = 19
-        return int(a)
-    if a == 11:
-        a = 20
-        return int(a)
-    if a == 12:
-        a = 22
-        return int(a)
-    if a == 13:
-        a = 24
-        return int(a)
-    if a == 14:
-        a = 25
-        return int(a)
-    if a == 15:
-        a = 27
-        return int(a)
-    if a == 16:
-        a = 28
-        return int(a)
-    if a == 17:
-        a = 30
-        return int(a)
-    if a == 18:
-        a = 32
-        return int(a)
-    if a == 19:
-        a = 33
-        return int(a)
-    if a == 20:
-        a = 35
-        return int(a)
-    if a == 21:
-        a = 38
-        return int(a)
-    if a == 22:
-        a = 40
-    return int(a)
+    return k
