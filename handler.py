@@ -133,8 +133,8 @@ def handle_dialog(request, response, user_storage):
         user_storage = {
             "propertyA": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                           1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],  # имущество Алисы
-            "propertyU": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            "propertyU": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             # имущество пользователя
             "moneyU": 200,  # Деньги Пользователя
             "moneyA": 200,  # Деньги Алисы
@@ -576,7 +576,7 @@ def handle_dialog(request, response, user_storage):
                         if int(user_storage["propertyU"][int(j)]) == 1:
                             flag = flag + 1
                         j = j + 1
-                    if int(flag) == 44:
+                    if int(flag) == 22:
                         k = 3
 
                     a = int(conversion(int(user_storage["field_cellA"])))
@@ -846,7 +846,7 @@ def handle_dialog(request, response, user_storage):
                         if int(user_storage["propertyU"][int(j)]) == 1:
                             flag = flag + 1
                         j = j + 1
-                    if int(flag) == 44:
+                    if int(flag) == 22:
                         k = 3
 
                     a = int(conversion(int(user_storage["field_cellU"])))
