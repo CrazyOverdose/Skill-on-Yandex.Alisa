@@ -182,17 +182,17 @@ def handle_dialog(request, response, user_storage):
             i = 0
             j = 0
             while i < 23:
-                if int(user_storage["propertyA"][int(i)]) == 1:
-                    desipher = int(deconversion(int(i)))
-                    text = text + str(game.fields[int(desipher)])
-                i = i + 1
+                if user_storage["propertyA"][i] == 1:
+                    desipher = deconversion(i)
+                    text = text + game.fields[desipher]
+                i += 1
             text = text + '\nВаша собственность: '
             while j < 23:
-                if int(user_storage["propertyU"][int(j)]) == 1:
-                    desipher = int(deconversion(int(j)))
-                    text = text + str(game.fields[int(desipher)])
-                j = j + 1
-            response.set_text(str(text))
+                if user_storage["propertyU"][j] == 1:
+                    desipher = deconversion(j)
+                    text = text + game.fields[desipher]
+                j +=1
+            response.set_text(text)
             return response, user_storage
 
         ##Вывод денежного состояния Алисы и пользователя
@@ -229,19 +229,19 @@ def handle_dialog(request, response, user_storage):
 
         ##Вывод количества денег на бирже
         if user_message in BURSE:
-            response.set_text('Сейчас на бирже ' + user_storage["exchange"] + ' $')
+            response.set_text('Сейчас на бирже ' + str(user_storage["exchange"]) + ' $')
             return response, user_storage
 
         ##Вывод количества денег, вложенных Алисой и пользователем в банк
         if user_message in BANKS:
             response.set_text(
-                'Вклады Алисы: ' + user_storage["bankA"] + ' $\n Ваши вклады ' + user_storage["bankU"] + ' $')
+                'Вклады Алисы: ' + str(user_storage["bankA"]) + ' $\n Ваши вклады ' + str(user_storage["bankU"]) + ' $')
             return response, user_storage
 
         ##Вывод ячеек, на которых находятся Алиса и пользователь
         if user_message in PLACE:
-            response.set_text('Вы находитесь на ' + user_storage["field_cellU"] + ' ячейке \n Алиса на ' +
-                user_storage["field_cellA"])
+            response.set_text('Вы находитесь на ' + str(user_storage["field_cellU"]) + ' ячейке \n Алиса на ' + str(
+                user_storage["field_cellA"]))
             return response, user_storage
 
         ##Обработка начала новой игры
@@ -892,10 +892,11 @@ def handle_dialog(request, response, user_storage):
                     return response, user_storage
 
                 ##Назад в школу
-                if user_storage["field_cellU"] == 18:
-                    rand = randint(1, 11)
-                    user_storage["school"] = rand
-                    response.set_text(game.fields[18] + '\n' + game.questions[rand])
+                if int(user_storage["field_cellU"]) == 18:
+                    random.seed()
+                    rand = int(randint(1, 11))
+                    user_storage["school"] = int(rand)
+                    response.set_text(str(game.fields[18]) + '\n' + str(game.questions[int(rand)]))
                     user_storage["users_turn"] = False
                     return response, user_storage
 
