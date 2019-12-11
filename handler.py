@@ -892,11 +892,10 @@ def handle_dialog(request, response, user_storage):
                     return response, user_storage
 
                 ##Назад в школу
-                if int(user_storage["field_cellU"]) == 18:
-                    random.seed()
-                    rand = int(randint(1, 11))
-                    user_storage["school"] = int(rand)
-                    response.set_text(str(game.fields[18]) + '\n' + str(game.questions[int(rand)]))
+                if user_storage["field_cellU"] == 18:
+                    rand = randint(1, 11)
+                    user_storage["school"] = rand
+                    response.set_text(game.fields[18] + '\n' + game.questions[rand])
                     user_storage["users_turn"] = False
                     return response, user_storage
 
