@@ -1,0 +1,237 @@
+\hypertarget{namespacelas__vegas}{}\doxysection{Пространство имен las\+\_\+vegas}
+\label{namespacelas__vegas}\index{las\_vegas@{las\_vegas}}
+\doxysubsection*{Классы}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classlas__vegas_1_1_draw}{Draw}}
+\begin{DoxyCompactList}\small\item\em Класс исключение для ничьи \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classlas__vegas_1_1las__vegas}{las\+\_\+vegas}}
+\begin{DoxyCompactList}\small\item\em Класс поле игры \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classlas__vegas_1_1_winner_error1}{Winner\+Error1}}
+\begin{DoxyCompactList}\small\item\em Класс исключение для победы Алисы \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classlas__vegas_1_1_winner_error2}{Winner\+Error2}}
+\begin{DoxyCompactList}\small\item\em Класс исключение для победы пользователя \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Функции}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacelas__vegas_aa0315045a06cc5e3e24435ede9dc1a7e}{handle\+\_\+dialog}} (request, response, user\+\_\+storage)
+\begin{DoxyCompactList}\small\item\em Функция обработки самой игры \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacelas__vegas_a5fcf6a8610567b59cb1e7ed0cefcde96}{end}} (request, response, text)
+\begin{DoxyCompactList}\small\item\em Начало новой игры \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Переменные}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacelas__vegas_abd14ec38b98edecec035b25cf4ded53c}{level}}
+\item 
+list \mbox{\hyperlink{namespacelas__vegas_a46176a771e2e1041f4184539a5b23daf}{M\+O\+N\+EY}} = \mbox{[}\textquotesingle{}деньги\textquotesingle{}, \textquotesingle{}моиденьги\textquotesingle{}, \textquotesingle{}сколькоуменяденег\textquotesingle{}, \textquotesingle{}сколькоденег\textquotesingle{}, \textquotesingle{}финансы\textquotesingle{}, \textquotesingle{}сбережения\textquotesingle{}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Слова для показа количества денег Алисы и пользователя \end{DoxyCompactList}\item 
+list \mbox{\hyperlink{namespacelas__vegas_a8db0ef9b59136680c114f5bb023a5bb5}{W\+O\+R\+DS}} = \mbox{[}\textquotesingle{}броситькубик\textquotesingle{}, \textquotesingle{}яхожу\textquotesingle{}, \textquotesingle{}го\textquotesingle{}, \textquotesingle{}давайиграть\textquotesingle{}, \textquotesingle{}играть\textquotesingle{}, \textquotesingle{}начать\textquotesingle{}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Слова для совершения хода Алисы или пользователя \end{DoxyCompactList}\item 
+list \mbox{\hyperlink{namespacelas__vegas_a374ef932481dd4ad846a7458723cf210}{E\+N\+D\+I\+N\+G\+\_\+\+W\+O\+R\+DS}} = \mbox{[}\textquotesingle{}новаяигра\textquotesingle{}, \textquotesingle{}выход\textquotesingle{}, \textquotesingle{}начатьновуюигру\textquotesingle{}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Слова для начала новой игры \end{DoxyCompactList}\item 
+list \mbox{\hyperlink{namespacelas__vegas_a22a96e8df0328f395346b8d5bdb04f6a}{B\+U\+R\+SE}} = \mbox{[}\textquotesingle{}биржа\textquotesingle{}, \textquotesingle{}сколькоденегнабирже\textquotesingle{}, \textquotesingle{}деньгинабирже\textquotesingle{}, \textquotesingle{}деньгисбиржи\textquotesingle{}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Слова для показа количества денег на бирже \end{DoxyCompactList}\item 
+list \mbox{\hyperlink{namespacelas__vegas_ab96d43d5b1acbaa2e747d1060153e6c5}{B\+A\+N\+KS}} = \mbox{[}\textquotesingle{}банк\textquotesingle{}, \textquotesingle{}деньгивбанке\textquotesingle{}, \textquotesingle{}сколькоденегвбанке\textquotesingle{}, \textquotesingle{}вклады\textquotesingle{}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Слова для показа количества денег, вложенных в банк Алисой и пользователем \end{DoxyCompactList}\item 
+list \mbox{\hyperlink{namespacelas__vegas_a1886856ead31a7b4833c95ea63487e67}{B\+U\+R\+S\+Etake}} = \mbox{[}\textquotesingle{}взять\textquotesingle{}, \textquotesingle{}забрать\textquotesingle{}, \textquotesingle{}взятьденьги\textquotesingle{}, \textquotesingle{}забратьденьги\textquotesingle{}, \mbox{]}
+\begin{DoxyCompactList}\small\item\em Слова для того, чтобы забрать деньги с биржи или банка \end{DoxyCompactList}\item 
+list \mbox{\hyperlink{namespacelas__vegas_a07b6b59515651d9c9f6d9b3f5ceb987c}{B\+U\+R\+S\+Egive}} = \mbox{[}\textquotesingle{}оставить\textquotesingle{}, \textquotesingle{}отдать\textquotesingle{}, \textquotesingle{}отдатьденьги\textquotesingle{}, \textquotesingle{}положить\textquotesingle{}, \textquotesingle{}оставитьденьги\textquotesingle{}, \textquotesingle{}положитьденьги\textquotesingle{}, \mbox{]}
+\begin{DoxyCompactList}\small\item\em Слова для того, чтобы оставить 100\$ на бирже \end{DoxyCompactList}\item 
+list \mbox{\hyperlink{namespacelas__vegas_ab6cfcade0acee303ba000e12c05ffb3c}{P\+L\+A\+CE}} = \mbox{[}\textquotesingle{}мояячейка\textquotesingle{}, \textquotesingle{}гдея\textquotesingle{}, \textquotesingle{}где\textquotesingle{}, \textquotesingle{}моеположение\textquotesingle{}, \textquotesingle{}накакойяячейке\textquotesingle{}, \textquotesingle{}клетка\textquotesingle{}, \textquotesingle{}мояклетка\textquotesingle{}, \textquotesingle{}накакойяклетке\textquotesingle{}, \textquotesingle{}местоположение\textquotesingle{}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Слова, чтобы увидеть ячейку, где находится Алиса и пользователь \end{DoxyCompactList}\item 
+list \mbox{\hyperlink{namespacelas__vegas_ab56f9d2fd6cfe61b08320fba69d82a93}{R\+U\+L\+ES}} = \mbox{[}\textquotesingle{}правила\textquotesingle{}, \textquotesingle{}какиграть\textquotesingle{}, \textquotesingle{}описание\textquotesingle{}, \textquotesingle{}описаниеигры\textquotesingle{}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Слова для показа правил игры \end{DoxyCompactList}\item 
+list \mbox{\hyperlink{namespacelas__vegas_afa668d597dc55b8b7f8363c3f0370bdf}{M\+AP}} = \mbox{[}\textquotesingle{}ячейки\textquotesingle{}, \textquotesingle{}карта\textquotesingle{}, \textquotesingle{}поле\textquotesingle{}, \textquotesingle{}описаниеячеек\textquotesingle{}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Слова для вызова списка всех ячеек поля \end{DoxyCompactList}\item 
+list \mbox{\hyperlink{namespacelas__vegas_a094d050d9324d607e35427c4d57762d9}{O\+WN}} = \mbox{[}\textquotesingle{}недвижимость\textquotesingle{}, \textquotesingle{}моянедвижимость\textquotesingle{}, \textquotesingle{}собственность\textquotesingle{}, \textquotesingle{}мое\textquotesingle{}, \textquotesingle{}моё\textquotesingle{}, \textquotesingle{}моясобственность\textquotesingle{}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Слова для показа собственности Алисы и пользователя \end{DoxyCompactList}\item 
+list \mbox{\hyperlink{namespacelas__vegas_a4695ede482c00f0785f6902b207a32d6}{B\+UY}} = \mbox{[}\textquotesingle{}купить\textquotesingle{},\textquotesingle{}да\textquotesingle{},\textquotesingle{}забрать\textquotesingle{},\textquotesingle{}приобрести\textquotesingle{},\textquotesingle{}хочу\textquotesingle{},\textquotesingle{}скупить\textquotesingle{}, \textquotesingle{}взять\textquotesingle{}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Слова для покупки недвижимости \end{DoxyCompactList}\item 
+list \mbox{\hyperlink{namespacelas__vegas_a3a70235c9c873b59890a731187b8da5f}{C\+O\+M\+M\+A\+N\+DS}} = \mbox{[}\textquotesingle{}команды\textquotesingle{},\textquotesingle{}список\textquotesingle{},\textquotesingle{}список команд\textquotesingle{},\textquotesingle{}чтоямогусделать\textquotesingle{},\textquotesingle{}варианты\textquotesingle{},\textquotesingle{}возможности\textquotesingle{}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Слова для просмотра всех доступных команд \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Функции}
+\mbox{\Hypertarget{namespacelas__vegas_a5fcf6a8610567b59cb1e7ed0cefcde96}\label{namespacelas__vegas_a5fcf6a8610567b59cb1e7ed0cefcde96}} 
+\index{las\_vegas@{las\_vegas}!end@{end}}
+\index{end@{end}!las\_vegas@{las\_vegas}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}}
+{\footnotesize\ttfamily def las\+\_\+vegas.\+end (\begin{DoxyParamCaption}\item[{}]{request,  }\item[{}]{response,  }\item[{}]{text }\end{DoxyParamCaption})}
+
+
+
+Начало новой игры 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em request} & Запрос пользователя \\
+\hline
+{\em response} & Ответ пользователю \\
+\hline
+{\em text} & Добавляется к ответу для пользователя в случае завершения игры (победа, ничья, поражение) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Хранилище пользователя 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacelas__vegas_aa0315045a06cc5e3e24435ede9dc1a7e}\label{namespacelas__vegas_aa0315045a06cc5e3e24435ede9dc1a7e}} 
+\index{las\_vegas@{las\_vegas}!handle\_dialog@{handle\_dialog}}
+\index{handle\_dialog@{handle\_dialog}!las\_vegas@{las\_vegas}}
+\doxysubsubsection{\texorpdfstring{handle\_dialog()}{handle\_dialog()}}
+{\footnotesize\ttfamily def las\+\_\+vegas.\+handle\+\_\+dialog (\begin{DoxyParamCaption}\item[{}]{request,  }\item[{}]{response,  }\item[{}]{user\+\_\+storage }\end{DoxyParamCaption})}
+
+
+
+Функция обработки самой игры 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em request} & Запрос пользователя \\
+\hline
+{\em response} & Ответ пользователю \\
+\hline
+{\em user\+\_\+storage} & Состояние пользователя \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Ответ для пользователя и его хранилище 
+\end{DoxyReturn}
+
+
+\doxysubsection{Переменные}
+\mbox{\Hypertarget{namespacelas__vegas_ab96d43d5b1acbaa2e747d1060153e6c5}\label{namespacelas__vegas_ab96d43d5b1acbaa2e747d1060153e6c5}} 
+\index{las\_vegas@{las\_vegas}!BANKS@{BANKS}}
+\index{BANKS@{BANKS}!las\_vegas@{las\_vegas}}
+\doxysubsubsection{\texorpdfstring{BANKS}{BANKS}}
+{\footnotesize\ttfamily list las\+\_\+vegas.\+B\+A\+N\+KS = \mbox{[}\textquotesingle{}банк\textquotesingle{}, \textquotesingle{}деньгивбанке\textquotesingle{}, \textquotesingle{}сколькоденегвбанке\textquotesingle{}, \textquotesingle{}вклады\textquotesingle{}\mbox{]}}
+
+
+
+Слова для показа количества денег, вложенных в банк Алисой и пользователем 
+
+\mbox{\Hypertarget{namespacelas__vegas_a22a96e8df0328f395346b8d5bdb04f6a}\label{namespacelas__vegas_a22a96e8df0328f395346b8d5bdb04f6a}} 
+\index{las\_vegas@{las\_vegas}!BURSE@{BURSE}}
+\index{BURSE@{BURSE}!las\_vegas@{las\_vegas}}
+\doxysubsubsection{\texorpdfstring{BURSE}{BURSE}}
+{\footnotesize\ttfamily list las\+\_\+vegas.\+B\+U\+R\+SE = \mbox{[}\textquotesingle{}биржа\textquotesingle{}, \textquotesingle{}сколькоденегнабирже\textquotesingle{}, \textquotesingle{}деньгинабирже\textquotesingle{}, \textquotesingle{}деньгисбиржи\textquotesingle{}\mbox{]}}
+
+
+
+Слова для показа количества денег на бирже 
+
+\mbox{\Hypertarget{namespacelas__vegas_a07b6b59515651d9c9f6d9b3f5ceb987c}\label{namespacelas__vegas_a07b6b59515651d9c9f6d9b3f5ceb987c}} 
+\index{las\_vegas@{las\_vegas}!BURSEgive@{BURSEgive}}
+\index{BURSEgive@{BURSEgive}!las\_vegas@{las\_vegas}}
+\doxysubsubsection{\texorpdfstring{BURSEgive}{BURSEgive}}
+{\footnotesize\ttfamily list las\+\_\+vegas.\+B\+U\+R\+S\+Egive = \mbox{[}\textquotesingle{}оставить\textquotesingle{}, \textquotesingle{}отдать\textquotesingle{}, \textquotesingle{}отдатьденьги\textquotesingle{}, \textquotesingle{}положить\textquotesingle{}, \textquotesingle{}оставитьденьги\textquotesingle{}, \textquotesingle{}положитьденьги\textquotesingle{}, \mbox{]}}
+
+
+
+Слова для того, чтобы оставить 100\$ на бирже 
+
+\mbox{\Hypertarget{namespacelas__vegas_a1886856ead31a7b4833c95ea63487e67}\label{namespacelas__vegas_a1886856ead31a7b4833c95ea63487e67}} 
+\index{las\_vegas@{las\_vegas}!BURSEtake@{BURSEtake}}
+\index{BURSEtake@{BURSEtake}!las\_vegas@{las\_vegas}}
+\doxysubsubsection{\texorpdfstring{BURSEtake}{BURSEtake}}
+{\footnotesize\ttfamily list las\+\_\+vegas.\+B\+U\+R\+S\+Etake = \mbox{[}\textquotesingle{}взять\textquotesingle{}, \textquotesingle{}забрать\textquotesingle{}, \textquotesingle{}взятьденьги\textquotesingle{}, \textquotesingle{}забратьденьги\textquotesingle{}, \mbox{]}}
+
+
+
+Слова для того, чтобы забрать деньги с биржи или банка 
+
+\mbox{\Hypertarget{namespacelas__vegas_a4695ede482c00f0785f6902b207a32d6}\label{namespacelas__vegas_a4695ede482c00f0785f6902b207a32d6}} 
+\index{las\_vegas@{las\_vegas}!BUY@{BUY}}
+\index{BUY@{BUY}!las\_vegas@{las\_vegas}}
+\doxysubsubsection{\texorpdfstring{BUY}{BUY}}
+{\footnotesize\ttfamily list las\+\_\+vegas.\+B\+UY = \mbox{[}\textquotesingle{}купить\textquotesingle{},\textquotesingle{}да\textquotesingle{},\textquotesingle{}забрать\textquotesingle{},\textquotesingle{}приобрести\textquotesingle{},\textquotesingle{}хочу\textquotesingle{},\textquotesingle{}скупить\textquotesingle{}, \textquotesingle{}взять\textquotesingle{}\mbox{]}}
+
+
+
+Слова для покупки недвижимости 
+
+\mbox{\Hypertarget{namespacelas__vegas_a3a70235c9c873b59890a731187b8da5f}\label{namespacelas__vegas_a3a70235c9c873b59890a731187b8da5f}} 
+\index{las\_vegas@{las\_vegas}!COMMANDS@{COMMANDS}}
+\index{COMMANDS@{COMMANDS}!las\_vegas@{las\_vegas}}
+\doxysubsubsection{\texorpdfstring{COMMANDS}{COMMANDS}}
+{\footnotesize\ttfamily list las\+\_\+vegas.\+C\+O\+M\+M\+A\+N\+DS = \mbox{[}\textquotesingle{}команды\textquotesingle{},\textquotesingle{}список\textquotesingle{},\textquotesingle{}список команд\textquotesingle{},\textquotesingle{}чтоямогусделать\textquotesingle{},\textquotesingle{}варианты\textquotesingle{},\textquotesingle{}возможности\textquotesingle{}\mbox{]}}
+
+
+
+Слова для просмотра всех доступных команд 
+
+\mbox{\Hypertarget{namespacelas__vegas_a374ef932481dd4ad846a7458723cf210}\label{namespacelas__vegas_a374ef932481dd4ad846a7458723cf210}} 
+\index{las\_vegas@{las\_vegas}!ENDING\_WORDS@{ENDING\_WORDS}}
+\index{ENDING\_WORDS@{ENDING\_WORDS}!las\_vegas@{las\_vegas}}
+\doxysubsubsection{\texorpdfstring{ENDING\_WORDS}{ENDING\_WORDS}}
+{\footnotesize\ttfamily list las\+\_\+vegas.\+E\+N\+D\+I\+N\+G\+\_\+\+W\+O\+R\+DS = \mbox{[}\textquotesingle{}новаяигра\textquotesingle{}, \textquotesingle{}выход\textquotesingle{}, \textquotesingle{}начатьновуюигру\textquotesingle{}\mbox{]}}
+
+
+
+Слова для начала новой игры 
+
+\mbox{\Hypertarget{namespacelas__vegas_abd14ec38b98edecec035b25cf4ded53c}\label{namespacelas__vegas_abd14ec38b98edecec035b25cf4ded53c}} 
+\index{las\_vegas@{las\_vegas}!level@{level}}
+\index{level@{level}!las\_vegas@{las\_vegas}}
+\doxysubsubsection{\texorpdfstring{level}{level}}
+{\footnotesize\ttfamily las\+\_\+vegas.\+level}
+
+\mbox{\Hypertarget{namespacelas__vegas_afa668d597dc55b8b7f8363c3f0370bdf}\label{namespacelas__vegas_afa668d597dc55b8b7f8363c3f0370bdf}} 
+\index{las\_vegas@{las\_vegas}!MAP@{MAP}}
+\index{MAP@{MAP}!las\_vegas@{las\_vegas}}
+\doxysubsubsection{\texorpdfstring{MAP}{MAP}}
+{\footnotesize\ttfamily list las\+\_\+vegas.\+M\+AP = \mbox{[}\textquotesingle{}ячейки\textquotesingle{}, \textquotesingle{}карта\textquotesingle{}, \textquotesingle{}поле\textquotesingle{}, \textquotesingle{}описаниеячеек\textquotesingle{}\mbox{]}}
+
+
+
+Слова для вызова списка всех ячеек поля 
+
+\mbox{\Hypertarget{namespacelas__vegas_a46176a771e2e1041f4184539a5b23daf}\label{namespacelas__vegas_a46176a771e2e1041f4184539a5b23daf}} 
+\index{las\_vegas@{las\_vegas}!MONEY@{MONEY}}
+\index{MONEY@{MONEY}!las\_vegas@{las\_vegas}}
+\doxysubsubsection{\texorpdfstring{MONEY}{MONEY}}
+{\footnotesize\ttfamily list las\+\_\+vegas.\+M\+O\+N\+EY = \mbox{[}\textquotesingle{}деньги\textquotesingle{}, \textquotesingle{}моиденьги\textquotesingle{}, \textquotesingle{}сколькоуменяденег\textquotesingle{}, \textquotesingle{}сколькоденег\textquotesingle{}, \textquotesingle{}финансы\textquotesingle{}, \textquotesingle{}сбережения\textquotesingle{}\mbox{]}}
+
+
+
+Слова для показа количества денег Алисы и пользователя 
+
+\mbox{\Hypertarget{namespacelas__vegas_a094d050d9324d607e35427c4d57762d9}\label{namespacelas__vegas_a094d050d9324d607e35427c4d57762d9}} 
+\index{las\_vegas@{las\_vegas}!OWN@{OWN}}
+\index{OWN@{OWN}!las\_vegas@{las\_vegas}}
+\doxysubsubsection{\texorpdfstring{OWN}{OWN}}
+{\footnotesize\ttfamily list las\+\_\+vegas.\+O\+WN = \mbox{[}\textquotesingle{}недвижимость\textquotesingle{}, \textquotesingle{}моянедвижимость\textquotesingle{}, \textquotesingle{}собственность\textquotesingle{}, \textquotesingle{}мое\textquotesingle{}, \textquotesingle{}моё\textquotesingle{}, \textquotesingle{}моясобственность\textquotesingle{}\mbox{]}}
+
+
+
+Слова для показа собственности Алисы и пользователя 
+
+\mbox{\Hypertarget{namespacelas__vegas_ab6cfcade0acee303ba000e12c05ffb3c}\label{namespacelas__vegas_ab6cfcade0acee303ba000e12c05ffb3c}} 
+\index{las\_vegas@{las\_vegas}!PLACE@{PLACE}}
+\index{PLACE@{PLACE}!las\_vegas@{las\_vegas}}
+\doxysubsubsection{\texorpdfstring{PLACE}{PLACE}}
+{\footnotesize\ttfamily list las\+\_\+vegas.\+P\+L\+A\+CE = \mbox{[}\textquotesingle{}мояячейка\textquotesingle{}, \textquotesingle{}гдея\textquotesingle{}, \textquotesingle{}где\textquotesingle{}, \textquotesingle{}моеположение\textquotesingle{}, \textquotesingle{}накакойяячейке\textquotesingle{}, \textquotesingle{}клетка\textquotesingle{}, \textquotesingle{}мояклетка\textquotesingle{}, \textquotesingle{}накакойяклетке\textquotesingle{}, \textquotesingle{}местоположение\textquotesingle{}\mbox{]}}
+
+
+
+Слова, чтобы увидеть ячейку, где находится Алиса и пользователь 
+
+\mbox{\Hypertarget{namespacelas__vegas_ab56f9d2fd6cfe61b08320fba69d82a93}\label{namespacelas__vegas_ab56f9d2fd6cfe61b08320fba69d82a93}} 
+\index{las\_vegas@{las\_vegas}!RULES@{RULES}}
+\index{RULES@{RULES}!las\_vegas@{las\_vegas}}
+\doxysubsubsection{\texorpdfstring{RULES}{RULES}}
+{\footnotesize\ttfamily list las\+\_\+vegas.\+R\+U\+L\+ES = \mbox{[}\textquotesingle{}правила\textquotesingle{}, \textquotesingle{}какиграть\textquotesingle{}, \textquotesingle{}описание\textquotesingle{}, \textquotesingle{}описаниеигры\textquotesingle{}\mbox{]}}
+
+
+
+Слова для показа правил игры 
+
+\mbox{\Hypertarget{namespacelas__vegas_a8db0ef9b59136680c114f5bb023a5bb5}\label{namespacelas__vegas_a8db0ef9b59136680c114f5bb023a5bb5}} 
+\index{las\_vegas@{las\_vegas}!WORDS@{WORDS}}
+\index{WORDS@{WORDS}!las\_vegas@{las\_vegas}}
+\doxysubsubsection{\texorpdfstring{WORDS}{WORDS}}
+{\footnotesize\ttfamily list las\+\_\+vegas.\+W\+O\+R\+DS = \mbox{[}\textquotesingle{}броситькубик\textquotesingle{}, \textquotesingle{}яхожу\textquotesingle{}, \textquotesingle{}го\textquotesingle{}, \textquotesingle{}давайиграть\textquotesingle{}, \textquotesingle{}играть\textquotesingle{}, \textquotesingle{}начать\textquotesingle{}\mbox{]}}
+
+
+
+Слова для совершения хода Алисы или пользователя 
+

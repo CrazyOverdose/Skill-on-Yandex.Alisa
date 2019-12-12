@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['bad_9',['bad',['../classhandler_1_1las__vegas.html#ade45844b21ff6712dc4256022bd777b1',1,'handler::las_vegas']]],
-  ['banks_10',['BANKS',['../namespacehandler.html#aa6549c031434dc6397d0413a0292bc56',1,'handler']]],
-  ['budget_5fchange_11',['budget_change',['../classhandler_1_1las__vegas.html#a2a5f90f481f5d77a08aeb1bc7ce63c9a',1,'handler::las_vegas']]],
-  ['burse_12',['BURSE',['../namespacehandler.html#a284c90e456c05379b1b4267c21ffacd2',1,'handler']]],
-  ['bursegive_13',['BURSEgive',['../namespacehandler.html#ab47d03327bdddca5e6d57aca10502a06',1,'handler']]],
-  ['bursetake_14',['BURSEtake',['../namespacehandler.html#a56afacd97418cbec6fad372318bba081',1,'handler']]],
-  ['buy_15',['BUY',['../namespacehandler.html#a2a35eb1508b8c05f93b2ebb1431672d6',1,'handler']]]
+  ['bad_8',['bad',['../classlas__vegas_1_1las__vegas.html#a4caac2f08abe24178308dc3f8990a07f',1,'las_vegas::las_vegas']]],
+  ['banks_9',['BANKS',['../namespacelas__vegas.html#ab96d43d5b1acbaa2e747d1060153e6c5',1,'las_vegas']]],
+  ['budget_5fchange_10',['budget_change',['../classlas__vegas_1_1las__vegas.html#a9f552d13e55823fedd7c83e413c74317',1,'las_vegas::las_vegas']]],
+  ['burse_11',['BURSE',['../namespacelas__vegas.html#a22a96e8df0328f395346b8d5bdb04f6a',1,'las_vegas']]],
+  ['bursegive_12',['BURSEgive',['../namespacelas__vegas.html#a07b6b59515651d9c9f6d9b3f5ceb987c',1,'las_vegas']]],
+  ['bursetake_13',['BURSEtake',['../namespacelas__vegas.html#a1886856ead31a7b4833c95ea63487e67',1,'las_vegas']]],
+  ['buy_14',['BUY',['../namespacelas__vegas.html#a4695ede482c00f0785f6902b207a32d6',1,'las_vegas']]]
 ];

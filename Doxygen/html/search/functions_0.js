@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['_5f_5finit_5f_5f_64',['__init__',['../classalice__sdk_1_1_alice_request.html#a04f988f4d396291adfbad005ced1f01f',1,'alice_sdk.AliceRequest.__init__()'],['../classalice__sdk_1_1_alice_response.html#a1c4df75b70d2e736ee27cccaeca93fb8',1,'alice_sdk.AliceResponse.__init__()']]],
-  ['_5f_5fstr_5f_5f_65',['__str__',['../classalice__sdk_1_1_alice_request.html#a522cf5525ca76c2970b07f9cfb34bf6b',1,'alice_sdk.AliceRequest.__str__()'],['../classalice__sdk_1_1_alice_response.html#a2fb2b818128e9cf422c9b05be8cdebfe',1,'alice_sdk.AliceResponse.__str__()']]]
+  ['_5f_5finit_5f_5f_64',['__init__',['../classalice_1_1_alice_request.html#aa3467e421c2ffcc595ace68d4fd593f5',1,'alice.AliceRequest.__init__()'],['../classalice_1_1_alice_response.html#ae680806641cfdee8e405c35e18111505',1,'alice.AliceResponse.__init__()']]],
+  ['_5f_5fstr_5f_5f_65',['__str__',['../classalice_1_1_alice_request.html#a527eac86d58866f151d19a5eeafbb70c',1,'alice.AliceRequest.__str__()'],['../classalice_1_1_alice_response.html#a8ec806f5f805a85e3c99d804b2f58509',1,'alice.AliceResponse.__str__()']]]
 ];

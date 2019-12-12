@@ -9,10 +9,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb38bc6d-9667-4c33-a38c-0406a6ca14d4" name="Default Changelist" comment="test 11">
-      <change beforePath="$PROJECT_DIR$/alice_sdk.py" beforeDir="false" afterPath="$PROJECT_DIR$/alice.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/las_vegas.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    <list default="true" id="cb38bc6d-9667-4c33-a38c-0406a6ca14d4" name="Default Changelist" comment="test 12">
+      <change afterPath="$PROJECT_DIR$/tests/sessions.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/las_vegas.py" beforeDir="false" afterPath="$PROJECT_DIR$/las_vegas.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +43,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python tests.Unittests for test_1.Test.test_rules">
     <configuration name="alice_sdk" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="alice" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -114,14 +115,30 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="Unittests for test_1.Test.test_rules" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="alice" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_1.Test.test_rules&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Docker.Dockerfile" />
       <item itemvalue="Python.alice_sdk" />
       <item itemvalue="Python.api" />
       <item itemvalue="Python.main" />
+      <item itemvalue="Python tests.Unittests for test_1.Test.test_rules" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Unittests for test_1.Test.test_rules" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.alice_sdk" />
         <item itemvalue="Python.api" />
@@ -139,13 +156,6 @@
       <option name="presentableId" value="Default" />
       <updated>1572786424239</updated>
       <workItem from="1575421225998" duration="128000" />
-    </task>
-    <task id="LOCAL-00094" summary="test 22">
-      <created>1575825164433</created>
-      <option name="number" value="00094" />
-      <option name="presentableId" value="LOCAL-00094" />
-      <option name="project" value="LOCAL" />
-      <updated>1575825164433</updated>
     </task>
     <task id="LOCAL-00095" summary="test 23">
       <created>1575825509609</created>
@@ -483,7 +493,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576087020687</updated>
     </task>
-    <option name="localTasksCounter" value="143" />
+    <task id="LOCAL-00143" summary="test 12">
+      <created>1576088281290</created>
+      <option name="number" value="00143" />
+      <option name="presentableId" value="LOCAL-00143" />
+      <option name="project" value="LOCAL" />
+      <updated>1576088281290</updated>
+    </task>
+    <option name="localTasksCounter" value="144" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -503,7 +520,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="test 52" />
     <MESSAGE value="test 53" />
     <MESSAGE value="test 54" />
     <MESSAGE value="test 56" />
@@ -528,7 +544,8 @@
     <MESSAGE value="test 9" />
     <MESSAGE value="test 10" />
     <MESSAGE value="test 11" />
-    <option name="LAST_COMMIT_MESSAGE" value="test 11" />
+    <MESSAGE value="test 12" />
+    <option name="LAST_COMMIT_MESSAGE" value="test 12" />
   </component>
   <component name="WindowStateProjectService">
     <state x="297" y="0" width="839" height="869" key="#Dockerfile" timestamp="1575238486279">
@@ -547,6 +564,10 @@
       <screen x="0" y="0" width="1440" height="872" />
     </state>
     <state x="178" y="93" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.872@0.0.1440.872" timestamp="1572786530065" />
+    <state x="168" y="550" width="1244" height="674" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1576173938480">
+      <screen x="0" y="0" width="1440" height="872" />
+    </state>
+    <state x="168" y="550" width="1244" height="674" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.0.1440.872@0.0.1440.872" timestamp="1576173938480" />
     <state x="453" y="179" width="528" height="513" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1575913136710">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
@@ -555,50 +576,50 @@
       <screen x="0" y="0" width="1440" height="872" />
     </state>
     <state x="435" y="193" key="FileChooserDialogImpl/0.0.1440.872@0.0.1440.872" timestamp="1575421171184" />
-    <state width="1407" height="260" key="GridCell.Tab.0.bottom" timestamp="1575954533634">
+    <state width="1407" height="260" key="GridCell.Tab.0.bottom" timestamp="1576173956009">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
-    <state width="1407" height="260" key="GridCell.Tab.0.bottom/0.0.1440.872@0.0.1440.872" timestamp="1575954533634" />
-    <state width="1407" height="260" key="GridCell.Tab.0.center" timestamp="1575954533633">
+    <state width="1407" height="260" key="GridCell.Tab.0.bottom/0.0.1440.872@0.0.1440.872" timestamp="1576173956009" />
+    <state width="1407" height="260" key="GridCell.Tab.0.center" timestamp="1576173956006">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
-    <state width="1407" height="260" key="GridCell.Tab.0.center/0.0.1440.872@0.0.1440.872" timestamp="1575954533633" />
-    <state width="1407" height="260" key="GridCell.Tab.0.left" timestamp="1575954533633">
+    <state width="1407" height="260" key="GridCell.Tab.0.center/0.0.1440.872@0.0.1440.872" timestamp="1576173956006" />
+    <state width="1407" height="260" key="GridCell.Tab.0.left" timestamp="1576173956004">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
-    <state width="1407" height="260" key="GridCell.Tab.0.left/0.0.1440.872@0.0.1440.872" timestamp="1575954533633" />
-    <state width="1407" height="260" key="GridCell.Tab.0.right" timestamp="1575954533634">
+    <state width="1407" height="260" key="GridCell.Tab.0.left/0.0.1440.872@0.0.1440.872" timestamp="1576173956004" />
+    <state width="1407" height="260" key="GridCell.Tab.0.right" timestamp="1576173956009">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
-    <state width="1407" height="260" key="GridCell.Tab.0.right/0.0.1440.872@0.0.1440.872" timestamp="1575954533634" />
-    <state width="1407" height="260" key="GridCell.Tab.1.bottom" timestamp="1575954533635">
+    <state width="1407" height="260" key="GridCell.Tab.0.right/0.0.1440.872@0.0.1440.872" timestamp="1576173956009" />
+    <state width="1407" height="260" key="GridCell.Tab.1.bottom" timestamp="1576173957804">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
-    <state width="1407" height="260" key="GridCell.Tab.1.bottom/0.0.1440.872@0.0.1440.872" timestamp="1575954533635" />
-    <state width="1407" height="260" key="GridCell.Tab.1.center" timestamp="1575954533635">
+    <state width="1407" height="260" key="GridCell.Tab.1.bottom/0.0.1440.872@0.0.1440.872" timestamp="1576173957804" />
+    <state width="1407" height="260" key="GridCell.Tab.1.center" timestamp="1576173957803">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
-    <state width="1407" height="260" key="GridCell.Tab.1.center/0.0.1440.872@0.0.1440.872" timestamp="1575954533635" />
-    <state width="1407" height="260" key="GridCell.Tab.1.left" timestamp="1575954533634">
+    <state width="1407" height="260" key="GridCell.Tab.1.center/0.0.1440.872@0.0.1440.872" timestamp="1576173957803" />
+    <state width="1407" height="260" key="GridCell.Tab.1.left" timestamp="1576173957803">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
-    <state width="1407" height="260" key="GridCell.Tab.1.left/0.0.1440.872@0.0.1440.872" timestamp="1575954533634" />
-    <state width="1407" height="260" key="GridCell.Tab.1.right" timestamp="1575954533635">
+    <state width="1407" height="260" key="GridCell.Tab.1.left/0.0.1440.872@0.0.1440.872" timestamp="1576173957803" />
+    <state width="1407" height="260" key="GridCell.Tab.1.right" timestamp="1576173957803">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
-    <state width="1407" height="260" key="GridCell.Tab.1.right/0.0.1440.872@0.0.1440.872" timestamp="1575954533635" />
+    <state width="1407" height="260" key="GridCell.Tab.1.right/0.0.1440.872@0.0.1440.872" timestamp="1576173957803" />
     <state x="164" y="71" width="1106" height="728" key="SettingsEditor" timestamp="1575238495689">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
     <state x="164" y="71" width="1106" height="728" key="SettingsEditor/0.0.1440.872@0.0.1440.872" timestamp="1575238495689" />
-    <state x="315" y="169" width="804" height="533" key="Vcs.Push.Dialog.v2" timestamp="1576082216297">
+    <state x="315" y="169" width="804" height="533" key="Vcs.Push.Dialog.v2" timestamp="1576088283731">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
-    <state x="315" y="169" width="804" height="533" key="Vcs.Push.Dialog.v2/0.0.1440.872@0.0.1440.872" timestamp="1576082216297" />
-    <state x="306" y="262" key="com.intellij.ide.util.TipDialog" timestamp="1576078984117">
+    <state x="315" y="169" width="804" height="533" key="Vcs.Push.Dialog.v2/0.0.1440.872@0.0.1440.872" timestamp="1576088283731" />
+    <state x="306" y="262" key="com.intellij.ide.util.TipDialog" timestamp="1576163337391">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
-    <state x="306" y="262" key="com.intellij.ide.util.TipDialog/0.0.1440.872@0.0.1440.872" timestamp="1576078984117" />
+    <state x="306" y="262" key="com.intellij.ide.util.TipDialog/0.0.1440.872@0.0.1440.872" timestamp="1576163337391" />
     <state x="215" y="124" width="1004" height="622" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1575239331118">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
@@ -607,9 +628,34 @@
       <screen x="0" y="0" width="1440" height="872" />
     </state>
     <state x="570" y="49" width="505" height="744" key="refactoring.ChangeSignatureDialog/0.0.1440.872@0.0.1440.872" timestamp="1573223658022" />
-    <state x="342" y="184" width="753" height="685" key="search.everywhere.popup" timestamp="1575294284541">
+    <state x="342" y="184" width="753" height="685" key="search.everywhere.popup" timestamp="1576166670997">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
-    <state x="342" y="184" width="753" height="685" key="search.everywhere.popup/0.0.1440.872@0.0.1440.872" timestamp="1575294284541" />
+    <state x="342" y="184" width="753" height="685" key="search.everywhere.popup/0.0.1440.872@0.0.1440.872" timestamp="1576166670997" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tests/test_1.py</url>
+          <line>84</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="tests">
+        <watch expression="self" />
+        <watch expression="self" />
+        <watch expression="self" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['rules_99',['RULES',['../namespacehandler.html#aa9694cf0223f7c92db239a19f98334fe',1,'handler']]]
+  ['questions_99',['questions',['../classlas__vegas_1_1las__vegas.html#aab332a24b523cf3448dec9cb8d31ed45',1,'las_vegas::las_vegas']]]
 ];

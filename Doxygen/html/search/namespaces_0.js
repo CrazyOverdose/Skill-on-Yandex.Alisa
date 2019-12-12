@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['alice_5fsdk_57',['alice_sdk',['../namespacealice__sdk.html',1,'']]]
+  ['alice_57',['alice',['../namespacealice.html',1,'']]]
 ];

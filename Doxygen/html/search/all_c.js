@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['place_37',['PLACE',['../namespacehandler.html#a2664d90afdcdf93bb0cc7d7cf90e1c04',1,'handler']]],
-  ['price_5ffield_38',['price_field',['../classhandler_1_1las__vegas.html#afd4a0d93bfb94aa214c073849515eac4',1,'handler::las_vegas']]],
-  ['price_5fforeign_5ffield_39',['price_foreign_field',['../classhandler_1_1las__vegas.html#abbbb72fdbb17505fb954fdae4bfea90c',1,'handler::las_vegas']]]
+  ['place_36',['PLACE',['../namespacelas__vegas.html#ab6cfcade0acee303ba000e12c05ffb3c',1,'las_vegas']]],
+  ['price_5ffield_37',['price_field',['../classlas__vegas_1_1las__vegas.html#aed20c0831bde9455eea9d4fc0102bad7',1,'las_vegas::las_vegas']]],
+  ['price_5fforeign_5ffield_38',['price_foreign_field',['../classlas__vegas_1_1las__vegas.html#a82900fddd030bd11cedf7a7d936ab885',1,'las_vegas::las_vegas']]]
 ];

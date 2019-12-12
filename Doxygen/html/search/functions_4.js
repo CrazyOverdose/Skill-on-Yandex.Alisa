@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['handle_5fdialog_69',['handle_dialog',['../namespacehandler.html#a57f63d790fc995cdbc13816c7dd88c43',1,'handler']]]
+  ['handle_5fdialog_69',['handle_dialog',['../namespacelas__vegas.html#aa0315045a06cc5e3e24435ede9dc1a7e',1,'las_vegas']]]
 ];

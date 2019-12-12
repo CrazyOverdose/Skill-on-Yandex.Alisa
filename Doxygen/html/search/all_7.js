@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['handle_5fdialog_24',['handle_dialog',['../namespacehandler.html#a57f63d790fc995cdbc13816c7dd88c43',1,'handler']]],
-  ['handler_25',['handler',['../namespacehandler.html',1,'']]],
-  ['handler_2epy_26',['handler.py',['../handler_8py.html',1,'']]],
-  ['havings_27',['havings',['../classhandler_1_1las__vegas.html#a0f9d87398a4d28a26c2d0c5cdec5674f',1,'handler::las_vegas']]]
+  ['handle_5fdialog_24',['handle_dialog',['../namespacelas__vegas.html#aa0315045a06cc5e3e24435ede9dc1a7e',1,'las_vegas']]],
+  ['havings_25',['havings',['../classlas__vegas_1_1las__vegas.html#a858fd8093f640f4223ade4924d2a76b2',1,'las_vegas::las_vegas']]]
 ];

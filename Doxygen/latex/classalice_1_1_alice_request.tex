@@ -1,0 +1,118 @@
+\hypertarget{classalice_1_1_alice_request}{}\doxysection{Класс alice.\+Alice\+Request}
+\label{classalice_1_1_alice_request}\index{alice.AliceRequest@{alice.AliceRequest}}
+
+
+Класс, обрабатывающий запрос к Алисе.  
+
+
+Граф наследования\+:alice.\+Alice\+Request\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classalice_1_1_alice_request}
+\end{center}
+\end{figure}
+\doxysubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classalice_1_1_alice_request_aa3467e421c2ffcc595ace68d4fd593f5}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, request\+\_\+dict)
+\begin{DoxyCompactList}\small\item\em Конструктор класса \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classalice_1_1_alice_request_a8add035d5a73d1420806f8e927f9676e}{version}} (self)
+\begin{DoxyCompactList}\small\item\em Версия протокола. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classalice_1_1_alice_request_a34c846842757a08fe42e729ce01b8bae}{session}} (self)
+\begin{DoxyCompactList}\small\item\em Данные о сессии \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classalice_1_1_alice_request_a8b864025eae8444d50dbff0142f37c3c}{user\+\_\+id}} (self)
+\begin{DoxyCompactList}\small\item\em Идентификатор экземпляра приложения, в котором пользователь общается с Алисой, максимум 64 символа. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classalice_1_1_alice_request_af4afc43a96e4dc98236de092609424c6}{is\+\_\+new\+\_\+session}} (self)
+\begin{DoxyCompactList}\small\item\em Признак новой сессии. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classalice_1_1_alice_request_a52af362b1c2e7d00fd4710f7b9bad50e}{command}} (self)
+\begin{DoxyCompactList}\small\item\em Служебное запрос пользователя, преобразованный для внутренней обработки Алисы. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classalice_1_1_alice_request_a527eac86d58866f151d19a5eeafbb70c}{\+\_\+\+\_\+str\+\_\+\+\_\+}} (self)
+\begin{DoxyCompactList}\small\item\em Метод получения строкового представления объекта. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Класс, обрабатывающий запрос к Алисе. 
+
+\doxysubsection{Конструктор(ы)}
+\mbox{\Hypertarget{classalice_1_1_alice_request_aa3467e421c2ffcc595ace68d4fd593f5}\label{classalice_1_1_alice_request_aa3467e421c2ffcc595ace68d4fd593f5}} 
+\index{alice.AliceRequest@{alice.AliceRequest}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!alice.AliceRequest@{alice.AliceRequest}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def alice.\+Alice\+Request.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{request\+\_\+dict }\end{DoxyParamCaption})}
+
+
+
+Конструктор класса 
+
+
+
+\doxysubsection{Методы}
+\mbox{\Hypertarget{classalice_1_1_alice_request_a527eac86d58866f151d19a5eeafbb70c}\label{classalice_1_1_alice_request_a527eac86d58866f151d19a5eeafbb70c}} 
+\index{alice.AliceRequest@{alice.AliceRequest}!\_\_str\_\_@{\_\_str\_\_}}
+\index{\_\_str\_\_@{\_\_str\_\_}!alice.AliceRequest@{alice.AliceRequest}}
+\doxysubsubsection{\texorpdfstring{\_\_str\_\_()}{\_\_str\_\_()}}
+{\footnotesize\ttfamily def alice.\+Alice\+Request.\+\_\+\+\_\+str\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Метод получения строкового представления объекта. 
+
+\mbox{\Hypertarget{classalice_1_1_alice_request_a52af362b1c2e7d00fd4710f7b9bad50e}\label{classalice_1_1_alice_request_a52af362b1c2e7d00fd4710f7b9bad50e}} 
+\index{alice.AliceRequest@{alice.AliceRequest}!command@{command}}
+\index{command@{command}!alice.AliceRequest@{alice.AliceRequest}}
+\doxysubsubsection{\texorpdfstring{command()}{command()}}
+{\footnotesize\ttfamily def alice.\+Alice\+Request.\+command (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Служебное запрос пользователя, преобразованный для внутренней обработки Алисы. 
+
+В ходе преобразования текст, в частности, очищается от знаков препинания, а числительные преобразуются в числа. \mbox{\Hypertarget{classalice_1_1_alice_request_af4afc43a96e4dc98236de092609424c6}\label{classalice_1_1_alice_request_af4afc43a96e4dc98236de092609424c6}} 
+\index{alice.AliceRequest@{alice.AliceRequest}!is\_new\_session@{is\_new\_session}}
+\index{is\_new\_session@{is\_new\_session}!alice.AliceRequest@{alice.AliceRequest}}
+\doxysubsubsection{\texorpdfstring{is\_new\_session()}{is\_new\_session()}}
+{\footnotesize\ttfamily def alice.\+Alice\+Request.\+is\+\_\+new\+\_\+session (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Признак новой сессии. 
+
+Возможные значения\+:
+\begin{DoxyEnumerate}
+\item true -\/ пользователь начинает новый разговор с навыком Алисы
+\item false -\/ запрос отправлен в рамках уже начатого разговора 
+\end{DoxyEnumerate}\mbox{\Hypertarget{classalice_1_1_alice_request_a34c846842757a08fe42e729ce01b8bae}\label{classalice_1_1_alice_request_a34c846842757a08fe42e729ce01b8bae}} 
+\index{alice.AliceRequest@{alice.AliceRequest}!session@{session}}
+\index{session@{session}!alice.AliceRequest@{alice.AliceRequest}}
+\doxysubsubsection{\texorpdfstring{session()}{session()}}
+{\footnotesize\ttfamily def alice.\+Alice\+Request.\+session (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Данные о сессии 
+
+\mbox{\Hypertarget{classalice_1_1_alice_request_a8b864025eae8444d50dbff0142f37c3c}\label{classalice_1_1_alice_request_a8b864025eae8444d50dbff0142f37c3c}} 
+\index{alice.AliceRequest@{alice.AliceRequest}!user\_id@{user\_id}}
+\index{user\_id@{user\_id}!alice.AliceRequest@{alice.AliceRequest}}
+\doxysubsubsection{\texorpdfstring{user\_id()}{user\_id()}}
+{\footnotesize\ttfamily def alice.\+Alice\+Request.\+user\+\_\+id (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Идентификатор экземпляра приложения, в котором пользователь общается с Алисой, максимум 64 символа. 
+
+\mbox{\Hypertarget{classalice_1_1_alice_request_a8add035d5a73d1420806f8e927f9676e}\label{classalice_1_1_alice_request_a8add035d5a73d1420806f8e927f9676e}} 
+\index{alice.AliceRequest@{alice.AliceRequest}!version@{version}}
+\index{version@{version}!alice.AliceRequest@{alice.AliceRequest}}
+\doxysubsubsection{\texorpdfstring{version()}{version()}}
+{\footnotesize\ttfamily def alice.\+Alice\+Request.\+version (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Версия протокола. 
+
+Текущая версия -\/ 1.\+0 
+
+Объявления и описания членов класса находятся в файле\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{alice_8py}{alice.\+py}}\end{DoxyCompactItemize}
