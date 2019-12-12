@@ -1,0 +1,7 @@
+os: linux
+sudo: required
+language: python
+python: "3.7"
+
+notifications:
+  email: false
