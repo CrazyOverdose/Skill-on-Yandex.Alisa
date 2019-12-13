@@ -345,6 +345,8 @@ def handle_dialog(request, response, user_storage):
                         user_storage["moneyU"] = user_storage["moneyU"] + 200
                     user_storage["field_cellU"] = int(user_message)
                     user_storage["anycell2"] = True
+                else:
+                    response.set_text('Ваш ход \n' + '\n Вы остались на месте ')
             if not user_message.isdigit():
                 response.set_text('Ваш ход \n' + '\n Вы остались на месте ')
             user_storage["go"] = False
