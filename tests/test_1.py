@@ -1,5 +1,7 @@
 import unittest
+import sys
 
+sys.path.append("..")
 from tests.for_tests import handle_dialog
 
 
