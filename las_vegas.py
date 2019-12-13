@@ -338,12 +338,13 @@ def handle_dialog(request, response, user_storage):
         ##Обработка ячейки для пользователя "перемещение на любую ячейку"
         if user_storage["go"]:
             if user_message.isdigit():
-                response.set_text(
-                    '\n Вы перешли на ячейку ' + str(user_message) + '\n' + game.fields[int(user_message)])
-                if user_storage["field_cellU"] > int(user_message):
-                    user_storage["moneyU"] = user_storage["moneyU"] + 200
-                user_storage["field_cellU"] = int(user_message)
-                user_storage["anycell2"] = True
+                if 40 >= int(user_message) >= 1:
+                    response.set_text(
+                        '\n Вы перешли на ячейку ' + str(user_message) + '\n' + game.fields[int(user_message)])
+                    if user_storage["field_cellU"] > int(user_message):
+                        user_storage["moneyU"] = user_storage["moneyU"] + 200
+                    user_storage["field_cellU"] = int(user_message)
+                    user_storage["anycell2"] = True
             if not user_message.isdigit():
                 response.set_text('Ваш ход \n' + '\n Вы остались на месте ')
             user_storage["go"] = False
