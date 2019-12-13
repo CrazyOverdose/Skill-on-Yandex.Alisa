@@ -46,7 +46,7 @@ class las_vegas:
 
     answers = ['0', '0', '4', 'Оттава', 'Сеул', 'е', 'ю', 'Грибоедов', 'нет', '6', '100000', '4']
 
-    fields = ['0', '\n 1. Cтарт \n', '\n 2. Колесо обозрения "High Roller" Цена: 10$ \n ',
+    fields = ['0', '\n 1. Cтарт \n', '\n 2. Колесо обозрения \"High Roller\" Цена: 10$ \n ',
               '\n 3. Инвестроры вложили в вас 100$\n',
               '\n 4. Ранчо "Casa de Shenandoah" Цена: 10$\n', '\n 5. Отправляйтесь на 2 ячейки назад\n',
               '\n 6. Брат за брата. Отдайте второму игроку 50$\n',
@@ -365,7 +365,7 @@ def handle_dialog(request, response, user_storage):
         ##ОБработка решения пользователя насчет недвижимости (купить, не купить)
         if user_storage["property"] != 0:
             if str(user_message) in BUY:
-                if user_storage["moneyU"] < game.price_field[user_storage["field_cellU"]]:
+                if user_storage["moneyU"] < abs(game.price_field[user_storage["field_cellU"]]):
                     response.set_text('У вас недостаточно средств ')
                 else:
                     user_storage["moneyU"] = user_storage["moneyU"] + game.price_field[user_storage["field_cellU"]]
