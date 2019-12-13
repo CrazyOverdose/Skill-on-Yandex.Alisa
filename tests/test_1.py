@@ -102,100 +102,6 @@ class Test_1(unittest.TestCase):
 
 
 class Test_2(unittest.TestCase):
-    def test_rules(self):
-        request = {
-            "meta": {
-                "client_id": "ru.yandex.searchplugin/7.16 (none none; android 4.4.2)",
-                "interfaces": {
-                    "account_linking": {},
-                    "payments": {},
-                    "screen": {}
-                },
-                "locale": "ru-RU",
-                "timezone": "UTC"
-            },
-            "request": {
-                "command": "правила",
-                "nlu": {
-                    "entities": [],
-                    "tokens": [
-                        "правила"
-                    ]
-                },
-                "original_utterance": "правила",
-                "type": "SimpleUtterance"
-            },
-            "session": {
-                "message_id": 1,
-                "new": False,
-                "session_id": "5635dea0-e8bbe050-16afad5c-75538f9",
-                "skill_id": "2e605c0c-cb43-4bc0-bff7-007f695822ad",
-                "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403"
-            },
-            "version": "1.0"
-        }
-
-        user_storage = {
-            "propertyA": [2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
-                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],  # имущество Алисы
-            "propertyU": [2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
-                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],
-            # имущество пользователя
-            "moneyU": 200.0,  # Деньги Пользователя
-            "moneyA": 200.0,  # Деньги Алисы
-            "field_cellA": 1,  # Клетка, на которой находится Алиса
-            "field_cellU": 1,  # Клетка, на которой находится пользователь
-            "bankU": 0.0,  # вклады пользователя (ячейка поля 37)
-            "bankA": 0.0,  # вклады алисы (ячейка поля 37)
-            "exchange": 0.0,  # деньги на бирже (ячейка поля 13)
-            "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403",
-            "users_turn": True,  # чей ход
-            "bank": False,  # пользователь попал в банк
-            "property": 0,  # пользователь попал на ячейку недвижимости
-            "go": False,  # на любую ячейку
-            "school": 0,  # пользователь попал на "назад в школу"
-            "choice": False,  # пользователь попал на биржу
-            "prison1": False,  # тюрьма Алисы
-            "prison2": False,  # тюрьма пользователя
-            "crash": False,  # если пользователь почти банкрот
-            "anycell1": False,
-            "anycell2": False
-
-        }
-
-        response = {
-            "version": "1.0",
-            "session": {
-                "message_id": 1,
-                "new": False,
-                "session_id": "5635dea0-e8bbe050-16afad5c-75538f9",
-                "skill_id": "2e605c0c-cb43-4bc0-bff7-007f695822ad",
-                "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403"
-            },
-            "response": {
-                "end_session": False,
-                "text": "Каждый участник бросает кубик и в зависимости от выпавшего количества очков перемещает фишку по полю. За каждый пройденный круг банк выплачивает 200$. Ваша цель – не обанкротиться. \n Если вы остановились на поле недвижимости и оно не занято другими участниками, у вас есть право на его покупку или отказ от покупки. \n Владение зданием дает право взыскивать арендную плату с человека, остановившегося на этом поле.\n «Тюрьма»: Попав на эту ячейку, вы теряете 150$ и пропускаете ход \n Если вам не хватает средств на какие-то обязательные выплаты, вы становитесь банкротом. \n \n Чтобы начать игру \"бросить кубик\""
-            }
-        }
-
-        alice_request = AliceRequest(request)
-
-        ##Ответ Алисы пользователю
-        alice_response = AliceResponse(alice_request)
-
-        alice_response, user_storage2 = handle_dialog(
-            alice_request, alice_response, user_storage
-        )
-
-        json_str = json.dumps(
-            response,
-            ensure_ascii=False,
-            indent=2
-        )
-        self.assertEqual((alice_response.dumps(), user_storage2), (json_str, user_storage), "Всё сломалось :))))))")
-
-
-class Test_3(unittest.TestCase):
     def test_own(self):
         request = {
             "meta": {
@@ -288,7 +194,7 @@ class Test_3(unittest.TestCase):
         self.assertEqual((alice_response.dumps(), user_storage2), (json_str, user_storage), "Всё сломалось :))))))")
 
 
-class Test_4(unittest.TestCase):
+class Test_3(unittest.TestCase):
     def test_money(self):
         request = {
             "meta": {
@@ -382,7 +288,7 @@ class Test_4(unittest.TestCase):
         self.assertEqual((alice_response.dumps(), user_storage2), (json_str, user_storage), "Всё сломалось :))))))")
 
 
-class Test_5(unittest.TestCase):
+class Test_4(unittest.TestCase):
     def test_map(self):
         request = {
             "meta": {
@@ -476,7 +382,7 @@ class Test_5(unittest.TestCase):
         self.assertEqual((alice_response.dumps(), user_storage2), (json_str, user_storage), "Всё сломалось :))))))")
 
 
-class Test_6(unittest.TestCase):
+class Test_5(unittest.TestCase):
     def test_burse(self):
         request = {
             "meta": {
@@ -570,7 +476,7 @@ class Test_6(unittest.TestCase):
         self.assertEqual((alice_response.dumps(), user_storage2), (json_str, user_storage), "Всё сломалось :))))))")
 
 
-class Test_7(unittest.TestCase):
+class Test_6(unittest.TestCase):
     def test_bank(self):
         request = {
             "meta": {
@@ -664,7 +570,7 @@ class Test_7(unittest.TestCase):
         self.assertEqual((alice_response.dumps(), user_storage2), (json_str, user_storage), "Всё сломалось :))))))")
 
 
-class Test_8(unittest.TestCase):
+class Test_7(unittest.TestCase):
     def test_place(self):
         request = {
             "meta": {
@@ -757,7 +663,8 @@ class Test_8(unittest.TestCase):
         )
         self.assertEqual((alice_response.dumps(), user_storage2), (json_str, user_storage), "Всё сломалось :))))))")
 
-class Test_9(unittest.TestCase):
+
+class Test_8(unittest.TestCase):
     def test_rules(self):
         request = {
             "meta": {
@@ -849,4 +756,770 @@ class Test_9(unittest.TestCase):
             indent=2
         )
         self.assertEqual((alice_response.dumps(), user_storage2), (json_str, user_storage), "Всё сломалось :))))))")
+
+
+class Test_9(unittest.TestCase):
+    def test_rules(self):
+        request = {
+            "meta": {
+                "client_id": "ru.yandex.searchplugin/7.16 (none none; android 4.4.2)",
+                "interfaces": {
+                    "account_linking": {},
+                    "payments": {},
+                    "screen": {}
+                },
+                "locale": "ru-RU",
+                "timezone": "UTC"
+            },
+            "request": {
+                "command": "новая игра",
+                "nlu": {
+                    "entities": [],
+                    "tokens": [
+                        "новая игра"
+                    ]
+                },
+                "original_utterance": "новая игра",
+                "type": "SimpleUtterance"
+            },
+            "session": {
+                "message_id": 1,
+                "new": False,
+                "session_id": "5635dea0-e8bbe050-16afad5c-75538f9",
+                "skill_id": "2e605c0c-cb43-4bc0-bff7-007f695822ad",
+                "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403"
+            },
+            "version": "1.0"
+        }
+
+        user_storage = {
+            "propertyA": [2, 2, 1, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],  # имущество Алисы
+            "propertyU": [2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],
+            # имущество пользователя
+            "moneyU": 200.0,  # Деньги Пользователя
+            "moneyA": 200.0,  # Деньги Алисы
+            "field_cellA": 1,  # Клетка, на которой находится Алиса
+            "field_cellU": 1,  # Клетка, на которой находится пользователь
+            "bankU": 0.0,  # вклады пользователя (ячейка поля 37)
+            "bankA": 0.0,  # вклады алисы (ячейка поля 37)
+            "exchange": 0.0,  # деньги на бирже (ячейка поля 13)
+            "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403",
+            "users_turn": True,  # чей ход
+            "bank": False,  # пользователь попал в банк
+            "property": 0,  # пользователь попал на ячейку недвижимости
+            "go": False,  # на любую ячейку
+            "school": 0,  # пользователь попал на "назад в школу"
+            "choice": False,  # пользователь попал на биржу
+            "prison1": False,  # тюрьма Алисы
+            "prison2": False,  # тюрьма пользователя
+            "crash": False,  # если пользователь почти банкрот
+            "anycell1": False,
+            "anycell2": False
+
+        }
+
+        newuser_storage = {
+            "propertyA": [2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],  # имущество Алисы
+            "propertyU": [2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],
+            # имущество пользователя
+            "moneyU": 200.0,  # Деньги Пользователя
+            "moneyA": 200.0,  # Деньги Алисы
+            "field_cellA": 1,  # Клетка, на которой находится Алиса
+            "field_cellU": 1,  # Клетка, на которой находится пользователь
+            "bankU": 0.0,  # вклады пользователя (ячейка поля 37)
+            "bankA": 0.0,  # вклады алисы (ячейка поля 37)
+            "exchange": 0.0,  # деньги на бирже (ячейка поля 13)
+            "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403",
+            "users_turn": True,  # чей ход
+            "bank": False,  # пользователь попал в банк
+            "property": 0,  # пользователь попал на ячейку недвижимости
+            "go": False,  # на любую ячейку
+            "school": 0,  # пользователь попал на "назад в школу"
+            "choice": False,  # пользователь попал на биржу
+            "prison1": False,  # тюрьма Алисы
+            "prison2": False,  # тюрьма пользователя
+            "crash": False,  # если пользователь почти банкрот
+            "anycell1": False,
+            "anycell2": False
+        }
+        response = {
+            "version": "1.0",
+            "session": {
+                "message_id": 1,
+                "new": False,
+                "session_id": "5635dea0-e8bbe050-16afad5c-75538f9",
+                "skill_id": "2e605c0c-cb43-4bc0-bff7-007f695822ad",
+                "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403"
+            },
+            "response": {
+                "end_session": False,
+                "text": "Давай напомню правила: Каждый участник бросает кубик и в зависимости от выпавшего количества очков перемещает фишку по полю. За каждый пройденный круг банк выплачивает 200$. Ваша цель – не обанкротиться. \n Если вы остановились на поле недвижимости и оно не куплено другими участниками, у вас есть право на его покупку или отказ от покупки. \n Владение зданием дает право взыскивать арендную плату с человека, остановившегося на этом поле.\n \n Если вам не хватает средств на какие-то обязательные выплаты, вы становитесь банкротом. \n \n Чтобы посмотреть все доступные команды: \"команды\" \n Чтобы начать игру: \"бросить кубик\""
+            }
+        }
+
+        alice_request = AliceRequest(request)
+
+        ##Ответ Алисы пользователю
+        alice_response = AliceResponse(alice_request)
+
+        alice_response, user_storage2 = handle_dialog(
+            alice_request, alice_response, user_storage
+        )
+
+        json_str = json.dumps(
+            response,
+            ensure_ascii=False,
+            indent=2
+        )
+        self.assertEqual((alice_response.dumps(), user_storage2), (json_str, newuser_storage), "Всё сломалось :))))))")
+
+
+class Test_10(unittest.TestCase):
+    def test_bad(self):
+        request = {
+            "meta": {
+                "client_id": "ru.yandex.searchplugin/7.16 (none none; android 4.4.2)",
+                "interfaces": {
+                    "account_linking": {},
+                    "payments": {},
+                    "screen": {}
+                },
+                "locale": "ru-RU",
+                "timezone": "UTC"
+            },
+            "request": {
+                "command": "несуществующая команда",
+                "nlu": {
+                    "entities": [],
+                    "tokens": [
+                        "несуществующая команда"
+                    ]
+                },
+                "original_utterance": "несуществующая команда",
+                "type": "SimpleUtterance"
+            },
+            "session": {
+                "message_id": 1,
+                "new": False,
+                "session_id": "5635dea0-e8bbe050-16afad5c-75538f9",
+                "skill_id": "2e605c0c-cb43-4bc0-bff7-007f695822ad",
+                "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403"
+            },
+            "version": "1.0"
+        }
+
+        user_storage = {
+            "propertyA": [2, 2, 1, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],  # имущество Алисы
+            "propertyU": [2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],
+            # имущество пользователя
+            "moneyU": 200.0,  # Деньги Пользователя
+            "moneyA": 200.0,  # Деньги Алисы
+            "field_cellA": 1,  # Клетка, на которой находится Алиса
+            "field_cellU": 1,  # Клетка, на которой находится пользователь
+            "bankU": 0.0,  # вклады пользователя (ячейка поля 37)
+            "bankA": 0.0,  # вклады алисы (ячейка поля 37)
+            "exchange": 0.0,  # деньги на бирже (ячейка поля 13)
+            "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403",
+            "users_turn": True,  # чей ход
+            "bank": False,  # пользователь попал в банк
+            "property": 0,  # пользователь попал на ячейку недвижимости
+            "go": False,  # на любую ячейку
+            "school": 0,  # пользователь попал на "назад в школу"
+            "choice": False,  # пользователь попал на биржу
+            "prison1": False,  # тюрьма Алисы
+            "prison2": False,  # тюрьма пользователя
+            "crash": False,  # если пользователь почти банкрот
+            "anycell1": False,
+            "anycell2": False
+
+        }
+
+        response = {
+            "version": "1.0",
+            "session": {
+                "message_id": 1,
+                "new": False,
+                "session_id": "5635dea0-e8bbe050-16afad5c-75538f9",
+                "skill_id": "2e605c0c-cb43-4bc0-bff7-007f695822ad",
+                "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403"
+            },
+            "response": {
+                "end_session": False,
+                "text": "Простите, но я вас не поняла."
+            }
+        }
+
+        alice_request = AliceRequest(request)
+
+        ##Ответ Алисы пользователю
+        alice_response = AliceResponse(alice_request)
+
+        alice_response, user_storage2 = handle_dialog(
+            alice_request, alice_response, user_storage
+        )
+
+        json_str = json.dumps(
+            response,
+            ensure_ascii=False,
+            indent=2
+        )
+        self.assertEqual((alice_response.dumps(), user_storage2), (json_str, user_storage), "Всё сломалось :))))))")
+
+
+class Test_11(unittest.TestCase):
+    def test_trueschool(self):
+        request = {
+            "meta": {
+                "client_id": "ru.yandex.searchplugin/7.16 (none none; android 4.4.2)",
+                "interfaces": {
+                    "account_linking": {},
+                    "payments": {},
+                    "screen": {}
+                },
+                "locale": "ru-RU",
+                "timezone": "UTC"
+            },
+            "request": {
+                "command": "4",
+                "nlu": {
+                    "entities": [],
+                    "tokens": [
+                        "4"
+                    ]
+                },
+                "original_utterance": "4",
+                "type": "SimpleUtterance"
+            },
+            "session": {
+                "message_id": 1,
+                "new": False,
+                "session_id": "5635dea0-e8bbe050-16afad5c-75538f9",
+                "skill_id": "2e605c0c-cb43-4bc0-bff7-007f695822ad",
+                "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403"
+            },
+            "version": "1.0"
+        }
+
+        user_storage = {
+            "propertyA": [2, 2, 1, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],  # имущество Алисы
+            "propertyU": [2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],
+            # имущество пользователя
+            "moneyU": 200.0,  # Деньги Пользователя
+            "moneyA": 200.0,  # Деньги Алисы
+            "field_cellA": 1,  # Клетка, на которой находится Алиса
+            "field_cellU": 18,  # Клетка, на которой находится пользователь
+            "bankU": 0.0,  # вклады пользователя (ячейка поля 37)
+            "bankA": 0.0,  # вклады алисы (ячейка поля 37)
+            "exchange": 0.0,  # деньги на бирже (ячейка поля 13)
+            "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403",
+            "users_turn": True,  # чей ход
+            "bank": False,  # пользователь попал в банк
+            "property": 0,  # пользователь попал на ячейку недвижимости
+            "go": False,  # на любую ячейку
+            "school": 2,  # пользователь попал на "назад в школу"
+            "choice": False,  # пользователь попал на биржу
+            "prison1": False,  # тюрьма Алисы
+            "prison2": False,  # тюрьма пользователя
+            "crash": False,  # если пользователь почти банкрот
+            "anycell1": False,
+            "anycell2": False
+
+        }
+
+        response = {
+            "version": "1.0",
+            "session": {
+                "message_id": 1,
+                "new": False,
+                "session_id": "5635dea0-e8bbe050-16afad5c-75538f9",
+                "skill_id": "2e605c0c-cb43-4bc0-bff7-007f695822ad",
+                "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403"
+            },
+            "response": {
+                "end_session": False,
+                "text": "Правильный ответ"
+            }
+        }
+
+        alice_request = AliceRequest(request)
+
+        ##Ответ Алисы пользователю
+        alice_response = AliceResponse(alice_request)
+
+        alice_response, user_storage2 = handle_dialog(
+            alice_request, alice_response, user_storage
+        )
+
+        json_str = json.dumps(
+            response,
+            ensure_ascii=False,
+            indent=2
+        )
+        self.assertEqual((alice_response.dumps(), user_storage2), (json_str, user_storage), "Всё сломалось :))))))")
+
+
+class Test_12(unittest.TestCase):
+    def test_falseschool(self):
+        request = {
+            "meta": {
+                "client_id": "ru.yandex.searchplugin/7.16 (none none; android 4.4.2)",
+                "interfaces": {
+                    "account_linking": {},
+                    "payments": {},
+                    "screen": {}
+                },
+                "locale": "ru-RU",
+                "timezone": "UTC"
+            },
+            "request": {
+                "command": "0",
+                "nlu": {
+                    "entities": [],
+                    "tokens": [
+                        "0"
+                    ]
+                },
+                "original_utterance": "0",
+                "type": "SimpleUtterance"
+            },
+            "session": {
+                "message_id": 1,
+                "new": False,
+                "session_id": "5635dea0-e8bbe050-16afad5c-75538f9",
+                "skill_id": "2e605c0c-cb43-4bc0-bff7-007f695822ad",
+                "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403"
+            },
+            "version": "1.0"
+        }
+
+        user_storage = {
+            "propertyA": [2, 2, 1, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],  # имущество Алисы
+            "propertyU": [2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],
+            # имущество пользователя
+            "moneyU": 200.0,  # Деньги Пользователя
+            "moneyA": 200.0,  # Деньги Алисы
+            "field_cellA": 1,  # Клетка, на которой находится Алиса
+            "field_cellU": 18,  # Клетка, на которой находится пользователь
+            "bankU": 0.0,  # вклады пользователя (ячейка поля 37)
+            "bankA": 0.0,  # вклады алисы (ячейка поля 37)
+            "exchange": 0.0,  # деньги на бирже (ячейка поля 13)
+            "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403",
+            "users_turn": True,  # чей ход
+            "bank": False,  # пользователь попал в банк
+            "property": 0,  # пользователь попал на ячейку недвижимости
+            "go": False,  # на любую ячейку
+            "school": 2,  # пользователь попал на "назад в школу"
+            "choice": False,  # пользователь попал на биржу
+            "prison1": False,  # тюрьма Алисы
+            "prison2": False,  # тюрьма пользователя
+            "crash": False,  # если пользователь почти банкрот
+            "anycell1": False,
+            "anycell2": False
+
+        }
+
+        response = {
+            "version": "1.0",
+            "session": {
+                "message_id": 1,
+                "new": False,
+                "session_id": "5635dea0-e8bbe050-16afad5c-75538f9",
+                "skill_id": "2e605c0c-cb43-4bc0-bff7-007f695822ad",
+                "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403"
+            },
+            "response": {
+                "end_session": False,
+                "text": "Неправильный ответ \n Правильный ответ: 4"
+            }
+        }
+
+        alice_request = AliceRequest(request)
+
+        ##Ответ Алисы пользователю
+        alice_response = AliceResponse(alice_request)
+
+        alice_response, user_storage2 = handle_dialog(
+            alice_request, alice_response, user_storage
+        )
+
+        json_str = json.dumps(
+            response,
+            ensure_ascii=False,
+            indent=2
+        )
+        self.assertEqual((alice_response.dumps(), user_storage2), (json_str, user_storage), "Всё сломалось :))))))")
+
+class Test_13(unittest.TestCase):
+    def test_bursegive(self):
+        request = {
+            "meta": {
+                "client_id": "ru.yandex.searchplugin/7.16 (none none; android 4.4.2)",
+                "interfaces": {
+                    "account_linking": {},
+                    "payments": {},
+                    "screen": {}
+                },
+                "locale": "ru-RU",
+                "timezone": "UTC"
+            },
+            "request": {
+                "command": "оставить",
+                "nlu": {
+                    "entities": [],
+                    "tokens": [
+                        "оставить"
+                    ]
+                },
+                "original_utterance": "оставить",
+                "type": "SimpleUtterance"
+            },
+            "session": {
+                "message_id": 1,
+                "new": False,
+                "session_id": "5635dea0-e8bbe050-16afad5c-75538f9",
+                "skill_id": "2e605c0c-cb43-4bc0-bff7-007f695822ad",
+                "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403"
+            },
+            "version": "1.0"
+        }
+
+        newuser_storage = {
+            "propertyA": [2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],  # имущество Алисы
+            "propertyU": [2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],
+            # имущество пользователя
+            "moneyU": 100.0,  # Деньги Пользователя
+            "moneyA": 200.0,  # Деньги Алисы
+            "field_cellA": 1,  # Клетка, на которой находится Алиса
+            "field_cellU": 13,  # Клетка, на которой находится пользователь
+            "bankU": 0.0,  # вклады пользователя (ячейка поля 37)
+            "bankA": 0.0,  # вклады алисы (ячейка поля 37)
+            "exchange": 100.0,  # деньги на бирже (ячейка поля 13)
+            "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403",
+            "users_turn": True,  # чей ход
+            "bank": False,  # пользователь попал в банк
+            "property": 0,  # пользователь попал на ячейку недвижимости
+            "go": False,  # на любую ячейку
+            "school": 0,  # пользователь попал на "назад в школу"
+            "choice": False,  # пользователь попал на биржу
+            "prison1": False,  # тюрьма Алисы
+            "prison2": False,  # тюрьма пользователя
+            "crash": False,  # если пользователь почти банкрот
+            "anycell1": False,
+            "anycell2": False
+
+        }
+
+        user_storage = {
+            "propertyA": [2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],  # имущество Алисы
+            "propertyU": [2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],
+            # имущество пользователя
+            "moneyU": 200.0,  # Деньги Пользователя
+            "moneyA": 200.0,  # Деньги Алисы
+            "field_cellA": 1,  # Клетка, на которой находится Алиса
+            "field_cellU": 13,  # Клетка, на которой находится пользователь
+            "bankU": 0.0,  # вклады пользователя (ячейка поля 37)
+            "bankA": 0.0,  # вклады алисы (ячейка поля 37)
+            "exchange": 0.0,  # деньги на бирже (ячейка поля 13)
+            "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403",
+            "users_turn": True,  # чей ход
+            "bank": False,  # пользователь попал в банк
+            "property": 0,  # пользователь попал на ячейку недвижимости
+            "go": False,  # на любую ячейку
+            "school": 0,  # пользователь попал на "назад в школу"
+            "choice": True,  # пользователь попал на биржу
+            "prison1": False,  # тюрьма Алисы
+            "prison2": False,  # тюрьма пользователя
+            "crash": False,  # если пользователь почти банкрот
+            "anycell1": False,
+            "anycell2": False
+
+        }
+
+        response = {
+            "version": "1.0",
+            "session": {
+                "message_id": 1,
+                "new": False,
+                "session_id": "5635dea0-e8bbe050-16afad5c-75538f9",
+                "skill_id": "2e605c0c-cb43-4bc0-bff7-007f695822ad",
+                "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403"
+            },
+            "response": {
+                "end_session": False,
+                "text": "Вы оставили 100$ на бирже"
+            }
+        }
+
+        alice_request = AliceRequest(request)
+
+        ##Ответ Алисы пользователю
+        alice_response = AliceResponse(alice_request)
+
+        alice_response, user_storage2 = handle_dialog(
+            alice_request, alice_response, user_storage
+        )
+
+        json_str = json.dumps(
+            response,
+            ensure_ascii=False,
+            indent=2
+        )
+        self.assertEqual((alice_response.dumps(), user_storage2), (json_str, newuser_storage), "Всё сломалось :))))))")
+
+
+class Test_14(unittest.TestCase):
+    def test_bursetake(self):
+        request = {
+            "meta": {
+                "client_id": "ru.yandex.searchplugin/7.16 (none none; android 4.4.2)",
+                "interfaces": {
+                    "account_linking": {},
+                    "payments": {},
+                    "screen": {}
+                },
+                "locale": "ru-RU",
+                "timezone": "UTC"
+            },
+            "request": {
+                "command": "взять",
+                "nlu": {
+                    "entities": [],
+                    "tokens": [
+                        "взять"
+                    ]
+                },
+                "original_utterance": "взять",
+                "type": "SimpleUtterance"
+            },
+            "session": {
+                "message_id": 1,
+                "new": False,
+                "session_id": "5635dea0-e8bbe050-16afad5c-75538f9",
+                "skill_id": "2e605c0c-cb43-4bc0-bff7-007f695822ad",
+                "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403"
+            },
+            "version": "1.0"
+        }
+
+        user_storage = {
+            "propertyA": [2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],  # имущество Алисы
+            "propertyU": [2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],
+            # имущество пользователя
+            "moneyU": 200.0,  # Деньги Пользователя
+            "moneyA": 200.0,  # Деньги Алисы
+            "field_cellA": 1,  # Клетка, на которой находится Алиса
+            "field_cellU": 13,  # Клетка, на которой находится пользователь
+            "bankU": 0.0,  # вклады пользователя (ячейка поля 37)
+            "bankA": 0.0,  # вклады алисы (ячейка поля 37)
+            "exchange": 100.0,  # деньги на бирже (ячейка поля 13)
+            "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403",
+            "users_turn": True,  # чей ход
+            "bank": False,  # пользователь попал в банк
+            "property": 0,  # пользователь попал на ячейку недвижимости
+            "go": False,  # на любую ячейку
+            "school": 0,  # пользователь попал на "назад в школу"
+            "choice": True,  # пользователь попал на биржу
+            "prison1": False,  # тюрьма Алисы
+            "prison2": False,  # тюрьма пользователя
+            "crash": False,  # если пользователь почти банкрот
+            "anycell1": False,
+            "anycell2": False
+
+        }
+
+        newuser_storage = {
+            "propertyA": [2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],  # имущество Алисы
+            "propertyU": [2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],
+            # имущество пользователя
+            "moneyU": 350.0,  # Деньги Пользователя
+            "moneyA": 200.0,  # Деньги Алисы
+            "field_cellA": 1,  # Клетка, на которой находится Алиса
+            "field_cellU": 13,  # Клетка, на которой находится пользователь
+            "bankU": 0.0,  # вклады пользователя (ячейка поля 37)
+            "bankA": 0.0,  # вклады алисы (ячейка поля 37)
+            "exchange": 0.0,  # деньги на бирже (ячейка поля 13)
+            "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403",
+            "users_turn": True,  # чей ход
+            "bank": False,  # пользователь попал в банк
+            "property": 0,  # пользователь попал на ячейку недвижимости
+            "go": False,  # на любую ячейку
+            "school": 0,  # пользователь попал на "назад в школу"
+            "choice": False,  # пользователь попал на биржу
+            "prison1": False,  # тюрьма Алисы
+            "prison2": False,  # тюрьма пользователя
+            "crash": False,  # если пользователь почти банкрот
+            "anycell1": False,
+            "anycell2": False
+
+        }
+
+        response = {
+            "version": "1.0",
+            "session": {
+                "message_id": 1,
+                "new": False,
+                "session_id": "5635dea0-e8bbe050-16afad5c-75538f9",
+                "skill_id": "2e605c0c-cb43-4bc0-bff7-007f695822ad",
+                "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403"
+            },
+            "response": {
+                "end_session": False,
+                "text": "Вы взяли 150.0 $ с биржи"
+            }
+        }
+
+        alice_request = AliceRequest(request)
+
+        ##Ответ Алисы пользователю
+        alice_response = AliceResponse(alice_request)
+
+        alice_response, user_storage2 = handle_dialog(
+            alice_request, alice_response, user_storage
+        )
+
+        json_str = json.dumps(
+            response,
+            ensure_ascii=False,
+            indent=2
+        )
+        self.assertEqual((alice_response.dumps(), user_storage2), (json_str, newuser_storage), "Всё сломалось :))))))")
+
+class Test_15(unittest.TestCase):
+    def test_bursenothing(self):
+        request = {
+            "meta": {
+                "client_id": "ru.yandex.searchplugin/7.16 (none none; android 4.4.2)",
+                "interfaces": {
+                    "account_linking": {},
+                    "payments": {},
+                    "screen": {}
+                },
+                "locale": "ru-RU",
+                "timezone": "UTC"
+            },
+            "request": {
+                "command": "ничего не делать",
+                "nlu": {
+                    "entities": [],
+                    "tokens": [
+                        "ничего не делать"
+                    ]
+                },
+                "original_utterance": "ничего не делать",
+                "type": "SimpleUtterance"
+            },
+            "session": {
+                "message_id": 1,
+                "new": False,
+                "session_id": "5635dea0-e8bbe050-16afad5c-75538f9",
+                "skill_id": "2e605c0c-cb43-4bc0-bff7-007f695822ad",
+                "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403"
+            },
+            "version": "1.0"
+        }
+
+        user_storage = {
+            "propertyA": [2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],  # имущество Алисы
+            "propertyU": [2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],
+            # имущество пользователя
+            "moneyU": 200.0,  # Деньги Пользователя
+            "moneyA": 200.0,  # Деньги Алисы
+            "field_cellA": 1,  # Клетка, на которой находится Алиса
+            "field_cellU": 13,  # Клетка, на которой находится пользователь
+            "bankU": 0.0,  # вклады пользователя (ячейка поля 37)
+            "bankA": 0.0,  # вклады алисы (ячейка поля 37)
+            "exchange": 100.0,  # деньги на бирже (ячейка поля 13)
+            "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403",
+            "users_turn": True,  # чей ход
+            "bank": False,  # пользователь попал в банк
+            "property": 0,  # пользователь попал на ячейку недвижимости
+            "go": False,  # на любую ячейку
+            "school": 0,  # пользователь попал на "назад в школу"
+            "choice": True,  # пользователь попал на биржу
+            "prison1": False,  # тюрьма Алисы
+            "prison2": False,  # тюрьма пользователя
+            "crash": False,  # если пользователь почти банкрот
+            "anycell1": False,
+            "anycell2": False
+
+        }
+
+        newuser_storage = {
+            "propertyA": [2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],  # имущество Алисы
+            "propertyU": [2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],
+            # имущество пользователя
+            "moneyU": 200.0,  # Деньги Пользователя
+            "moneyA": 200.0,  # Деньги Алисы
+            "field_cellA": 1,  # Клетка, на которой находится Алиса
+            "field_cellU": 13,  # Клетка, на которой находится пользователь
+            "bankU": 0.0,  # вклады пользователя (ячейка поля 37)
+            "bankA": 0.0,  # вклады алисы (ячейка поля 37)
+            "exchange": 100.0,  # деньги на бирже (ячейка поля 13)
+            "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403",
+            "users_turn": True,  # чей ход
+            "bank": False,  # пользователь попал в банк
+            "property": 0,  # пользователь попал на ячейку недвижимости
+            "go": False,  # на любую ячейку
+            "school": 0,  # пользователь попал на "назад в школу"
+            "choice": False,  # пользователь попал на биржу
+            "prison1": False,  # тюрьма Алисы
+            "prison2": False,  # тюрьма пользователя
+            "crash": False,  # если пользователь почти банкрот
+            "anycell1": False,
+            "anycell2": False
+
+        }
+
+        response = {
+            "version": "1.0",
+            "session": {
+                "message_id": 1,
+                "new": False,
+                "session_id": "5635dea0-e8bbe050-16afad5c-75538f9",
+                "skill_id": "2e605c0c-cb43-4bc0-bff7-007f695822ad",
+                "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403"
+            },
+            "response": {
+                "end_session": False,
+                "text": "Иногда ничего не делать - лучшее решение"
+            }
+        }
+
+        alice_request = AliceRequest(request)
+
+        ##Ответ Алисы пользователю
+        alice_response = AliceResponse(alice_request)
+
+        alice_response, user_storage2 = handle_dialog(
+            alice_request, alice_response, user_storage
+        )
+
+        json_str = json.dumps(
+            response,
+            ensure_ascii=False,
+            indent=2
+        )
+        self.assertEqual((alice_response.dumps(), user_storage2), (json_str, newuser_storage), "Всё сломалось :))))))")
 
