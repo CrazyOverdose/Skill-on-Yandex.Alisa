@@ -1,6 +1,6 @@
 import unittest
 
-from for_tests import handle_dialog
+from tests.for_tests import handle_dialog
 
 
 class Test1(unittest.TestCase):
