@@ -9,7 +9,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb38bc6d-9667-4c33-a38c-0406a6ca14d4" name="Default Changelist" comment="test 17">
+    <list default="true" id="cb38bc6d-9667-4c33-a38c-0406a6ca14d4" name="Default Changelist" comment="19">
       <change afterPath="$PROJECT_DIR$/tests/test_1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
@@ -129,10 +129,10 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Docker.Dockerfile" />
       <item itemvalue="Python.alice_sdk" />
       <item itemvalue="Python.api" />
       <item itemvalue="Python.main" />
-      <item itemvalue="Docker.Dockerfile" />
       <item itemvalue="Python tests.Unittests for test_1.Test.test_rules" />
     </list>
     <recent_temporary>
@@ -155,13 +155,6 @@
       <option name="presentableId" value="Default" />
       <updated>1572786424239</updated>
       <workItem from="1575421225998" duration="128000" />
-    </task>
-    <task id="LOCAL-00096" summary="test 24">
-      <created>1575826213532</created>
-      <option name="number" value="00096" />
-      <option name="presentableId" value="LOCAL-00096" />
-      <option name="project" value="LOCAL" />
-      <updated>1575826213532</updated>
     </task>
     <task id="LOCAL-00097" summary="test 26">
       <created>1575826874540</created>
@@ -499,7 +492,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576174529120</updated>
     </task>
-    <option name="localTasksCounter" value="145" />
+    <task id="LOCAL-00145" summary="19">
+      <created>1576214924862</created>
+      <option name="number" value="00145" />
+      <option name="presentableId" value="LOCAL-00145" />
+      <option name="project" value="LOCAL" />
+      <updated>1576214924867</updated>
+    </task>
+    <option name="localTasksCounter" value="146" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -519,7 +519,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="test 54" />
     <MESSAGE value="test 56" />
     <MESSAGE value="test 57" />
     <MESSAGE value="test 58" />
@@ -544,7 +543,8 @@
     <MESSAGE value="test 11" />
     <MESSAGE value="test 12" />
     <MESSAGE value="test 17" />
-    <option name="LAST_COMMIT_MESSAGE" value="test 17" />
+    <MESSAGE value="19" />
+    <option name="LAST_COMMIT_MESSAGE" value="19" />
   </component>
   <component name="WindowStateProjectService">
     <state x="297" y="0" width="839" height="869" key="#Dockerfile" timestamp="1575238486279">
@@ -611,10 +611,10 @@
       <screen x="0" y="0" width="1440" height="872" />
     </state>
     <state x="164" y="71" width="1106" height="728" key="SettingsEditor/0.0.1440.872@0.0.1440.872" timestamp="1575238495689" />
-    <state x="315" y="169" width="804" height="533" key="Vcs.Push.Dialog.v2" timestamp="1576174534327">
+    <state x="315" y="169" width="804" height="533" key="Vcs.Push.Dialog.v2" timestamp="1576214927012">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
-    <state x="315" y="169" width="804" height="533" key="Vcs.Push.Dialog.v2/0.0.1440.872@0.0.1440.872" timestamp="1576174534327" />
+    <state x="315" y="169" width="804" height="533" key="Vcs.Push.Dialog.v2/0.0.1440.872@0.0.1440.872" timestamp="1576214927012" />
     <state x="306" y="262" key="com.intellij.ide.util.TipDialog" timestamp="1576163337391">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
@@ -634,13 +634,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/tests/test_1.py</url>
-          <line>84</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
