@@ -1,9 +1,16 @@
-os: linux
 sudo: required
 language: python
 python: "3.7"
 
+install:
+  - pip install tensorflow keras matplotlib
 
+jobs:
+  include:
+    - name: "tests"
+      script:
+        - cd tests
+        - python -m unittest -v test
 
 notifications:
-  email: false
+    email: false

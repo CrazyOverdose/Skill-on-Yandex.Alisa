@@ -129,10 +129,10 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Docker.Dockerfile" />
       <item itemvalue="Python.alice_sdk" />
       <item itemvalue="Python.api" />
       <item itemvalue="Python.main" />
+      <item itemvalue="Docker.Dockerfile" />
       <item itemvalue="Python tests.Unittests for test_1.Test.test_rules" />
     </list>
     <recent_temporary>
