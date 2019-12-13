@@ -303,9 +303,12 @@ def handle_dialog(request, response, user_storage):
                 user_storage["exchange"] = 0
 
             if user_message in BURSEgive:
-                user_storage["moneyU"] = user_storage["moneyU"] - 100
-                user_storage["exchange"] = user_storage["exchange"] + 100
-                response.set_text('Вы оставили 100$ на бирже')
+                if user_storage["moneyU"] > 100:
+                    user_storage["moneyU"] = user_storage["moneyU"] - 100
+                    user_storage["exchange"] = user_storage["exchange"] + 100
+                    response.set_text('Вы оставили 100$ на бирже')
+                else:
+                    response.set_text('У вас нет столько денег')
 
             if user_message not in BURSEgive + BURSEtake:
                 response.set_text('Иногда ничего не делать - лучшее решение')
