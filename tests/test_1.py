@@ -199,3 +199,80 @@ class Test5(unittest.TestCase):
 
         self.assertEqual(handle_dialog(user_message, flag, user_storage), (response, user_storage), "Всё совпало")
 
+class Test6(unittest.TestCase):
+
+    def test_own(self):
+        user_storage = {
+            "propertyA": [2, 2, 1, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],  # имущество Алисы
+            "propertyU": [2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],
+            # имущество пользователя
+            "moneyU": 200.0,  # Деньги Пользователя
+            "moneyA": 200.0,  # Деньги Алисы
+            "field_cellA": 1,  # Клетка, на которой находится Алиса
+            "field_cellU": 1,  # Клетка, на которой находится пользователь
+            "bankU": 170.0,  # вклады пользователя (ячейка поля 37)
+            "bankA": 210.0,  # вклады алисы (ячейка поля 37)
+            "exchange": 0.0,  # деньги на бирже (ячейка поля 13)
+            "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403",
+            "users_turn": True,  # чей ход
+            "bank": False,  # пользователь попал в банк
+            "property": 0,  # пользователь попал на ячейку недвижимости
+            "go": False,  # на любую ячейку
+            "school": 0,  # пользователь попал на "назад в школу"
+            "choice": False,  # пользователь попал на биржу
+            "prison1": False,  # тюрьма Алисы
+            "prison2": False,  # тюрьма пользователя
+            "crash": False,  # если пользователь почти банкрот
+            "anycell1": False,
+            "anycell2": False
+
+        }
+
+        user_message = 'мое'
+        flag = False
+
+        response = 'Собственность Алисы: ' + '\n 2. Колесо обозрения "High Roller" Цена: 10$ \n ' + '\nВаша собственность: '
+
+        self.assertEqual(handle_dialog(user_message, flag, user_storage), (response, user_storage), "Всё совпало")
+
+
+class Test7(unittest.TestCase):
+
+    def test_place(self):
+        user_storage = {
+            "propertyA": [2, 2, 1, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],  # имущество Алисы
+            "propertyU": [2, 2, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0,
+                          0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 2, 0, 2, 0],
+            # имущество пользователя
+            "moneyU": 200.0,  # Деньги Пользователя
+            "moneyA": 200.0,  # Деньги Алисы
+            "field_cellA": 4,  # Клетка, на которой находится Алиса
+            "field_cellU": 10,  # Клетка, на которой находится пользователь
+            "bankU": 0.0,  # вклады пользователя (ячейка поля 37)
+            "bankA": 0.0,  # вклады алисы (ячейка поля 37)
+            "exchange": 0.0,  # деньги на бирже (ячейка поля 13)
+            "user_id": "4912D562F9B17A606D7EAB894ED13B0F1B25B342BD3EFD046F887A4FBB52D403",
+            "users_turn": True,  # чей ход
+            "bank": False,  # пользователь попал в банк
+            "property": 0,  # пользователь попал на ячейку недвижимости
+            "go": False,  # на любую ячейку
+            "school": 0,  # пользователь попал на "назад в школу"
+            "choice": False,  # пользователь попал на биржу
+            "prison1": False,  # тюрьма Алисы
+            "prison2": False,  # тюрьма пользователя
+            "crash": False,  # если пользователь почти банкрот
+            "anycell1": False,
+            "anycell2": False
+
+        }
+
+        user_message = 'гдея'
+        flag = False
+
+        response = 'Вы находитесь на ' + '10' + ' ячейке \n Алиса на ' + '4'
+
+        self.assertEqual(handle_dialog(user_message, flag, user_storage), (response, user_storage), "Всё совпало")
+

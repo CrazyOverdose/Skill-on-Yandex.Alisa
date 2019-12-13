@@ -273,8 +273,7 @@ def handle_dialog(request, response, user_storage):
 
         ##Вывод ячеек, на которых находятся Алиса и пользователь
         if user_message in PLACE:
-            response.set_text('Вы находитесь на ' + user_storage["field_cellU"] + ' ячейке \n Алиса на ' + user_storage[
-                "field_cellA"])
+            response.set_text('Вы находитесь на ' + str(user_storage["field_cellU"]) + ' ячейке \n Алиса на ' + str(user_storage["field_cellA"]))
             return response, user_storage
 
         ##Обработка начала новой игры
