@@ -143,7 +143,7 @@ def handle_dialog(request, response, user_storage):
     Args:
         request: Запрос пользователя
         response: Ответ пользователю
-        user_storage: Состояние пользователя
+        user_storage: Хранилище пользователя
     Returns:
         Ответ для пользователя и его хранилище"""
 
