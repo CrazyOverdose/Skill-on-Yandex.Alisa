@@ -9,7 +9,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb38bc6d-9667-4c33-a38c-0406a6ca14d4" name="Default Changelist" comment="30" />
+    <list default="true" id="cb38bc6d-9667-4c33-a38c-0406a6ca14d4" name="Default Changelist" comment="35">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/las_vegas.py" beforeDir="false" afterPath="$PROJECT_DIR$/las_vegas.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -147,20 +150,6 @@
       <option name="presentableId" value="Default" />
       <updated>1572786424239</updated>
       <workItem from="1575421225998" duration="128000" />
-    </task>
-    <task id="LOCAL-00107" summary="test 42">
-      <created>1575914135891</created>
-      <option name="number" value="00107" />
-      <option name="presentableId" value="LOCAL-00107" />
-      <option name="project" value="LOCAL" />
-      <updated>1575914135891</updated>
-    </task>
-    <task id="LOCAL-00108" summary="test 43">
-      <created>1575914842378</created>
-      <option name="number" value="00108" />
-      <option name="presentableId" value="LOCAL-00108" />
-      <option name="project" value="LOCAL" />
-      <updated>1575914842379</updated>
     </task>
     <task id="LOCAL-00109" summary="test 44">
       <created>1575915002992</created>
@@ -491,7 +480,21 @@
       <option name="project" value="LOCAL" />
       <updated>1576252370765</updated>
     </task>
-    <option name="localTasksCounter" value="156" />
+    <task id="LOCAL-00156" summary="34">
+      <created>1576254008682</created>
+      <option name="number" value="00156" />
+      <option name="presentableId" value="LOCAL-00156" />
+      <option name="project" value="LOCAL" />
+      <updated>1576254008682</updated>
+    </task>
+    <task id="LOCAL-00157" summary="35">
+      <created>1576254097104</created>
+      <option name="number" value="00157" />
+      <option name="presentableId" value="LOCAL-00157" />
+      <option name="project" value="LOCAL" />
+      <updated>1576254097104</updated>
+    </task>
+    <option name="localTasksCounter" value="158" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -511,8 +514,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="test 1" />
-    <MESSAGE value="test 2" />
     <MESSAGE value="test 3" />
     <MESSAGE value="test 4" />
     <MESSAGE value="test 5" />
@@ -536,7 +537,9 @@
     <MESSAGE value="28" />
     <MESSAGE value="29" />
     <MESSAGE value="30" />
-    <option name="LAST_COMMIT_MESSAGE" value="30" />
+    <MESSAGE value="34" />
+    <MESSAGE value="35" />
+    <option name="LAST_COMMIT_MESSAGE" value="35" />
   </component>
   <component name="WindowStateProjectService">
     <state x="297" y="0" width="839" height="869" key="#Dockerfile" timestamp="1575238486279">
@@ -611,10 +614,10 @@
       <screen x="0" y="0" width="1440" height="872" />
     </state>
     <state width="722" height="437" key="XDebugger.FullValuePopup/0.0.1440.872@0.0.1440.872" timestamp="1576231949051" />
-    <state x="306" y="262" key="com.intellij.ide.util.TipDialog" timestamp="1576239415484">
+    <state x="306" y="262" key="com.intellij.ide.util.TipDialog" timestamp="1576951614448">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
-    <state x="306" y="262" key="com.intellij.ide.util.TipDialog/0.0.1440.872@0.0.1440.872" timestamp="1576239415484" />
+    <state x="306" y="262" key="com.intellij.ide.util.TipDialog/0.0.1440.872@0.0.1440.872" timestamp="1576951614448" />
     <state x="215" y="124" width="1004" height="622" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1575239331118">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
