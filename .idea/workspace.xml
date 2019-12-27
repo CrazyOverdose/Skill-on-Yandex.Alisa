@@ -12,6 +12,7 @@
     <list default="true" id="cb38bc6d-9667-4c33-a38c-0406a6ca14d4" name="Default Changelist" comment="35">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/las_vegas.py" beforeDir="false" afterPath="$PROJECT_DIR$/las_vegas.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_1.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -558,10 +559,10 @@
       <screen x="0" y="0" width="1440" height="872" />
     </state>
     <state x="178" y="93" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.872@0.0.1440.872" timestamp="1572786530065" />
-    <state x="0" y="126" width="1244" height="678" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1576243624996">
+    <state x="0" y="126" width="1244" height="678" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1577450325650">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
-    <state x="0" y="126" width="1244" height="678" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.0.1440.872@0.0.1440.872" timestamp="1576243624996" />
+    <state x="0" y="126" width="1244" height="678" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.0.1440.872@0.0.1440.872" timestamp="1577450325650" />
     <state x="453" y="179" width="528" height="513" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1576215017471">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
@@ -570,22 +571,22 @@
       <screen x="0" y="0" width="1440" height="872" />
     </state>
     <state x="435" y="193" key="FileChooserDialogImpl/0.0.1440.872@0.0.1440.872" timestamp="1575421171184" />
-    <state width="1407" height="362" key="GridCell.Tab.0.bottom" timestamp="1576250764400">
+    <state width="1407" height="362" key="GridCell.Tab.0.bottom" timestamp="1577450488141">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
-    <state width="1407" height="362" key="GridCell.Tab.0.bottom/0.0.1440.872@0.0.1440.872" timestamp="1576250764400" />
-    <state width="1407" height="362" key="GridCell.Tab.0.center" timestamp="1576250764399">
+    <state width="1407" height="362" key="GridCell.Tab.0.bottom/0.0.1440.872@0.0.1440.872" timestamp="1577450488141" />
+    <state width="1407" height="362" key="GridCell.Tab.0.center" timestamp="1577450488140">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
-    <state width="1407" height="362" key="GridCell.Tab.0.center/0.0.1440.872@0.0.1440.872" timestamp="1576250764399" />
-    <state width="1407" height="362" key="GridCell.Tab.0.left" timestamp="1576250764399">
+    <state width="1407" height="362" key="GridCell.Tab.0.center/0.0.1440.872@0.0.1440.872" timestamp="1577450488140" />
+    <state width="1407" height="362" key="GridCell.Tab.0.left" timestamp="1577450488138">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
-    <state width="1407" height="362" key="GridCell.Tab.0.left/0.0.1440.872@0.0.1440.872" timestamp="1576250764399" />
-    <state width="1407" height="362" key="GridCell.Tab.0.right" timestamp="1576250764400">
+    <state width="1407" height="362" key="GridCell.Tab.0.left/0.0.1440.872@0.0.1440.872" timestamp="1577450488138" />
+    <state width="1407" height="362" key="GridCell.Tab.0.right" timestamp="1577450488141">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
-    <state width="1407" height="362" key="GridCell.Tab.0.right/0.0.1440.872@0.0.1440.872" timestamp="1576250764400" />
+    <state width="1407" height="362" key="GridCell.Tab.0.right/0.0.1440.872@0.0.1440.872" timestamp="1577450488141" />
     <state width="1407" height="260" key="GridCell.Tab.1.bottom" timestamp="1576242173361">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
@@ -614,10 +615,10 @@
       <screen x="0" y="0" width="1440" height="872" />
     </state>
     <state width="722" height="437" key="XDebugger.FullValuePopup/0.0.1440.872@0.0.1440.872" timestamp="1576231949051" />
-    <state x="306" y="262" key="com.intellij.ide.util.TipDialog" timestamp="1576951614448">
+    <state x="306" y="262" key="com.intellij.ide.util.TipDialog" timestamp="1577450088109">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
-    <state x="306" y="262" key="com.intellij.ide.util.TipDialog/0.0.1440.872@0.0.1440.872" timestamp="1576951614448" />
+    <state x="306" y="262" key="com.intellij.ide.util.TipDialog/0.0.1440.872@0.0.1440.872" timestamp="1577450088109" />
     <state x="215" y="124" width="1004" height="622" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1575239331118">
       <screen x="0" y="0" width="1440" height="872" />
     </state>
